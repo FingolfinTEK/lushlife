@@ -1,4 +1,0 @@
-lushfile.plugins.controller.ControllerModule
-lushfile.plugins.view.ViewModule
-lushfile.plugins.context.ContextModule
-lush.application.wiki.WikiModule

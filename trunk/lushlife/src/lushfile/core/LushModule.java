@@ -17,6 +17,9 @@ public class LushModule implements Module {
 		binder.bindScope(ServletScoped.class, new ServletScope());
 		binder.bind(String.class).annotatedWith(Names.named("encoding"))
 				.toInstance("UTF-8");
+		binder.bind(Long.class).annotatedWith(Names.named("startupTime"))
+				.toInstance(System.currentTimeMillis());
+
 	}
 
 	@Provides

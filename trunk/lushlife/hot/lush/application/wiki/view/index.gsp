@@ -1,23 +1,17 @@
-<%
- html.html{
- 	html.head{
- 	  html.title 'テストを書こう'
- 	}
-	html.body {
-		html.p '文章2'
-%> 
-    <br />
-    	色々かける
-    	
-    	<%l.form{ %>
-    		<% l.input('xxxx') %>
-    		
-    		<input type="submit" />
-    		 
-    		<% l.submit('test.invoke',[value:'invoke']) %>
-    		
-    	<%} %>
-<%
-} 
-}
-%>
+<% l.template('Lush','template.gsp',
+	[title:'タイトル']){%>
+	<% l.injectTo('head'){%>
+			<% l.css('test.css') %>
+			<% l.javascript('test.js') %>
+			<% l.loadScript('jquery') %>
+			head
+	<% } %>
+	
+	<% l.injectTo('body'){ %>
+	${testDto.value}
+			<% l.linkTo('test.invoke',[params:[value:'xxx']]) %>
+			<% l.linkTo('wiki',[params:[value:'xxx']]){ %>
+				<% l.image('test.bmp') %>
+			<% } %>
+	<% } %>
+<% } %>

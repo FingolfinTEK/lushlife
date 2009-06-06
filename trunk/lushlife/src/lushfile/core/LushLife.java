@@ -8,6 +8,8 @@ import javax.servlet.ServletContext;
 
 import lushfile.core.context.ClassLoaderManager;
 import lushfile.core.context.LushContext;
+import lushfile.core.controller.LushController;
+import lushfile.core.controller.LushControllerMetadata;
 import lushfile.core.guice.InjectorFactory;
 import lushfile.core.guice.ModuleLoader;
 
@@ -74,4 +76,13 @@ public class LushLife {
 		return injector;
 	}
 
+	static public String resolvePackage(String contextName) {
+		LushController controller = getInjector().getInstance(
+				LushControllerMetadata.class).getPackageMapping().get(
+				contextName);
+		if (contextName != null) {
+			return controller.getPackageName();
+		}
+		return contextName.toLowerCase();
+	}
 }

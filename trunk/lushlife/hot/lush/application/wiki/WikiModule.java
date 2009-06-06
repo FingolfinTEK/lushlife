@@ -7,7 +7,7 @@ public class WikiModule implements Module {
 
 	@Override
 	public void configure(Binder binder) {
-		binder.bind(Initializer.class).asEagerSingleton();
+		binder.bind(WikiConfigurator.class).asEagerSingleton();
 	}
 
 }
