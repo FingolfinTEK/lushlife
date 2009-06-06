@@ -1,4 +1,4 @@
-package lush.application.wiki.model;
+package lush.application.lushup.model;
 
 import com.google.inject.servlet.RequestScoped;
 
@@ -16,3 +16,5 @@ public class TestDto {
 	}
 
 }
+
+

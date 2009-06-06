@@ -1,2 +1,1 @@
-lush.application.wiki.WikiModule
-lushfile.plugins.PluginModules
+lush.application.lushup.LushupModule

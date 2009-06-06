@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
 
+import lush.plugins.lfunction.LFunction;
 import lushfile.core.LushLife;
 import lushfile.core.context.RequestScopedMap;
 import lushfile.core.groovy.ShellMap;
 import lushfile.core.util.LushIO;
 import lushfile.plugins.context.RequestContext;
 import lushfile.plugins.view.GSPTemplateEngine;
-import lushfile.plugins.view.LFunction;
 import lushfile.plugins.view.PrintWriterDelegate;
 
 import org.slf4j.Logger;

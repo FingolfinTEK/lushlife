@@ -7,11 +7,14 @@ import lushfile.plugins.view.ViewModule;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.servlet.ServletModule;
 
-public class PluginModules implements Module {
+public class LushCorePluginModules implements Module {
 
 	@Override
 	public void configure(Binder binder) {
+		binder.install(new ServletModule());
+		binder.install(new lushfile.core.LushModule());
 		binder.install(new ControllerModule());
 		binder.install(new ViewModule());
 		binder.install(new ContextModule());

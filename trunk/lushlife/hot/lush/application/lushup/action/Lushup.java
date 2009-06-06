@@ -1,11 +1,11 @@
-package lush.application.wiki.action;
+package lush.application.lushup.action;
 
-import lush.application.wiki.model.TestDto;
+import lush.application.lushup.model.TestDto;
 import lushfile.plugins.context.RequestContext;
 
 import com.google.inject.Inject;
 
-public class Wiki {
+public class Lushup {
 
 	@Inject
 	RequestContext parameter;
