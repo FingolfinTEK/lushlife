@@ -19,8 +19,8 @@ public class AsStream {
 
 	public String asString() throws IOException {
 		StringBuilder sb = new StringBuilder();
+		InputStreamReader reader = new InputStreamReader(inputStream);
 		try {
-			InputStreamReader reader = new InputStreamReader(inputStream);
 			char[] buf = new char[1024];
 			while (true) {
 				int read = reader.read(buf);
@@ -31,22 +31,26 @@ public class AsStream {
 			}
 			return sb.toString();
 		} finally {
-			inputStream.close();
+			reader.close();
 		}
 	}
 
 	public byte[] asBytes() throws IOException {
 		ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		byte[] buf = new byte[1024];
-		while (true) {
-			int size = inputStream.read(buf);
-			if (size <= 0) {
-				break;
+		try {
+			while (true) {
+				int size = inputStream.read(buf);
+				if (size <= 0) {
+					break;
+				}
+				bao.write(buf, 0, size);
 			}
-			bao.write(buf, 0, size);
+			bao.flush();
+			return bao.toByteArray();
+		} finally {
+			inputStream.close();
 		}
-
-		return bao.toByteArray();
 	}
 
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Maven - Welcome to Maven</title>
+<% l.css('maven_base.css')%>
+<% l.css('maven-theme.css')%>
+<% l.css('site.css')%>
+
+</head>
+<body class="composite">
+<!-- 
+<div id="banner">
+	banner
+<div class="clear">
+<hr>
+</div>
+ -->
+</div>
+<div id="breadcrumbs">
+	<div class="xleft"> <% l.linkTo('Lushup',[value:'Home']) %> </div>
+	<div class="xright">
+		<% if(g.logined()){ %>
+			${g.user.email} <a href="${g.userService.createLogoutURL(request.requestURI)}">Logout</a>
+		<% } else {%>
+			<a href="${g.userService.createLoginURL(request.requestURI)}">Login</a>
+		<% } %>
+	 </div>
+	<div class="clear">
+		<hr>
+	</div>
+</div>
+<div id="leftColumn">
+	<div id="navcolumn">navi</div>
+	<div class="clear">
+		<hr>
+	</div>
+</div>
+
+<div id="bodyColumn">
+	<% l.injectFrom("main_contents") %> 
+	<!-- 
+	<div id="contentBox">
+		<div class="section">
+			<div id="downloadbox">
+				downloadbox
+			</div>
+		</div>
+	</div>
+	 -->
+	<div class="clear">
+	<hr>
+	</div>
+</div>
+<div id="footer">
+	<div class="xright">
+			powered by Lushlife
+		<div class="clear">
+		<hr>
+		</div>
+	</div>
+</div>
+</body>
+</html>

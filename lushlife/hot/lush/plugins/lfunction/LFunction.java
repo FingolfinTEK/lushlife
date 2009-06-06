@@ -1,4 +1,4 @@
-package lushfile.plugins.view;
+package lush.plugins.lfunction;
 
 import groovy.lang.Closure;
 
@@ -14,6 +14,7 @@ import lushfile.core.util.MapBuilder;
 import lushfile.plugins.context.RequestContext;
 import lushfile.plugins.resources.LoadScriptMetadata;
 import lushfile.plugins.resources.ResourceManager;
+import lushfile.plugins.view.PrintWriterDelegate;
 import lushfile.plugins.view.template.TemplateManager;
 import lushfile.plugins.view.util.Markup;
 import lushfile.plugins.view.util.NestTag;

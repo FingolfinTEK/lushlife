@@ -31,6 +31,5 @@ public class ViewConfigurator {
 		map.put("session", HttpSession.class);
 		map.put("context", ServletContext.class);
 		map.put("application", ServletContext.class);
-		map.put("l", LFunction.class);
 	}
 }

@@ -1,4 +1,4 @@
-package lush.application.wiki;
+package lush.application.lushup;
 
 import lushfile.core.controller.LushController;
 import lushfile.core.controller.LushControllerMetadata;
@@ -7,14 +7,14 @@ import lushfile.plugins.resources.LoadScriptMetadata;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class WikiConfigurator {
+public class LushupConfigurator {
 
 	@Inject
 	public void init(LushControllerMetadata metadata, Injector injector) {
 		metadata.getPackageMapping().put(
-				"Wiki",
+				"Lushup",
 				injector.getInstance(LushController.class).init(
-						WikiConfigurator.class.getPackage().getName()));
+						LushupConfigurator.class.getPackage().getName()));
 	}
 
 	@Inject

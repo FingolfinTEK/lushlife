@@ -80,7 +80,7 @@ public class LushLife {
 		LushController controller = getInjector().getInstance(
 				LushControllerMetadata.class).getPackageMapping().get(
 				contextName);
-		if (contextName != null) {
+		if (controller != null) {
 			return controller.getPackageName();
 		}
 		return contextName.toLowerCase();
