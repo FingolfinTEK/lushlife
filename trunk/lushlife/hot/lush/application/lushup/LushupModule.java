@@ -6,6 +6,8 @@ import javax.jdo.PersistenceManagerFactory;
 
 import lush.plugins.google.GoogleModule;
 import lush.plugins.lfunction.LFunctionModule;
+import lushfile.core.LushLife;
+import lushfile.core.guice.ServletScoped;
 import lushfile.plugins.LushCorePluginModules;
 
 import com.google.inject.Binder;
@@ -24,12 +26,16 @@ public class LushupModule implements Module {
 		binder.bind(LushupConfigurator.class).asEagerSingleton();
 	}
 
-	PersistenceManagerFactory factory = JDOHelper
-			.getPersistenceManagerFactory("transactions-optional");
+	@Provides
+	@ServletScoped
+	public PersistenceManagerFactory createFactor() {
+		return JDOHelper.getPersistenceManagerFactory("transactions-optional");
+	}
 
 	@Provides
 	@RequestScoped
 	public PersistenceManager createManagerFactory() {
-		return factory.getPersistenceManager();
+		return LushLife.getInjector().getInstance(
+				PersistenceManagerFactory.class).getPersistenceManager();
 	}
 }

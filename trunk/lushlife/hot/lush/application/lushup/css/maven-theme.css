@@ -72,7 +72,7 @@ h3 {
   background-color: #ccc;
   font-weight: bold;
   font-size: 14px;
-  background-image: url(../images/h3.jpg);
+ /* background-image: url(../images/h3.jpg);*/
   background-repeat: no-repeat;
   background-position: left bottom;
 }
@@ -83,7 +83,7 @@ p {
 }
 #breadcrumbs {
   height: 13px;
-  background-image: url(../images/breadcrumbs.jpg);
+ /* background-image: url(../images/breadcrumbs.jpg); */
   padding: 5px 10px 14px 20px;
 }
 * html #breadcrumbs {

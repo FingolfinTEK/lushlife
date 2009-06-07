@@ -3,13 +3,6 @@
 	<application>lush-life</application>
 	<version>2</version>
 
-	<static-files>
-		<include path="/**.css" />
-		<include path="/**.js" />
-		<include path="/**.bmp" />
-	</static-files>
-
-
 	<system-properties>
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
 		<property name="file.encoding" value="UTF-8" />

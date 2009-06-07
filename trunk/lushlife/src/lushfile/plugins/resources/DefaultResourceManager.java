@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.servlet.http.HttpServletResponse;
+
 import lushfile.core.LushLife;
 import lushfile.core.lock.DoubleCheckBlocking;
 import lushfile.core.util.LushIO;
@@ -16,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
@@ -34,7 +37,11 @@ public class DefaultResourceManager implements ResourceManager {
 	private Lock lock = new ReentrantLock();
 
 	@Inject
-	RequestContext context;
+	Provider<RequestContext> context;
+
+	@Inject
+	Provider<HttpServletResponse> response;
+
 	private Map<String, byte[]> resources = new ConcurrentHashMap<String, byte[]>();
 
 	@Override
@@ -80,13 +87,30 @@ public class DefaultResourceManager implements ResourceManager {
 				}.get();
 
 				stream.write(out);
+				writeHeader(type, resource, response.get());
 			}
 		};
 	}
 
+	protected void writeHeader(String type, String resource,
+			HttpServletResponse httpServletResponse) {
+		if (type.equals("css")) {
+			httpServletResponse.setContentType("text/css");
+		}
+		if (type.equals("javascript")) {
+			httpServletResponse.setContentType("text/javascript");
+		}
+		if (type.equals("image")) {
+			String[] strs = resource.split("\\.");
+			httpServletResponse
+					.setContentType("image/" + strs[strs.length - 1]);
+		}
+
+	}
+
 	public String toUrl(String contextName, String type, String resource) {
-		return "/" + context.getBaseName() + "/Resources/" + contextName + "/"
-				+ type + "/" + resource + "?" + starupTime;
+		return "/" + context.get().getBaseName() + "/Resources/" + contextName
+				+ "/" + type + "/" + resource + "?" + starupTime;
 	}
 
 	@Override

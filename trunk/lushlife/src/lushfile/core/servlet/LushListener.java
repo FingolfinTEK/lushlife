@@ -13,6 +13,7 @@ import javax.servlet.ServletRequestListener;
 import lushfile.core.LushLife;
 import lushfile.core.context.ClassLoaderManager;
 import lushfile.core.context.LushContext;
+import lushfile.core.guice.HiddenScopeManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,23 +28,27 @@ public class LushListener extends GuiceServletContextListener implements
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
+		LushContext.getHiddenScope().clear();
 		LushContext.setServletContext(event.getServletContext());
 		ClassLoaderManager.buildClassLoader(event.getServletContext());
 		try {
 			super.contextDestroyed(event);
 		} finally {
 			LushContext.setServletContext(null);
+			LushContext.getHiddenScope().clear();
 		}
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
+		LushContext.getHiddenScope().clear();
 		LushContext.setServletContext(event.getServletContext());
 		ClassLoaderManager.buildClassLoader(event.getServletContext());
 		try {
 			super.contextInitialized(event);
 		} finally {
 			LushContext.setServletContext(null);
+			LushContext.getHiddenScope().clear();
 		}
 	}
 
@@ -55,10 +60,12 @@ public class LushListener extends GuiceServletContextListener implements
 	@Override
 	public void requestDestroyed(ServletRequestEvent event) {
 		LushContext.setServletContext(null);
+		LushContext.getHiddenScope().clear();
 	}
 
 	@Override
 	public void requestInitialized(ServletRequestEvent event) {
+		LushContext.getHiddenScope().clear();
 		LushContext.setServletContext(event.getServletContext());
 		if (LushLife.isHotdeployMode()) {
 			if (isUpdate()) {
@@ -66,6 +73,8 @@ public class LushListener extends GuiceServletContextListener implements
 				LushLife.resetInjector();
 			}
 		}
+		LushLife.getInjector().getInstance(HiddenScopeManager.class)//
+				.restore(event.getServletRequest());
 	}
 
 	static public final String LAST_UPDATE_TIME = "LUSH_LAST_UPDATE";
