@@ -2,6 +2,8 @@ package lushfile.core;
 
 import lushfile.core.context.ClassLoaderManager;
 import lushfile.core.context.LushContext;
+import lushfile.core.guice.HiddenScoped;
+import lushfile.core.guice.HiddenScope;
 import lushfile.core.guice.ServletScope;
 import lushfile.core.guice.ServletScoped;
 
@@ -15,8 +17,12 @@ public class LushModule implements Module {
 	@Override
 	public void configure(Binder binder) {
 		binder.bindScope(ServletScoped.class, new ServletScope());
+		binder.bindScope(HiddenScoped.class, new HiddenScope());
+
 		binder.bind(String.class).annotatedWith(Names.named("encoding"))
 				.toInstance("UTF-8");
+		binder.bind(String.class).annotatedWith(Names.named("lushHiddenKey"))
+				.toInstance("_lush_hidden_key");
 		binder.bind(Long.class).annotatedWith(Names.named("startupTime"))
 				.toInstance(System.currentTimeMillis());
 

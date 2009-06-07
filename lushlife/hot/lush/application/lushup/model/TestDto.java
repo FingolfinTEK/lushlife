@@ -1,14 +1,24 @@
 package lush.application.lushup.model;
 
-import com.google.inject.servlet.RequestScoped;
+import java.io.Serializable;
 
-@RequestScoped
-public class TestDto {
+import lushfile.core.guice.HiddenScoped;
 
-	String value = "action bean";
+@HiddenScoped
+public class TestDto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private String value = "action bean";
+
+	private int intValue;
+
+	public void increment() {
+		intValue++;
+	}
 
 	public String getValue() {
-		return value;
+		return value + ":" + intValue;
 	}
 
 	public void setValue(String value) {
@@ -16,5 +26,3 @@ public class TestDto {
 	}
 
 }
-
-

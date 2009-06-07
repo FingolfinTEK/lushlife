@@ -14,6 +14,7 @@ public class Lushup {
 	TestDto dto;
 
 	public void invoke() {
+		dto.increment();
 		dto.setValue(parameter.getContextName() + "#"
 				+ parameter.getControllerName() + parameter.getMethodName());
 	}

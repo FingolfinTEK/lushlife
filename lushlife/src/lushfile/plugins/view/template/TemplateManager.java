@@ -4,10 +4,10 @@ import groovy.lang.Closure;
 import groovy.text.Template;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Map;
 
-import lush.plugins.lfunction.LFunction;
 import lushfile.core.LushLife;
 import lushfile.core.context.RequestScopedMap;
 import lushfile.core.groovy.ShellMap;
@@ -43,9 +43,6 @@ public class TemplateManager {
 	private RequestScopedMap map;
 
 	@Inject
-	private LFunction lFunction;
-
-	@Inject
 	private ShellMap shellMap;
 
 	protected Template loadTemplate(String contextName, String resourceName) {
@@ -74,7 +71,7 @@ public class TemplateManager {
 	public void injectFrom(String name) {
 		logger.info("injectFrom {}", name);
 		TemplateHandler handler = template.getLast();
-		lFunction.getWriter().write(handler.get(name));
+		getWriter().write(handler.get(name));
 	}
 
 	public String param(String name) {
@@ -98,10 +95,14 @@ public class TemplateManager {
 					closure.call();
 				}
 			}.run();
-			template.make(shellMap).writeTo(lFunction.getWriter());
+			template.make(shellMap).writeTo(getWriter());
 		} finally {
 			this.template.pollLast();
 		}
+	}
+
+	public PrintWriter getWriter() {
+		return (PrintWriter) map.get("out");
 	}
 
 }

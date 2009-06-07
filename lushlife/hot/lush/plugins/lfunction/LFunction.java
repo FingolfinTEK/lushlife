@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import lushfile.core.context.RequestScopedMap;
+import lushfile.core.guice.HiddenScopeManager;
 import lushfile.core.util.BeansUtil;
 import lushfile.core.util.MapBuilder;
 import lushfile.plugins.context.RequestContext;
@@ -225,6 +226,9 @@ public class LFunction {
 		form(new HashMap<String, String>(), closure);
 	}
 
+	@Inject
+	HiddenScopeManager hidden;
+
 	private void form(Map<String, String> map, final Closure closure) {
 
 		if (!map.containsKey("action")) {
@@ -238,6 +242,11 @@ public class LFunction {
 		getWriter().append(new Markup().tag("form", map, new NestTag() {
 			@Override
 			public void markup(Markup markup) {
+				markup.tag("input", //
+						new MapBuilder().put("type", "hidden")//
+								.put("name", hidden.getHiddenKey())//
+								.put("value", hidden.toHidden()).toMap());
+
 				markup.text(new PrintWriterDelegate(requestScopedMap) {
 					protected void invoke() {
 						closure.call();
@@ -247,8 +256,9 @@ public class LFunction {
 		}).toString());
 	}
 
+	@Deprecated
 	public PrintWriter getWriter() {
-		return (PrintWriter) requestScopedMap.get("out");
+		return this.manager.get().getWriter();
 	}
 
 	public void hidden(String el) {
