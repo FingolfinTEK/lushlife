@@ -36,6 +36,7 @@ public class GSPRenderer implements Renderer {
 	@Override
 	public void render() throws IOException {
 		writerHeader(response);
+		logger.info("view id {}", classLoaderPath);
 		Template template = engine.create(classLoaderPath);
 		binder.setup();
 		Writable writable = template.make(shellMap);
@@ -45,7 +46,7 @@ public class GSPRenderer implements Renderer {
 		}
 	}
 
-	private void writerHeader(HttpServletResponse response) {
+	protected void writerHeader(HttpServletResponse response) {
 		response.setContentType("text/html;charset=utf8");
 	}
 

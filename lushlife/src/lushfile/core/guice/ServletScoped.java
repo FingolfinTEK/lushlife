@@ -7,11 +7,6 @@ import java.lang.annotation.Target;
 
 import com.google.inject.ScopeAnnotation;
 
-/**
- * Singleton for Hotdeploy
- * 
- * @author
- */
 @Target( { ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @ScopeAnnotation

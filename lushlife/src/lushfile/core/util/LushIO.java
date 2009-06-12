@@ -13,7 +13,7 @@ public class LushIO {
 		String clazzPath = toClassPath(packageName, resoruceName);
 		InputStream stream = loader.getResourceAsStream(clazzPath);
 		if (stream == null) {
-			// TODO
+			// TODO Error handling
 			throw new IllegalStateException("resoruce not found " + clazzPath);
 		}
 		return new AsStream(stream);

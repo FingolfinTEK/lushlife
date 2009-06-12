@@ -1,15 +1,22 @@
-<% l.template('maven_template.html',
-	[title:'Lushup ']){%>
+<% l.template(
+	[title:'Lushup']){
+%>
+	
 	<% l.injectTo('main_contents'){ %>
-			<% l.linkTo('test.invoke',[params:[value:'xxx']]) %>
-			<br />
-			${testDto.value}
-			<% l.linkTo('wiki',[params:[value:'xxx']]){ %>
-				<% l.image('test.bmp') %>
+	
+		<table>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+			</tr>
+			<% for(shop in shops.shops){%>
+			<tr>
+				<td>${shop.id}</td>
+				<td>${shop.name}</td>
+			</tr>
 			<% } %>
-			
-			<% l.form(){ %>
-				<% l.submit("lushup") %>
-			<% } %>
+		</table>
+
 	<% } %>
+	
 <% } %>

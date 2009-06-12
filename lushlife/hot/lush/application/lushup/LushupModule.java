@@ -5,7 +5,10 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
 import lush.plugins.google.GoogleModule;
+import lush.plugins.jquery.JQueryModule;
 import lush.plugins.lfunction.LFunctionModule;
+import lush.plugins.model.ModelModule;
+import lush.plugins.yahoo.YahooModule;
 import lushfile.core.LushLife;
 import lushfile.core.guice.ServletScoped;
 import lushfile.plugins.LushCorePluginModules;
@@ -20,9 +23,13 @@ public class LushupModule implements Module {
 	@Override
 	public void configure(Binder binder) {
 		binder.install(new LushCorePluginModules());
-		binder.install(new GoogleModule());
-		binder.install(new LFunctionModule());
+		binder.install(new ModelModule());
 
+		binder.install(new GoogleModule());
+		binder.install(new YahooModule());
+		binder.install(new JQueryModule());
+
+		binder.install(new LFunctionModule());
 		binder.bind(LushupConfigurator.class).asEagerSingleton();
 	}
 

@@ -59,8 +59,8 @@ public abstract class ActionEvent implements LushEvent {
 				instance = injector.getInstance(clazz);
 			} catch (Exception e) {
 				ReflectionErrorParameter param = injector.getInstance(
-						ReflectionErrorParameter.class).init(packageName,
-						className, methodName, e);
+						ReflectionErrorParameter.class).init(packageName, null,
+						null, e);
 				return toEvent(param);
 			}
 
@@ -71,9 +71,9 @@ public abstract class ActionEvent implements LushEvent {
 						instance, returnValue);
 				return toEvent(parameter);
 			} catch (Exception e) {
-				ActionParameter parameter = injector.getInstance(
-						ActionParameter.class).init(packageName, method,
-						instance, e);
+				ReflectionErrorParameter parameter = injector.getInstance(
+						ReflectionErrorParameter.class).init(packageName,
+						method, instance, e);
 				return toEvent(parameter);
 			}
 		} finally {
