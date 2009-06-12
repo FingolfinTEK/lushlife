@@ -56,6 +56,10 @@ public class LFunction {
 		linkTo(context.getContextName(), action, attr);
 	}
 
+	public void linkTo(Map<String, Object> attr) {
+		linkTo(context.getContextName(), "", attr);
+	}
+
 	public void linkTo(String context, String action, Map<String, Object> attr) {
 		final String value = buildLink(context, action, attr);
 		getWriter().write(new Markup() {
@@ -298,7 +302,12 @@ public class LFunction {
 	}
 
 	public void param(String name) {
-		getWriter().write(manager.get().param(name));
+		String param = manager.get().param(name);
+		if (param != null) {
+			getWriter().write(param);
+		} else {
+			getWriter().write("#param[" + name + "]");
+		}
 	}
 
 	public void password(String el) {
@@ -320,6 +329,15 @@ public class LFunction {
 			params.put("id", action);
 		}
 		writeInput(commandKey + "##" + action, params, type);
+	}
+
+	public void template(Closure closure) throws IOException {
+		template(new HashMap<String, String>(), closure);
+	}
+
+	public void template(Map<String, String> params, Closure closure)
+			throws IOException {
+		template("template.gsp", params, closure);
 	}
 
 	public void template(String template, Closure closure) throws IOException {

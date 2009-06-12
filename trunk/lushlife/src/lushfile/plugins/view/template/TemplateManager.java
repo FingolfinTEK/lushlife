@@ -71,7 +71,10 @@ public class TemplateManager {
 	public void injectFrom(String name) {
 		logger.info("injectFrom {}", name);
 		TemplateHandler handler = template.getLast();
-		getWriter().write(handler.get(name));
+		String value = handler.get(name);
+		if (value != null) {
+			getWriter().write(value);
+		}
 	}
 
 	public String param(String name) {

@@ -1,30 +1,32 @@
 package lushfile.core.controller;
 
+import java.lang.reflect.Method;
+
 public class ReflectionErrorParameter {
 	private String packageName;
-	private String className;
-	private String methodName;
+	private Method method;
+	private Object instance;
 	private Exception exception;
 
-	public String getClassName() {
-		return className;
-	}
-
-	public String getMethodName() {
-		return methodName;
+	public Method getMethod() {
+		return method;
 	}
 
 	public Exception getException() {
 		return exception;
 	}
 
-	public ReflectionErrorParameter init(String packageName, String className,
-			String methodName, Exception e) {
+	public ReflectionErrorParameter init(String packageName, Method method,
+			Object instance, Exception e) {
 		this.packageName = packageName;
-		this.className = className;
-		this.methodName = methodName;
 		this.exception = e;
+		this.instance = instance;
+		this.method = method;
 		return this;
+	}
+
+	public Object getInstance() {
+		return instance;
 	}
 
 	public String getPackageName() {

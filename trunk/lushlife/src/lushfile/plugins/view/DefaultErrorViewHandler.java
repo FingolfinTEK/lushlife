@@ -7,8 +7,7 @@ public class DefaultErrorViewHandler implements ErrorViewHandler {
 
 	@Override
 	public void handle(ReflectionErrorParameter param) {
-		// TODO Error Handling
-		throw new RuntimeException(param.getClassName() + "#"
-				+ param.getMethodName(), param.getException());
+		throw new RuntimeException("#" + param.getMethod(), param
+				.getException());
 	}
 }
