@@ -1,7 +1,7 @@
 package glassbottle;
 
 import glassbottle.core.Injector;
-import glassbottle.core.context.LushContext;
+import glassbottle.core.context.GlassBottleContext;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.servlet.ServletContext;
@@ -19,7 +19,7 @@ public class GlassBottle
 
    public static boolean isHotdeployMode()
    {
-      ServletContext context = glassbottle.core.context.LushContext.getServletContext();
+      ServletContext context = glassbottle.core.context.GlassBottleContext.getServletContext();
       String str = context.getServerInfo();
       if (!str.contains("Development"))
       {
@@ -32,7 +32,7 @@ public class GlassBottle
 
    static public void setBootStrap(Bootstrap bootstrap)
    {
-      ServletContext contdxt = LushContext.getServletContext();
+      ServletContext contdxt = GlassBottleContext.getServletContext();
       if (contdxt == null)
       {
          return;
@@ -42,7 +42,7 @@ public class GlassBottle
 
    static public Bootstrap getBootStrap()
    {
-      ServletContext contxt = LushContext.getServletContext();
+      ServletContext contxt = GlassBottleContext.getServletContext();
       if (contxt == null)
       {
          return null;

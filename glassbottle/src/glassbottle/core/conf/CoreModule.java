@@ -3,7 +3,7 @@ package glassbottle.core.conf;
 import glassbottle.core.ClassLoaderProducer;
 import glassbottle.core.Injector;
 import glassbottle.core.StartupTimeProducer;
-import glassbottle.core.context.LushContext;
+import glassbottle.core.context.GlassBottleContext;
 import glassbottle.core.dsl.WebBeansBinder;
 import glassbottle.core.dsl.WebBeansModule;
 
@@ -15,7 +15,7 @@ public class CoreModule implements WebBeansModule
    {
       module.clazz(ClassLoaderProducer.class);
       module.clazz(StartupTimeProducer.class);
-      module.clazz(LushContext.class);
+      module.clazz(GlassBottleContext.class);
       module.clazz(Injector.class);
    }
 

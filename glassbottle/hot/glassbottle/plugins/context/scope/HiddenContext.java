@@ -1,7 +1,7 @@
 package glassbottle.plugins.context.scope;
 
 
-import glassbottle.core.context.LushContext;
+import glassbottle.core.context.GlassBottleContext;
 
 import java.util.Map;
 
@@ -57,7 +57,7 @@ public class HiddenContext extends AbstractMapContext
          @Override
          public Map<Contextual<? extends Object>, BeanInstance<? extends Object>> delegate()
          {
-            return LushContext.getHiddenScope();
+            return GlassBottleContext.getHiddenScope();
          }
 
       };

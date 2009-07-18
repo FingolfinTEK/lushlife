@@ -6,12 +6,12 @@ import java.util.List;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.bootstrap.spi.Deployment;
 
-public class LushDeployment implements Deployment
+public class GlassBottleDeployment implements Deployment
 {
 
-   LushLifeBeanDeploymentArchive disc;
+   GlassBottleBeanDeploymentArchive disc;
 
-   public LushDeployment(LushLifeBeanDeploymentArchive disc)
+   public GlassBottleDeployment(GlassBottleBeanDeploymentArchive disc)
    {
       this.disc = disc;
    }

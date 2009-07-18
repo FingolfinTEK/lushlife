@@ -9,7 +9,7 @@ import javax.servlet.ServletContext;
 
 import org.jboss.webbeans.context.api.BeanInstance;
 
-public class LushContext
+public class GlassBottleContext
 {
    static private ThreadLocal<ServletContext> servletContext = new ThreadLocal<ServletContext>();
    static private ThreadLocal<Map<Contextual<? extends Object>, BeanInstance<? extends Object>>> hiddenScope = new ThreadLocal<Map<Contextual<? extends Object>, BeanInstance<? extends Object>>>()
@@ -39,6 +39,6 @@ public class LushContext
 
    public static void setServletContext(ServletContext servletContext)
    {
-      LushContext.servletContext.set(servletContext);
+      GlassBottleContext.servletContext.set(servletContext);
    }
 }

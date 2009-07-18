@@ -1,7 +1,7 @@
 package glassbottle.core;
 
 
-import glassbottle.core.context.LushContext;
+import glassbottle.core.context.GlassBottleContext;
 import glassbottle.servlet.GlassBottleListener;
 
 import java.net.MalformedURLException;
@@ -53,7 +53,7 @@ public class ClassLoaderProducer
    @Produces
    static public ClassLoader getClassLoader()
    {
-      ServletContext context = LushContext.getServletContext();
+      ServletContext context = GlassBottleContext.getServletContext();
       if (context == null)
       {
          return Thread.currentThread().getContextClassLoader();
