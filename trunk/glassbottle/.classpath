@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="war/WEB-INF/modules" path="hot"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-collections-1.0-rc2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javassist-3.8.1.GA.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr299-api-1.0.0-SNAPSHOT.jar" sourcepath="/jsr299-api/src/main/java"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-api-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-core-1.0.0-SNAPSHOT.jar" sourcepath="/webbeans-core/src/main/java"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-logging-1.0.0-SNAPSHOT.jar" sourcepath="C:/home/eclipse/sandbox/aplengine/webbeans-extensions/logger/src/main/java"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-spi-1.0.0-SNAPSHOT.jar" sourcepath="/webbeans-spi/src/main/java"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/groovy-all-1.6.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/ejb-api-3.0.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
