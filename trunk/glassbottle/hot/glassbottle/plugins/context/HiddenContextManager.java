@@ -31,7 +31,7 @@ public class HiddenContextManager
 
    public String toHidden()
    {
-      Map<Contextual<? extends Object>, BeanInstance<? extends Object>> hidden = glassbottle.core.context.LushContext.getHiddenScope();
+      Map<Contextual<? extends Object>, BeanInstance<? extends Object>> hidden = glassbottle.core.context.GlassBottleContext.getHiddenScope();
       if (hidden.size() == 0)
       {
          return "";
@@ -84,7 +84,7 @@ public class HiddenContextManager
             };
             Map<Contextual<? extends Object>, BeanInstance<? extends Object>> map = (Map<Contextual<? extends Object>, BeanInstance<? extends Object>>) ois.readObject();
             ois.close();
-            glassbottle.core.context.LushContext.getHiddenScope().putAll(map);
+            glassbottle.core.context.GlassBottleContext.getHiddenScope().putAll(map);
          }
          catch (IOException e)
          {

@@ -5,8 +5,8 @@ import glassbottle.GlassBottle;
 import glassbottle.core.ClassLoaderProducer;
 import glassbottle.core.binding.RequestDestroyedLiteral;
 import glassbottle.core.binding.RequestInitializedLiteral;
-import glassbottle.core.context.LushContext;
-import glassbottle.core.webbeans.LushLifeBootstrap;
+import glassbottle.core.context.GlassBottleContext;
+import glassbottle.core.webbeans.GlassBottleBoostrap;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -34,28 +34,28 @@ public class GlassBottleListener extends WebBeansListener implements
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
-		glassbottle.core.context.LushContext.getHiddenScope().clear();
-		LushContext.setServletContext(event.getServletContext());
+		glassbottle.core.context.GlassBottleContext.getHiddenScope().clear();
+		GlassBottleContext.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader(event.getServletContext());
 		try {
-			LushLifeBootstrap.destoryManager();
+			GlassBottleBoostrap.destoryManager();
 		} finally {
-			LushContext.setServletContext(null);
-			LushContext.getHiddenScope().clear();
+			GlassBottleContext.setServletContext(null);
+			GlassBottleContext.getHiddenScope().clear();
 		}
 		super.contextDestroyed(event);
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		LushContext.getHiddenScope().clear();
-		LushContext.setServletContext(event.getServletContext());
+		GlassBottleContext.getHiddenScope().clear();
+		GlassBottleContext.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader(event.getServletContext());
 		try {
-			LushLifeBootstrap.initManager();
+			GlassBottleBoostrap.initManager();
 		} finally {
-			LushContext.setServletContext(null);
-			LushContext.getHiddenScope().clear();
+			GlassBottleContext.setServletContext(null);
+			GlassBottleContext.getHiddenScope().clear();
 		}
 		super.contextInitialized(event);
 	}
@@ -64,19 +64,19 @@ public class GlassBottleListener extends WebBeansListener implements
 	public void requestDestroyed(ServletRequestEvent event) {
 		CurrentManager.rootManager().fireEvent(event,
 				new RequestDestroyedLiteral());
-		LushContext.setServletContext(null);
-		LushContext.getHiddenScope().clear();
+		GlassBottleContext.setServletContext(null);
+		GlassBottleContext.getHiddenScope().clear();
 		DependentContext.instance().setActive(false);
 	}
 
 	@Override
 	public void requestInitialized(ServletRequestEvent event) {
-		LushContext.getHiddenScope().clear();
-		LushContext.setServletContext(event.getServletContext());
+		GlassBottleContext.getHiddenScope().clear();
+		GlassBottleContext.setServletContext(event.getServletContext());
 		if (GlassBottle.isHotdeployMode()) {
 			if (isUpdate()) {
 				ClassLoaderProducer.produceClassLoader(event.getServletContext());
-				LushLifeBootstrap.initManager();
+				GlassBottleBoostrap.initManager();
 			}
 			Thread.currentThread().setContextClassLoader(
 					ClassLoaderProducer.getClassLoader());
@@ -89,7 +89,7 @@ public class GlassBottleListener extends WebBeansListener implements
 	static public final String LAST_UPDATE_TIME = "LUSH_LAST_UPDATE";
 
 	private boolean isUpdate() {
-		ServletContext context = LushContext.getServletContext();
+		ServletContext context = GlassBottleContext.getServletContext();
 		Long lastUpdate = (Long) context.getAttribute(LAST_UPDATE_TIME);
 		if (lastUpdate == null) {
 			return false;

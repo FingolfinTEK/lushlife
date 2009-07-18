@@ -19,13 +19,13 @@ import org.jboss.webbeans.context.DependentContext;
 import org.jboss.webbeans.context.api.helpers.ConcurrentHashMapBeanStore;
 
 
-public class LushLifeBootstrap
+public class GlassBottleBoostrap
 {
 
    static public void initManager()
    {
       List<WebBeansModule> modules = ModuleLoader.loadModules(ClassLoaderProducer.getClassLoader());
-      LushLifeBootstrap.initManager(modules);
+      GlassBottleBoostrap.initManager(modules);
    }
 
    static public void initManager(WebBeansModule... module)
@@ -38,7 +38,7 @@ public class LushLifeBootstrap
       destoryManager();
       Bootstrap bootstrap = new WebBeansBootstrap();
       bootstrap.setEnvironment(Environments.SERVLET);
-      bootstrap.getServices().add(Deployment.class, new LushDeployment(new LushLifeBeanDeploymentArchive(module)));
+      bootstrap.getServices().add(Deployment.class, new GlassBottleDeployment(new GlassBottleBeanDeploymentArchive(module)));
       bootstrap.setApplicationContext(new ConcurrentHashMapBeanStore());
       bootstrap.initialize();
       bootstrap.boot();

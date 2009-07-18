@@ -15,12 +15,12 @@ import java.util.Set;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 
 
-public class LushLifeBeanDeploymentArchive implements BeanDeploymentArchive
+public class GlassBottleBeanDeploymentArchive implements BeanDeploymentArchive
 {
 
-   private LushBinderImpl binder = new LushBinderImpl();
+   private WebBeansBinderImpl binder = new WebBeansBinderImpl();
 
-   static public class LushBinderImpl implements WebBeansBinder
+   static public class WebBeansBinderImpl implements WebBeansBinder
    {
       private Set<Class<?>> classes = new HashSet<Class<?>>();
       private Set<URL> xmls = new HashSet<URL>();
@@ -55,12 +55,12 @@ public class LushLifeBeanDeploymentArchive implements BeanDeploymentArchive
 
    }
 
-   public LushLifeBeanDeploymentArchive(WebBeansModule... modules)
+   public GlassBottleBeanDeploymentArchive(WebBeansModule... modules)
    {
       this(Arrays.asList(modules));
    }
 
-   public LushLifeBeanDeploymentArchive(Iterable<WebBeansModule> modules)
+   public GlassBottleBeanDeploymentArchive(Iterable<WebBeansModule> modules)
    {
       for (WebBeansModule module : modules)
       {
