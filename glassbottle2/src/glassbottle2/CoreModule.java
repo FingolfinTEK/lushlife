@@ -1,13 +1,14 @@
 package glassbottle2;
 
+import glassbottle2.util.UtilModule;
+
 public class CoreModule implements WebBeansModule
 {
 
    @Override
    public void configure(WebBeansBinder module)
    {
-      module.clazz(ClassLoaderProducer.class);
-      module.clazz(StartupTimeProducer.class);
+      module.install(new UtilModule());
       module.clazz(GlassBottleContext.class);
       module.clazz(Injector.class);
    }

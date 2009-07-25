@@ -1,7 +1,7 @@
 package glassbottle2.application.lushup;
 
 import glassbottle2.binding.Encoding;
-import glassbottle2.plugins.context.binding.HiddenKey;
+import glassbottle2.context.binding.HiddenKey;
 
 import javax.enterprise.inject.Produces;
 

@@ -1,8 +1,8 @@
 package glassbottle2.extension.groovy;
 
-import glassbottle2.ClassLoaderProducer;
 import glassbottle2.binding.Encoding;
 import glassbottle2.scope.Singleton;
+import glassbottle2.util.loader.ClassLoaderProducer;
 import groovy.lang.GroovyShell;
 
 import org.codehaus.groovy.control.CompilerConfiguration;

@@ -1,10 +1,13 @@
 package glassbottle2.application.lushup.resources;
 
+import glassbottle2.Injector;
 import glassbottle2.application.lushup.model.Customer;
 import glassbottle2.application.lushup.view.Index;
-import glassbottle2.plugins.view.Render;
+import glassbottle2.extension.jsp.JSPPage;
+import glassbottle2.view.Render;
 
 import javax.enterprise.inject.Current;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,6 +15,9 @@ import javax.ws.rs.core.StreamingOutput;
 
 public class CustomerBase
 {
+   @Current
+   Injector injector;
+
    @Current
    Customer customer;
 
@@ -24,7 +30,8 @@ public class CustomerBase
    {
       customer.setId(id);
       customer.setFirstName(name);
-      return new Render(Index.class);
+      // return new Render(Index.class);
+      return injector.getInstanceByType(JSPPage.class).path("/test.jsp");
    }
 
    @GET

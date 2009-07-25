@@ -1,9 +1,9 @@
 package glassbottle2.extension.groovy;
 
-import glassbottle2.plugins.context.NamingResolverMap;
-import glassbottle2.plugins.view.Page;
+import glassbottle2.el.NamingResolverMap;
 import glassbottle2.util.beans.BeansUtil;
 import glassbottle2.util.loader.ClassLoaderUtil;
+import glassbottle2.view.Page;
 import groovy.lang.Writable;
 import groovy.text.Template;
 

@@ -1,11 +1,11 @@
 package glassbottle2.servlet;
 
-import glassbottle2.ClassLoaderProducer;
 import glassbottle2.GlassBottle;
 import glassbottle2.GlassBottleContext;
 import glassbottle2.binding.RequestDestroyedLiteral;
 import glassbottle2.binding.RequestInitializedLiteral;
 import glassbottle2.bootstrap.GlassBottleBoostrap;
+import glassbottle2.util.loader.ClassLoaderProducer;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -17,6 +17,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
+import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.webbeans.CurrentManager;
 import org.jboss.webbeans.context.DependentContext;
@@ -62,6 +63,7 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
          GlassBottleContext.getHiddenScope().clear();
       }
       super.contextInitialized(event);
+      CurrentManager.rootManager().fireEvent(event, new RequestInitializedLiteral());
    }
 
    @Override
@@ -69,8 +71,9 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
    {
       CurrentManager.rootManager().fireEvent(event, new RequestDestroyedLiteral());
       GlassBottleContext.setServletContext(null);
+      GlassBottleContext.setRequest(null);
+      GlassBottleContext.setResponse(null);
       GlassBottleContext.getHiddenScope().clear();
-      // DependentContext.instance().setActive(false);
       DependentContext dependentContext = GlassBottle.getBootStrap(event.getServletContext()).getServices().get(DependentContext.class);
       if (dependentContext == null)
       {
@@ -81,8 +84,9 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
    @Override
    public void requestInitialized(ServletRequestEvent event)
    {
-      GlassBottleContext.getHiddenScope().clear();
       GlassBottleContext.setServletContext(event.getServletContext());
+      GlassBottleContext.setRequest((HttpServletRequest) event.getServletRequest());
+      GlassBottleContext.getHiddenScope().clear();
       if (GlassBottle.isHotdeployMode())
       {
          if (isUpdate())

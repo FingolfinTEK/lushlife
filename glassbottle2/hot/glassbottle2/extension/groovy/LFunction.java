@@ -2,8 +2,8 @@ package glassbottle2.extension.groovy;
 
 import glassbottle2.binding.Encoding;
 import glassbottle2.binding.StartupTime;
+import glassbottle2.context.ServletPathInfo;
 import glassbottle2.extension.groovy.impl.TemplateManager;
-import glassbottle2.plugins.context.ServletPathInfo;
 import glassbottle2.scope.EventScoped;
 import glassbottle2.util.markup.Markup;
 import glassbottle2.util.markup.NestTag;
@@ -64,7 +64,7 @@ public class LFunction
    }
 
    @Encoding
-   String encoding;
+   private String encoding;
 
    private String toUrl(String type, String resource)
    {

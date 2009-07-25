@@ -1,6 +1,6 @@
 package glassbottle2.extension.groovy.impl;
 
-import glassbottle2.plugins.context.EventScopedMap;
+import glassbottle2.el.ELVariableEventScopedMap;
 import glassbottle2.scope.EventScoped;
 
 import java.io.PrintWriter;
@@ -27,7 +27,7 @@ public class TemplateManager
    // private glassbottle.plugins.groovy.GSPTemplateEngine engine;
    //
     @Current
-   private EventScopedMap map;
+   private ELVariableEventScopedMap map;
    //
    // @Current
    //   private NamingResolverMap shellMap;

@@ -1,9 +1,9 @@
 package glassbottle2.bootstrap;
 
-import glassbottle2.ClassLoaderProducer;
 import glassbottle2.GlassBottle;
 import glassbottle2.WebBeansModule;
 import glassbottle2.scope.SingletonContext;
+import glassbottle2.util.loader.ClassLoaderProducer;
 
 import java.util.Arrays;
 import java.util.List;

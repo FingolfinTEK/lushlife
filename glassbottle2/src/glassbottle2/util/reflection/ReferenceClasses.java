@@ -1,6 +1,6 @@
 package glassbottle2.util.reflection;
 
-import glassbottle2.ClassLoaderProducer;
+import glassbottle2.util.loader.ClassLoaderProducer;
 
 import java.lang.reflect.Modifier;
 import java.util.Collection;
