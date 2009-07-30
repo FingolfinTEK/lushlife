@@ -4,6 +4,7 @@ import glassbottle2.el.ELVariableEventScopedMap;
 import glassbottle2.scope.EventScoped;
 
 import java.io.PrintWriter;
+import java.io.Writer;
 
 import javax.enterprise.inject.Current;
 
@@ -26,11 +27,12 @@ public class TemplateManager
    // @Current
    // private glassbottle.plugins.groovy.GSPTemplateEngine engine;
    //
-    @Current
+   @Current
    private ELVariableEventScopedMap map;
+
    //
    // @Current
-   //   private NamingResolverMap shellMap;
+   // private NamingResolverMap shellMap;
 
    // protected Template loadTemplate(String resourceName)
    // {
@@ -42,38 +44,38 @@ public class TemplateManager
    // Closure closure) throws IOException
    // {
    // include(controller.getPackage().getName(), resourceName, params, closure);
-   //   }
+   // }
 
-//   public void injectTo(String name, final Closure closure)
-//   {
-//      logger.info("injectTo {0}", name);
-//      TemplateHandler handler = template.getLast();
-//      handler.put(name, new PrintWriterDelegate(map)
-//      {
-//         @Override
-//         protected void invoke()
-//         {
-//            closure.call();
-//         }
-//      }.toString());
-//   }
-//
-//   public void injectFrom(String name)
-//   {
-//      logger.info("injectFrom {0}", name);
-//      TemplateHandler handler = template.getLast();
-//      String value = handler.get(name);
-//      if (value != null)
-//      {
-//         getWriter().write(value);
-//      }
-//   }
-//
-//   public String param(String name)
-//   {
-//      TemplateHandler handler = template.getLast();
-//      return handler.param(name);
-//   }
+   // public void injectTo(String name, final Closure closure)
+   // {
+   // logger.info("injectTo {0}", name);
+   // TemplateHandler handler = template.getLast();
+   // handler.put(name, new PrintWriterDelegate(map)
+   // {
+   // @Override
+   // protected void invoke()
+   // {
+   // closure.call();
+   // }
+   // }.toString());
+   // }
+   //
+   // public void injectFrom(String name)
+   // {
+   // logger.info("injectFrom {0}", name);
+   // TemplateHandler handler = template.getLast();
+   // String value = handler.get(name);
+   // if (value != null)
+   // {
+   // getWriter().write(value);
+   // }
+   // }
+   //
+   // public String param(String name)
+   // {
+   // TemplateHandler handler = template.getLast();
+   // return handler.param(name);
+   // }
 
    // public void include(String packageName, String resourceName, Map<String,
    // String> params, final Closure closure) throws IOException
@@ -99,13 +101,13 @@ public class TemplateManager
    // }
    // finally
    // {
-   //         this.template.pollLast();
-   //      }
-   //   }
+   // this.template.pollLast();
+   // }
+   // }
 
-   public PrintWriter getWriter()
+   public Writer getWriter()
    {
-      return (PrintWriter) map.get("out");
+      return (Writer) map.get("out");
    }
 
 }

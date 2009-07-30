@@ -7,9 +7,6 @@ import groovy.text.SimpleTemplateEngine;
 import groovy.text.Template;
 import groovy.text.TemplateEngine;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,6 +40,7 @@ public class GSPTemplateEngine
    public GSPTemplateEngine(GroovyShellManager manager)
    {
       this.engine = new SimpleTemplateEngine(manager.getShell());
+      // this.engine = new TemplateEngine();
    }
 
    public Template create(final String classLoaderPath)
@@ -66,29 +64,35 @@ public class GSPTemplateEngine
             }
             try
             {
-               Reader reader = new InputStreamReader(url.openStream(), encoding);
+               // Reader reader = new InputStreamReader(url.openStream(),
+               // encoding);
                try
                {
-                  if (logger.isDebugEnabled())
-                  {
-                     BufferedReader br = new BufferedReader(reader);
-                     StringBuilder sb = new StringBuilder();
-                     for (String s = br.readLine(); s != null; s = br.readLine())
-                     {
-                        sb.append(s);
-                        sb.append("\n");
-                     }
-                     logger.debug(sb.toString());
-                     return engine.createTemplate(sb.toString());
-                  }
-                  else
-                  {
-                     return engine.createTemplate(reader);
-                  }
+                  logger.info("gsp {0}", url);
+                  return engine.createTemplate(url);
+                  // if (logger.isDebugEnabled())
+                  // {
+                  // BufferedReader br = new BufferedReader(reader);
+                  // StringBuilder sb = new StringBuilder();
+                  // for (String s = br.readLine(); s != null; s =
+                  // br.readLine())
+                  // {
+                  // sb.append(s);
+                  // sb.append("\n");
+                  // }
+                  // logger.debug(sb.toString());
+                  // return engine.createTemplate(sb.toString());
+                  // }
+                  // else
+                  // {
+                  // return engine.
+                  // return engine.createTemplate(new
+                  // InputStreamReader(reader));
+                  // }
                }
                finally
                {
-                  reader.close();
+                  // reader.close();
                }
             }
             catch (Exception e)

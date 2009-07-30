@@ -29,7 +29,7 @@ public class Injector implements Serializable
 
    final private BeanManagerImpl manager;
 
-   public <T> T getInstanceByType(Class<T> type, Annotation... bindings)
+   public <T> T getInstance(Class<T> type, Annotation... bindings)
    {
       WBAnnotated<T, ?> element = ResolvableWBClass.of(type, bindings, manager);
       Bean<T> bean = manager.getBean(element, bindings);

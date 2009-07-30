@@ -1,6 +1,5 @@
-package glassbottle2.application.lushup.resources;
+package application.lushup.resources;
 
-import glassbottle2.application.lushup.model.Customer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +25,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import application.lushup.model.Customer;
 
 @Path("/customers")
 public class CustomerResource extends CustomerBase

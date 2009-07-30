@@ -13,6 +13,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.annotation.PostConstruct;
+import javax.cache.Cache;
+import javax.cache.CacheException;
+import javax.cache.CacheManager;
 import javax.enterprise.inject.Current;
 import javax.enterprise.inject.Instance;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +40,20 @@ public class ResourceCacheImpl implements ResourceCache
    @Current
    Instance<HttpServletResponse> response;
 
-   private Map<String, byte[]> resources = new ConcurrentHashMap<String, byte[]>();
+   private Cache cache;
+
+   @PostConstruct
+   public void init()
+   {
+      try
+      {
+         cache = CacheManager.getInstance().getCacheFactory().createCache(new ConcurrentHashMap());
+      }
+      catch (CacheException e)
+      {
+         throw new RuntimeException(e);
+      }
+   }
 
    @Override
    public WriteTo write(final String resource)
@@ -52,7 +69,7 @@ public class ResourceCacheImpl implements ResourceCache
                @Override
                protected Map<String, byte[]> cache()
                {
-                  return resources;
+                  return cache;
                }
 
                @Override

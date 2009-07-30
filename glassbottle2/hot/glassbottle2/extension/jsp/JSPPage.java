@@ -1,5 +1,6 @@
 package glassbottle2.extension.jsp;
 
+import glassbottle2.GlassBottle;
 import glassbottle2.view.Page;
 
 import java.io.IOException;
@@ -10,14 +11,15 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspApplicationContext;
-import javax.servlet.jsp.JspFactory;
 import javax.ws.rs.WebApplicationException;
-
-import org.jboss.webbeans.el.WebBeansELResolver;
 
 public class JSPPage implements Page
 {
+   static public Page to(String path)
+   {
+      return GlassBottle.getInjector().getInstance(JSPPage.class).path(path);
+   }
+
    private String path;
 
    @Current

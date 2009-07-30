@@ -1,4 +1,4 @@
-package glassbottle2.application.lushup.model;
+package application.lushup.model;
 
 import glassbottle2.scope.EventScoped;
 

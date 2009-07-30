@@ -28,7 +28,7 @@ public class GlassBottleResourceFactory implements ResourceFactory
 
    public Object createResource(final HttpRequest request, final HttpResponse response, final InjectorFactory factory)
    {
-      return GlassBottle.getInjector().getInstanceByType(scannableClass);
+      return GlassBottle.getInjector().getInstance(scannableClass);
    }
 
    public void requestFinished(final HttpRequest request, final HttpResponse response, final Object resource)

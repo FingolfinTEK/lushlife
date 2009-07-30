@@ -32,6 +32,8 @@ public class GlassBottleContext
       return hiddenScope.get();
    }
 
+   @Named("request")
+   @Produces
    public static HttpServletRequest getRequest()
    {
       return request.get();
@@ -42,15 +44,13 @@ public class GlassBottleContext
       GlassBottleContext.request.set(request);
    }
 
-   @Named("request")
+   @Named("response")
    @Produces
    public static HttpServletResponse getResponse()
    {
       return response.get();
    }
 
-   @Named("response")
-   @Produces
    public static void setResponse(HttpServletResponse response)
    {
       GlassBottleContext.response.set(response);

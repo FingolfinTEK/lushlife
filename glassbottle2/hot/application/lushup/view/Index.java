@@ -1,4 +1,4 @@
-package glassbottle2.application.lushup.view;
+package application.lushup.view;
 
 import glassbottle2.extension.groovy.GSPPage;
 

@@ -38,7 +38,7 @@ public class ModuleProcessor
          }
          if (beanClass.isAnnotationPresent(Provider.class))
          {
-            providerFactory.registerProviderInstance(GlassBottle.getInjector().getInstanceByType(clazz));
+            providerFactory.registerProviderInstance(GlassBottle.getInjector().getInstance(clazz));
          }
       }
    }

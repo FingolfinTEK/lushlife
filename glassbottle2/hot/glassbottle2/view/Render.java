@@ -20,7 +20,7 @@ public class Render implements StreamingOutput
    @Override
    public void write(OutputStream outputStream) throws IOException, WebApplicationException
    {
-      Page page = GlassBottle.getInjector().getInstanceByType(viewClazz);
+      Page page = GlassBottle.getInjector().getInstance(viewClazz);
       page.write(outputStream);
    }
 }

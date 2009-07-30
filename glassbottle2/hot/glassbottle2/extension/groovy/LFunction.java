@@ -8,6 +8,7 @@ import glassbottle2.scope.EventScoped;
 import glassbottle2.util.markup.Markup;
 import glassbottle2.util.markup.NestTag;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,17 +30,17 @@ public class LFunction
    @Current
    ServletPathInfo info;
 
-   public void css(String resource)
+   public void css(String resource) throws IOException
    {
       css(resource, new HashMap<String, String>());
    }
 
-   public void js(String resource)
+   public void js(String resource) throws IOException
    {
       js(resource, new HashMap<String, String>());
    }
 
-   public void js(String resource, Map<String, String> attr)
+   public void js(String resource, Map<String, String> attr) throws IOException
    {
 
       if (!attr.containsKey("type"))
@@ -71,7 +72,7 @@ public class LFunction
       return "/" + this.info.getServletPath() + "/" + resource + "/" + type + "?" + startuptime;
    }
 
-   public void css(String resource, Map<String, String> attr)
+   public void css(String resource, Map<String, String> attr) throws IOException
    {
 
       if (!attr.containsKey("type"))

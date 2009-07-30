@@ -1,10 +1,14 @@
 package glassbottle2.extension.jsp;
 
+import java.lang.reflect.Method;
+
 import glassbottle2.binding.RequestInitialized;
+import glassbottle2.el.NamingResolverMap;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Current;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletRequestEvent;
 import javax.servlet.jsp.JspApplicationContext;
 import javax.servlet.jsp.JspFactory;
 
@@ -14,18 +18,28 @@ public class JSPInitializer
 {
    static public boolean init = false;
 
+   @Current
+   NamingResolverMap map;
+
    public void initELResolver(@Observes
    @RequestInitialized
-   ServletContextEvent event)
+   ServletRequestEvent event)
    {
-      if (init == false)
-      {
-         ServletContext context = event.getServletContext();
-         JspFactory factory = JspFactory.getDefaultFactory();
-         JspApplicationContext applicationContext = factory.getJspApplicationContext(context);
-         applicationContext.addELResolver(new WebBeansELResolver());
-         init = true;
-      }
+      event.getServletRequest().setAttribute("w", map);
+      // if (init == false)
+      // {
+      // ServletContext context = event.getServletContext();
+      // JspFactory factory = JspFactory.getDefaultFactory();
+      // System.out.println(factory.getClass());
+      // for (Method method : factory.getClass().getMethods())
+      // {
+      // System.out.println(method);
+      // }
+      // JspApplicationContext applicationContext =
+      // factory.getJspApplicationContext(context);
+      // applicationContext.addELResolver(new WebBeansELResolver());
+      //         init = true;
+      //      }
 
    }
 

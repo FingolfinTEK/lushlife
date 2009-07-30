@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr181-api-1.0-MR1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

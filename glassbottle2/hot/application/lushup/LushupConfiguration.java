@@ -1,4 +1,4 @@
-package glassbottle2.application.lushup;
+package application.lushup;
 
 import glassbottle2.binding.Encoding;
 import glassbottle2.context.binding.HiddenKey;

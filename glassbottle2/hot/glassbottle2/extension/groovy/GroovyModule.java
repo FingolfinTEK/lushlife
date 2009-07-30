@@ -16,6 +16,7 @@ public class GroovyModule implements WebBeansModule
       binder.clazz(LFunction.class);
       binder.clazz(TemplateManager.class);
       binder.clazz(TemplateHandler.class);
+      // binder.clazz(GroovyListener.class);
    }
 
 }
