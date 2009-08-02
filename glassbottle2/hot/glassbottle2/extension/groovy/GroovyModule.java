@@ -11,7 +11,7 @@ public class GroovyModule implements WebBeansModule
    @Override
    public void configure(WebBeansBinder binder)
    {
-      binder.clazz(GSPTemplateEngine.class);
+      binder.clazz(GroovyTemplateEngine.class);
       binder.clazz(GroovyShellManager.class);
       binder.clazz(LFunction.class);
       binder.clazz(TemplateManager.class);
