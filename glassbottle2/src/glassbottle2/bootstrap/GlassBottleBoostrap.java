@@ -1,12 +1,11 @@
 package glassbottle2.bootstrap;
 
+import glassbottle2.BeanModule;
 import glassbottle2.GlassBottle;
-import glassbottle2.WebBeansModule;
 import glassbottle2.scope.SingletonContext;
 import glassbottle2.util.loader.ClassLoaderProducer;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.enterprise.inject.spi.BeanManager;
 
@@ -22,16 +21,16 @@ public class GlassBottleBoostrap
 
    static public void initManager()
    {
-      List<WebBeansModule> modules = ModuleLoader.loadModules(ClassLoaderProducer.getClassLoader());
+      Iterable<BeanModule> modules = ModuleLoader.loadModules(ClassLoaderProducer.getClassLoader());
       GlassBottleBoostrap.initManager(modules);
    }
 
-   static public void initManager(WebBeansModule... module)
+   static public void initManager(BeanModule... module)
    {
       initManager(Arrays.asList(module));
    }
 
-   static public void initManager(Iterable<WebBeansModule> module)
+   static public void initManager(Iterable<BeanModule> module)
    {
       destoryManager();
       Bootstrap bootstrap = new WebBeansBootstrap()
@@ -53,7 +52,7 @@ public class GlassBottleBoostrap
 
       };
       bootstrap.setEnvironment(Environments.SERVLET);
-      GlassBottleDeployment deployment = new GlassBottleDeployment(new GlassBottleBeanDeploymentArchive(module));
+      GlassBottleDeployment deployment = new GlassBottleDeployment(new BeanModuleBeanDeploymentArchive(module));
       bootstrap.getServices().add(Deployment.class, deployment);
       bootstrap.setApplicationContext(new ConcurrentHashMapBeanStore());
       bootstrap.initialize();

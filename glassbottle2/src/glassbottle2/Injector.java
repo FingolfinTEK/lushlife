@@ -29,6 +29,11 @@ public class Injector implements Serializable
 
    final private BeanManagerImpl manager;
 
+   public <T> T $(Class<T> type, Annotation... bindings)
+   {
+      return getInstance(type, bindings);
+   }
+
    public <T> T getInstance(Class<T> type, Annotation... bindings)
    {
       WBAnnotated<T, ?> element = ResolvableWBClass.of(type, bindings, manager);

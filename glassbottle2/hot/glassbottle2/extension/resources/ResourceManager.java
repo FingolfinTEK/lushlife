@@ -3,15 +3,16 @@ package glassbottle2.extension.resources;
 import glassbottle2.binding.Encoding;
 import glassbottle2.binding.StartupTime;
 import glassbottle2.context.ServletPathInfo;
+import glassbottle2.extension.jspquery.JSPQueryManager;
+import glassbottle2.extension.jspquery.tag.CSS;
+import glassbottle2.extension.jspquery.tag.JavaScript;
+import glassbottle2.extension.jspquery.tag.TagBase;
 import glassbottle2.scope.EventScoped;
-import glassbottle2.util.markup.Markup;
-import glassbottle2.util.markup.NestTag;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.enterprise.inject.Current;
+import javax.ws.rs.Path;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -24,70 +25,30 @@ public class ResourceManager
    @Current
    private ServletPathInfo info;
 
-   public String css(String resource) throws IOException
+   @Current
+   JSPQueryManager jsp;
+
+   public CSS css(Class<?> resourceClass, String resource) throws IOException
    {
-      return css(resource, new HashMap<String, String>());
+      CSS css = jsp.$(CSS.class);
+      css.href(toUrl(resourceClass, "css", resource));
+      return css;
    }
 
-   public String js(String resource) throws IOException
+   public JavaScript js(Class<?> resourceClass, String resource) throws IOException
    {
-      return js(resource, new HashMap<String, String>());
-   }
-
-   public String js(String resource, Map<String, String> attr) throws IOException
-   {
-
-      if (!attr.containsKey("type"))
-      {
-         attr.put("type", "text/javascript");
-      }
-
-      if (!attr.containsKey("charset"))
-      {
-         attr.put("charset", encoding);
-      }
-
-      attr.put("src", toUrl("js", resource));
-
-      return (new Markup().tag("script", attr, new NestTag()
-      {
-         public void markup(Markup markup)
-         {
-         }
-      }).toString());
-
+      JavaScript javaScript = jsp.$(JavaScript.class);
+      javaScript.src(toUrl(resourceClass, "js", resource));
+      javaScript.encoding(encoding);
+      return javaScript;
    }
 
    @Encoding
    private String encoding;
 
-   private String toUrl(String type, String resource)
+   private String toUrl(Class<?> resourceClass, String type, String resource)
    {
-      return "/" + this.info.getServletPath() + "/" + resource + "/" + type + "?" + startuptime;
-   }
-
-   public String css(String resource, Map<String, String> attr) throws IOException
-   {
-
-      if (!attr.containsKey("type"))
-      {
-         attr.put("type", "text/css");
-      }
-
-      if (!attr.containsKey("rel"))
-      {
-         attr.put("rel", "Stylesheet");
-      }
-
-      if (!attr.containsKey("media"))
-      {
-         attr.put("media", "screen");
-      }
-
-      attr.put("href", toUrl("css", resource));
-
-      return new Markup().tag("link", attr).toString();
-
+      return "/" + this.info.getServletPath() + "/" + resourceClass.getAnnotation(Path.class).value() + "/" + resource + "/" + type + "?" + startuptime;
    }
 
    public String h(Object object)

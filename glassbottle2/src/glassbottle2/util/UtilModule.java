@@ -1,19 +1,18 @@
 package glassbottle2.util;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 import glassbottle2.util.date.StartupTimeProducer;
 import glassbottle2.util.loader.ClassLoaderProducer;
 
-public class UtilModule implements WebBeansModule
+public class UtilModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(ClassLoaderProducer.class);
-      binder.clazz(StartupTimeProducer.class);
-
+      binder.model(ClassLoaderProducer.class);
+      binder.model(StartupTimeProducer.class);
    }
 
 }

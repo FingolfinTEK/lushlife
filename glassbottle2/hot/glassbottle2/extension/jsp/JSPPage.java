@@ -43,7 +43,7 @@ public class JSPPage implements Page
       try
       {
          response.reset();
-         context.getRequestDispatcher(path).forward(reqeust, response);
+         context.getRequestDispatcher(path).include(reqeust, response);
       }
       catch (ServletException e)
       {

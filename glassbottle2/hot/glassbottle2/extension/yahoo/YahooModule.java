@@ -1,16 +1,16 @@
 package glassbottle2.extension.yahoo;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 import glassbottle2.extension.resources.ResourceModule;
 
-public class YahooModule implements WebBeansModule
+public class YahooModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(YahooResource.class);
+      binder.model(YahooResource.class);
       binder.install(new ResourceModule());
    }
 

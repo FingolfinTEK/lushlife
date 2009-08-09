@@ -9,9 +9,9 @@ import org.jboss.webbeans.bootstrap.spi.Deployment;
 public class GlassBottleDeployment implements Deployment
 {
 
-   GlassBottleBeanDeploymentArchive disc;
+   BeanModuleBeanDeploymentArchive disc;
 
-   public GlassBottleDeployment(GlassBottleBeanDeploymentArchive disc)
+   public GlassBottleDeployment(BeanModuleBeanDeploymentArchive disc)
    {
       this.disc = disc;
    }

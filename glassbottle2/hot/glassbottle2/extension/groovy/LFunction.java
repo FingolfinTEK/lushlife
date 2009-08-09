@@ -92,7 +92,7 @@ public class LFunction
 
       attr.put("href", toUrl("css", resource));
 
-      manager.getWriter().write(new Markup().tag("link", attr).toString());
+      manager.getWriter().write(new Markup().simple("link", attr).toString());
 
    }
 

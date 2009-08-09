@@ -1,17 +1,20 @@
 package glassbottle2.extension.resources;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 import glassbottle2.extension.jaxrs.JaxRSModule;
+import glassbottle2.extension.jspquery.JSPQueryModule;
 
-public class ResourceModule implements WebBeansModule
+public class ResourceModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
       binder.install(new JaxRSModule());
-      binder.clazz(ResourceCacheImpl.class);
+      binder.install(new JSPQueryModule());
+      binder.model(ResourceCacheImpl.class);
+      binder.model(ResourceManager.class);
    }
 
 }

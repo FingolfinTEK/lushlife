@@ -1,15 +1,15 @@
 package glassbottle2.extension.json;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 
-public class JSONModule implements WebBeansModule
+public class JSONModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(JSONWriter.class);
+      binder.model(JSONWriter.class);
    }
 
 }

@@ -49,11 +49,23 @@ public class Markup
 
    public Markup tag(String tag)
    {
-      tag(tag, new HashMap<String, String>());
+      simple(tag, new HashMap<String, String>());
       return this;
    }
 
-   public Markup tag(String tag, Map<String, ?> map)
+   public String start(String tag, Map<String, ?> map)
+   {
+      sb.append("<" + tag);
+      writeAttribute(map);
+      return toString();
+   }
+
+   public String end(String tag)
+   {
+      return "</" + tag + ">";
+   }
+
+   public Markup simple(String tag, Map<String, ?> map)
    {
       sb.append("<" + tag);
       writeAttribute(map);

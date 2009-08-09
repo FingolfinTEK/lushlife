@@ -1,15 +1,15 @@
 package glassbottle2;
 
 import glassbottle2.CoreModule;
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 import glassbottle2.context.ContextModule;
 
-public class StandardPluginModule implements WebBeansModule
+public class StandardPluginModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
       binder.install(new CoreModule());
       binder.install(new ContextModule());

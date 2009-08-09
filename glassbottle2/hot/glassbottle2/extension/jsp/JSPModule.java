@@ -1,16 +1,15 @@
 package glassbottle2.extension.jsp;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 
-public class JSPModule implements WebBeansModule
+public class JSPModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(JSPInitializer.class);
-      binder.clazz(JSPPage.class);
+      binder.model(JSPPage.class);
    }
 
 }

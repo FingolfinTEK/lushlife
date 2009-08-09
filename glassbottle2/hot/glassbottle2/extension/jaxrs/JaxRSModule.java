@@ -1,16 +1,16 @@
 package glassbottle2.extension.jaxrs;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 
-public class JaxRSModule implements WebBeansModule
+public class JaxRSModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(JaxRSInitializer.class);
-      binder.clazz(JaxRsServletDispatcher.class);
+      binder.model(JaxRSInitializer.class);
+      binder.model(JaxRsServletDispatcher.class);
    }
 
 }

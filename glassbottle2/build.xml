@@ -114,8 +114,9 @@
 
 	<target name="module.install">
 
-		<artifact:mvn pom="../webbeans-ri/pom.xml">
-			<arg line="install" />
+		<artifact:mvn pom="../webbeans-ri/pom.xml" fork="true">
+			<jvmarg value="-Xmx512M"/>
+			<arg line="clean install" />
 			<arg line="-Dmaven.test.skip=true" />
 		</artifact:mvn>
 

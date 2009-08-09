@@ -1,17 +1,17 @@
 package glassbottle2.context;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 
-public class ContextModule implements WebBeansModule
+public class ContextModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(ContextListener.class);
-      binder.clazz(HiddenContextManager.class);
-      binder.clazz(ServletPathInfo.class);
+      binder.model(ContextListener.class);
+      binder.model(HiddenContextManager.class);
+      binder.model(ServletPathInfo.class);
    }
 
 }

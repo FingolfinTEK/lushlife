@@ -1,18 +1,18 @@
 package glassbottle2.el;
 
-import glassbottle2.WebBeansBinder;
-import glassbottle2.WebBeansModule;
+import glassbottle2.BeanBinder;
+import glassbottle2.BeanModule;
 import glassbottle2.el.impl.NamingResolverImpl;
 
-public class ELModule implements WebBeansModule
+public class ELModule implements BeanModule
 {
 
    @Override
-   public void configure(WebBeansBinder binder)
+   public void configure(BeanBinder binder)
    {
-      binder.clazz(ELVariableEventScopedMap.class);
-      binder.clazz(NamingResolverImpl.class);
-      binder.clazz(NamingResolverMap.class);
+      binder.model(ELVariableEventScopedMap.class);
+      binder.model(NamingResolverImpl.class);
+      binder.model(NamingResolverMap.class);
    }
 
 }
