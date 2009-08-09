@@ -57,6 +57,7 @@ public class Markup
    {
       sb.append("<" + tag);
       writeAttribute(map);
+      sb.append(">");
       return toString();
    }
 

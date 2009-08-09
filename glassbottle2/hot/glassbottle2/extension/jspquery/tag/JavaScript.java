@@ -44,7 +44,7 @@ public abstract class JavaScript extends HTMLTag<JavaScript>
    public String toString()
    {
       initialization();
-      return simple();
+      return start() + " " + end();
    }
 
 }

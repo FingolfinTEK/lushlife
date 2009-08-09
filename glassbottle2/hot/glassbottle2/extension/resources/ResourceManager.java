@@ -48,7 +48,7 @@ public class ResourceManager
 
    private String toUrl(Class<?> resourceClass, String type, String resource)
    {
-      return "/" + this.info.getServletPath() + "/" + resourceClass.getAnnotation(Path.class).value() + "/" + resource + "/" + type + "?" + startuptime;
+      return this.info.getServletPath() + "/" + resourceClass.getAnnotation(Path.class).value() + "/" + resource + "/" + type + "?" + startuptime;
    }
 
    public String h(Object object)

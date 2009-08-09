@@ -45,7 +45,7 @@ public class TagBase<T extends Tag<T>> implements Tag<T>
       return start();
    }
 
-   private String start()
+   public String start()
    {
       initialization();
       this.manager.addStack(this);
