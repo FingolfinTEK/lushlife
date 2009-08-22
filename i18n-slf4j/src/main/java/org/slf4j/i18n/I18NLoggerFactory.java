@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.i18n.impl.AnnotationMessageFormatResolver;
 import org.slf4j.i18n.impl.AnnotationLogLevelResolver;
-import org.slf4j.i18n.impl.CompositeFormatResolver;
+import org.slf4j.i18n.impl.CompositeMessageFormatResolver;
 import org.slf4j.i18n.impl.CompositeLogLevelResolver;
 import org.slf4j.i18n.impl.I18NLoggerImpl;
 import org.slf4j.i18n.impl.ResourceBundleMessageFormatResolver;
@@ -32,7 +32,7 @@ public class I18NLoggerFactory {
 		logLevelResolver.add(new ResourceBundleLogLevelResolver());
 		logLevelResolver.add(new AnnotationLogLevelResolver());
 
-		CompositeFormatResolver formatResolver = new CompositeFormatResolver();
+		CompositeMessageFormatResolver formatResolver = new CompositeMessageFormatResolver();
 		formatResolver.add(new ResourceBundleMessageFormatResolver());
 		formatResolver.add(new AnnotationMessageFormatResolver());
 

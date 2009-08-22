@@ -45,7 +45,6 @@
 
 	</dependencies>
 
-
 	<build>
 		<plugins>
 			<plugin>
@@ -56,6 +55,40 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jar-plugin</artifactId>
+		<configuration>
+			<archive>
+				<manifest>
+					<addDefaultImplementationEntries>
+						true
+                        </addDefaultImplementationEntries>
+					<addDefaultSpecificationEntries>
+						true
+                        </addDefaultSpecificationEntries>
+				</manifest>
+				<manifestEntries>
+					<Implementation-URL>${pom.url}</Implementation-URL>
+				</manifestEntries>
+				<manifestSections>
+					<manifestSection>
+						<name>Build-Information</name>
+						<manifestEntries>
+							<Maven-Version>${maven.version}</Maven-Version>
+							<Java-Version>${java.version}</Java-Version>
+							<Java-Vendor>${java.vendor}</Java-Vendor>
+							<Os-Name>${os.name}</Os-Name>
+							<Os-Arch>${os.arch}</Os-Arch>
+							<Os-Version>${os.version}</Os-Version>
+							<Scm-Revision>${buildNumber}</Scm-Revision>
+						</manifestEntries>
+					</manifestSection>
+				</manifestSections>
+			</archive>
+		</configuration>
+	</plugin>
 		</plugins>
 	</build>
+
 </project>

@@ -10,8 +10,9 @@ import org.slf4j.i18n.collections.ConcurrentEnumCache;
 import org.slf4j.i18n.spi.LogMessageFormatResolver;
 
 /**
- * resolve log message format by ResourceBundle associated with enum class. Enum
- * class name is used for ResourceBundle name.
+ * The resolve ResourceBundleMessageFormatResolver log message format by
+ * ResourceBundle associated with enum class. Enum class name is used for
+ * ResourceBundle name.
  * 
  * for instance, if enum class is "example.LogMessages", loaded ResourceBundle
  * file is "example/LogMessages.properties".

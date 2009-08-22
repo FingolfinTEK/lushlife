@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.slf4j.i18n.spi.LogMessageFormatResolver;
 
-public class CompositeFormatResolver implements LogMessageFormatResolver {
+public class CompositeMessageFormatResolver implements LogMessageFormatResolver {
 	private List<LogMessageFormatResolver> resolvers = new ArrayList<LogMessageFormatResolver>();
 
 	public List<LogMessageFormatResolver> getResolvers() {
