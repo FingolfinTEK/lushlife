@@ -11,8 +11,8 @@ import org.slf4j.i18n.collections.ConcurrentEnumCache;
 import org.slf4j.i18n.spi.LogLevelResolver;
 
 /**
- * resolve log level by ResourceBundle associated with enum class. Enum class
- * name is used for ResourceBundle name.
+ * The ResourceBundleLogLevelResolver resolve log level by ResourceBundle
+ * associated with enum class. Enum class name is used for ResourceBundle name.
  * 
  * for instance, if enum class is "example.LogMessages", loaded ResourceBundle
  * file is "example/LogMessages_level.properties".

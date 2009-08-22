@@ -9,7 +9,8 @@ import org.slf4j.i18n.helpers.ReflectionHelper;
 import org.slf4j.i18n.spi.LogMessageFormatResolver;
 
 /**
- * resolve log message format form annotation associated with enums.
+ * The AnnotationMessageFormatReolver resolve log message format form annotation
+ * associated with enums.
  * 
  * @author Takeshi Kondo
  */

@@ -11,7 +11,8 @@ import org.slf4j.i18n.spi.LogBindigType;
 import org.slf4j.i18n.spi.LogLevelResolver;
 
 /**
- * resolve log level by annotation associated with enums.
+ * The AnnotationLogLevelResolver resolve log level by annotation associated
+ * with enums.
  * 
  * @author Takeshi Kondo
  */
