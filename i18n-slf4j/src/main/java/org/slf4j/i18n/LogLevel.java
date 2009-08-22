@@ -16,9 +16,13 @@ public enum LogLevel {
 		}
 
 		@Override
-		public void log(Logger logger, String format, Throwable t,
-				Object... argArray) {
+		public void log(Logger logger, String format, Object[] argArray) {
 			logger.trace(format, argArray);
+		}
+
+		@Override
+		public void log(Logger logger, String format, Throwable t) {
+			logger.trace(format, t);
 		}
 	},
 
@@ -29,9 +33,13 @@ public enum LogLevel {
 		}
 
 		@Override
-		public void log(Logger logger, String format, Throwable t,
-				Object... argArray) {
-			logger.debug(format, t, argArray);
+		public void log(Logger logger, String format, Object[] argArray) {
+			logger.debug(format, argArray);
+		}
+
+		@Override
+		public void log(Logger logger, String format, Throwable t) {
+			logger.debug(format, t);
 		}
 	},
 
@@ -42,9 +50,13 @@ public enum LogLevel {
 		}
 
 		@Override
-		public void log(Logger logger, String format, Throwable t,
-				Object... argArray) {
+		public void log(Logger logger, String format, Object[] argArray) {
 			logger.info(format, argArray);
+		}
+
+		@Override
+		public void log(Logger logger, String format, Throwable t) {
+			logger.info(format, t);
 		}
 	},
 
@@ -55,9 +67,13 @@ public enum LogLevel {
 		}
 
 		@Override
-		public void log(Logger logger, String format, Throwable t,
-				Object... argArray) {
-			logger.warn(format, t, argArray);
+		public void log(Logger logger, String format, Object[] argArray) {
+			logger.warn(format, argArray);
+		}
+
+		@Override
+		public void log(Logger logger, String format, Throwable t) {
+			logger.warn(format, t);
 		}
 	},
 
@@ -68,9 +84,13 @@ public enum LogLevel {
 		}
 
 		@Override
-		public void log(Logger logger, String format, Throwable t,
-				Object... argArray) {
-			logger.error(format, t, argArray);
+		public void log(Logger logger, String format, Object[] argArray) {
+			logger.error(format, argArray);
+		}
+
+		@Override
+		public void log(Logger logger, String format, Throwable t) {
+			logger.error(format, t);
 		}
 	},
 
@@ -84,8 +104,12 @@ public enum LogLevel {
 		}
 
 		@Override
-		public void log(Logger logger, String format, Throwable t,
-				Object... argArray) {
+		public void log(Logger logger, String format, Object[] argArray) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void log(Logger logger, String format, Throwable t) {
 			throw new UnsupportedOperationException();
 		}
 	};
@@ -97,7 +121,11 @@ public enum LogLevel {
 	/**
 	 * delegate slf4j logger
 	 */
-	public abstract void log(Logger logger, String format, Throwable t,
-			Object... argArray);
+	public abstract void log(Logger logger, String format, Object[] argArray);
+
+	/**
+	 * delegate slf4j logger
+	 */
+	public abstract void log(Logger logger, String format, Throwable t);
 
 }
