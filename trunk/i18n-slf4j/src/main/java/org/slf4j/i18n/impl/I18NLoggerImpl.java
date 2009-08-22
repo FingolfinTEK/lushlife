@@ -32,46 +32,49 @@ public class I18NLoggerImpl implements I18NLogger {
 	}
 
 	public <E extends Enum<E>> void log(E logId, Object... argArray) {
-		log(logId, null, argArray);
+		writeLog(defaultLogLevel, logId, argArray);
 	}
 
-	public <E extends Enum<E>> void log(E logId, Throwable t,
-			Object... argArray) {
-		log(defaultLogLevel, logId, t, argArray);
+	public <E extends Enum<E>> void log(E logId, Throwable t) {
+		writeLog(defaultLogLevel, logId, t);
 	}
 
-	private <E extends Enum<E>> void log(LogLevel defaultLogLevel, E logId,
-			Throwable t, Object... argArray) {
+	private <E extends Enum<E>> void writeLog(LogLevel defaultLogLevel,
+			E logId, Throwable t) {
 		LogLevel level = manager.resolveLogLevel(logId, defaultLogLevel);
 		String format = manager.resolveLogMessage(logId);
-		level.log(logger, format, t, argArray);
+		level.log(logger, format, t);
+	}
+
+	private <E extends Enum<E>> void writeLog(LogLevel defaultLogLevel,
+			E logId, Object[] argArray) {
+		LogLevel level = manager.resolveLogLevel(logId, defaultLogLevel);
+		String format = manager.resolveLogMessage(logId);
+		level.log(logger, format, argArray);
 	}
 
 	public <E extends Enum<E>> void debug(E logId, Object... argArray) {
-		debug(logId, null, argArray);
+		writeLog(LogLevel.DEBUG, logId, argArray);
 	}
 
-	public <E extends Enum<E>> void debug(E logId, Throwable t,
-			Object... argArray) {
-		log(LogLevel.DEBUG, logId, t, argArray);
+	public <E extends Enum<E>> void debug(E logId, Throwable t) {
+		writeLog(LogLevel.DEBUG, logId, t);
 	}
 
 	public <E extends Enum<E>> void error(E logId, Object... argArray) {
-		error(logId, null, argArray);
+		writeLog(LogLevel.ERROR, logId, argArray);
 	}
 
-	public <E extends Enum<E>> void error(E logId, Throwable t,
-			Object... argArray) {
-		log(LogLevel.ERROR, logId, t, argArray);
+	public <E extends Enum<E>> void error(E logId, Throwable t) {
+		writeLog(LogLevel.ERROR, logId, t);
 	}
 
 	public <E extends Enum<E>> void info(E logId, Object... argArray) {
-		info(logId, null, argArray);
+		writeLog(LogLevel.INFO, logId, argArray);
 	}
 
-	public <E extends Enum<E>> void info(E logId, Throwable t,
-			Object... argArray) {
-		log(LogLevel.INFO, logId, t, argArray);
+	public <E extends Enum<E>> void info(E logId, Throwable t) {
+		writeLog(LogLevel.INFO, logId, t);
 	}
 
 	public <E extends Enum<E>> boolean isDebugEnabled(E logId) {
@@ -95,21 +98,19 @@ public class I18NLoggerImpl implements I18NLogger {
 	}
 
 	public <E extends Enum<E>> void trace(E logId, Object... argArray) {
-		trace(logId, null, argArray);
+		writeLog(LogLevel.TRACE, logId, argArray);
 	}
 
-	public <E extends Enum<E>> void trace(E logId, Throwable t,
-			Object... argArray) {
-		log(LogLevel.TRACE, logId, t, argArray);
-
+	public <E extends Enum<E>> void trace(E logId, Throwable t) {
+		writeLog(LogLevel.TRACE, logId, t);
 	}
 
 	public <E extends Enum<E>> void warn(E logId, Object... argArray) {
-		warn(logId, null, argArray);
+		writeLog(LogLevel.WARN, logId, argArray);
 	}
 
-	public <E extends Enum<E>> void warn(E logId, Throwable t,
-			Object... argArray) {
-		log(LogLevel.WARN, logId, t, argArray);
+	public <E extends Enum<E>> void warn(E logId, Throwable t) {
+		writeLog(LogLevel.WARN, logId, t);
 	}
+
 }

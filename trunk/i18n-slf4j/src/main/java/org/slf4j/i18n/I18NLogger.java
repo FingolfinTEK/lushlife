@@ -31,7 +31,7 @@ public interface I18NLogger {
 	 * log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
-	<E extends Enum<E>> void log(E logId, Throwable t, Object... argArray);
+	<E extends Enum<E>> void log(E logId, Throwable t);
 
 	/**
 	 * Is the logger instance enabled for the level associated with log id? If
@@ -55,7 +55,7 @@ public interface I18NLogger {
 	 * log id isn't associated with log level, the log level is regarded as
 	 * error.
 	 */
-	<E extends Enum<E>> void error(E logId, Throwable t, Object... argArray);
+	<E extends Enum<E>> void error(E logId, Throwable t);
 
 	/**
 	 * Is the logger instance enabled for the level associated with log id? If
@@ -79,7 +79,7 @@ public interface I18NLogger {
 	 * log id isn't associated with log level, the log level is regarded as
 	 * warn.
 	 */
-	<E extends Enum<E>> void warn(E logId, Throwable t, Object... argArray);
+	<E extends Enum<E>> void warn(E logId, Throwable t);
 
 	/**
 	 * Is the logger instance enabled for the level associated with log id? If
@@ -103,7 +103,7 @@ public interface I18NLogger {
 	 * log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
-	<E extends Enum<E>> void info(E logId, Throwable t, Object... argArray);
+	<E extends Enum<E>> void info(E logId, Throwable t);
 
 	/**
 	 * Is the logger instance enabled for the level associated with log id? If
@@ -127,7 +127,7 @@ public interface I18NLogger {
 	 * log id isn't associated with log level, the log level is regarded as
 	 * debug.
 	 */
-	<E extends Enum<E>> void debug(E logId, Throwable t, Object... argArray);
+	<E extends Enum<E>> void debug(E logId, Throwable t);
 
 	/**
 	 * Is the logger instance enabled for the level associated with log id? If
@@ -151,7 +151,7 @@ public interface I18NLogger {
 	 * log id isn't associated with log level, the log level is regarded as
 	 * trace.
 	 */
-	<E extends Enum<E>> void trace(E logId, Throwable t, Object... argArray);
+	<E extends Enum<E>> void trace(E logId, Throwable t);
 
 	/**
 	 * Return delegating slf4j logger
