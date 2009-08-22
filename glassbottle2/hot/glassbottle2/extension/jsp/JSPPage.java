@@ -11,6 +11,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 import javax.ws.rs.WebApplicationException;
 
 public class JSPPage implements Page

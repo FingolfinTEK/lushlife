@@ -1,12 +1,12 @@
 package glassbottle2.context;
 
-import glassbottle2.scope.EventScoped;
+import glassbottle2.scope.Singleton;
 
 import javax.enterprise.inject.Initializer;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-@EventScoped
+@Singleton
 public class ServletPathInfo
 {
 

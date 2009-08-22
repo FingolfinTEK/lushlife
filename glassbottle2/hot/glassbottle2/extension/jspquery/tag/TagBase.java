@@ -30,7 +30,11 @@ public class TagBase<T extends Tag<T>> implements Tag<T>
    @Override
    public T attr(String name, Object value)
    {
-      attr.put(name, value);
+      if (value == null)
+      {
+         return (T) this;
+      }
+      attr.put(name, String.valueOf(value));
       return (T) this;
    }
 

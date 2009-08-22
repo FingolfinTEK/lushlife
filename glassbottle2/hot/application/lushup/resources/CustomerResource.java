@@ -28,7 +28,7 @@ import org.w3c.dom.NodeList;
 
 import application.lushup.model.Customer;
 
-@Path("/customers")
+@Path("customers")
 public class CustomerResource extends CustomerBase
 {
    private Map<Integer, Customer> customerDB = new ConcurrentHashMap<Integer, Customer>();

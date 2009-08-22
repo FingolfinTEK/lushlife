@@ -1,20 +1,33 @@
 package glassbottle2.extension.jspquery;
 
+import glassbottle2.Injector;
 import glassbottle2.extension.jspquery.tag.TagBase;
 import glassbottle2.scope.EventScoped;
 
 import java.util.LinkedList;
+
+import javax.enterprise.inject.Current;
 
 @EventScoped
 public class JSPQueryManager
 {
    LinkedList<TagBase<?>> tags = new LinkedList<TagBase<?>>();
 
-   public <T extends TagBase<T>> T $(Class<T> clazz)
+   @Current
+   Injector injector;
+
+   public <T> T $(Class<T> clazz)
    {
-      T tagBase = TagBase.of(clazz);
-      tagBase.setManager(this);
-      return tagBase;
+      if (TagBase.class.isAssignableFrom(clazz))
+      {
+         TagBase<?> tagBase = TagBase.of((Class<? extends TagBase>) clazz);
+         tagBase.setManager(this);
+         return (T) tagBase;
+      }
+      else
+      {
+         return injector.getInstance(clazz);
+      }
    }
 
    public void addStack(TagBase<?> tag)

@@ -4,11 +4,14 @@
 <%@page import="glassbottle2.extension.yahoo.YahooResource"%>
 <%@page import="glassbottle2.extension.jquery.JQueryResource"%>
 <%@page import="application.lushup.model.Customer"%>
-<%@page import="glassbottle2.extension.jspquery.JSPQueryManager"%><html>
+<%@page import="glassbottle2.extension.jspquery.JSPQueryManager"%>
+<%@page import="glassbottle2.extension.jspquery.tag.A"%>
+<%@page import="application.lushup.resources.CustomerResource"%>
+<html>
 <%
-	Injector i = GlassBottle.getInjector();
-	ResourceManager r = i.getInstance(ResourceManager.class);
-	JSPQueryManager j = i.getInstance(JSPQueryManager.class);
+	Injector injector = GlassBottle.getInjector();
+	ResourceManager r = injector.getInstance(ResourceManager.class);
+	JSPQueryManager j = injector.getInstance(JSPQueryManager.class);
 %>
 <head>
 
@@ -25,10 +28,16 @@
 
 <p>sample</p>
 
-<p><%=i.$(Customer.class).getId()%></p>
-<p><%=i.$(Customer.class).getCity()%></p>
-<p><%=i.$(Customer.class).getLastName()%></p>
+<p><%=j.$(Customer.class).getId()%></p>
+<p><%=j.$(Customer.class).getCity()%></p>
+<p><%=j.$(Customer.class).getLastName()%></p>
 
+<%=j.$(A.class)
+	.href(r.url(CustomerResource.class)
+			.path(j.$(Customer.class).getId()))
+	.id("tag_a")%>
+	Sample Link
+<%= j.end() %>
 <table border="1">
 	<tr>
 		<td>TD #0</td>

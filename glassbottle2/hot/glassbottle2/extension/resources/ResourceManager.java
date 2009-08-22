@@ -6,7 +6,6 @@ import glassbottle2.context.ServletPathInfo;
 import glassbottle2.extension.jspquery.JSPQueryManager;
 import glassbottle2.extension.jspquery.tag.CSS;
 import glassbottle2.extension.jspquery.tag.JavaScript;
-import glassbottle2.extension.jspquery.tag.TagBase;
 import glassbottle2.scope.EventScoped;
 
 import java.io.IOException;
@@ -48,7 +47,13 @@ public class ResourceManager
 
    private String toUrl(Class<?> resourceClass, String type, String resource)
    {
-      return this.info.getServletPath() + "/" + resourceClass.getAnnotation(Path.class).value() + "/" + resource + "/" + type + "?" + startuptime;
+      return url(resourceClass) + "/" + resource + "/" + type + "?" + startuptime;
+   }
+
+   public AddPath url(Class<?> resourceClass)
+   {
+      return new AddPath().path(info.getServletPath() + "/" + resourceClass.getAnnotation(Path.class).value());
+
    }
 
    public String h(Object object)
