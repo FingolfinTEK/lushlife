@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 public interface I18NLogger {
 
 	/**
-	 * Is the logger instance enabled for the level associated with log id? If
+	 * Is the logger instance enabled for the level associated with log id?
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
 	<E extends Enum<E>> boolean isEnabledFor(E logId);
@@ -20,7 +20,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
 	<E extends Enum<E>> void log(E logId, Object... argArray);
@@ -28,15 +28,15 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
 	<E extends Enum<E>> void log(E logId, Throwable t);
 
 	/**
-	 * Is the logger instance enabled for the level associated with log id? If
+	 * Is the logger instance enabled for the level associated with log id?
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * error.
 	 */
 	<E extends Enum<E>> boolean isErrorEnabled(E logId);
@@ -44,7 +44,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * error.
 	 */
 	<E extends Enum<E>> void error(E logId, Object... argArray);
@@ -52,7 +52,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * error.
 	 */
 	<E extends Enum<E>> void error(E logId, Throwable t);
@@ -60,7 +60,7 @@ public interface I18NLogger {
 	/**
 	 * Is the logger instance enabled for the level associated with log id? If
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * warn.
 	 */
 	<E extends Enum<E>> boolean isWarnEnabled(E logId);
@@ -68,7 +68,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * warn.
 	 */
 	<E extends Enum<E>> void warn(E logId, Object... argArray);
@@ -76,15 +76,15 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * warn.
 	 */
 	<E extends Enum<E>> void warn(E logId, Throwable t);
 
 	/**
-	 * Is the logger instance enabled for the level associated with log id? If
+	 * Is the logger instance enabled for the level associated with log id?
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
 	<E extends Enum<E>> boolean isInfoEnabled(E logId);
@@ -92,7 +92,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
 	<E extends Enum<E>> void info(E logId, Object... argArray);
@@ -100,15 +100,15 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * info.
 	 */
 	<E extends Enum<E>> void info(E logId, Throwable t);
 
 	/**
-	 * Is the logger instance enabled for the level associated with log id? If
+	 * Is the logger instance enabled for the level associated with log id?
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * debug.
 	 */
 	<E extends Enum<E>> boolean isDebugEnabled(E logId);
@@ -116,7 +116,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * debug.
 	 */
 	<E extends Enum<E>> void debug(E logId, Object... argArray);
@@ -124,15 +124,15 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * debug.
 	 */
 	<E extends Enum<E>> void debug(E logId, Throwable t);
 
 	/**
-	 * Is the logger instance enabled for the level associated with log id? If
+	 * Is the logger instance enabled for the level associated with log id?
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * trace.
 	 */
 	<E extends Enum<E>> boolean isTraceEnabled(E logId);
@@ -140,7 +140,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * trace.
 	 */
 	<E extends Enum<E>> void trace(E logId, Object... argArray);
@@ -148,7 +148,7 @@ public interface I18NLogger {
 	/**
 	 * Log a message at the level associated with log id.
 	 * 
-	 * log id isn't associated with log level, the log level is regarded as
+	 * If log id isn't associated with log level, the log level is regarded as
 	 * trace.
 	 */
 	<E extends Enum<E>> void trace(E logId, Throwable t);

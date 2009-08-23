@@ -1,6 +1,7 @@
 package org.slf4j.i18n;
 
 import org.slf4j.Logger;
+import org.slf4j.spi.LocationAwareLogger;
 
 /**
  * This LogLevel represent slf4j log levels by enums.
@@ -24,6 +25,11 @@ public enum LogLevel {
 		public void log(Logger logger, String format, Throwable t) {
 			logger.trace(format, t);
 		}
+
+		@Override
+		public int intValue() {
+			return LocationAwareLogger.TRACE_INT;
+		}
 	},
 
 	DEBUG {
@@ -40,6 +46,11 @@ public enum LogLevel {
 		@Override
 		public void log(Logger logger, String format, Throwable t) {
 			logger.debug(format, t);
+		}
+
+		@Override
+		public int intValue() {
+			return LocationAwareLogger.DEBUG_INT;
 		}
 	},
 
@@ -58,6 +69,11 @@ public enum LogLevel {
 		public void log(Logger logger, String format, Throwable t) {
 			logger.info(format, t);
 		}
+
+		@Override
+		public int intValue() {
+			return LocationAwareLogger.INFO_INT;
+		}
 	},
 
 	WARN {
@@ -74,6 +90,11 @@ public enum LogLevel {
 		@Override
 		public void log(Logger logger, String format, Throwable t) {
 			logger.warn(format, t);
+		}
+
+		@Override
+		public int intValue() {
+			return LocationAwareLogger.WARN_INT;
 		}
 	},
 
@@ -92,12 +113,17 @@ public enum LogLevel {
 		public void log(Logger logger, String format, Throwable t) {
 			logger.error(format, t);
 		}
+
+		@Override
+		public int intValue() {
+			return LocationAwareLogger.ERROR_INT;
+		}
 	},
 
 	/**
 	 * log level is not specified.
 	 */
-	NO_BINDING {
+	NOT_SPECIFIED {
 		@Override
 		public boolean isEnabledFor(Logger logger) {
 			throw new UnsupportedOperationException();
@@ -112,20 +138,33 @@ public enum LogLevel {
 		public void log(Logger logger, String format, Throwable t) {
 			throw new UnsupportedOperationException();
 		}
+
+		@Override
+		public int intValue() {
+			return Integer.MIN_VALUE;
+		}
 	};
+
 	/**
-	 * delegate slf4j logger#isXXXEnabled
+	 * Delegate slf4j logger#isXXXEnabled
 	 */
 	public abstract boolean isEnabledFor(Logger logger);
 
 	/**
-	 * delegate slf4j logger
+	 * Write log through slf4j logger.
 	 */
 	public abstract void log(Logger logger, String format, Object[] argArray);
 
 	/**
-	 * delegate slf4j logger
+	 * Write log through slf4j logger.
 	 */
 	public abstract void log(Logger logger, String format, Throwable t);
+
+	/**
+	 * Get log level integer value.
+	 * 
+	 * @return
+	 */
+	public abstract int intValue();
 
 }

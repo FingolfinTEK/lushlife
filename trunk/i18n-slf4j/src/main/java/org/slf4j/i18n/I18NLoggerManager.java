@@ -11,8 +11,6 @@ public class I18NLoggerManager {
 		this.logMessaggeResolver = logMessaggeResolver;
 	}
 
-	private String defautlMessage = "*** no message ***";
-
 	private LogLevelResolver loglevelResolver;
 
 	private LogMessageFormatResolver logMessaggeResolver;
@@ -20,16 +18,17 @@ public class I18NLoggerManager {
 	public <E extends Enum<E>> LogLevel resolveLogLevel(E logId,
 			LogLevel defaultLogLevel) {
 		LogLevel level = loglevelResolver.toLogLevel(logId);
-		if (level == null || level.equals(LogLevel.NO_BINDING)) {
+		if (level == null || level.equals(LogLevel.NOT_SPECIFIED)) {
 			return defaultLogLevel;
 		}
 		return level;
 	}
 
-	public <E extends Enum<E>> String resolveLogMessage(E logId) {
+	public <E extends Enum<E>> String resolveLogMessage(E logId,
+			String defaultMessage) {
 		String message = logMessaggeResolver.toMessageFormat(logId);
 		if (message == null) {
-			return defautlMessage;
+			return defaultMessage;
 		}
 		return message;
 	}

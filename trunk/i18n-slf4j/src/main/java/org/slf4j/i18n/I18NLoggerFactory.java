@@ -49,8 +49,17 @@ public class I18NLoggerFactory {
 		return getLogger(clazz.getName());
 	}
 
+	static public <E extends Enum<E>> LogLevel getLevel(E logId) {
+		return INSTANCE.manager.resolveLogLevel(logId, null);
+	}
+
+	static public <E extends Enum<E>> String getMessage(E logId) {
+		return INSTANCE.manager.resolveLogMessage(logId, null);
+	}
+
 	private final I18NLoggerManager manager;
 	private LogLevel defaltLogLevel = LogLevel.INFO;
+	private String defaultMessage = "*** no message ***";
 
 	public I18NLoggerFactory(I18NLoggerManager manager) {
 		this.manager = manager;
@@ -58,6 +67,7 @@ public class I18NLoggerFactory {
 
 	public I18NLogger createLogger(String name) {
 		Logger logger = LoggerFactory.getLogger(name);
-		return new I18NLoggerImpl(logger, manager, defaltLogLevel);
+		return new I18NLoggerImpl(logger, manager, defaltLogLevel,
+				defaultMessage);
 	}
 }

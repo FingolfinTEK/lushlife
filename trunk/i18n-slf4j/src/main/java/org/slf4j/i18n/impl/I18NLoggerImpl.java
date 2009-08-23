@@ -9,12 +9,14 @@ public class I18NLoggerImpl implements I18NLogger {
 	private Logger logger;
 	private I18NLoggerManager manager;
 	private LogLevel defaultLogLevel;
+	private String defaultMessage;
 
 	public I18NLoggerImpl(Logger logger, I18NLoggerManager manager,
-			LogLevel defaultLogLevel) {
+			LogLevel defaultLogLevel, String defaultMessage) {
 		this.logger = logger;
 		this.manager = manager;
 		this.defaultLogLevel = defaultLogLevel;
+		this.defaultMessage = defaultMessage;
 	}
 
 	public Logger getDelegate() {
@@ -42,14 +44,14 @@ public class I18NLoggerImpl implements I18NLogger {
 	private <E extends Enum<E>> void writeLog(LogLevel defaultLogLevel,
 			E logId, Throwable t) {
 		LogLevel level = manager.resolveLogLevel(logId, defaultLogLevel);
-		String format = manager.resolveLogMessage(logId);
+		String format = manager.resolveLogMessage(logId, defaultMessage);
 		level.log(logger, format, t);
 	}
 
 	private <E extends Enum<E>> void writeLog(LogLevel defaultLogLevel,
 			E logId, Object[] argArray) {
 		LogLevel level = manager.resolveLogLevel(logId, defaultLogLevel);
-		String format = manager.resolveLogMessage(logId);
+		String format = manager.resolveLogMessage(logId, defaultMessage);
 		level.log(logger, format, argArray);
 	}
 
