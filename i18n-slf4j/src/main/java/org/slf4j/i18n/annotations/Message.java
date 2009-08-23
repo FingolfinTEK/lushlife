@@ -16,7 +16,7 @@ import org.slf4j.i18n.spi.LogBindigType;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@LogBindigType(LogLevel.NO_BINDING)
+@LogBindigType(LogLevel.NOT_SPECIFIED)
 public @interface Message {
 	String value();
 }
