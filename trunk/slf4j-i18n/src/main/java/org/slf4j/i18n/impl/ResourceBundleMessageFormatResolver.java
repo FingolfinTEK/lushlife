@@ -6,7 +6,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 
-import org.slf4j.i18n.collections.ConcurrentEnumCache;
+import org.slf4j.i18n.collections.ConcurrentEnumMapCache;
 import org.slf4j.i18n.spi.LogMessageFormatResolver;
 
 /**
@@ -22,7 +22,7 @@ import org.slf4j.i18n.spi.LogMessageFormatResolver;
  */
 public class ResourceBundleMessageFormatResolver implements
 		LogMessageFormatResolver {
-	ConcurrentEnumCache<String> cache = new ConcurrentEnumCache<String>();
+	ConcurrentEnumMapCache<String> cache = new ConcurrentEnumMapCache<String>();
 
 	public <E extends Enum<E>> String toMessageFormat(final E logId) {
 		return cache.putIfAbsent(logId, new Callable<EnumMap<E, String>>() {

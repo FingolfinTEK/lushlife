@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 
 import org.slf4j.i18n.LogLevel;
-import org.slf4j.i18n.collections.ConcurrentEnumCache;
+import org.slf4j.i18n.collections.ConcurrentEnumMapCache;
 import org.slf4j.i18n.spi.LogLevelResolver;
 
 /**
@@ -21,7 +21,7 @@ import org.slf4j.i18n.spi.LogLevelResolver;
  * 
  */
 public class ResourceBundleLogLevelResolver implements LogLevelResolver {
-	ConcurrentEnumCache<LogLevel> cache = new ConcurrentEnumCache<LogLevel>();
+	ConcurrentEnumMapCache<LogLevel> cache = new ConcurrentEnumMapCache<LogLevel>();
 
 	public <E extends Enum<E>> LogLevel toLogLevel(final E logId) {
 		return cache.putIfAbsent(logId, new Callable<EnumMap<E, LogLevel>>() {

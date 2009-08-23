@@ -5,8 +5,8 @@ import java.util.EnumMap;
 import java.util.concurrent.Callable;
 
 import org.slf4j.i18n.LogLevel;
-import org.slf4j.i18n.collections.ConcurrentEnumCache;
-import org.slf4j.i18n.helpers.ReflectionHelper;
+import org.slf4j.i18n.collections.ConcurrentEnumMapCache;
+import org.slf4j.i18n.helpers.Reflections;
 import org.slf4j.i18n.spi.LogBindigType;
 import org.slf4j.i18n.spi.LogLevelResolver;
 
@@ -18,13 +18,13 @@ import org.slf4j.i18n.spi.LogLevelResolver;
  */
 public class AnnotationLogLevelResolver implements LogLevelResolver {
 
-	ConcurrentEnumCache<LogLevel> cache = new ConcurrentEnumCache<LogLevel>();
+	ConcurrentEnumMapCache<LogLevel> cache = new ConcurrentEnumMapCache<LogLevel>();
 
 	private <E extends Enum<E>> EnumMap<E, LogLevel> createLogLevelMap(
 			Class<E> clazz) {
 		EnumMap<E, LogLevel> map = new EnumMap<E, LogLevel>(clazz);
 		for (E e : clazz.getEnumConstants()) {
-			Annotation logLevel = ReflectionHelper.getLogLevelAnnotation(e);
+			Annotation logLevel = Reflections.getLogLevelAnnotation(e);
 			if (logLevel != null
 					&& logLevel.annotationType().isAnnotationPresent(
 							LogBindigType.class)) {
