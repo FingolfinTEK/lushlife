@@ -24,7 +24,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.helpers.Util;
 
-public class ConcurrentEnumCache<V> {
+public class ConcurrentEnumMapCache<V> {
 
 	ReentrantLock lock = new ReentrantLock();
 	Map<Class<? extends Enum<?>>, EnumMap<?, V>> cache = new ConcurrentHashMap<Class<? extends Enum<?>>, EnumMap<?, V>>();

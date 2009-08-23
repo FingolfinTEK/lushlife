@@ -10,7 +10,7 @@ import org.slf4j.i18n.spi.LogBindigType;
  * 
  * @author Takeshi Kondo
  */
-public class ReflectionHelper {
+public class Reflections {
 
 	/**
 	 * 

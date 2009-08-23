@@ -146,7 +146,7 @@ public enum LogLevel {
 	};
 
 	/**
-	 * Delegate slf4j logger#isXXXEnabled
+	 * Is the logger instance enabled for this level?
 	 */
 	public abstract boolean isEnabledFor(Logger logger);
 

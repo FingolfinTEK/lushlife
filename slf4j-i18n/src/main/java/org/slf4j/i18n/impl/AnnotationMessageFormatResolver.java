@@ -4,8 +4,8 @@ import java.lang.annotation.Annotation;
 import java.util.EnumMap;
 import java.util.concurrent.Callable;
 
-import org.slf4j.i18n.collections.ConcurrentEnumCache;
-import org.slf4j.i18n.helpers.ReflectionHelper;
+import org.slf4j.i18n.collections.ConcurrentEnumMapCache;
+import org.slf4j.i18n.helpers.Reflections;
 import org.slf4j.i18n.spi.LogMessageFormatResolver;
 
 /**
@@ -17,7 +17,7 @@ import org.slf4j.i18n.spi.LogMessageFormatResolver;
 public class AnnotationMessageFormatResolver implements
 		LogMessageFormatResolver {
 
-	ConcurrentEnumCache<String> cache = new ConcurrentEnumCache<String>();
+	ConcurrentEnumMapCache<String> cache = new ConcurrentEnumMapCache<String>();
 
 	public <E extends Enum<E>> String toMessageFormat(final E logId) {
 		return cache.putIfAbsent(logId, new Callable<EnumMap<E, String>>() {
@@ -31,9 +31,9 @@ public class AnnotationMessageFormatResolver implements
 			Class<E> clazz) {
 		EnumMap<E, String> map = new EnumMap<E, String>(clazz);
 		for (E e : clazz.getEnumConstants()) {
-			Annotation logLevel = ReflectionHelper.getLogLevelAnnotation(e);
+			Annotation logLevel = Reflections.getLogLevelAnnotation(e);
 			if (logLevel != null) {
-				map.put(e, (String) ReflectionHelper.getValue(logLevel));
+				map.put(e, (String) Reflections.getValue(logLevel));
 			}
 		}
 		return map;
