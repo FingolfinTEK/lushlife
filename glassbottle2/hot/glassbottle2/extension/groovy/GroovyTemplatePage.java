@@ -12,10 +12,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.Writer;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 
 import org.jboss.webbeans.log.Log;
@@ -25,10 +24,10 @@ public abstract class GroovyTemplatePage implements Page
 {
    Log log = Logging.getLog(GroovyTemplatePage.class);
 
-   @Current
+   @Inject
    private GroovyTemplateEngine engine;
 
-   @Current
+   @Inject
    private NamingResolverMap map;
 
    @Encoding

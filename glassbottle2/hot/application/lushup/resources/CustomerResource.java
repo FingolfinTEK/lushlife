@@ -1,6 +1,5 @@
 package application.lushup.resources;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,8 +9,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.inject.Current;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -45,14 +44,13 @@ public class CustomerResource extends CustomerBase
       return Response.created(URI.create("/customers/" + customer.getId())).build();
    }
 
-   @Current
+   @Inject
    BeanManager manager;
 
    @PUT
    @Path("{id}")
    @Consumes("application/xml")
-   public void updateCustomer(@PathParam("id")
-   int id, InputStream is)
+   public void updateCustomer(@PathParam("id") int id, InputStream is)
    {
       Customer update = readCustomer(is);
       Customer current = customerDB.get(id);

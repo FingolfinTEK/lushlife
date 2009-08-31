@@ -5,7 +5,7 @@ import glassbottle2.servlet.GlassBottleHttpServletDispatcher;
 import java.io.IOException;
 import java.util.Enumeration;
 
-import javax.enterprise.inject.Initializer;
+import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class JaxRsServletDispatcher implements GlassBottleHttpServletDispatcher
 {
    HttpServletDispatcher dispatcher = new HttpServletDispatcher();
 
-   @Initializer
+   @Inject
    public JaxRsServletDispatcher(final ServletContext context) throws ServletException
    {
       dispatcher.init(new ServletConfig()

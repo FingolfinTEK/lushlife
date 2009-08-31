@@ -3,7 +3,7 @@ package glassbottle2.extension.resources;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,7 +13,7 @@ import javax.ws.rs.core.StreamingOutput;
 
 public abstract class ResourceController
 {
-   @Current
+   @Inject
    ResourceCache cache;
 
    protected String getPackage()
@@ -23,8 +23,7 @@ public abstract class ResourceController
 
    @GET
    @Path("{path}/js")
-   public StreamingOutput loadJavaScript(@PathParam("path")
-   String id)
+   public StreamingOutput loadJavaScript(@PathParam("path") String id)
    {
       final String path = (getPackage() + ".js.").replace(".", "/") + id;
       return new StreamingOutput()
@@ -42,8 +41,7 @@ public abstract class ResourceController
    @GET
    @Path("{path}/css")
    @Consumes("text/css")
-   public StreamingOutput loadCss(@PathParam("path")
-   String id)
+   public StreamingOutput loadCss(@PathParam("path") String id)
    {
       final String path = (getPackage() + ".css.").replace(".", "/") + id;
       return new StreamingOutput()

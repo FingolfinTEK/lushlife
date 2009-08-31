@@ -5,22 +5,21 @@ import glassbottle2.scope.EventScoped;
 import java.util.AbstractMap;
 import java.util.Set;
 
-import javax.enterprise.inject.Current;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
-
+import javax.inject.Inject;
 
 @EventScoped
 public class NamingResolverMap extends AbstractMap<String, Object>
 {
 
-   @Current
+   @Inject
    private ELVariableEventScopedMap map;
 
-   @Current
+   @Inject
    private BeanManager manager;
 
-   @Current
+   @Inject
    private NamingResolver resolver;
 
    public Object get(Object key)

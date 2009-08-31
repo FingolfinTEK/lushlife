@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.context.spi.Contextual;
-import javax.enterprise.inject.Named;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -12,7 +12,7 @@ import java.io.ObjectStreamClass;
 import java.util.Map;
 
 import javax.enterprise.context.spi.Contextual;
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 import javax.servlet.ServletRequest;
 
 import org.apache.commons.codec.binary.Base64;
@@ -56,7 +56,7 @@ public class HiddenContextManager
       }
    }
 
-   @Current
+   @Inject
    ClassLoader loader;
 
    public void restore(ServletRequest req)

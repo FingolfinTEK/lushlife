@@ -3,8 +3,8 @@ package glassbottle2.extension.jaxrs;
 import glassbottle2.bootstrap.GlassBottleDeployment;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Current;
 import javax.enterprise.inject.spi.BeforeShutdown;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
@@ -17,11 +17,10 @@ public class JaxRSInitializer
 {
    private ResteasyBootstrap resteasyBootstrap = new ResteasyBootstrap();
 
-   @Current
+   @Inject
    private ServletContext context;
 
-   public void contextInitialized(@Observes
-   GlassBottleDeployment deployment)
+   public void contextInitialized(@Observes GlassBottleDeployment deployment)
    {
       ServletContextEvent event = new ServletContextEvent(context);
       resteasyBootstrap.contextInitialized(event);

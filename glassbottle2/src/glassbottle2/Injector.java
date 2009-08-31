@@ -1,12 +1,10 @@
 package glassbottle2;
 
-import glassbottle2.scope.Singleton;
-
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.Initializer;
 import javax.enterprise.inject.spi.Bean;
+import javax.inject.Inject;
 
 import org.jboss.webbeans.BeanManagerImpl;
 import org.jboss.webbeans.introspector.WBAnnotated;
@@ -14,13 +12,13 @@ import org.jboss.webbeans.log.Log;
 import org.jboss.webbeans.log.Logging;
 import org.jboss.webbeans.resolution.ResolvableWBClass;
 
-@Singleton
+@javax.inject.Singleton
 public class Injector implements Serializable
 {
    private static final long serialVersionUID = -4385238949949794479L;
    static Log log = Logging.getLog(Injector.class);
 
-   @Initializer
+   @Inject
    public Injector(BeanManagerImpl manager)
    {
       super();

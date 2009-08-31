@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jboss.webbeans.bootstrap.api.ServiceRegistry;
+import org.jboss.webbeans.bootstrap.api.helpers.SimpleServiceRegistry;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.ejb.spi.EjbDescriptor;
 
@@ -52,9 +54,11 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive
    }
 
    final private BeanBinderImpl binder = new BeanBinderImpl();
+   final private ServiceRegistry registry;
 
-   public BeanModuleBeanDeploymentArchive(Iterable<BeanModule> modules)
+   public BeanModuleBeanDeploymentArchive(ServiceRegistry registry, Iterable<BeanModule> modules)
    {
+      this.registry = registry;
       for (BeanModule module : modules)
       {
          module.configure(binder);
@@ -83,6 +87,12 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive
    public Collection<EjbDescriptor<?>> getEjbs()
    {
       return new ArrayList<EjbDescriptor<?>>();
+   }
+
+   @Override
+   public ServiceRegistry getServices()
+   {
+      return registry;
    }
 
 }

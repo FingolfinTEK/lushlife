@@ -6,14 +6,14 @@ import glassbottle2.scope.EventScoped;
 
 import java.util.LinkedList;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 
 @EventScoped
 public class JSPQueryManager
 {
    LinkedList<TagBase<?>> tags = new LinkedList<TagBase<?>>();
 
-   @Current
+   @Inject
    Injector injector;
 
    public <T> T $(Class<T> clazz)

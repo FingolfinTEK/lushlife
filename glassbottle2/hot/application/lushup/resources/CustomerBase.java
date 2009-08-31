@@ -4,7 +4,7 @@ import glassbottle2.Injector;
 import glassbottle2.extension.jsp.JSPPage;
 import glassbottle2.view.Page;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,18 +14,16 @@ import application.lushup.model.Customer;
 
 public class CustomerBase
 {
-   @Current
+   @Inject
    Injector injector;
 
-   @Current
+   @Inject
    Customer customer;
 
    @GET
    @Path("{id}/{name}")
    // @Produces("application/json")
-   public StreamingOutput getCustomer2(@PathParam("id")
-   int id, @PathParam("name")
-   String name)
+   public StreamingOutput getCustomer2(@PathParam("id") int id, @PathParam("name") String name)
    {
       customer.setId(id);
       customer.setFirstName(name);
@@ -36,8 +34,7 @@ public class CustomerBase
    @GET
    @Path("{id}")
    // @Produces("application/json")
-   public Page getCustomer(@PathParam("id")
-   int id)
+   public Page getCustomer(@PathParam("id") int id)
    {
       customer.setId(id);
       return JSPPage.to("/test.jsp");

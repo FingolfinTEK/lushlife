@@ -6,13 +6,11 @@ import glassbottle2.view.Page;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.tools.JavaCompiler;
-import javax.tools.ToolProvider;
 import javax.ws.rs.WebApplicationException;
 
 public class JSPPage implements Page
@@ -24,13 +22,13 @@ public class JSPPage implements Page
 
    private String path;
 
-   @Current
+   @Inject
    HttpServletRequest reqeust;
 
-   @Current
+   @Inject
    HttpServletResponse response;
 
-   @Current
+   @Inject
    ServletContext context;
 
    public JSPPage path(String path)

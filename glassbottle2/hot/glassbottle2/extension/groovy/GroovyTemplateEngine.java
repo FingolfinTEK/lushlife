@@ -1,7 +1,6 @@
 package glassbottle2.extension.groovy;
 
 import glassbottle2.binding.Encoding;
-import glassbottle2.scope.Singleton;
 import glassbottle2.util.lock.DoubleCheckBlocking;
 import groovy.text.SimpleTemplateEngine;
 import groovy.text.Template;
@@ -13,13 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.enterprise.inject.Current;
-import javax.enterprise.inject.Initializer;
+import javax.inject.Inject;
 
 import org.jboss.webbeans.log.Log;
 import org.jboss.webbeans.log.Logging;
 
-@Singleton
+@javax.inject.Singleton
 public class GroovyTemplateEngine
 {
 
@@ -27,7 +25,7 @@ public class GroovyTemplateEngine
 
    private TemplateEngine engine;
 
-   @Current
+   @Inject
    private ClassLoader loader;
 
    @Encoding
@@ -36,7 +34,7 @@ public class GroovyTemplateEngine
    private ConcurrentHashMap<String, Template> cache = new ConcurrentHashMap<String, Template>();
    private Lock lock = new ReentrantLock();
 
-   @Initializer
+   @Inject
    public GroovyTemplateEngine(GroovyShellManager manager)
    {
       this.engine = new SimpleTemplateEngine(manager.getShell());

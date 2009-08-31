@@ -3,10 +3,9 @@ package glassbottle2.extension.groovy.impl;
 import glassbottle2.el.ELVariableEventScopedMap;
 import glassbottle2.scope.EventScoped;
 
-import java.io.PrintWriter;
 import java.io.Writer;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 
 import org.jboss.webbeans.log.Log;
 import org.jboss.webbeans.log.Logging;
@@ -27,7 +26,7 @@ public class TemplateManager
    // @Current
    // private glassbottle.plugins.groovy.GSPTemplateEngine engine;
    //
-   @Current
+   @Inject
    private ELVariableEventScopedMap map;
 
    //

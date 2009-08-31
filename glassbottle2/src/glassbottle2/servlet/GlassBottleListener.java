@@ -74,11 +74,12 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
       GlassBottleContext.setRequest(null);
       GlassBottleContext.setResponse(null);
       GlassBottleContext.getHiddenScope().clear();
-      DependentContext dependentContext = GlassBottle.getBootStrap(event.getServletContext()).getServices().get(DependentContext.class);
-      if (dependentContext == null)
-      {
-         dependentContext.setActive(false);
-      }
+      // DependentContext dependentContext =
+      // GlassBottle.getBootStrap(event.getServletContext()).getServices().get(DependentContext.class);
+      // if (dependentContext == null)
+      // {
+      // dependentContext.setActive(false);
+      // }
    }
 
    @Override
@@ -96,7 +97,7 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
          }
          Thread.currentThread().setContextClassLoader(ClassLoaderProducer.getClassLoader());
       }
-      GlassBottle.getBootStrap().getServices().get(DependentContext.class).setActive(true);
+      // GlassBottle.getBootStrap()..getServices().get(DependentContext.class).setActive(true);
       CurrentManager.rootManager().fireEvent(event, new RequestInitializedLiteral());
    }
 

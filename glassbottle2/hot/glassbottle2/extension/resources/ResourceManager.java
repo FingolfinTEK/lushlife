@@ -10,7 +10,7 @@ import glassbottle2.scope.EventScoped;
 
 import java.io.IOException;
 
-import javax.enterprise.inject.Current;
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -21,10 +21,10 @@ public class ResourceManager
    @StartupTime
    private Long startuptime;
 
-   @Current
+   @Inject
    private ServletPathInfo info;
 
-   @Current
+   @Inject
    JSPQueryManager jsp;
 
    public CSS css(Class<?> resourceClass, String resource) throws IOException

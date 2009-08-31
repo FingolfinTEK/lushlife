@@ -3,6 +3,7 @@ package glassbottle2.bootstrap;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jboss.webbeans.bootstrap.api.ServiceRegistry;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.bootstrap.spi.Deployment;
 
@@ -28,6 +29,12 @@ public class GlassBottleDeployment implements Deployment
    public BeanDeploymentArchive loadBeanDeploymentArchive(Class<?> beanClass)
    {
       return disc;
+   }
+
+   @Override
+   public ServiceRegistry getServices()
+   {
+      return disc.getServices();
    }
 
 }

@@ -29,5 +29,11 @@
 
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>inject-api</artifactId>
+		</dependency>
+		
 	</dependencies>
 </project>

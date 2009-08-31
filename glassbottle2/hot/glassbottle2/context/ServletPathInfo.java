@@ -1,12 +1,10 @@
 package glassbottle2.context;
 
-import glassbottle2.scope.Singleton;
-
-import javax.enterprise.inject.Initializer;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-@Singleton
+@javax.inject.Singleton
 public class ServletPathInfo
 {
 
@@ -17,7 +15,7 @@ public class ServletPathInfo
       return servletPath;
    }
 
-   @Initializer
+   @Inject
    public ServletPathInfo(HttpServletRequest request)
    {
       ServletContext context = request.getSession().getServletContext();

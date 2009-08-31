@@ -2,7 +2,7 @@ package application.lushup.model;
 
 import glassbottle2.scope.EventScoped;
 
-import javax.enterprise.inject.Named;
+import javax.inject.Named;
 
 @EventScoped
 @Named

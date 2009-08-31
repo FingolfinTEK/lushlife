@@ -10,13 +10,16 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.context.ScopeType;
+import javax.enterprise.context.NormalScope;
+import javax.inject.Scope;
 
 @Target( { TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @Documented
 @Inherited
-@ScopeType(normal = false, passivating = false)
+@Scope
+@NormalScope(passivating = false)
+// @ScopeType(normal = false, passivating = false)
 public @interface EventScoped
 {
 

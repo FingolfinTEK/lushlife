@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.inject.Current;
-import javax.enterprise.inject.Named;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -21,13 +21,13 @@ import org.apache.commons.lang.StringEscapeUtils;
 @EventScoped
 public class LFunction
 {
-   @Current
+   @Inject
    TemplateManager manager;
 
    @StartupTime
    Long startuptime;
 
-   @Current
+   @Inject
    ServletPathInfo info;
 
    public void css(String resource) throws IOException

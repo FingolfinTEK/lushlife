@@ -1,7 +1,6 @@
 package glassbottle2.extension.resources;
 
 import glassbottle2.binding.StartupTime;
-import glassbottle2.scope.Singleton;
 import glassbottle2.util.io.WriteTo;
 import glassbottle2.util.loader.ClassLoaderUtil;
 import glassbottle2.util.lock.DoubleCheckBlocking;
@@ -17,8 +16,9 @@ import javax.annotation.PostConstruct;
 import javax.cache.Cache;
 import javax.cache.CacheException;
 import javax.cache.CacheManager;
-import javax.enterprise.inject.Current;
 import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jboss.webbeans.log.Log;
@@ -29,7 +29,7 @@ public class ResourceCacheImpl implements ResourceCache
 {
    static Log logger = Logging.getLog(ResourceCacheImpl.class);
 
-   @Current
+   @Inject
    ClassLoader loader;
 
    @StartupTime
@@ -37,7 +37,7 @@ public class ResourceCacheImpl implements ResourceCache
 
    private Lock lock = new ReentrantLock();
 
-   @Current
+   @Inject
    Instance<HttpServletResponse> response;
 
    private Cache cache;
