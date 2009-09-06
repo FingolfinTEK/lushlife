@@ -74,12 +74,8 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
       GlassBottleContext.setRequest(null);
       GlassBottleContext.setResponse(null);
       GlassBottleContext.getHiddenScope().clear();
-      // DependentContext dependentContext =
-      // GlassBottle.getBootStrap(event.getServletContext()).getServices().get(DependentContext.class);
-      // if (dependentContext == null)
-      // {
-      // dependentContext.setActive(false);
-      // }
+      super.requestDestroyed(event);
+
    }
 
    @Override
@@ -88,17 +84,25 @@ public class GlassBottleListener extends WebBeansListener implements ServletRequ
       GlassBottleContext.setServletContext(event.getServletContext());
       GlassBottleContext.setRequest((HttpServletRequest) event.getServletRequest());
       GlassBottleContext.getHiddenScope().clear();
+      boolean update = isUpdate();
+      logger.info("hot deploy[{0}] , update[{1}]", GlassBottle.isHotdeployMode(), update);
+
       if (GlassBottle.isHotdeployMode())
       {
-         if (isUpdate())
+         if (update)
          {
             ClassLoaderProducer.produceClassLoader(event.getServletContext());
-            GlassBottleBoostrap.initManager();
          }
          Thread.currentThread().setContextClassLoader(ClassLoaderProducer.getClassLoader());
+         if (update)
+         {
+            logger.info("init bean manager");
+            GlassBottleBoostrap.initManager();
+         }
       }
-      // GlassBottle.getBootStrap()..getServices().get(DependentContext.class).setActive(true);
+      GlassBottle.getServiceRegistry().get(DependentContext.class).setActive(true);
       CurrentManager.rootManager().fireEvent(event, new RequestInitializedLiteral());
+      super.requestInitialized(event);
    }
 
    static public final String LAST_UPDATE_TIME = "LUSH_LAST_UPDATE";

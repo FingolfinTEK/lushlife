@@ -10,7 +10,6 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.context.NormalScope;
 import javax.inject.Scope;
 
 @Target( { TYPE, METHOD, FIELD })
@@ -18,8 +17,6 @@ import javax.inject.Scope;
 @Documented
 @Inherited
 @Scope
-@NormalScope(passivating = false)
-// @ScopeType(normal = false, passivating = false)
 public @interface EventScoped
 {
 

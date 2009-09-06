@@ -14,9 +14,12 @@ import org.jboss.webbeans.bootstrap.api.ServiceRegistry;
 import org.jboss.webbeans.bootstrap.api.helpers.SimpleServiceRegistry;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.ejb.spi.EjbDescriptor;
+import org.jboss.webbeans.log.Log;
+import org.jboss.webbeans.log.Logging;
 
 public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive
 {
+   static Log log = Logging.getLog(BeanModuleBeanDeploymentArchive.class);
 
    static public class BeanBinderImpl implements BeanBinder
    {
@@ -36,6 +39,7 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive
       @Override
       public void model(Class<?> clazz)
       {
+         log.debug("load class {0} ", clazz);
          classes.add(clazz);
       }
 
