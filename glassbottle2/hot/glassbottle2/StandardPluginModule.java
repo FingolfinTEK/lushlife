@@ -15,4 +15,21 @@ public class StandardPluginModule implements BeanModule
       binder.install(new ContextModule());
    }
 
+   enum MSG
+   {
+      A,
+
+      B
+      {
+
+      }
+   }
+
+   public static void main(String[] args)
+   {
+      System.out.println(MSG.A.getClass());
+      System.out.println(MSG.B.getClass());
+      System.out.println(MSG.B.getDeclaringClass());
+   }
+
 }

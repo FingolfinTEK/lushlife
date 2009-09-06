@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" output="war/WEB-INF/modules" path="hot"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (2)"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (3)"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6.0"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/resteasy-jaxrs-1.1.GA.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/groovy-all-1.6.3.jar"/>
@@ -21,5 +21,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-spi-1.0.0-SNAPSHOT.jar" sourcepath="/webbeans-spi/src/main/java"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr299-api-1.0.0-SNAPSHOT.jar" sourcepath="/jsr299-api/src/main/java"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/inject-api-1.0.0-PRD.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-api-1.0-sdk-1.2.5.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

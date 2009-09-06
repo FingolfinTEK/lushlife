@@ -1,6 +1,7 @@
 package glassbottle2.context;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +17,7 @@ public class ServletPathInfo
    }
 
    @Inject
-   public ServletPathInfo(HttpServletRequest request)
+   public ServletPathInfo(@Named("request") HttpServletRequest request)
    {
       ServletContext context = request.getSession().getServletContext();
       this.servletPath = context.getInitParameter("resteasy.servlet.mapping.prefix");

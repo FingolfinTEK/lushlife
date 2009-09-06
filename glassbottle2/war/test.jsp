@@ -13,6 +13,7 @@
 	ResourceManager r = injector.getInstance(ResourceManager.class);
 	JSPQueryManager j = injector.getInstance(JSPQueryManager.class);
 %>
+
 <head>
 
 <%=r.css(YahooResource.class, "reset.css")%>
@@ -32,12 +33,14 @@
 <p><%=j.$(Customer.class).getCity()%></p>
 <p><%=j.$(Customer.class).getLastName()%></p>
 
+
 <%=j.$(A.class)
 	.href(r.url(CustomerResource.class)
 			.path(j.$(Customer.class).getId()))
 	.id("tag_a")%>
 	Sample Link
 <%= j.end() %>
+
 <table border="1">
 	<tr>
 		<td>TD #0</td>
@@ -45,7 +48,7 @@
 	</tr>
 	<tr>
 		<td>TD #2</td>
-		<td></td>
+		<td> Good Point </td>
 	</tr>
 	<tr>
 		<td></td>

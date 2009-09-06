@@ -2,10 +2,7 @@ package application.lushup.model;
 
 import glassbottle2.scope.EventScoped;
 
-import javax.inject.Named;
-
 @EventScoped
-@Named
 public class Customer
 {
    private int id;
@@ -39,7 +36,8 @@ public class Customer
 
    public String getLastName()
    {
-      return lastName;
+      // return lastName;
+      return "last name5";
    }
 
    public void setLastName(String lastName)

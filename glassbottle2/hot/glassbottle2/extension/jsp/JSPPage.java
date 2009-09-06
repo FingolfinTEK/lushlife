@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,13 +24,15 @@ public class JSPPage implements Page
    private String path;
 
    @Inject
-   HttpServletRequest reqeust;
+   @Named("request")
+   private HttpServletRequest reqeust;
 
    @Inject
-   HttpServletResponse response;
+   @Named("response")
+   private HttpServletResponse response;
 
    @Inject
-   ServletContext context;
+   private ServletContext context;
 
    public JSPPage path(String path)
    {

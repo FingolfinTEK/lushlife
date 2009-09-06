@@ -27,15 +27,14 @@ public class CustomerBase
    {
       customer.setId(id);
       customer.setFirstName(name);
-      // return new Render(Index.class);
       return JSPPage.to("/test.jsp");
    }
 
    @GET
    @Path("{id}")
-   // @Produces("application/json")
    public Page getCustomer(@PathParam("id") int id)
    {
+      
       customer.setId(id);
       return JSPPage.to("/test.jsp");
    }
