@@ -18,6 +18,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 @EventScoped
 public class ResourceManager
 {
+   @Inject
    @StartupTime
    private Long startuptime;
 

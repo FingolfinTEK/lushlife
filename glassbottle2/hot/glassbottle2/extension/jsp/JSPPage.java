@@ -14,8 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.WebApplicationException;
 
+import org.jboss.webbeans.log.Log;
+import org.jboss.webbeans.log.Logging;
+
 public class JSPPage implements Page
 {
+   static Log log = Logging.getLog(JSPPage.class);
+
    static public Page to(String path)
    {
       return GlassBottle.getInjector().getInstance(JSPPage.class).path(path);
@@ -45,6 +50,8 @@ public class JSPPage implements Page
    {
       try
       {
+
+         log.info("JSP page [{0}]", path);
          response.reset();
          context.getRequestDispatcher(path).include(reqeust, response);
       }

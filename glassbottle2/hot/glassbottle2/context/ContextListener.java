@@ -1,5 +1,7 @@
 package glassbottle2.context;
 
+import java.util.UUID;
+
 import glassbottle2.binding.RequestDestroyed;
 import glassbottle2.binding.RequestInitialized;
 import glassbottle2.context.scope.HiddenContext;
@@ -15,6 +17,7 @@ import org.jboss.webbeans.BeanManagerImpl;
 import org.jboss.webbeans.context.api.helpers.ConcurrentHashMapBeanStore;
 import org.jboss.webbeans.log.Log;
 import org.jboss.webbeans.log.Logging;
+import org.slf4j.MDC;
 
 @Singleton
 public class ContextListener
@@ -27,13 +30,15 @@ public class ContextListener
 
    public void initScope(@Observes AfterDeploymentValidation event)
    {
-      log.info("init context ");
+      UUID id = UUID.randomUUID();
+      MDC.put("requestId", id.toString());
       manager.addContext(EventContext.INSTANCE);
       manager.addContext(HiddenContext.INSTANCE);
    }
 
    public void requsetInit(@Observes @RequestInitialized ServletRequestEvent event)
    {
+      MDC.remove("requestId");
       EventContext.INSTANCE.setBeanStore(new ConcurrentHashMapBeanStore());
       EventContext.INSTANCE.setActive(true);
       HiddenContext.INSTANCE.setActive(true);

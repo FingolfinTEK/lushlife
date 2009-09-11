@@ -22,5 +22,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr299-api-1.0.0-SNAPSHOT.jar" sourcepath="/jsr299-api/src/main/java"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/inject-api-1.0.0-PRD.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-api-1.0-sdk-1.2.5.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

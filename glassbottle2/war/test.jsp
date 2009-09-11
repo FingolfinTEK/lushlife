@@ -34,12 +34,9 @@
 <p><%=j.$(Customer.class).getLastName()%></p>
 
 
-<%=j.$(A.class)
-	.href(r.url(CustomerResource.class)
-			.path(j.$(Customer.class).getId()))
-	.id("tag_a")%>
-	Sample Link
-<%= j.end() %>
+<%=j.$(A.class).href(
+							r.url(CustomerResource.class).path(
+									j.$(Customer.class).getId())).id("tag_a")%> Sample Link <%=j.end()%>
 
 <table border="1">
 	<tr>
@@ -48,7 +45,7 @@
 	</tr>
 	<tr>
 		<td>TD #2</td>
-		<td> Good Point </td>
+		<td>Good Point</td>
 	</tr>
 	<tr>
 		<td></td>

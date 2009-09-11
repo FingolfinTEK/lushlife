@@ -69,9 +69,9 @@ public class GlassBottle
    static public Injector getInjector()
    {
       BeanManagerImpl beanManager = CurrentManager.rootManager();
-      if (log.isInfoEnabled())
+      if (log.isDebugEnabled())
       {
-         log.info("CurrentManager[{0}] {1}", beanManager.hashCode(), beanManager);
+         log.debug("CurrentManager[{0}] {1}", beanManager.hashCode(), beanManager);
       }
       Bean<?> injectorBean = beanManager.getBeans(Injector.class).iterator().next();
       return (Injector) beanManager.getReference(injectorBean, beanManager.createCreationalContext(injectorBean));
