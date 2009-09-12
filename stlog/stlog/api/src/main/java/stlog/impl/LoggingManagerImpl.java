@@ -63,9 +63,4 @@ public class LoggingManagerImpl implements LoggingManager {
 			}
 		});
 	}
-
-	public void clear() {
-
-	}
-
 }

@@ -13,6 +13,11 @@ import stlog.util.Reflections;
 public class AnnotationLevelResolver implements LevelResolver {
 
 	private ConcurrentEnumMapCache<Level> cache = new ConcurrentEnumMapCache<Level>();
+	private Level defaultLogLevel = Level.INFO;
+
+	public void setDefaultLogLevel(String defaultLogLevel) {
+		this.defaultLogLevel = Level.valueOf(defaultLogLevel.toUpperCase());
+	}
 
 	public <T extends Enum<T>> Level toLevel(final T logId) {
 		return cache.putIfAbsent(logId, new Closure<EnumMap<T, Level>>() {
@@ -22,7 +27,7 @@ public class AnnotationLevelResolver implements LevelResolver {
 		});
 	}
 
-	public <T extends Enum<T>> EnumMap<T, Level> createEnumMap(
+	private <T extends Enum<T>> EnumMap<T, Level> createEnumMap(
 			final Class<T> clazz) {
 		EnumMap<T, Level> map = new EnumMap<T, Level>(clazz);
 		for (T t : clazz.getEnumConstants()) {
@@ -32,7 +37,7 @@ public class AnnotationLevelResolver implements LevelResolver {
 		return map;
 	}
 
-	public Level resolveLevel(Enum<?> id) {
+	private Level resolveLevel(Enum<?> id) {
 		Annotation[] annotations = Reflections.getAnnotations(id);
 		for (Annotation annotation : annotations) {
 			if (annotation.annotationType().isAnnotationPresent(
@@ -41,7 +46,7 @@ public class AnnotationLevelResolver implements LevelResolver {
 						LogLevelBinding.class).value();
 			}
 		}
-		return Level.INFO;// default level
+		return defaultLogLevel;
 	}
 
 }

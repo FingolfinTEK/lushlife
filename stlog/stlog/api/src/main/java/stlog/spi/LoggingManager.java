@@ -2,7 +2,6 @@ package stlog.spi;
 
 import java.util.List;
 
-
 public interface LoggingManager {
 
 	LevelResolver getLevelResolver();
@@ -14,7 +13,5 @@ public interface LoggingManager {
 	LocaleSelector getLocaleSelector();
 
 	void initialize();
-
-	void clear();
 
 }
