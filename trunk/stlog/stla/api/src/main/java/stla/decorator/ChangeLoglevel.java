@@ -73,7 +73,15 @@ public class ChangeLoglevel implements LogProviderDecorator {
 					binder.log(level, logId, message, e);
 				}
 			}
+
+			public String getName() {
+				return getName();
+			}
 		};
+	}
+
+	public boolean isTarget(LogProvider provider) {
+		return true;
 	}
 
 }

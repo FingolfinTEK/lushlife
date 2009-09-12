@@ -70,4 +70,8 @@ public class SLF4JLogProvider implements LogProvider {
 		throw new IllegalArgumentException("Unreachable code");
 	}
 
+	public String getName() {
+		return logger.getName();
+	}
+
 }
