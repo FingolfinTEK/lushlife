@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import stlog.decorator.AddLogIdToMessage;
-import stlog.i18n.DefaultLocaleSelector;
+import stlog.i18n.LocaleSelectorImpl;
 import stlog.level.AnnotationLevelResolver;
 import stlog.message.AnnotationMessageResolver;
 import stlog.message.CompositeMessageResolver;
@@ -18,7 +18,7 @@ import stlog.spi.MessageResolver;
 public class LoggingManagerImpl implements LoggingManager {
 	private CompositeMessageResolver messageResolver;
 	private LevelResolver revelResolver = new AnnotationLevelResolver();
-	private LocaleSelector localeSelector = new DefaultLocaleSelector();
+	private LocaleSelector localeSelector = new LocaleSelectorImpl();
 	private List<LogProviderDecorator> decorators = new ArrayList<LogProviderDecorator>();
 
 	public List<LogProviderDecorator> getDecorators() {

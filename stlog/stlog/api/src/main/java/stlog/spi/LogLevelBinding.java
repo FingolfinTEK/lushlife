@@ -1,4 +1,4 @@
-package stlog.annotations;
+package stlog.spi;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

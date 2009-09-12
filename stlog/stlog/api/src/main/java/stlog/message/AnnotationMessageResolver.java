@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.util.EnumMap;
 import java.util.Locale;
 
-import stlog.annotations.LogLevelBinding;
+import stlog.spi.LogLevelBinding;
 import stlog.spi.MessageResolver;
 import stlog.util.Closure;
 import stlog.util.ConcurrentEnumMapCache;

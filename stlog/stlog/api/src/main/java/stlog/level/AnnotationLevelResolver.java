@@ -4,8 +4,8 @@ import java.lang.annotation.Annotation;
 import java.util.EnumMap;
 
 import stlog.Level;
-import stlog.annotations.LogLevelBinding;
 import stlog.spi.LevelResolver;
+import stlog.spi.LogLevelBinding;
 import stlog.util.Closure;
 import stlog.util.ConcurrentEnumMapCache;
 import stlog.util.Reflections;
