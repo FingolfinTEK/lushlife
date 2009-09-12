@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<stla>
+	<!-- locale selector for i18n -->
+	<locale-selector class="stla.i18n.LocaleSelectorImpl" />
+
+	<message-resolvers>
+		<!--
+			search log message from ResourceBundle associated with log id enum.
+		-->
+		<message-resolver class="stla.message.ResourceBunldeMessageResolver" />
+		<!--
+			search log message from annotation associated with log id enum.
+		-->
+		<message-resolver class="stla.message.AnnotationMessageResolver" />
+	</message-resolvers>
+
+	<decorators>
+		<!-- 
+			change loglevel of stla.LogMsg.TEST0001 to WARN;
+		 -->
+		<decorator class="stla.decorator.ChangeLoglevel" enumClass="stla.LogMsg"
+			value="TEST0001" to="WARN" />
+
+		<!-- 
+			add log id to log message;
+		 -->
+		<decorator class="stla.decorator.AddLogIdToMessage" />
+	</decorators>
+
+</stla>
