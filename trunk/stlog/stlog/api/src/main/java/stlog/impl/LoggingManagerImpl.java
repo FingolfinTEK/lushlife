@@ -3,12 +3,9 @@ package stlog.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import stlog.decorator.AddLogIdToMessage;
-import stlog.i18n.LocaleSelectorImpl;
-import stlog.level.AnnotationLevelResolver;
-import stlog.message.AnnotationMessageResolver;
+import stlog.configuration.LoggingManagerBinder;
+import stlog.configuration.LoggingManagerConfiguration;
 import stlog.message.CompositeMessageResolver;
-import stlog.message.ResourceBunldeMessageResolver;
 import stlog.spi.LevelResolver;
 import stlog.spi.LocaleSelector;
 import stlog.spi.LogProviderDecorator;
@@ -16,17 +13,22 @@ import stlog.spi.LoggingManager;
 import stlog.spi.MessageResolver;
 
 public class LoggingManagerImpl implements LoggingManager {
-	private CompositeMessageResolver messageResolver;
-	private LevelResolver revelResolver = new AnnotationLevelResolver();
-	private LocaleSelector localeSelector = new LocaleSelectorImpl();
+	private CompositeMessageResolver messageResolver = new CompositeMessageResolver();
+	private LevelResolver levelResolver;
+	private LocaleSelector localeSelector;
 	private List<LogProviderDecorator> decorators = new ArrayList<LogProviderDecorator>();
+	private LoggingManagerConfiguration config;
+
+	public LoggingManagerImpl(LoggingManagerConfiguration config) {
+		this.config = config;
+	}
 
 	public List<LogProviderDecorator> getDecorators() {
 		return decorators;
 	}
 
 	public LevelResolver getLevelResolver() {
-		return revelResolver;
+		return levelResolver;
 	}
 
 	public LocaleSelector getLocaleSelector() {
@@ -38,11 +40,28 @@ public class LoggingManagerImpl implements LoggingManager {
 	}
 
 	public void initialize() {
-		messageResolver = new CompositeMessageResolver();
-		messageResolver.add(new ResourceBunldeMessageResolver());
-		messageResolver.add(new AnnotationMessageResolver());
+		config.configure(new LoggingManagerBinder() {
 
-		this.decorators.add(new AddLogIdToMessage());
+			public void localeSelector(LocaleSelector localeSelector) {
+				LoggingManagerImpl.this.localeSelector = localeSelector;
+			}
+
+			public void levelResolver(LevelResolver levelResolver) {
+				LoggingManagerImpl.this.levelResolver = levelResolver;
+			}
+
+			public void addMessageResolver(MessageResolver messageResolver) {
+				LoggingManagerImpl.this.messageResolver.add(messageResolver);
+			}
+
+			public void addDecorator(LogProviderDecorator decorator) {
+				decorators.add(decorator);
+			}
+
+			public void install(LoggingManagerConfiguration config) {
+				config.configure(this);
+			}
+		});
 	}
 
 	public void clear() {

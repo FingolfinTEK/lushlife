@@ -1,7 +1,10 @@
 package stlog;
 
+import java.net.URL;
 import java.util.Locale;
 
+import stlog.configuration.DefaultLoggingManagerConfiguration;
+import stlog.configuration.XMLLoggingManagerConfiguration;
 import stlog.impl.LogImpl;
 import stlog.impl.LoggingManagerImpl;
 import stlog.slf4j.SLF4JLogProviderFactory;
@@ -17,7 +20,7 @@ public class Logging {
 
 	static private LoggingManager loggingManager;
 	static private LogProviderFactory loggingFactory;
-	
+
 	static {
 		initializeLoggingFactory();
 		initializeLoggingManager();
@@ -38,6 +41,7 @@ public class Logging {
 				}
 			}
 		}
+
 		if (Logging.loggingFactory == null) {
 			Logging.loggingFactory = new SLF4JLogProviderFactory();
 		}
@@ -45,23 +49,20 @@ public class Logging {
 	}
 
 	private static void initializeLoggingManager() {
-		ServiceLoader<LoggingManager> services = ServiceLoader.load(
-				LoggingManager.class, Thread.currentThread()
-						.getContextClassLoader());
-		for (LoggingManager manager : services) {
-			if (loggingManager == null) {
-				Logging.loggingManager = manager;
-			} else {
-				if (!loggingManager.getClass().equals(manager.getClass())) {
-					LogLog.reportFailure("already loaded LogManager ["
-							+ loggingManager.getClass() + "]. ignore ["
-							+ manager.getClass() + "]", null);
-				}
-			}
+		String xmlFileName = System.getProperty("stlog.configuration");
+		if (xmlFileName == null) {
+			xmlFileName = "stlog.xml";
+		}
+		URL xmlResource = Thread.currentThread().getContextClassLoader()
+				.getResource(xmlFileName);
+		if (xmlResource != null) {
+			Logging.loggingManager = new LoggingManagerImpl(
+					new XMLLoggingManagerConfiguration(xmlResource));
 		}
 		// default logging manager
 		if (Logging.loggingManager == null) {
-			Logging.loggingManager = new LoggingManagerImpl();
+			Logging.loggingManager = new LoggingManagerImpl(
+					new DefaultLoggingManagerConfiguration());
 		}
 
 		loggingManager.initialize();

@@ -21,7 +21,7 @@ public class ChangeLoglevel implements LogProviderDecorator {
 	}
 
 	public void setTo(String to) {
-		this.to = Level.valueOf(to);
+		this.to = Level.valueOf(to.toUpperCase());
 	}
 
 	private final AtomicBoolean reportError = new AtomicBoolean(true);
@@ -30,8 +30,9 @@ public class ChangeLoglevel implements LogProviderDecorator {
 		if (enumClass == null || value == null || to == null) {
 			if (reportError.getAndSet(false)) {
 				LogLog.reportFailure(
-						"IllealState: Ignore ChangeLogLevel logId[ " + enumClass
-								+ "#" + value + "] to[" + to + "]", null);
+						"IllealState: Ignore ChangeLogLevel logId[ "
+								+ enumClass + "#" + value + "] to[" + to + "]",
+						null);
 			}
 			return binder;
 		}
