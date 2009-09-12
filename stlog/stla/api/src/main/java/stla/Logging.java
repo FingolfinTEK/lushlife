@@ -31,7 +31,6 @@ public class Logging {
 	private static void initializeLoggingManager() {
 
 		loggingManager = xmlConfiguration();
-
 		// default logging manager
 		if (loggingManager == null) {
 			loggingManager = new LoggingManagerImpl(
