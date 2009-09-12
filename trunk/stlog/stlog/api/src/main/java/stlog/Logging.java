@@ -13,8 +13,6 @@ import stlog.spi.LogProvider;
 import stlog.spi.LogProviderDecorator;
 import stlog.spi.LogProviderFactory;
 import stlog.spi.LoggingManager;
-import stlog.util.LogLog;
-import stlog.util.ServiceLoader;
 
 public class Logging {
 
@@ -27,28 +25,24 @@ public class Logging {
 	}
 
 	private static void initializeLoggingFactory() {
-		ServiceLoader<LogProviderFactory> services = ServiceLoader.load(
-				LogProviderFactory.class, Thread.currentThread()
-						.getContextClassLoader());
-		for (LogProviderFactory factory : services) {
-			if (Logging.loggingFactory == null) {
-				Logging.loggingFactory = factory;
-			} else {
-				if (!loggingFactory.getClass().equals(factory.getClass())) {
-					LogLog.reportFailure("already loaded LoggingFactory ["
-							+ Logging.loggingFactory.getClass() + "]. ignore ["
-							+ factory.getClass() + "]", null);
-				}
-			}
-		}
-
-		if (Logging.loggingFactory == null) {
-			Logging.loggingFactory = new SLF4JLogProviderFactory();
-		}
+		loggingFactory = new SLF4JLogProviderFactory();
 		loggingFactory.initialize();
 	}
 
 	private static void initializeLoggingManager() {
+
+		loggingManager = xmlConfiguration();
+
+		// default logging manager
+		if (loggingManager == null) {
+			loggingManager = new LoggingManagerImpl(
+					new DefaultLoggingManagerConfiguration());
+		}
+
+		loggingManager.initialize();
+	}
+
+	private static LoggingManager xmlConfiguration() {
 		String xmlFileName = System.getProperty("stlog.configuration");
 		if (xmlFileName == null) {
 			xmlFileName = "stlog.xml";
@@ -56,16 +50,10 @@ public class Logging {
 		URL xmlResource = Thread.currentThread().getContextClassLoader()
 				.getResource(xmlFileName);
 		if (xmlResource != null) {
-			Logging.loggingManager = new LoggingManagerImpl(
-					new XMLLoggingManagerConfiguration(xmlResource));
+			return new LoggingManagerImpl(new XMLLoggingManagerConfiguration(
+					xmlResource));
 		}
-		// default logging manager
-		if (Logging.loggingManager == null) {
-			Logging.loggingManager = new LoggingManagerImpl(
-					new DefaultLoggingManagerConfiguration());
-		}
-
-		loggingManager.initialize();
+		return null;
 	}
 
 	static public <E extends Enum<E>> Level getLevel(E logId) {
