@@ -13,8 +13,4 @@ public class SLF4JLogProviderFactory implements LogProviderFactory {
 		return new SLF4JLogProvider(logger);
 	}
 
-	public void initialize() {
-		// do nothing;
-	}
-
 }
