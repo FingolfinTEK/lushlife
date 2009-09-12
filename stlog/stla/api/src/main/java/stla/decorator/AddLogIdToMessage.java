@@ -23,6 +23,14 @@ public class AddLogIdToMessage implements LogProviderDecorator {
 			public boolean isEnableFor(Level level, Enum<?> logId) {
 				return proceed.isEnableFor(level, logId);
 			}
+
+			public String getName() {
+				return proceed.getName();
+			}
 		};
+	}
+
+	public boolean isTarget(LogProvider provider) {
+		return true;
 	}
 }
