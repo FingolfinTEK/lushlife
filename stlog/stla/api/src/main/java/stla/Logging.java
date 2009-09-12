@@ -64,6 +64,10 @@ public class Logging {
 				.toMessage(logId, getLocale());
 	}
 
+	static public <E extends Enum<E>> String getMessage(E logId, Locale locale) {
+		return loggingManager.getMessageResolver().toMessage(logId, locale);
+	}
+
 	static public Locale getLocale() {
 		return loggingManager.getLocaleSelector().getLocale();
 	}
