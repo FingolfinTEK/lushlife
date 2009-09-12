@@ -11,9 +11,7 @@ public class LoggerTest {
 	@Test
 	public void test_logger() {
 		logger.log(LogMsg.TEST0001, "xx");
-
 		logger.log(LogMsg.TEST0001, new NullPointerException());
-
 	}
 
 }
