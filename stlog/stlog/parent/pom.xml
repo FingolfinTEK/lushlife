@@ -9,17 +9,20 @@
 
 	<distributionManagement>
 		<repository>
-			<id>repository.jboss.org</id>
-			<name>JBoss Releases Repository</name>
-			<url>dav:https://svn.jboss.org/repos/repository.jboss.org/maven2
+			<id>google-maven-repository</id>
+			<name>Google Maven Repository</name>
+			<url>dav:https://lushlife.googlecode.com/svn/repository/
 			</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshots.jboss.org</id>
-			<name>JBoss Snapshot Repository</name>
-			<url>dav:https://snapshots.jboss.org/maven2</url>
+			<id>google-maven-snapshot-repository</id>
+			<name>Google Maven Snapshot Repository</name>
+			<url>dav:https://lushlife.googlecode.com/svn/snapshot-repository/
+			</url>
+			<uniqueVersion>true</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
