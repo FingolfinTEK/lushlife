@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import stlog.spi.LocaleSelector;
 
-public class DefaultLocaleSelector implements LocaleSelector {
+public class LocaleSelectorImpl implements LocaleSelector {
 
 	ThreadLocal<Locale> threadLocale = new ThreadLocal<Locale>();
 
