@@ -10,7 +10,6 @@ public class ConcurrentEnumMapCache<V> {
 	ReentrantLock lock = new ReentrantLock();
 	Map<Class<? extends Enum<?>>, EnumMap<?, V>> cache = new ConcurrentHashMap<Class<? extends Enum<?>>, EnumMap<?, V>>();
 
-	@SuppressWarnings("unchecked")
 	public <E extends Enum<E>> V putIfAbsent(Enum<?> key,
 			Closure<EnumMap<E, V>> callable) {
 

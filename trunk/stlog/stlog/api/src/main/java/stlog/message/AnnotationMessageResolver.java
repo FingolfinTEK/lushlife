@@ -40,7 +40,7 @@ public class AnnotationMessageResolver implements MessageResolver {
 				return String.valueOf(Reflections.getValue(annotation));
 			}
 		}
-		return null;// message not found
+		return null;
 	}
 
 }

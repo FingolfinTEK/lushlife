@@ -26,7 +26,6 @@ public class Logging {
 
 	private static void initializeLoggingFactory() {
 		loggingFactory = new SLF4JLogProviderFactory();
-		loggingFactory.initialize();
 	}
 
 	private static void initializeLoggingManager() {
