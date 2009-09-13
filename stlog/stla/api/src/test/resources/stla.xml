@@ -19,17 +19,16 @@
 		<!-- 
 			stop to write log of stla.LogMsg.TEST0002.
 		 -->
-		<decorator class="stla.decorator.Block" 
-			category="stla"
-			logId="TEST0002"  />
-	
+		<decorator class="stla.decorator.Block" category="stla"
+			logId="TEST0002" />
+
 		<!-- 
 			change loglevel of stla.LogMsg.TEST0001 to WARN.
 		 -->
-		<decorator class="stla.decorator.ChangeLoglevel" 
-			category="stla"
-			logId="TEST0001" 
-			to="INFO" />
+		<decorator class="stla.decorator.ChangeLoglevel" category="stla"
+			logId="TEST0001" to="INFO" />
+
+		<decorator class="stla.decorator.PutLogIdToSLF4JMDC" key="id" />
 
 		<!-- 
 			add log id to log message;
