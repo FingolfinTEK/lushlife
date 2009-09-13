@@ -85,7 +85,9 @@ public class Logging {
 	public static Log getLogger(String name) {
 		LogProvider binder = loggingFactory.getLogger(name);
 		for (LogProviderDecorator decoretor : loggingManager.getDecorators()) {
-			binder = decoretor.decorate(binder);
+			if (decoretor.isTarget(binder)) {
+				binder = decoretor.decorate(binder);
+			}
 		}
 		return new LogImpl(binder, loggingManager);
 	}
