@@ -8,13 +8,12 @@ public class XMLLoggingManagerConfiguration extends
 	private URL url;
 
 	public XMLLoggingManagerConfiguration(URL url) {
-		super();
 		this.url = url;
 	}
 
 	@Override
 	protected void configure() {
-		new STLogXmlParser(this).parse(url);
+		new STLAXmlParser(this).parse(url);
 	}
 
 }

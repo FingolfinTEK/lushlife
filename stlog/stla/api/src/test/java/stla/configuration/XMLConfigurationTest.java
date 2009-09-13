@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import stla.configuration.LoggingManagerBinder;
 import stla.configuration.LoggingManagerConfiguration;
-import stla.configuration.STLogXmlParser;
+import stla.configuration.STLAXmlParser;
 import stla.decorator.AddLogIdToMessage;
 import stla.decorator.ChangeLoglevel;
 import stla.message.AnnotationMessageResolver;
@@ -22,7 +22,7 @@ public class XMLConfigurationTest {
 	public void testXml() {
 		URL stlogXml = Thread.currentThread().getContextClassLoader()
 				.getResource("stla.xml");
-		new STLogXmlParser(new LoggingManagerBinder() {
+		new STLAXmlParser(new LoggingManagerBinder() {
 
 			public void localeSelector(LocaleSelector localeSelector) {
 				// TODO Auto-generated method stub
