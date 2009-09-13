@@ -18,9 +18,6 @@ public class ChangeLoglevel extends LogIdHandlingDecoratorBase implements
 	private final AtomicBoolean reportError = new AtomicBoolean(true);
 
 	public LogProvider decorate(final LogProvider binder) {
-		if (!validate()) {
-			return binder;
-		}
 		if (to == null) {
 			if (reportError.getAndSet(false)) {
 				LogLog.reportFailure("IllealState: to attribute is [" + to

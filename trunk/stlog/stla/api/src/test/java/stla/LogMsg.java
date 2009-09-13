@@ -1,8 +1,11 @@
 package stla;
 
-import stla.Error;
 
 public enum LogMsg {
-	@Error("Error Message {}")
+	@Debug("Error Message {} {}")
 	TEST0001,
+	
+	@Error("Block {} {}")
+	TEST0002,
+	
 }
