@@ -1,42 +1,20 @@
 package stla.decorator;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import stla.spi.LogProviderDecorator;
-import stla.util.LogLog;
 
 public abstract class LogIdHandlingDecoratorBase extends
 		LogProviderDecoratorBase implements LogProviderDecorator {
-	protected String enumClass;
-	protected String value;
+	protected String logId;
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public void setEnumClass(String enumClass) {
-		this.enumClass = enumClass;
-	}
-
-	AtomicBoolean reportError = new AtomicBoolean(true);
-
-	protected boolean validate() {
-		if (enumClass == null || value == null) {
-			if (reportError.getAndSet(false)) {
-				LogLog.reportFailure("IllealState: Ignore "
-						+ this.getClass().getSimpleName() + " logId[ "
-						+ enumClass + "#" + value + "]", null);
-			}
-			return false;
-		}
-		return true;
+	public void setLogId(String value) {
+		this.logId = value;
 	}
 
 	protected boolean isTarget(Enum<?> logId) {
-		if (!logId.getDeclaringClass().getName().equals(enumClass)) {
-			return false;
+		if (this.logId == null) {
+			return true;
 		}
-		if (!logId.name().equals(value)) {
+		if (!logId.name().equals(this.logId)) {
 			return false;
 		}
 		return true;

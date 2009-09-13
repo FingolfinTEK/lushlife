@@ -6,13 +6,8 @@ import stla.spi.LogProvider;
 public class Block extends LogIdHandlingDecoratorBase {
 
 	public LogProvider decorate(final LogProvider logProvider) {
-	
-		if (!validate()) {
-			return logProvider;
-		}
-		
-		return new LogProvider() {
 
+		return new LogProvider() {
 			public void log(Level level, Enum<?> logId, String format,
 					Object[] params) {
 				if (isTarget(logId)) {
@@ -31,8 +26,7 @@ public class Block extends LogIdHandlingDecoratorBase {
 			}
 
 			public boolean isEnableFor(Level level, Enum<?> logId) {
-				if(isTarget(logId))
-				{
+				if (isTarget(logId)) {
 					return false;
 				}
 				return logProvider.isEnableFor(level, logId);
