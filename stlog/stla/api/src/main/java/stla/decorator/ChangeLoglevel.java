@@ -7,18 +7,9 @@ import stla.spi.LogProvider;
 import stla.spi.LogProviderDecorator;
 import stla.util.LogLog;
 
-public class ChangeLoglevel implements LogProviderDecorator {
-	private String enumClass;
-	private String value;
+public class ChangeLoglevel extends LogIdHandlingDecoratorBase implements
+		LogProviderDecorator {
 	private Level to;
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public void setEnumClass(String enumClass) {
-		this.enumClass = enumClass;
-	}
 
 	public void setTo(String to) {
 		this.to = Level.valueOf(to.toUpperCase());
@@ -27,12 +18,13 @@ public class ChangeLoglevel implements LogProviderDecorator {
 	private final AtomicBoolean reportError = new AtomicBoolean(true);
 
 	public LogProvider decorate(final LogProvider binder) {
-		if (enumClass == null || value == null || to == null) {
+		if (!validate()) {
+			return binder;
+		}
+		if (to == null) {
 			if (reportError.getAndSet(false)) {
-				LogLog.reportFailure(
-						"IllealState: Ignore ChangeLogLevel logId[ "
-								+ enumClass + "#" + value + "] to[" + to + "]",
-						null);
+				LogLog.reportFailure("IllealState: to attribute is [" + to
+						+ "]..", null);
 			}
 			return binder;
 		}
@@ -55,16 +47,6 @@ public class ChangeLoglevel implements LogProviderDecorator {
 				}
 			}
 
-			private boolean isTarget(Enum<?> logId) {
-				if (!logId.getDeclaringClass().getName().equals(enumClass)) {
-					return false;
-				}
-				if (!logId.name().equals(value)) {
-					return false;
-				}
-				return true;
-			}
-
 			public void log(Level level, Enum<?> logId, String message,
 					Throwable e) {
 				if (isTarget(logId)) {
@@ -78,10 +60,6 @@ public class ChangeLoglevel implements LogProviderDecorator {
 				return getName();
 			}
 		};
-	}
-
-	public boolean isTarget(LogProvider provider) {
-		return true;
 	}
 
 }

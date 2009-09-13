@@ -4,7 +4,8 @@ import stla.Level;
 import stla.spi.LogProvider;
 import stla.spi.LogProviderDecorator;
 
-public class AddLogIdToMessage implements LogProviderDecorator {
+public class AddLogIdToMessage extends LogProviderDecoratorBase implements
+		LogProviderDecorator {
 
 	public LogProvider decorate(final LogProvider proceed) {
 		return new LogProvider() {
@@ -30,7 +31,4 @@ public class AddLogIdToMessage implements LogProviderDecorator {
 		};
 	}
 
-	public boolean isTarget(LogProvider provider) {
-		return true;
-	}
 }
