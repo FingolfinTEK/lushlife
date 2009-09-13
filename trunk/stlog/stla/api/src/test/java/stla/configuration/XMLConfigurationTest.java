@@ -1,6 +1,7 @@
 package stla.configuration;
 
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,6 +23,9 @@ public class XMLConfigurationTest {
 	public void testXml() {
 		URL stlogXml = Thread.currentThread().getContextClassLoader()
 				.getResource("stla.xml");
+		final AtomicBoolean callMessageResolver = new AtomicBoolean(false);
+		final AtomicBoolean callDecorator = new AtomicBoolean(false);
+		
 		new STLAXmlParser(new LoggingManagerBinder() {
 
 			public void localeSelector(LocaleSelector localeSelector) {
@@ -51,6 +55,7 @@ public class XMLConfigurationTest {
 							AnnotationMessageResolver.class);
 				}
 				counter++;
+				callMessageResolver.set(true);
 			}
 
 			int decoratorCounter = 0;
@@ -65,7 +70,11 @@ public class XMLConfigurationTest {
 							AddLogIdToMessage.class);
 				}
 				decoratorCounter++;
+				callDecorator.set(true);
 			}
 		}).parse(stlogXml);
+		
+		assert callMessageResolver.get();
+		assert callDecorator.get();
 	}
 }
