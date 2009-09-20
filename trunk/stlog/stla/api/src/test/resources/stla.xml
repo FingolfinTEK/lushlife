@@ -2,38 +2,39 @@
 
 <stla>
 	<!-- locale selector for i18n -->
-	<locale-selector class="stla.i18n.LocaleSelectorImpl" />
+	<locale-selector class="com.google.code.lushlife.stla.i18n.LocaleSelectorImpl" />
 
 	<message-resolvers>
 		<!--
 			search log message from ResourceBundle associated with log id enum.
 		-->
-		<message-resolver class="stla.message.ResourceBunldeMessageResolver" />
+		<message-resolver class="com.google.code.lushlife.stla.message.ResourceBunldeMessageResolver" />
 		<!--
 			search log message from annotation associated with log id enum.
 		-->
-		<message-resolver class="stla.message.AnnotationMessageResolver" />
+		<message-resolver class="com.google.code.lushlife.stla.message.AnnotationMessageResolver" />
+		
 	</message-resolvers>
 
 	<decorators>
 		<!-- 
 			stop to write log of stla.LogMsg.TEST0002.
 		 -->
-		<decorator class="stla.decorator.Block" category="stla"
+		<decorator class="com.google.code.lushlife.stla.decorator.Block" category="stla"
 			logId="TEST0002" />
 
 		<!-- 
 			change loglevel of stla.LogMsg.TEST0001 to WARN.
 		 -->
-		<decorator class="stla.decorator.ChangeLoglevel" category="stla"
+		<decorator class="com.google.code.lushlife.stla.decorator.ChangeLoglevel" category="stla"
 			logId="TEST0001" to="INFO" />
 
-		<decorator class="stla.decorator.PutLogIdToSLF4JMDC" key="id" />
+		<decorator class="com.google.code.lushlife.stla.decorator.PutLogIdToSLF4JMDC" key="id" />
 
 		<!-- 
 			add log id to log message;
 		 -->
-		<decorator class="stla.decorator.AddLogIdToMessage" />
+		<decorator class="com.google.code.lushlife.stla.decorator.AddLogIdToMessage" />
 	</decorators>
 
 </stla>
