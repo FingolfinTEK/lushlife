@@ -16,6 +16,10 @@ public class LoggerTest {
 		logger.log(LogMsg.TEST0002, "xx", "yy");
 		logger.log(LogMsg.TEST0002, new NullPointerException());
 		
+		logger.log(LogMsg.TEST0003, "xx", "yy");
+		logger.log(LogMsg.TEST0003, new NullPointerException());
+		
+		
 	}
 
 }
