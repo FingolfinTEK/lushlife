@@ -8,4 +8,10 @@ public enum LogMsg {
 	@Error("Block {} {}")
 	TEST0002,
 	
+
+	@Error("Test Message")
+	TEST0003,
+	
+	
+	
 }
