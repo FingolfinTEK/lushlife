@@ -32,7 +32,7 @@ public class ClassLoaderProducer {
 
 	private static void produceClassLoader(ServletContext context, URL... urls) {
 
-		logger.log(LogMsgCore.KMKZ00005, Arrays.toString(urls));
+		logger.log(LogMsgCore.KMKZC0005, Arrays.toString(urls));
 
 		ClassLoader loader = new URLClassLoader(urls, Thread.currentThread()
 				.getContextClassLoader());

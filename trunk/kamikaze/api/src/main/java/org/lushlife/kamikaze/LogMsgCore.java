@@ -7,24 +7,24 @@ import org.lushlife.stla.Warn;
 public enum LogMsgCore {
 
 	@Info("JSP page [{}]")
-	KMKZ00001,
+	KMKZC0001,
 
 	@Info("init bean manager")
-	KMKZ00002,
+	KMKZC0002,
 
 	@Info("hot deploy[{}] , update[{}]")
-	KMKZ00003,
+	KMKZC0003,
 
 	@Debug("CurrentManager[{}] {}")
-	KMKZ00004,
+	KMKZC0004,
 
 	@Info("hot deploy classloader create {}")
-	KMKZ00005,
+	KMKZC0005,
 
 	@Warn("Error loading {}")
-	KMKZ00006,
+	KMKZC0006,
 
 	@Warn("Error loading")
-	KMKZ00007
+	KMKZC0007
 
 }

@@ -49,7 +49,7 @@ public class JSPPage implements Page {
 	public void write(OutputStream arg0) throws IOException,
 			WebApplicationException {
 		try {
-			log.log(LogMsgCore.KMKZ00001, path);
+			log.log(LogMsgCore.KMKZC0001, path);
 			response.reset();
 			context.getRequestDispatcher(path).include(reqeust, response);
 		} catch (ServletException e) {

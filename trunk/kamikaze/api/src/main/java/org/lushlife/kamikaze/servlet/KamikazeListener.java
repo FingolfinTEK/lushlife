@@ -89,7 +89,7 @@ public class KamikazeListener implements ServletRequestListener,
 				.getServletRequest());
 		Contexts.getHiddenScope().clear();
 		boolean update = isUpdate();
-		logger.log(LogMsgCore.KMKZ00003, Kamikaze.isHotdeployMode(), update);
+		logger.log(LogMsgCore.KMKZC0003, Kamikaze.isHotdeployMode(), update);
 
 		if (Kamikaze.isHotdeployMode()) {
 			if (update) {
@@ -99,7 +99,7 @@ public class KamikazeListener implements ServletRequestListener,
 			Thread.currentThread().setContextClassLoader(
 					ClassLoaderProducer.getClassLoader());
 			if (update) {
-				logger.log(LogMsgCore.KMKZ00002);
+				logger.log(LogMsgCore.KMKZC0002);
 				bootstrapService.initManager();
 			}
 		}

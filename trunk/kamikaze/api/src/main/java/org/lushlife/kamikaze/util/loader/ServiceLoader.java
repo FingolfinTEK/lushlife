@@ -90,15 +90,15 @@ public class ServiceLoader<S> implements Iterable<S> {
 								providers.add(instance);
 							} catch (NoClassDefFoundError e) {
 								throw new IllegalStateException(Logging
-										.getMessage(LogMsgCore.KMKZ00006,
+										.getMessage(LogMsgCore.KMKZC0006,
 												line));
 							} catch (InstantiationException e) {
 								throw new IllegalStateException(Logging
-										.getMessage(LogMsgCore.KMKZ00006,
+										.getMessage(LogMsgCore.KMKZC0006,
 												line));
 							} catch (IllegalAccessException e) {
 								throw new IllegalStateException(Logging
-										.getMessage(LogMsgCore.KMKZ00006,
+										.getMessage(LogMsgCore.KMKZC0006,
 												line));
 							}
 						}
