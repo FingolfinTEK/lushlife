@@ -16,6 +16,7 @@
 package org.lushlife.stla;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.Locale;
 
 import org.lushlife.stla.configuration.DefaultLoggingManagerConfiguration;
@@ -28,7 +29,6 @@ import org.lushlife.stla.spi.LogProvider;
 import org.lushlife.stla.spi.LogProviderDecorator;
 import org.lushlife.stla.spi.LogProviderFactory;
 import org.lushlife.stla.spi.LoggingManager;
-
 
 /**
  * @author Takeshi Kondo
@@ -77,13 +77,19 @@ public class Logging {
 		return loggingManager.getLevelResolver().toLevel(logId);
 	}
 
-	static public <E extends Enum<E>> String getMessage(E logId) {
-		return loggingManager.getMessageResolver()
-				.toMessage(logId, getLocale());
+	static public <E extends Enum<E>> String getMessage(E logId,
+			Object... params) {
+		return getMessageFromIdAndLocale(logId, getLocale(), params);
 	}
 
-	static public <E extends Enum<E>> String getMessage(E logId, Locale locale) {
-		return loggingManager.getMessageResolver().toMessage(logId, locale);
+	static public <E extends Enum<E>> String getMessageFromIdAndLocale(E logId, Locale locale,
+			Object... params) {
+		String message = loggingManager.getMessageResolver().toMessage(logId,
+				locale);
+		if (params.length == 0) {
+			return message;
+		}
+		return MessageFormat.format(message, params);
 	}
 
 	static public Locale getLocale() {
