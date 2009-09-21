@@ -7,6 +7,13 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
+	<scm>
+		<connection>scm:svn:https://lushlife.googlecode.com/svn/trunk/stla-project/
+		</connection>
+		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/trunk/stla-project/
+		</developerConnection>
+		<url>http://code.google.com/p/lushlife/</url>
+	</scm>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.google.code.lushlife.stla</groupId>
