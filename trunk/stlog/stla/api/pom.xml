@@ -2,14 +2,12 @@
 <project>
 	<parent>
 		<artifactId>stla-parent</artifactId>
-		<groupId>com.google.code.lushlife.stla</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<groupId>org.lushlife.stla</groupId>
+		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.google.code.lushlife.stla</groupId>
 	<artifactId>stla</artifactId>
 	<name>Simple Type-safe Logging Api</name>
-	<version>1.0-SNAPSHOT</version>
 
 	<url>http://maven.apache.org</url>
 

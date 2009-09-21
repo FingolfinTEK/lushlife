@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<artifactId>stla-parent</artifactId>
-		<groupId>com.google.code.lushlife.stla</groupId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.lushlife.stla</groupId>
+	<artifactId>stla-root</artifactId>
+	<packaging>pom</packaging>
+	<version>0.1.0-SNAPSHOT</version>
+	<name>Simple Type-Safe Logging API Root</name>
+	<url>http://maven.apache.org</url>
+
+	<distributionManagement>
+		<repository>
+			<id>lushlife.googlecode.releases</id>
+			<name>lushlife.googlecode.releases</name>
+			<url>dav:https://lushlife.googlecode.com/svn/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>lushlife.googlecode.snapshots</id>
+			<name>lushlife.googlecode.snapshots</name>
+			<url>dav:https://lushlife.googlecode.com/svn/maven2-snapshots/
+			</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<scm>
 		<connection>scm:svn:https://lushlife.googlecode.com/svn/trunk/stla-project/
@@ -15,13 +31,7 @@
 		<url>http://code.google.com/p/lushlife/</url>
 	</scm>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.google.code.lushlife.stla</groupId>
-	<artifactId>stla-root</artifactId>
-	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>Simple Type-Safe Logging API Root</name>
-	<url>http://maven.apache.org</url>
+
 	<modules>
 		<module>parent</module>
 		<module>api</module>
