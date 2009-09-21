@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="war/WEB-INF/modules" path="hot"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (3)"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6.0"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/resteasy-jaxrs-1.1.GA.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jaxrs-api-1.1.GA.jar" sourcepath="/my/java/resteasy/resteasy-jaxrs-1.1.GA-src/jaxrs-api/src/main/java"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javassist-3.11.0.GA.jar" sourcepath="/Users/konchikisyo/.m2/repository/javassist/javassist/3.11.0.GA/javassist-3.11.0.GA.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-collections-1.0-rc2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/json-lib-2.3-jdk15.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr181-api-1.0-MR1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/inject-api-1.0.0-PRD.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-api-1.0-sdk-1.2.5.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/stla-0.1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/kamikaze-core-1.0-SNAPSHOT.jar" sourcepath="/my/eclipse/glassbottle/kamikaze/api/src"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-logging-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr299-api-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-api-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-core-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/webbeans-spi-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
