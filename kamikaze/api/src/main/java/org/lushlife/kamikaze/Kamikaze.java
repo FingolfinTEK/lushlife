@@ -1,6 +1,7 @@
 package org.lushlife.kamikaze;
 
 import java.lang.annotation.Annotation;
+import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
@@ -30,9 +31,9 @@ public class Kamikaze {
 
 	static public Injector getInjector() {
 		BeanManager beanManager = Contexts.get(BeanManager.class);
-		log.log(LogMsgCore.KMKZ00004, beanManager.hashCode(), beanManager);
-		Bean<?> injectorBean = beanManager.getBeans(Injector.class).iterator()
-				.next();
+		log.log(LogMsgCore.KMKZC0004, beanManager.hashCode(), beanManager);
+		Set<Bean<?>> beans = beanManager.getBeans(Injector.class);
+		Bean<? extends Object> injectorBean = beanManager.resolve(beans);
 		return (Injector) beanManager.getReference(injectorBean,
 				Injector.class, beanManager
 						.createCreationalContext(injectorBean));

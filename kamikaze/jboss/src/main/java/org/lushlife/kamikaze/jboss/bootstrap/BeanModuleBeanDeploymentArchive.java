@@ -10,11 +10,12 @@ import java.util.Set;
 import org.jboss.webbeans.bootstrap.api.ServiceRegistry;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.ejb.spi.EjbDescriptor;
-import org.jboss.webbeans.log.Log;
-import org.jboss.webbeans.log.Logging;
 import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.WebBeansModule;
+import org.lushlife.kamikaze.jboss.LogMsgJBoss;
 import org.lushlife.kamikaze.util.loader.ServiceLoader;
+import org.lushlife.stla.Log;
+import org.lushlife.stla.Logging;
 
 public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive {
 	static Log log = Logging.getLog(BeanModuleBeanDeploymentArchive.class);
@@ -32,7 +33,7 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive {
 		}
 
 		public void model(Class<?> clazz) {
-			log.debug("load class {0} ", clazz);
+			log.log(LogMsgJBoss.KMKZJ0004, clazz);
 			classes.add(clazz);
 		}
 

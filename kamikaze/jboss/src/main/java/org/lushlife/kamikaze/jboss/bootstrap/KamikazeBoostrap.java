@@ -14,16 +14,17 @@ import org.jboss.webbeans.bootstrap.api.ServiceRegistry;
 import org.jboss.webbeans.bootstrap.api.helpers.SimpleServiceRegistry;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.context.api.helpers.ConcurrentHashMapBeanStore;
-import org.jboss.webbeans.log.Log;
-import org.jboss.webbeans.log.Logging;
 import org.jboss.webbeans.servlet.api.ServletServices;
 import org.lushlife.kamikaze.WebBeansModule;
 import org.lushlife.kamikaze.context.Contexts;
+import org.lushlife.kamikaze.jboss.LogMsgJBoss;
 import org.lushlife.kamikaze.jboss.context.EventContext;
 import org.lushlife.kamikaze.jboss.context.SingletonContext;
 import org.lushlife.kamikaze.spi.BootstrapService;
 import org.lushlife.kamikaze.spi.PostDeployEvent;
 import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
+import org.lushlife.stla.Log;
+import org.lushlife.stla.Logging;
 
 public class KamikazeBoostrap implements BootstrapService {
 	static public Log logger = Logging.getLog(KamikazeBoostrap.class);
@@ -31,9 +32,9 @@ public class KamikazeBoostrap implements BootstrapService {
 	public void initManager() {
 		Iterable<WebBeansModule> modules = ModuleLoader
 				.loadModules(ClassLoaderProducer.getClassLoader());
-		if (logger.isDebugEnabled()) {
+		if (logger.isEnableFor(LogMsgJBoss.KMKZJ0003)) {
 			for (WebBeansModule module : modules) {
-				logger.debug("load bean module [{0}]", module.getClass());
+				logger.log(LogMsgJBoss.KMKZJ0003, module.getClass());
 			}
 		}
 		initManager(modules);
