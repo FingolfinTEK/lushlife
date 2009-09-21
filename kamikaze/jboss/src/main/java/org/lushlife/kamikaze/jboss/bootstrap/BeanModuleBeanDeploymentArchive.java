@@ -45,9 +45,10 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive {
 		}
 
 		public void installService(Class<? extends WebBeansModule> clazz) {
-			install(ServiceLoader.load(clazz).getSingle());
+			for (WebBeansModule module : ServiceLoader.load(clazz)) {
+				install(module);
+			}
 		}
-
 	}
 
 	final private BeanBinderImpl binder = new BeanBinderImpl();

@@ -26,6 +26,10 @@ public class JSPPage implements Page {
 
 	private String path;
 
+	public String getPath() {
+		return path;
+	}
+
 	@Inject
 	@Named("request")
 	private HttpServletRequest reqeust;
