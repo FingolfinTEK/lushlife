@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.context.binding;
+package org.lushlife.kamikaze.context;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

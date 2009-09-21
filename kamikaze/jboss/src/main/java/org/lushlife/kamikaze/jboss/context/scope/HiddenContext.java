@@ -1,5 +1,4 @@
-package org.lushlife.kamikaze.jboss.context.scope;
-//package org.lushlife.scarecrow.jboss.context.scope;
+//package org.lushlife.kamikaze.jboss.context.scope;
 //
 //import java.util.Map;
 //
@@ -9,8 +8,8 @@ package org.lushlife.kamikaze.jboss.context.scope;
 //import org.jboss.webbeans.context.api.BeanStore;
 //import org.jboss.webbeans.context.api.ContexutalInstance;
 //import org.jboss.webbeans.context.api.helpers.AbstractMapBackedBeanStore;
-//import org.lushlife.glassbottle2.GlassBottleContext;
-//import org.lushlife.glassbottle2.context.scope.HiddenScoped;
+//import org.lushlife.kamikaze.context.Contexts;
+//import org.lushlife.kamikaze.scope.HiddenScoped;
 //
 //public class HiddenContext extends AbstractMapContext {
 //
@@ -27,7 +26,7 @@ package org.lushlife.kamikaze.jboss.context.scope;
 //
 //			@Override
 //			public Map<Contextual<? extends Object>, ContexutalInstance<? extends Object>> delegate() {
-//				return GlassBottleContext.getHiddenScope();
+//				return ()Contexts.getHiddenScope();
 //			}
 //
 //		};

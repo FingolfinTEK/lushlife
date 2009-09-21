@@ -8,7 +8,7 @@ import java.util.Arrays;
 import javax.enterprise.inject.Produces;
 import javax.servlet.ServletContext;
 
-import org.lushlife.kamikaze.KamikazeContext;
+import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.util.LogMsgUtil;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
@@ -42,7 +42,7 @@ public class ClassLoaderProducer {
 
 	@Produces
 	static public ClassLoader getClassLoader() {
-		ServletContext context = KamikazeContext.getServletContext();
+		ServletContext context = Contexts.getServletContext();
 		if (context == null) {
 			return Thread.currentThread().getContextClassLoader();
 		}

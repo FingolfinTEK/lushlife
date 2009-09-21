@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze;
+package org.lushlife.kamikaze.context;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class KamikazeContext {
+public class Contexts {
 
 	static private ThreadLocal<HttpServletRequest> request = new ThreadLocal<HttpServletRequest>();
 	static private ThreadLocal<HttpServletResponse> response = new ThreadLocal<HttpServletResponse>();
@@ -33,7 +33,7 @@ public class KamikazeContext {
 	}
 
 	public static void setRequest(HttpServletRequest request) {
-		KamikazeContext.request.set(request);
+		Contexts.request.set(request);
 	}
 
 	@Named("response")
@@ -43,7 +43,7 @@ public class KamikazeContext {
 	}
 
 	public static void setResponse(HttpServletResponse response) {
-		KamikazeContext.response.set(response);
+		Contexts.response.set(response);
 	}
 
 	@Produces
@@ -53,16 +53,15 @@ public class KamikazeContext {
 	}
 
 	public static void setServletContext(ServletContext servletContext) {
-		KamikazeContext.servletContext.set(servletContext);
+		Contexts.servletContext.set(servletContext);
 	}
 
 	public static <T> T get(Class<T> clazz) {
-		return (T) KamikazeContext.getServletContext().getAttribute(
-				clazz.getName());
+		return (T) getServletContext().getAttribute(clazz.getName());
 	}
 
 	public static <T> void setRegistries(Class<T> clazz, T instance) {
-		KamikazeContext.getServletContext().setAttribute(clazz.getName(),
+		Contexts.getServletContext().setAttribute(clazz.getName(),
 				instance);
 	}
 }

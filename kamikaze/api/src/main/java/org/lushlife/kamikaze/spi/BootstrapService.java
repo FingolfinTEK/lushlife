@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.servlet;
+package org.lushlife.kamikaze.spi;
 
 public interface BootstrapService {
 	void initManager();

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.lushlife.kamikaze.Kamikaze;
-import org.lushlife.kamikaze.KamikazeContext;
+import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.event.RequestDestroyedLiteral;
 import org.lushlife.kamikaze.event.RequestInitializedLiteral;
 
@@ -20,8 +20,8 @@ public class KamikazeServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest arg0, HttpServletResponse arg1)
 			throws ServletException, IOException {
-		KamikazeContext.setResponse(arg1);
-		BeanManager manager = KamikazeContext.get(BeanManager.class);
+		Contexts.setResponse(arg1);
+		BeanManager manager = Contexts.get(BeanManager.class);
 		HttpServletEvent event = new HttpServletEvent(arg0, arg1);
 		manager.fireEvent(event, new RequestInitializedLiteral());
 		try {
