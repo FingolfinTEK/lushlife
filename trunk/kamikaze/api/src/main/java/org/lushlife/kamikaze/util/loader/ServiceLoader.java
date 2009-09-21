@@ -6,13 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.net.URL;
-import java.nio.channels.IllegalSelectorException;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.lushlife.kamikaze.util.LogMsgUtil;
+import org.lushlife.kamikaze.LogMsgCore;
 import org.lushlife.stla.Logging;
 
 public class ServiceLoader<S> implements Iterable<S> {
@@ -91,15 +90,15 @@ public class ServiceLoader<S> implements Iterable<S> {
 								providers.add(instance);
 							} catch (NoClassDefFoundError e) {
 								throw new IllegalStateException(Logging
-										.getMessage(LogMsgUtil.REAPERUTL00002,
+										.getMessage(LogMsgCore.KMKZ00006,
 												line));
 							} catch (InstantiationException e) {
 								throw new IllegalStateException(Logging
-										.getMessage(LogMsgUtil.REAPERUTL00002,
+										.getMessage(LogMsgCore.KMKZ00006,
 												line));
 							} catch (IllegalAccessException e) {
 								throw new IllegalStateException(Logging
-										.getMessage(LogMsgUtil.REAPERUTL00002,
+										.getMessage(LogMsgCore.KMKZ00006,
 												line));
 							}
 						}
