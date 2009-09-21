@@ -8,8 +8,8 @@ import java.util.Arrays;
 import javax.enterprise.inject.Produces;
 import javax.servlet.ServletContext;
 
+import org.lushlife.kamikaze.LogMsgCore;
 import org.lushlife.kamikaze.context.Contexts;
-import org.lushlife.kamikaze.util.LogMsgUtil;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
@@ -32,7 +32,7 @@ public class ClassLoaderProducer {
 
 	private static void produceClassLoader(ServletContext context, URL... urls) {
 
-		logger.log(LogMsgUtil.REAPERUTL00001, Arrays.toString(urls));
+		logger.log(LogMsgCore.KMKZ00005, Arrays.toString(urls));
 
 		ClassLoader loader = new URLClassLoader(urls, Thread.currentThread()
 				.getContextClassLoader());
