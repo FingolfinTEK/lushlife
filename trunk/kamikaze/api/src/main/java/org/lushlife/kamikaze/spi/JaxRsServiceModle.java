@@ -1,7 +1,7 @@
 package org.lushlife.kamikaze.spi;
 
-import org.lushlife.kamikaze.BeanModule;
+import org.lushlife.kamikaze.WebBeansModule;
 
-public interface JaxRsServiceModle extends BeanModule {
+public interface JaxRsServiceModle extends WebBeansModule {
 
 }

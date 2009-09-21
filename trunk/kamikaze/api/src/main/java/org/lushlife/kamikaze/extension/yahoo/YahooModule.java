@@ -1,12 +1,12 @@
 package org.lushlife.kamikaze.extension.yahoo;
 
-import org.lushlife.kamikaze.BeanBinder;
-import org.lushlife.kamikaze.BeanModule;
+import org.lushlife.kamikaze.WebBeansBinder;
+import org.lushlife.kamikaze.WebBeansModule;
 import org.lushlife.kamikaze.resources.ResourceModule;
 
-public class YahooModule implements BeanModule {
+public class YahooModule implements WebBeansModule {
 
-	public void configure(BeanBinder binder) {
+	public void configure(WebBeansBinder binder) {
 		binder.model(YahooResource.class);
 		binder.install(new ResourceModule());
 	}

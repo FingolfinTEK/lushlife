@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.context.scope;
+package org.lushlife.kamikaze.context;
 //package lushlife.plugins.context.scope;
 //package lushlife.plugins.context.scope;
 //

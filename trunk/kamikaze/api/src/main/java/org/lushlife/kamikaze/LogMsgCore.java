@@ -6,15 +6,15 @@ import org.lushlife.stla.Info;
 public enum LogMsgCore {
 
 	@Info("JSP page [{}]")
-	KMK00001,
+	KMKZ00001,
 
 	@Info("init bean manager")
-	KMK00002,
+	KMKZ00002,
 
 	@Info("hot deploy[{}] , update[{}]")
-	KMK00003,
+	KMKZ00003,
 
-	@Debug("CurrentManager[{0}] {1}")
-	KMK00004
+	@Debug("CurrentManager[{}] {}")
+	KMKZ00004
 
 }

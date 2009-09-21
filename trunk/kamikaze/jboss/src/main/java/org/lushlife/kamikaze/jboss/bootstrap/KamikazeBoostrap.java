@@ -17,11 +17,11 @@ import org.jboss.webbeans.context.api.helpers.ConcurrentHashMapBeanStore;
 import org.jboss.webbeans.log.Log;
 import org.jboss.webbeans.log.Logging;
 import org.jboss.webbeans.servlet.api.ServletServices;
-import org.lushlife.kamikaze.BeanModule;
-import org.lushlife.kamikaze.KamikazeContext;
+import org.lushlife.kamikaze.WebBeansModule;
+import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.jboss.context.EventContext;
 import org.lushlife.kamikaze.jboss.context.SingletonContext;
-import org.lushlife.kamikaze.servlet.BootstrapService;
+import org.lushlife.kamikaze.spi.BootstrapService;
 import org.lushlife.kamikaze.spi.PostDeployEvent;
 import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
 
@@ -29,21 +29,21 @@ public class KamikazeBoostrap implements BootstrapService {
 	static public Log logger = Logging.getLog(KamikazeBoostrap.class);
 
 	public void initManager() {
-		Iterable<BeanModule> modules = ModuleLoader
+		Iterable<WebBeansModule> modules = ModuleLoader
 				.loadModules(ClassLoaderProducer.getClassLoader());
 		if (logger.isDebugEnabled()) {
-			for (BeanModule module : modules) {
+			for (WebBeansModule module : modules) {
 				logger.debug("load bean module [{0}]", module.getClass());
 			}
 		}
 		initManager(modules);
 	}
 
-	public void initManager(BeanModule... module) {
+	public void initManager(WebBeansModule... module) {
 		initManager(Arrays.asList(module));
 	}
 
-	public void initManager(Iterable<BeanModule> module) {
+	public void initManager(Iterable<WebBeansModule> module) {
 		destoryManager();
 		final SimpleServiceRegistry service = new SimpleServiceRegistry();
 		final BeanModuleBeanDeploymentArchive archive = new BeanModuleBeanDeploymentArchive(
@@ -79,13 +79,13 @@ public class KamikazeBoostrap implements BootstrapService {
 				.endInitialization();
 
 		// GlassBottle.setBootstrap(bootstrap);
-		KamikazeContext.setRegistries(Bootstrap.class, bootstrap);
+		Contexts.setRegistries(Bootstrap.class, bootstrap);
 
-		KamikazeContext.setRegistries(ServiceRegistry.class, service);
+		Contexts.setRegistries(ServiceRegistry.class, service);
 		BeanManagerImpl manager = (BeanManagerImpl) bootstrap
 				.getManager(archive);
 
-		KamikazeContext.setRegistries(BeanManager.class, manager);
+		Contexts.setRegistries(BeanManager.class, manager);
 		manager.addContext(new SingletonContext());
 		manager.addContext(EventContext.INSTANCE);
 		manager.fireEvent(new PostDeployEvent() {
@@ -97,7 +97,7 @@ public class KamikazeBoostrap implements BootstrapService {
 	}
 
 	public void destoryManager() {
-		Bootstrap bootStrap = KamikazeContext.get(Bootstrap.class);
+		Bootstrap bootStrap = Contexts.get(Bootstrap.class);
 		if (bootStrap != null) {
 			bootStrap.shutdown();
 		}

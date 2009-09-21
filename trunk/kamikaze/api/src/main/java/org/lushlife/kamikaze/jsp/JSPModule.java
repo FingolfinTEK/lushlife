@@ -1,11 +1,11 @@
 package org.lushlife.kamikaze.jsp;
 
-import org.lushlife.kamikaze.BeanBinder;
-import org.lushlife.kamikaze.BeanModule;
+import org.lushlife.kamikaze.WebBeansBinder;
+import org.lushlife.kamikaze.WebBeansModule;
 
-public class JSPModule implements BeanModule {
+public class JSPModule implements WebBeansModule {
 
-	public void configure(BeanBinder binder) {
+	public void configure(WebBeansBinder binder) {
 		binder.model(JSPPage.class);
 	}
 

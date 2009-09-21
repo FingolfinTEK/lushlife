@@ -12,13 +12,14 @@ import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.ejb.spi.EjbDescriptor;
 import org.jboss.webbeans.log.Log;
 import org.jboss.webbeans.log.Logging;
-import org.lushlife.kamikaze.BeanBinder;
-import org.lushlife.kamikaze.BeanModule;
+import org.lushlife.kamikaze.WebBeansBinder;
+import org.lushlife.kamikaze.WebBeansModule;
+import org.lushlife.kamikaze.util.loader.ServiceLoader;
 
 public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive {
 	static Log log = Logging.getLog(BeanModuleBeanDeploymentArchive.class);
 
-	static public class BeanBinderImpl implements BeanBinder {
+	static public class BeanBinderImpl implements WebBeansBinder {
 		private Set<Class<?>> classes = new HashSet<Class<?>>();
 		private Set<URL> xmls = new HashSet<URL>();
 
@@ -35,12 +36,16 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive {
 			classes.add(clazz);
 		}
 
-		public void install(BeanModule module) {
+		public void install(WebBeansModule module) {
 			module.configure(this);
 		}
 
 		public void beansXml(URL url) {
 			xmls.add(url);
+		}
+
+		public void installService(Class<? extends WebBeansModule> clazz) {
+			install(ServiceLoader.load(clazz).getSingle());
 		}
 
 	}
@@ -49,9 +54,9 @@ public class BeanModuleBeanDeploymentArchive implements BeanDeploymentArchive {
 	final private ServiceRegistry registry;
 
 	public BeanModuleBeanDeploymentArchive(ServiceRegistry registry,
-			Iterable<BeanModule> modules) {
+			Iterable<WebBeansModule> modules) {
 		this.registry = registry;
-		for (BeanModule module : modules) {
+		for (WebBeansModule module : modules) {
 			module.configure(binder);
 		}
 	}

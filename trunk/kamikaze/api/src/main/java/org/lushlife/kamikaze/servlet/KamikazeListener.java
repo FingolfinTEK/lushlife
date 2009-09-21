@@ -14,10 +14,11 @@ import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 
 import org.lushlife.kamikaze.Kamikaze;
-import org.lushlife.kamikaze.KamikazeContext;
 import org.lushlife.kamikaze.LogMsgCore;
+import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.event.RequestDestroyedLiteral;
 import org.lushlife.kamikaze.event.RequestInitializedLiteral;
+import org.lushlife.kamikaze.spi.BootstrapService;
 import org.lushlife.kamikaze.spi.ServletEventService;
 import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
 import org.lushlife.kamikaze.util.loader.ServiceLoader;
@@ -40,55 +41,55 @@ public class KamikazeListener implements ServletRequestListener,
 	static Log logger = Logging.getLog(KamikazeListener.class);
 
 	public void contextDestroyed(ServletContextEvent event) {
-		KamikazeContext.getHiddenScope().clear();
-		KamikazeContext.setServletContext(event.getServletContext());
+		Contexts.getHiddenScope().clear();
+		Contexts.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader(event.getServletContext());
 		try {
 			// KamikazeBoostrap.destoryManager();
 			bootstrapService.destoryManager();
 		} finally {
-			KamikazeContext.setServletContext(null);
-			KamikazeContext.getHiddenScope().clear();
+			Contexts.setServletContext(null);
+			Contexts.getHiddenScope().clear();
 		}
 		// super.contextDestroyed(event);
 		servletEvent.contextDestroyed(event);
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
-		KamikazeContext.getHiddenScope().clear();
-		KamikazeContext.setServletContext(event.getServletContext());
+		Contexts.getHiddenScope().clear();
+		Contexts.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader(event.getServletContext());
 		try {
 			// KamikazeBoostrap.initManager();
 			bootstrapService.initManager();
 
 			servletEvent.contextInitialized(event);
-			KamikazeContext.get(BeanManager.class).fireEvent(event,
+			Contexts.get(BeanManager.class).fireEvent(event,
 					new RequestInitializedLiteral());
 		} finally {
-			KamikazeContext.setServletContext(null);
-			KamikazeContext.getHiddenScope().clear();
+			Contexts.setServletContext(null);
+			Contexts.getHiddenScope().clear();
 		}
 	}
 
 	public void requestDestroyed(ServletRequestEvent event) {
-		KamikazeContext.get(BeanManager.class).fireEvent(event,
+		Contexts.get(BeanManager.class).fireEvent(event,
 				new RequestDestroyedLiteral());
-		KamikazeContext.setServletContext(null);
-		KamikazeContext.setRequest(null);
-		KamikazeContext.setResponse(null);
-		KamikazeContext.getHiddenScope().clear();
+		Contexts.setServletContext(null);
+		Contexts.setRequest(null);
+		Contexts.setResponse(null);
+		Contexts.getHiddenScope().clear();
 		servletEvent.requestDestroyed(event);
 
 	}
 
 	public void requestInitialized(ServletRequestEvent event) {
-		KamikazeContext.setServletContext(event.getServletContext());
-		KamikazeContext.setRequest((HttpServletRequest) event
+		Contexts.setServletContext(event.getServletContext());
+		Contexts.setRequest((HttpServletRequest) event
 				.getServletRequest());
-		KamikazeContext.getHiddenScope().clear();
+		Contexts.getHiddenScope().clear();
 		boolean update = isUpdate();
-		logger.log(LogMsgCore.KMK00003, Kamikaze.isHotdeployMode(), update);
+		logger.log(LogMsgCore.KMKZ00003, Kamikaze.isHotdeployMode(), update);
 
 		if (Kamikaze.isHotdeployMode()) {
 			if (update) {
@@ -98,18 +99,18 @@ public class KamikazeListener implements ServletRequestListener,
 			Thread.currentThread().setContextClassLoader(
 					ClassLoaderProducer.getClassLoader());
 			if (update) {
-				logger.log(LogMsgCore.KMK00002);
+				logger.log(LogMsgCore.KMKZ00002);
 				bootstrapService.initManager();
 			}
 		}
 
-		KamikazeContext.get(BeanManager.class).fireEvent(event,
+		Contexts.get(BeanManager.class).fireEvent(event,
 				new RequestInitializedLiteral());
 		servletEvent.requestInitialized(event);
 	}
 
 	private boolean isUpdate() {
-		ServletContext context = KamikazeContext.getServletContext();
+		ServletContext context = Contexts.getServletContext();
 		Long lastUpdate = (Long) context
 				.getAttribute(ClassLoaderProducer.LAST_UPDATE_TIME);
 		if (lastUpdate == null) {
