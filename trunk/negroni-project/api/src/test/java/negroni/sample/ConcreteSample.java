@@ -1,6 +1,6 @@
 package negroni.sample;
 
-import negroni.Negroni;
+import org.lushlife.negroni.Negroni;
 
 public abstract class ConcreteSample extends MethodMissingSample
 {
@@ -10,7 +10,7 @@ public abstract class ConcreteSample extends MethodMissingSample
 
    public static void main(String[] args)
    {
-      negroni.Enhancer enhancer = Negroni.config().add(ConcreteSample.class).create();
+      org.lushlife.negroni.Enhancer enhancer = Negroni.config().add(ConcreteSample.class).create();
       ConcreteSample sample = enhancer.getInstance(ConcreteSample.class);
       sample.invoke("invoke");
       sample.invoke(10);

@@ -4,9 +4,12 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import negroni.extension.collection.EnumerableArrayList;
 
 import org.junit.Test;
+import org.lushlife.negroni.$;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.extension.collection.EnumerableArrayList;
 
 
 public class CollectionTest {

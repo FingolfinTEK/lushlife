@@ -2,8 +2,9 @@ package negroni.sample;
 
 import java.lang.reflect.Method;
 
-import negroni.Negroni;
-import negroni.annotation.MethodMissing;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.annotation.MethodMissing;
+
 
 
 public abstract class MMTest {

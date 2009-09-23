@@ -9,13 +9,15 @@ import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
-import negroni.core.impl.guice.GuiceConfigurator;
-import negroni.extension.jmx.AbstractMBeanClient;
-import negroni.extension.jmx.MBeanClientMixin;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.core.impl.guice.GuiceConfigurator;
+import org.lushlife.negroni.extension.jmx.AbstractMBeanClient;
+import org.lushlife.negroni.extension.jmx.MBeanClientMixin;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;

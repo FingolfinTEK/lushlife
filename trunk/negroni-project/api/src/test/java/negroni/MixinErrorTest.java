@@ -2,12 +2,15 @@ package negroni;
 
 import java.sql.SQLException;
 
-import negroni.annotation.MixinImplementedBy;
-import negroni.annotation.Mixined;
-import negroni.core.exceptions.ConfigurationException;
-import negroni.core.exceptions.NegroniException;
 
 import org.junit.Test;
+import org.lushlife.negroni.$;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.annotation.MixinImplementedBy;
+import org.lushlife.negroni.annotation.Mixined;
+import org.lushlife.negroni.core.exceptions.ConfigurationException;
+import org.lushlife.negroni.core.exceptions.NegroniException;
 
 public class MixinErrorTest
 {

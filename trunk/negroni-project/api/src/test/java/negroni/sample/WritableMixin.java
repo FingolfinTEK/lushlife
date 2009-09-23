@@ -2,7 +2,8 @@ package negroni.sample;
 
 import java.io.Serializable;
 
-import negroni.annotation.Mixined;
+import org.lushlife.negroni.annotation.Mixined;
+
 
 public class WritableMixin
 {

@@ -5,11 +5,12 @@ import java.lang.reflect.Method;
 
 import junit.framework.Assert;
 
-import negroni.annotation.MethodMissing;
-import negroni.annotation.Undefined;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.annotation.MethodMissing;
+import org.lushlife.negroni.annotation.Undefined;
 
 public class MethodMissingVarargsTest
 {

@@ -2,8 +2,9 @@ package negroni.sample;
 
 import java.lang.reflect.Method;
 
-import negroni.annotation.MethodMissing;
-import negroni.annotation.Mixined;
+import org.lushlife.negroni.annotation.MethodMissing;
+import org.lushlife.negroni.annotation.Mixined;
+
 
 public class AMixinImpl
 {

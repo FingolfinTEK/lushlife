@@ -4,12 +4,13 @@ import java.lang.annotation.Documented;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 
-import negroni.annotation.MethodMissing;
-import negroni.core.exceptions.ConfigurationException;
-import negroni.core.exceptions.RuntimeInvocationTargetException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.annotation.MethodMissing;
+import org.lushlife.negroni.core.exceptions.ConfigurationException;
+import org.lushlife.negroni.core.exceptions.RuntimeInvocationTargetException;
 
 
 public class MethodMissingErrorTest {

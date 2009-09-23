@@ -1,9 +1,9 @@
 package negroni.sample;
 
-import negroni.Enhancer;
-import negroni.Negroni;
 
 import org.junit.Test;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
 
 public class MixinTest
 {

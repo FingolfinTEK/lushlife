@@ -5,13 +5,16 @@ import java.lang.reflect.Method;
 
 import junit.framework.Assert;
 
-import negroni.annotation.InstanceScoped;
-import negroni.annotation.MethodMissing;
-import negroni.annotation.MixinImplementedBy;
-import negroni.annotation.Mixined;
-import negroni.core.mixin.GetObjectMixin;
 
 import org.junit.Test;
+import org.lushlife.negroni.$;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.annotation.InstanceScoped;
+import org.lushlife.negroni.annotation.MethodMissing;
+import org.lushlife.negroni.annotation.MixinImplementedBy;
+import org.lushlife.negroni.annotation.Mixined;
+import org.lushlife.negroni.core.mixin.GetObjectMixin;
 
 public class MixinMethodMissingVarargsTest
 {

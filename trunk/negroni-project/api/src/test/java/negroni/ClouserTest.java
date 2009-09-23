@@ -2,9 +2,12 @@ package negroni;
 
 import junit.framework.Assert;
 
-import negroni.core.closure.CV;
 
 import org.junit.Test;
+import org.lushlife.negroni.$;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.core.closure.CV;
 
 
 public class ClouserTest {
