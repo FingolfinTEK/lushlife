@@ -2,7 +2,8 @@ package negroni.sample;
 
 import java.lang.reflect.Method;
 
-import negroni.annotation.MethodMissing;
+import org.lushlife.negroni.annotation.MethodMissing;
+
 
 public abstract class MethodMissingSample
 {

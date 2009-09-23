@@ -1,6 +1,9 @@
 package negroni;
 
-import negroni.annotation.Config;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.annotation.Config;
+
 import junit.framework.Assert;
 
 

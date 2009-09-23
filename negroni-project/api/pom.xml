@@ -1,76 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.googlecode.latte</groupId>
-	<artifactId>latte</artifactId>
+	<parent>
+		<groupId>org.lushlife.negroni</groupId>
+		<artifactId>negroni-root</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>org.lushlife.negroni</groupId>
+	<artifactId>negroni</artifactId>
 	<packaging>jar</packaging>
-	<version>${latte.version}</version>
-	<name>latte</name>
+	<name>negroni</name>
 	<url>http://maven.apache.org</url>
 
-	<developers>
-		<developer>
-			<id>takeshi</id>
-			<name>Takeshi Kondo</name>
-			<email>takeshi.kondo@gmail.com</email>
-		</developer>
-	</developers>
-
-
-	<build>
-		<defaultGoal>validate</defaultGoal>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>source-jar</id>
-						<phase>site</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<configuration>
-					<linkXref>true</linkXref>
-					<targetJdk>1.5</targetJdk>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

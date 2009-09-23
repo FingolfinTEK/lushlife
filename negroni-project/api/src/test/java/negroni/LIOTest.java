@@ -10,9 +10,12 @@ import java.net.URL;
 
 import junit.framework.Assert;
 
-import negroni.extension.io.NIO;
 
 import org.junit.Test;
+import org.lushlife.negroni.$;
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.extension.io.NIO;
 
 
 public class LIOTest {

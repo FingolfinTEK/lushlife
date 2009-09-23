@@ -1,6 +1,6 @@
 package negroni.sample;
 
-import negroni.annotation.MixinImplementedBy;
+import org.lushlife.negroni.annotation.MixinImplementedBy;
 
 @MixinImplementedBy(WritableMixin.class)
 public interface Writable
