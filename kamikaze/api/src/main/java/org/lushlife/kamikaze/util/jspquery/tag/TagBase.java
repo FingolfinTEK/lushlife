@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.extension.jspquery.tag;
+package org.lushlife.kamikaze.util.jspquery.tag;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -13,7 +13,7 @@ import javassist.util.proxy.MethodHandler;
 import javassist.util.proxy.ProxyFactory;
 import javassist.util.proxy.ProxyObject;
 
-import org.lushlife.kamikaze.extension.jspquery.JSPQueryManager;
+import org.lushlife.kamikaze.util.jspquery.JSPQueryManager;
 import org.lushlife.kamikaze.util.lock.DoubleCheckBlocking;
 import org.lushlife.kamikaze.util.markup.Markup;
 

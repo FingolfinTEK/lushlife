@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.extension.jspquery;
+package org.lushlife.kamikaze.util.jspquery;
 
 import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.WebBeansModule;

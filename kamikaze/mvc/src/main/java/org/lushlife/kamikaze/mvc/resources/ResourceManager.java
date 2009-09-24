@@ -7,13 +7,13 @@ import javax.inject.Named;
 import javax.ws.rs.Path;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.lushlife.kamikaze.extension.jspquery.JSPQueryManager;
-import org.lushlife.kamikaze.extension.jspquery.tag.CSS;
-import org.lushlife.kamikaze.extension.jspquery.tag.JavaScript;
 import org.lushlife.kamikaze.mvc.context.ServletPathInfo;
 import org.lushlife.kamikaze.resources.AddPath;
 import org.lushlife.kamikaze.scope.EventScoped;
 import org.lushlife.kamikaze.util.date.StartupTime;
+import org.lushlife.kamikaze.util.jspquery.JSPQueryManager;
+import org.lushlife.kamikaze.util.jspquery.tag.CSS;
+import org.lushlife.kamikaze.util.jspquery.tag.JavaScript;
 
 @EventScoped
 public class ResourceManager {
@@ -28,14 +28,14 @@ public class ResourceManager {
 	private JSPQueryManager jsp;
 
 	public CSS css(Class<?> resourceClass, String resource) throws IOException {
-		CSS css = jsp.$(CSS.class);
+		CSS css = jsp.tag(CSS.class);
 		css.href(toUrl(resourceClass, "css", resource));
 		return css;
 	}
 
 	public JavaScript js(Class<?> resourceClass, String resource)
 			throws IOException {
-		JavaScript javaScript = jsp.$(JavaScript.class);
+		JavaScript javaScript = jsp.tag(JavaScript.class);
 		javaScript.src(toUrl(resourceClass, "js", resource));
 		javaScript.encoding(encoding);
 		return javaScript;
