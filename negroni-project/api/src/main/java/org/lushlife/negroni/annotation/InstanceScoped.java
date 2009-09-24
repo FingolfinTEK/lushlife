@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.inject.ScopeAnnotation;
+import javax.inject.Scope;
 
 /**
  * 
@@ -13,7 +13,7 @@ import com.google.inject.ScopeAnnotation;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@ScopeAnnotation
+@Scope
 public @interface InstanceScoped
 {
 

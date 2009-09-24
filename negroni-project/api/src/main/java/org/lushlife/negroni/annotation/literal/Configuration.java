@@ -3,16 +3,15 @@ package org.lushlife.negroni.annotation.literal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.AnnotationLiteral;
+
 import org.lushlife.negroni.Configurator;
 import org.lushlife.negroni.annotation.Config;
 import org.lushlife.negroni.core.impl.inject.InjectionUnit;
 import org.lushlife.negroni.core.impl.inject.Injections;
 import org.lushlife.negroni.core.impl.reflection.Reflections;
 
-
-
-public class Configuration extends AnnotationLiteral<Config>
-		implements Config {
+public class Configuration extends AnnotationLiteral<Config> implements Config {
 	final List<InjectionUnit<?>> injectionUnits;
 
 	public List<InjectionUnit<?>> getInjectionUnits() {

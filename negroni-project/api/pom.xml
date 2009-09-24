@@ -40,12 +40,20 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!--
+			<dependency> <groupId>com.google.code.guice</groupId>
+			<artifactId>guice</artifactId> <version>1.0</version>
+			<scope>compile</scope> </dependency>
+		-->
 
 		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
+			<groupId>org.jboss.webbeans</groupId>
+			<artifactId>jsr299-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>inject-api</artifactId>
 		</dependency>
 
 	</dependencies>

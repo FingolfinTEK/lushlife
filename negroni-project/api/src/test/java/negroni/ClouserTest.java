@@ -2,10 +2,9 @@ package negroni;
 
 import junit.framework.Assert;
 
-
 import org.junit.Test;
-import org.lushlife.negroni.$;
 import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Mix;
 import org.lushlife.negroni.Negroni;
 import org.lushlife.negroni.core.closure.CV;
 
@@ -25,7 +24,7 @@ public class ClouserTest {
 		final int[] count = new int[1];
 		count[0] = 0;
 		Enhancer c = Negroni.create();
-		c.call(new $<TestC>(new Object(), 2) {
+		c.call(new Mix<TestC>(new Object(), 2) {
 			public void times() {
 				count[0]++;
 			}

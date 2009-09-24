@@ -1,13 +1,10 @@
 package negroni;
 
-import java.lang.annotation.Documented;
-
 import junit.framework.Assert;
 
-
 import org.junit.Test;
-import org.lushlife.negroni.$;
 import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Mix;
 import org.lushlife.negroni.Negroni;
 import org.lushlife.negroni.annotation.InstanceScoped;
 import org.lushlife.negroni.annotation.MixinImplementedBy;
@@ -198,7 +195,7 @@ public class MixinTest
    public void a01()
    {
       Enhancer container = Negroni.create();
-      MixTest mix = container.mixin(new $<MixTest>(10L)
+      MixTest mix = container.mixin(new Mix<MixTest>(10L)
       {
       });
       mix.invoke();
@@ -209,7 +206,7 @@ public class MixinTest
    public void a02()
    {
       Enhancer container = Negroni.create();
-      MixTest mix = container.mixin(new $<MixTest>("10")
+      MixTest mix = container.mixin(new Mix<MixTest>("10")
       {
       });
       Assert.assertEquals("10", mix.getMixinObject());
@@ -243,7 +240,7 @@ public class MixinTest
    public void a03()
    {
       Enhancer container = Negroni.create();
-      MixTest mix = container.mixin(new $<MixTest>(10)
+      MixTest mix = container.mixin(new Mix<MixTest>(10)
       {
       });
       Assert.assertEquals(10, mix.getMixinObject());
@@ -276,7 +273,7 @@ public class MixinTest
    public void a04()
    {
       Enhancer container = Negroni.create();
-      MixTest mix = container.mixin(new $<MixTest>('a')
+      MixTest mix = container.mixin(new Mix<MixTest>('a')
       {
       });
       Assert.assertEquals('a', mix.getMixinObject());

@@ -1,5 +1,7 @@
 package org.lushlife.negroni.annotation.literal;
 
+import javax.enterprise.inject.AnnotationLiteral;
+
 import org.lushlife.negroni.annotation.Config;
 
 public class SimpleConfigAnnotationLiteral extends AnnotationLiteral<Config>

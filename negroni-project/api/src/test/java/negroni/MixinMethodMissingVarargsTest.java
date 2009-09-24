@@ -1,14 +1,12 @@
 package negroni;
 
-import java.lang.annotation.Documented;
 import java.lang.reflect.Method;
 
 import junit.framework.Assert;
 
-
 import org.junit.Test;
-import org.lushlife.negroni.$;
 import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Mix;
 import org.lushlife.negroni.Negroni;
 import org.lushlife.negroni.annotation.InstanceScoped;
 import org.lushlife.negroni.annotation.MethodMissing;
@@ -238,7 +236,7 @@ public class MixinMethodMissingVarargsTest
    public void a02() throws Exception
    {
       Enhancer container = Negroni.create();
-      MethodMissingMix mix = container.mixin(new $<MethodMissingMix>("String")
+      MethodMissingMix mix = container.mixin(new Mix<MethodMissingMix>("String")
       {
       });
       mix.invoke();
@@ -249,7 +247,7 @@ public class MixinMethodMissingVarargsTest
    public void a03() throws Exception
    {
       Enhancer container = Negroni.create();
-      MethodMissingMix mix = container.mixin(new $<MethodMissingMix>('c')
+      MethodMissingMix mix = container.mixin(new Mix<MethodMissingMix>('c')
       {
       });
       mix.invoke();
@@ -301,7 +299,7 @@ public class MixinMethodMissingVarargsTest
    public void a03_() throws Exception
    {
       Enhancer container = Negroni.create();
-      MethodMissingMix mix = container.mixin(new $<MethodMissingMix>('c')
+      MethodMissingMix mix = container.mixin(new Mix<MethodMissingMix>('c')
       {
       });
       mix.invoke2(10, 10);
@@ -313,7 +311,7 @@ public class MixinMethodMissingVarargsTest
    public void a04() throws Exception
    {
       Enhancer container = Negroni.create();
-      MethodMissingMix mix = container.mixin(new $<MethodMissingMix>(10L)
+      MethodMissingMix mix = container.mixin(new Mix<MethodMissingMix>(10L)
       {
       });
       mix.invoke();
@@ -364,7 +362,7 @@ public class MixinMethodMissingVarargsTest
    public void a05() throws Exception
    {
       Enhancer container = Negroni.create();
-      MethodMissingMix mix = container.mixin(new $<MethodMissingMix>(10)
+      MethodMissingMix mix = container.mixin(new Mix<MethodMissingMix>(10)
       {
       });
       mix.invoke();

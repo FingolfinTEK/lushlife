@@ -1,6 +1,7 @@
 package org.lushlife.negroni.annotation.literal;
 
-import org.lushlife.negroni.annotation.Named;
+import javax.enterprise.inject.AnnotationLiteral;
+import javax.inject.Named;
 
 public class NamedAnnotationLiteral extends AnnotationLiteral<Named> implements
 		Named {
@@ -9,6 +10,7 @@ public class NamedAnnotationLiteral extends AnnotationLiteral<Named> implements
 	public NamedAnnotationLiteral(String name) {
 		this.name = name;
 	}
+
 	public String value() {
 		return name;
 	}

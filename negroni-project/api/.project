@@ -1,6 +1,6 @@
 <projectDescription>
   <name>negroni</name>
-  <comment/>
+  <comment>The reference implementation of JSR 299: Web Beans</comment>
   <projects/>
   <buildSpec>
     <buildCommand>
