@@ -13,21 +13,16 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.lushlife.negroni.conversions.converter;
+package org.lushlife.negroni.delegate;
 
-import org.lushlife.negroni.conversions.Converter;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author Takeshi Kondo
  */
-public class ObjectConverter implements Converter<Object> {
-
-	public Object convert(Object obj) {
-		return obj;
-	}
-
-	public boolean isAssignableTo(Class<?> from) {
-		return true;
-	}
+@Retention(RetentionPolicy.RUNTIME)
+public @interface DelegateMethodPrecedence {
+	int value();
 
 }
