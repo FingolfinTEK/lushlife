@@ -21,12 +21,16 @@ import java.util.Map;
 import javassist.util.proxy.MethodHandler;
 
 import org.lushlife.negroni.Container;
+import org.lushlife.negroni.LogMsgNGLN;
 import org.lushlife.negroni.delegate.DelegateMethod;
+import org.lushlife.stla.Log;
+import org.lushlife.stla.Logging;
 
 /**
  * @author Takeshi Kondo
  */
 public class DelegateMethodHandler implements MethodHandler {
+	static public Log log = Logging.getLog(DelegateMethodHandler.class);
 
 	Container container;
 	Map<Method, DelegateMethod> mapping;
@@ -39,7 +43,9 @@ public class DelegateMethodHandler implements MethodHandler {
 
 	public Object invoke(Object self, Method thisMethod, Method proceed,
 			Object[] args) throws Throwable {
-		return mapping.get(thisMethod)
-				.invoke(container, self, thisMethod, args);
+		Object obj = mapping.get(thisMethod).invoke(container, self,
+				thisMethod, args);
+		log.log(LogMsgNGLN.NGLN00004, thisMethod, obj);
+		return obj;
 	}
 }
