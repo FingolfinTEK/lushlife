@@ -22,7 +22,6 @@ import org.lushlife.stla.spi.LogProvider;
 import org.lushlife.stla.spi.LogProviderDecorator;
 import org.lushlife.stla.util.LogLog;
 
-
 /**
  * @author Takeshi Kondo
  */
@@ -64,11 +63,11 @@ public class ChangeLoglevel extends LogIdHandlingDecoratorBase implements
 			}
 
 			public void log(Level level, Enum<?> logId, String message,
-					Throwable e) {
+					Throwable e, Object[] params) {
 				if (isTarget(logId)) {
-					binder.log(to, logId, message, e);
+					binder.log(to, logId, message, e, params);
 				} else {
-					binder.log(level, logId, message, e);
+					binder.log(level, logId, message, e, params);
 				}
 			}
 

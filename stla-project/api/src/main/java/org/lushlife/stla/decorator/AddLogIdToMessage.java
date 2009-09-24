@@ -34,9 +34,9 @@ public class AddLogIdToMessage extends LogProviderDecoratorBase implements
 			}
 
 			public void log(Level level, Enum<?> logId, String message,
-					Throwable e) {
+					Throwable e, Object[] params) {
 				proceed.log(level, logId, "<" + logId.name() + "> " + message,
-						e);
+						e, params);
 			}
 
 			public boolean isEnableFor(Level level, Enum<?> logId) {

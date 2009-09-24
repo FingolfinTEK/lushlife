@@ -15,10 +15,11 @@
  */
 package org.lushlife.stla.slf4j;
 
+import java.text.MessageFormat;
+
 import org.lushlife.stla.Level;
 import org.lushlife.stla.spi.LogProvider;
 import org.slf4j.Logger;
-
 
 /**
  * @author Takeshi Kondo
@@ -46,7 +47,16 @@ public class SLF4JLogProvider implements LogProvider {
 		throw new IllegalArgumentException("Unreachable code");
 	}
 
-	public void log(Level level, Enum<?> logId, String message, Throwable e) {
+	public void log(Level level, Enum<?> logId, String message, Throwable e,
+			Object[] params) {
+		if (!isEnableFor(level, logId)) {
+			return;
+		}
+		try {
+			message = MessageFormat.format(message, params);
+		} catch (IllegalArgumentException ex) {
+			logger.debug("illegal argument eception ", ex);
+		}
 		switch (level) {
 		case ERROR:
 			logger.error(message, e);
@@ -68,21 +78,31 @@ public class SLF4JLogProvider implements LogProvider {
 	}
 
 	public void log(Level level, Enum<?> logId, String format, Object[] params) {
+		if (!isEnableFor(level, logId)) {
+			return;
+		}
+		String message;
+		try {
+			message = MessageFormat.format(format, params);
+		} catch (IllegalArgumentException e) {
+			logger.debug("illegal argument eception ", e);
+			message = format;
+		}
 		switch (level) {
 		case ERROR:
-			logger.error(format, params);
+			logger.error(message);
 			return;
 		case WARN:
-			logger.warn(format, params);
+			logger.warn(message);
 			return;
 		case INFO:
-			logger.info(format, params);
+			logger.info(message);
 			return;
 		case DEBUG:
-			logger.debug(format, params);
+			logger.debug(message);
 			return;
 		case TRACE:
-			logger.trace(format, params);
+			logger.trace(message);
 			return;
 		}
 		throw new IllegalArgumentException("Unreachable code");

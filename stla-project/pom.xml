@@ -17,6 +17,10 @@
 		</developerConnection>
 		<url>http://code.google.com/p/lushlife/</url>
 	</scm>
+	
+	<modules>
+		<module>api</module>
+	</modules>
 
 	<distributionManagement>
 		<repository>
@@ -154,8 +158,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<modules>
-		<module>api</module>
-	</modules>
 </project>

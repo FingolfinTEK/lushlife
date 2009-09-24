@@ -35,11 +35,11 @@ public class Block extends LogIdHandlingDecoratorBase {
 			}
 
 			public void log(Level level, Enum<?> logId, String message,
-					Throwable e) {
+					Throwable e, Object[] params) {
 				if (isTarget(logId)) {
 					return;
 				}
-				logProvider.log(level, logId, message, e);
+				logProvider.log(level, logId, message, e, params);
 
 			}
 
