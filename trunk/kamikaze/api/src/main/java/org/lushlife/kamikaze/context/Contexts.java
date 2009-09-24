@@ -4,17 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.context.spi.Contextual;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class Contexts {
 
-	static private ThreadLocal<HttpServletRequest> request = new ThreadLocal<HttpServletRequest>();
-	static private ThreadLocal<HttpServletResponse> response = new ThreadLocal<HttpServletResponse>();
-	static private ThreadLocal<ServletContext> servletContext = new ThreadLocal<ServletContext>();
+	static private ThreadLocal<SingletonContext<?>> servletContext = new ThreadLocal<SingletonContext<?>>();
 	static private ThreadLocal<Map<Contextual<? extends Object>, Object>> hiddenScope = new ThreadLocal<Map<Contextual<? extends Object>, Object>>() {
 		@Override
 		protected Map<Contextual<? extends Object>, Object> initialValue() {
@@ -26,42 +19,19 @@ public class Contexts {
 		return hiddenScope.get();
 	}
 
-	@Named("request")
-	@Produces
-	public static HttpServletRequest getRequest() {
-		return request.get();
+	public static SingletonContext<?> getServletContext() {
+		return servletContext.get();
 	}
 
-	public static void setRequest(HttpServletRequest request) {
-		Contexts.request.set(request);
-	}
-
-	@Named("response")
-	@Produces
-	public static HttpServletResponse getResponse() {
-		return response.get();
-	}
-
-	public static void setResponse(HttpServletResponse response) {
-		Contexts.response.set(response);
-	}
-
-	@Produces
-	public static ServletContext getServletContext() {
-		ServletContext context = servletContext.get();
-		return context;
-	}
-
-	public static void setServletContext(ServletContext servletContext) {
+	public static void setServletContext(SingletonContext<?> servletContext) {
 		Contexts.servletContext.set(servletContext);
 	}
 
 	public static <T> T get(Class<T> clazz) {
-		return (T) getServletContext().getAttribute(clazz.getName());
+		return (T) servletContext.get().get(clazz.getName());
 	}
 
 	public static <T> void setRegistries(Class<T> clazz, T instance) {
-		Contexts.getServletContext().setAttribute(clazz.getName(),
-				instance);
+		servletContext.get().set(clazz.getName(), instance);
 	}
 }

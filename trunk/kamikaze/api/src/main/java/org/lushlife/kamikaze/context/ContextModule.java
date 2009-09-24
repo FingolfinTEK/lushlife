@@ -8,7 +8,6 @@ public class ContextModule implements WebBeansModule {
 
 	public void configure(WebBeansBinder binder) {
 		binder.installService(ContextServiceModule.class);
-		binder.model(ServletPathInfo.class);
 		binder.model(Contexts.class);
 	}
 }

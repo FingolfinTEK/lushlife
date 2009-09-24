@@ -11,6 +11,5 @@ public class ResourceModule implements WebBeansModule {
 		binder.installService(JaxRsServiceModle.class);
 		binder.install(new JSPQueryModule());
 		binder.model(ResourceCacheImpl.class);
-		binder.model(ResourceManager.class);
 	}
 }
