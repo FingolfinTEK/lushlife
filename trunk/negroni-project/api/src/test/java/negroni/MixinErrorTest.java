@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 
 import org.junit.Test;
-import org.lushlife.negroni.$;
 import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Mix;
 import org.lushlife.negroni.Negroni;
 import org.lushlife.negroni.annotation.MixinImplementedBy;
 import org.lushlife.negroni.annotation.Mixined;
@@ -91,7 +91,7 @@ public class MixinErrorTest
    public void c01() throws TestException
    {
       Enhancer c = Negroni.create();
-      MixinException ex = c.mixin(new $<MixinException>("test")
+      MixinException ex = c.mixin(new Mix<MixinException>("test")
       {
       });
       ex.invoke(NullPointerException.class);
@@ -101,7 +101,7 @@ public class MixinErrorTest
    public void c02() throws TestException
    {
       Enhancer c = Negroni.create();
-      MixinException ex = c.mixin(new $<MixinException>("test")
+      MixinException ex = c.mixin(new Mix<MixinException>("test")
       {
       });
       ex.invoke(TestException.class);
@@ -111,7 +111,7 @@ public class MixinErrorTest
    public void c03() throws TestException
    {
       Enhancer c = Negroni.create();
-      MixinException ex = c.mixin(new $<MixinException>("test")
+      MixinException ex = c.mixin(new Mix<MixinException>("test")
       {
       });
       ex.invoke(SQLException.class);
@@ -121,7 +121,7 @@ public class MixinErrorTest
    public void d01() throws TestException
    {
       Enhancer c = Negroni.create();
-      c.mixin(new $<MixinException2>("test")
+      c.mixin(new Mix<MixinException2>("test")
       {
       });
    }

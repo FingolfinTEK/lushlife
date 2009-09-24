@@ -8,19 +8,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.lushlife.negroni.Configurator;
 import org.lushlife.negroni.Identifier;
 import org.lushlife.negroni.annotation.literal.Configuration;
-import org.lushlife.negroni.core.configuration.LCollections;
 import org.lushlife.negroni.core.impl.delegate.DelegateMethod;
 import org.lushlife.negroni.core.impl.inject.Injections;
-
-
 
 public abstract class ConfiguratorBase implements Configurator {
 
 	public void init() {
-		configuration(LCollections.class);
 	}
 
-	ConcurrentHashMap<Class<?>, List<DelegateMethod>> cash = new ConcurrentHashMap<Class<?>, List<DelegateMethod>>();
+	Map<Class<?>, List<DelegateMethod>> cash = new ConcurrentHashMap<Class<?>, List<DelegateMethod>>();
 
 	public Map<Class<?>, List<DelegateMethod>> getCash() {
 		return cash;

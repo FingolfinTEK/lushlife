@@ -6,10 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import org.lushlife.negroni.core.exceptions.NegroniException;
-import org.lushlife.negroni.core.impl.guice.GuiceConfigurator;
 import org.lushlife.negroni.core.impl.reflection.Reflections;
-
-
 
 /**
  * The entry point to the Negroni framework. Creates {@link Enhancer}s from
@@ -28,7 +25,7 @@ public class Negroni {
 				+ Configurator.class.getName();
 		URL url = Reflections.getResouce(resouceName);
 		if (url == null) {
-			return new GuiceConfigurator();
+			// return new GuiceConfigurator();
 		}
 		BufferedReader br;
 		try {
