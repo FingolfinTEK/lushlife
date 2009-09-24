@@ -7,10 +7,9 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.lushlife.negroni</groupId>
-	<artifactId>negroni-simple</artifactId>
+	<artifactId>negroni</artifactId>
 	<packaging>jar</packaging>
-	<name>negroni</name>
-	<url>http://maven.apache.org</url>
+	<name>Negroni</name>
 
 	<dependencies>
 
