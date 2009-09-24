@@ -13,7 +13,6 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 
-import org.lushlife.kamikaze.Kamikaze;
 import org.lushlife.kamikaze.LogMsgCore;
 import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.event.RequestDestroyedLiteral;
@@ -22,6 +21,7 @@ import org.lushlife.kamikaze.mvc.context.ServletContexts;
 import org.lushlife.kamikaze.mvc.spi.ServletEventService;
 import org.lushlife.kamikaze.spi.BootstrapService;
 import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
+import org.lushlife.kamikaze.util.loader.ClassLoaderUtil;
 import org.lushlife.kamikaze.util.loader.ServiceLoader;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
@@ -46,13 +46,11 @@ public class KamikazeListener implements ServletRequestListener,
 		ServletContexts.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader();
 		try {
-			// KamikazeBoostrap.destoryManager();
 			bootstrapService.destoryManager();
 		} finally {
 			Contexts.setServletContext(null);
 			Contexts.getHiddenScope().clear();
 		}
-		// super.contextDestroyed(event);
 		servletEvent.contextDestroyed(event);
 	}
 
@@ -90,9 +88,10 @@ public class KamikazeListener implements ServletRequestListener,
 				.getServletRequest());
 		Contexts.getHiddenScope().clear();
 		boolean update = isUpdate();
-		logger.log(LogMsgCore.KMKZC0003, Kamikaze.isHotdeployMode(), update);
+		logger.log(LogMsgCore.KMKZC0003, ClassLoaderUtil.isHotdeployMode(),
+				update);
 
-		if (Kamikaze.isHotdeployMode()) {
+		if (ClassLoaderUtil.isHotdeployMode()) {
 			if (update) {
 				ClassLoaderProducer.produceClassLoader();
 			}

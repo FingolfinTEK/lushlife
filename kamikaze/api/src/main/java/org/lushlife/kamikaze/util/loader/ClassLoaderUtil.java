@@ -2,27 +2,34 @@ package org.lushlife.kamikaze.util.loader;
 
 import java.io.InputStream;
 
-public class ClassLoaderUtil
-{
+import org.lushlife.kamikaze.context.SingletonContext;
 
-   static public String toClassPath(String packageName, String resourceName)
-   {
-      return packageName.replace(".", "/") + "/" + resourceName;
-   }
+public class ClassLoaderUtil {
+	public static boolean isHotdeployMode() {
+		SingletonContext<?> context = org.lushlife.kamikaze.context.Contexts
+				.getServletContext();
+		String str = context.getServerInfo();
+		if (!str.contains("Development")) {
+			return false;
+		}
+		return true;
+	}
 
-   static public AsStream load(ClassLoader loader, String packageName, String resoruceName)
-   {
-      String clazzPath = toClassPath(packageName, resoruceName);
-      return load(loader, clazzPath);
-   }
+	static public String toClassPath(String packageName, String resourceName) {
+		return packageName.replace(".", "/") + "/" + resourceName;
+	}
 
-   public static AsStream load(ClassLoader loader, String clazzPath)
-   {
-      InputStream stream = loader.getResourceAsStream(clazzPath);
-      if (stream == null)
-      {
-         throw new IllegalStateException("resoruce not found " + clazzPath);
-      }
-      return new AsStream(stream);
-   }
+	static public AsStream load(ClassLoader loader, String packageName,
+			String resoruceName) {
+		String clazzPath = toClassPath(packageName, resoruceName);
+		return load(loader, clazzPath);
+	}
+
+	public static AsStream load(ClassLoader loader, String clazzPath) {
+		InputStream stream = loader.getResourceAsStream(clazzPath);
+		if (stream == null) {
+			throw new IllegalStateException("resoruce not found " + clazzPath);
+		}
+		return new AsStream(stream);
+	}
 }
