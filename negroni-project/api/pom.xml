@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.lushlife.negroni</groupId>
 		<artifactId>negroni-root</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>org.lushlife.negroni</groupId>
 	<artifactId>negroni</artifactId>
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.lushlife.stla</groupId>
 			<artifactId>stla</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 
 	</dependencies>
