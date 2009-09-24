@@ -53,15 +53,6 @@ public class ChangeLoglevel extends LogIdHandlingDecoratorBase implements
 				}
 			}
 
-			public void log(Level level, Enum<?> logId, String format,
-					Object[] params) {
-				if (isTarget(logId)) {
-					binder.log(to, logId, format, params);
-				} else {
-					binder.log(level, logId, format, params);
-				}
-			}
-
 			public void log(Level level, Enum<?> logId, String message,
 					Throwable e, Object[] params) {
 				if (isTarget(logId)) {

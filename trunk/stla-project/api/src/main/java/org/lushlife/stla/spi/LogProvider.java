@@ -28,6 +28,4 @@ public interface LogProvider {
 	public void log(Level level, Enum<?> logId, String message, Throwable e,
 			Object[] params);
 
-	public void log(Level level, Enum<?> logId, String format, Object[] params);
-
 }

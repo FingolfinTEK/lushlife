@@ -34,16 +34,6 @@ public class PutLogIdToSLF4JMDC extends LogProviderDecoratorBase implements
 
 	public LogProvider decorate(final LogProvider proceed) {
 		return new LogProvider() {
-			public void log(Level level, Enum<?> logId, String format,
-					Object[] params) {
-				try {
-					MDC.put(key, logId.name());
-					proceed.log(level, logId, format, params);
-				} finally {
-					MDC.remove(key);
-				}
-			}
-
 			public void log(Level level, Enum<?> logId, String message,
 					Throwable e, Object[] params) {
 				try {
