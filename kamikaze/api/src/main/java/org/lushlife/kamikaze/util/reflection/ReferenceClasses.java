@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
-
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.LoaderClassPath;
+
+import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
 
 public class ReferenceClasses {
 	static public Set<Class<?>> getReferenceClasses(Class<?> clazz) {
