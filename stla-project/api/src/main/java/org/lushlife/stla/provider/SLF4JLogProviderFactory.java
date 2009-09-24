@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.lushlife.stla.slf4j;
+package org.lushlife.stla.provider;
 
 import org.lushlife.stla.spi.LogProvider;
 import org.lushlife.stla.spi.LogProviderFactory;

@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.lushlife.stla.slf4j;
+package org.lushlife.stla.provider;
 
 import java.text.MessageFormat;
 
@@ -72,37 +72,6 @@ public class SLF4JLogProvider implements LogProvider {
 			return;
 		case TRACE:
 			logger.trace(message, e);
-			return;
-		}
-		throw new IllegalArgumentException("Unreachable code");
-	}
-
-	public void log(Level level, Enum<?> logId, String format, Object[] params) {
-		if (!isEnableFor(level, logId)) {
-			return;
-		}
-		String message;
-		try {
-			message = MessageFormat.format(format, params);
-		} catch (IllegalArgumentException e) {
-			logger.debug("illegal argument eception ", e);
-			message = format;
-		}
-		switch (level) {
-		case ERROR:
-			logger.error(message);
-			return;
-		case WARN:
-			logger.warn(message);
-			return;
-		case INFO:
-			logger.info(message);
-			return;
-		case DEBUG:
-			logger.debug(message);
-			return;
-		case TRACE:
-			logger.trace(message);
 			return;
 		}
 		throw new IllegalArgumentException("Unreachable code");

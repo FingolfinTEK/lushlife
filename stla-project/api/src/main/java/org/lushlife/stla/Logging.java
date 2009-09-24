@@ -23,7 +23,8 @@ import org.lushlife.stla.configuration.DefaultLoggingManagerConfiguration;
 import org.lushlife.stla.configuration.XMLLoggingManagerConfiguration;
 import org.lushlife.stla.impl.LogImpl;
 import org.lushlife.stla.impl.LoggingManagerImpl;
-import org.lushlife.stla.slf4j.SLF4JLogProviderFactory;
+import org.lushlife.stla.provider.JDKLogProviderFactory;
+import org.lushlife.stla.provider.SLF4JLogProviderFactory;
 import org.lushlife.stla.spi.LocaleSelector;
 import org.lushlife.stla.spi.LogProvider;
 import org.lushlife.stla.spi.LogProviderDecorator;
@@ -44,7 +45,12 @@ public class Logging {
 	}
 
 	private static void initializeLoggingFactory() {
-		loggingFactory = new SLF4JLogProviderFactory();
+		try {
+			Class.forName("org.slf4j.Logger");
+			loggingFactory = new SLF4JLogProviderFactory();
+		} catch (ClassNotFoundException e) {
+			loggingFactory = new JDKLogProviderFactory();
+		}
 	}
 
 	private static void initializeLoggingManager() {
@@ -82,8 +88,8 @@ public class Logging {
 		return getMessageFromIdAndLocale(logId, getLocale(), params);
 	}
 
-	static public <E extends Enum<E>> String getMessageFromIdAndLocale(E logId, Locale locale,
-			Object... params) {
+	static public <E extends Enum<E>> String getMessageFromIdAndLocale(E logId,
+			Locale locale, Object... params) {
 		String message = loggingManager.getMessageResolver().toMessage(logId,
 				locale);
 		if (params.length == 0) {

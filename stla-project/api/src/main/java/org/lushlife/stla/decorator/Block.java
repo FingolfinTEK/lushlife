@@ -26,14 +26,6 @@ public class Block extends LogIdHandlingDecoratorBase {
 	public LogProvider decorate(final LogProvider logProvider) {
 
 		return new LogProvider() {
-			public void log(Level level, Enum<?> logId, String format,
-					Object[] params) {
-				if (isTarget(logId)) {
-					return;
-				}
-				logProvider.log(level, logId, format, params);
-			}
-
 			public void log(Level level, Enum<?> logId, String message,
 					Throwable e, Object[] params) {
 				if (isTarget(logId)) {

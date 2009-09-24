@@ -43,7 +43,7 @@ public class LogImpl implements Log {
 		Level level = manager.getLevelResolver().toLevel(logId);
 		Locale locale = manager.getLocaleSelector().getLocale();
 		String message = manager.getMessageResolver().toMessage(logId, locale);
-		logger.log(level, logId, message, params);
+		logger.log(level, logId, message, null, params);
 	}
 
 	public <E extends Enum<E>> void log(E logId, Throwable e, Object... params) {
