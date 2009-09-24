@@ -9,7 +9,7 @@ import javax.servlet.ServletContextEvent;
 import org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap;
 import org.jboss.resteasy.spi.Registry;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
-import org.lushlife.kamikaze.spi.PostDeployEvent;
+import org.lushlife.kamikaze.spi.PostInitializationEvent;
 
 public class JaxRSInitializer {
 	private ResteasyBootstrap resteasyBootstrap = new ResteasyBootstrap();
@@ -17,7 +17,7 @@ public class JaxRSInitializer {
 	@Inject
 	private ServletContext context;
 
-	public void contextInitialized(@Observes PostDeployEvent deployment) {
+	public void contextInitialized(@Observes PostInitializationEvent deployment) {
 		ServletContextEvent event = new ServletContextEvent(context);
 		resteasyBootstrap.contextInitialized(event);
 		final ServletContext context = event.getServletContext();

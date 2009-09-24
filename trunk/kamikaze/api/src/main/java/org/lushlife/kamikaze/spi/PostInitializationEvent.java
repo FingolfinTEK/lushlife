@@ -2,7 +2,7 @@ package org.lushlife.kamikaze.spi;
 
 import java.util.Collection;
 
-public interface PostDeployEvent {
+public interface PostInitializationEvent {
 
 	Collection<Class<?>> getClasses();
 }

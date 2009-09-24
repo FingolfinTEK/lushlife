@@ -21,7 +21,7 @@ import org.lushlife.kamikaze.jboss.LogMsgJBoss;
 import org.lushlife.kamikaze.jboss.context.EventContext;
 import org.lushlife.kamikaze.jboss.context.SingletonContext;
 import org.lushlife.kamikaze.spi.BootstrapService;
-import org.lushlife.kamikaze.spi.PostDeployEvent;
+import org.lushlife.kamikaze.spi.PostInitializationEvent;
 import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
@@ -89,7 +89,7 @@ public class KamikazeBoostrap implements BootstrapService {
 		Contexts.setRegistries(BeanManager.class, manager);
 		manager.addContext(new SingletonContext());
 		manager.addContext(EventContext.INSTANCE);
-		manager.fireEvent(new PostDeployEvent() {
+		manager.fireEvent(new PostInitializationEvent() {
 			public Collection<Class<?>> getClasses() {
 				return deployment.getBeanDeploymentArchives().get(0)
 						.getBeanClasses();
