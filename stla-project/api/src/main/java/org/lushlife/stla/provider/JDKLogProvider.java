@@ -48,16 +48,21 @@ public class JDKLogProvider implements LogProvider {
 		switch (level) {
 		case ERROR:
 			logger.log(java.util.logging.Level.SEVERE, message, e);
+			return;
 		case WARN:
 			logger.log(java.util.logging.Level.WARNING, message, e);
+			return;
 		case INFO:
 			logger.log(java.util.logging.Level.INFO, message, e);
+			return;
 		case DEBUG:
 			logger.log(java.util.logging.Level.FINE, message, e);
+			return;
 		case TRACE:
 			logger.log(java.util.logging.Level.FINER, message, e);
+			return;
 		}
-		throw new IllegalArgumentException("Unreachable code");
+		throw new IllegalArgumentException("Unreachable code " + level);
 
 	}
 
