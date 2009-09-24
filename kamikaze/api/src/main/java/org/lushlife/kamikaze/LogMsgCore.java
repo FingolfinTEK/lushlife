@@ -25,6 +25,9 @@ public enum LogMsgCore {
 	KMKZC0006,
 
 	@Warn("Error loading")
-	KMKZC0007
+	KMKZC0007,
+
+	@Debug("load class {0} ")
+	KMKZC0008
 
 }
