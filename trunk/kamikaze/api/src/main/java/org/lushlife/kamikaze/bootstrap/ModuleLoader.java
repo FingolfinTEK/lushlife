@@ -1,7 +1,7 @@
-package org.lushlife.kamikaze.jboss.bootstrap;
+package org.lushlife.kamikaze.bootstrap;
 
-import org.jboss.webbeans.util.serviceProvider.ServiceLoader;
 import org.lushlife.kamikaze.WebBeansModule;
+import org.lushlife.kamikaze.util.loader.ServiceLoader;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 

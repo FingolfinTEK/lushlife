@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.WebApplicationException;
 
 import org.lushlife.kamikaze.Kamikaze;
-import org.lushlife.kamikaze.LogMsgCore;
+import org.lushlife.kamikaze.LogMsgKMKZC;
 import org.lushlife.kamikaze.mvc.view.Page;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
@@ -49,7 +49,7 @@ public class JSPPage implements Page {
 	public void write(OutputStream arg0) throws IOException,
 			WebApplicationException {
 		try {
-			log.log(LogMsgCore.KMKZC0001, path);
+			log.log(LogMsgKMKZC.KMKZC0001, path);
 			response.reset();
 			context.getRequestDispatcher(path).include(reqeust, response);
 		} catch (ServletException e) {

@@ -1,15 +1,16 @@
 package org.lushlife.kamikaze;
 
 import org.lushlife.stla.Debug;
+import org.lushlife.stla.Error;
 import org.lushlife.stla.Info;
 import org.lushlife.stla.Warn;
 
-public enum LogMsgCore {
+public enum LogMsgKMKZC {
 
 	@Info("JSP page [{}]")
 	KMKZC0001,
 
-	@Info("init bean manager")
+	@Info("init bean manager: modules[{}]")
 	KMKZC0002,
 
 	@Info("hot deploy[{}] , update[{}]")
@@ -28,6 +29,9 @@ public enum LogMsgCore {
 	KMKZC0007,
 
 	@Debug("load class {0} ")
-	KMKZC0008
+	KMKZC0008,
+
+	@Error("Uninitialized BeanManager")
+	KMKZC0009
 
 }

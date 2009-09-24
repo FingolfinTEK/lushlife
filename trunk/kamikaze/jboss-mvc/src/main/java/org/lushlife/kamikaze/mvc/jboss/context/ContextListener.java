@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.jboss.context;
+package org.lushlife.kamikaze.mvc.jboss.context;
 
 import java.util.UUID;
 
@@ -12,7 +12,8 @@ import org.jboss.webbeans.BeanManagerImpl;
 import org.jboss.webbeans.context.api.helpers.ConcurrentHashMapBeanStore;
 import org.lushlife.kamikaze.event.RequestDestroyed;
 import org.lushlife.kamikaze.event.RequestInitialized;
-import org.lushlife.kamikaze.jboss.LogMsgJBoss;
+import org.lushlife.kamikaze.jboss.LogMsgKMKZJ;
+import org.lushlife.kamikaze.jboss.context.EventContext;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 import org.slf4j.MDC;
@@ -29,7 +30,6 @@ public class ContextListener {
 		UUID id = UUID.randomUUID();
 		MDC.put("requestId", id.toString());
 		manager.addContext(EventContext.INSTANCE);
-		// manager.addContext(HiddenContext.INSTANCE);
 	}
 
 	public void requsetInit(
@@ -37,16 +37,14 @@ public class ContextListener {
 		MDC.remove("requestId");
 		EventContext.INSTANCE.setBeanStore(new ConcurrentHashMapBeanStore());
 		EventContext.INSTANCE.setActive(true);
-		// HiddenContext.INSTANCE.setActive(true);
-		log.log(LogMsgJBoss.KMKZJ0001);
+		log.log(LogMsgKMKZJ.KMKZJ0001);
 	}
 
 	public void requestDestory(
 			@Observes @RequestDestroyed ServletRequestEvent event) {
 		EventContext.INSTANCE.setBeanStore(null);
 		EventContext.INSTANCE.setActive(false);
-		// HiddenContext.INSTANCE.setActive(false);
-		log.log(LogMsgJBoss.KMKZJ0002);
+		log.log(LogMsgKMKZJ.KMKZJ0002);
 	}
 
 }

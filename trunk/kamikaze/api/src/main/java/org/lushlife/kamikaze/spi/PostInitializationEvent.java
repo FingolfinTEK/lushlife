@@ -4,5 +4,5 @@ import java.util.Collection;
 
 public interface PostInitializationEvent {
 
-	Collection<Class<?>> getClasses();
+	Collection<Class<?>> getBeanClasses();
 }

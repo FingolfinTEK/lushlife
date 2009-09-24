@@ -1,8 +1,11 @@
 package org.lushlife.kamikaze.spi;
 
-public interface BootstrapService {
-	void initManager();
+import org.lushlife.kamikaze.WebBeansModule;
 
-	void destoryManager();
+public interface BootstrapService {
+
+	void shutdownManager();
+
+	void bootManager(Iterable<WebBeansModule> modules);
 
 }

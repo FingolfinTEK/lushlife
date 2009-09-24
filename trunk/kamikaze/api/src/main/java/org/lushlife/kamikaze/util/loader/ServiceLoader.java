@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.lushlife.kamikaze.LogMsgCore;
+import org.lushlife.kamikaze.LogMsgKMKZC;
+import org.lushlife.kamikaze.util.loader.annotation.Precedence;
 import org.lushlife.stla.Logging;
 
 public class ServiceLoader<S> implements Iterable<S> {
@@ -89,17 +90,17 @@ public class ServiceLoader<S> implements Iterable<S> {
 								S instance = constructor.newInstance();
 								providers.add(instance);
 							} catch (NoClassDefFoundError e) {
-								throw new IllegalStateException(Logging
-										.getMessage(LogMsgCore.KMKZC0006,
-												line));
+								throw new IllegalStateException(
+										Logging.getMessage(
+												LogMsgKMKZC.KMKZC0006, line));
 							} catch (InstantiationException e) {
-								throw new IllegalStateException(Logging
-										.getMessage(LogMsgCore.KMKZC0006,
-												line));
+								throw new IllegalStateException(
+										Logging.getMessage(
+												LogMsgKMKZC.KMKZC0006, line));
 							} catch (IllegalAccessException e) {
-								throw new IllegalStateException(Logging
-										.getMessage(LogMsgCore.KMKZC0006,
-												line));
+								throw new IllegalStateException(
+										Logging.getMessage(
+												LogMsgKMKZC.KMKZC0006, line));
 							}
 						}
 
@@ -126,12 +127,28 @@ public class ServiceLoader<S> implements Iterable<S> {
 		if (providers.size() == 0) {
 			throw new IllegalStateException("not found " + expectedType);
 		}
-		if (providers.size() >= 2) {
-			throw new IllegalStateException("ambiguity " + expectedType);
+		int maxPredecende = Integer.MIN_VALUE;
+		S maxProvider = null;
+		for (S s : providers) {
+			int predecende = toProcedence(s.getClass());
+			if (maxPredecende == predecende) {
+				throw new IllegalStateException("same precedence "
+						+ maxProvider.getClass() + " and " + s.getClass());
+			}
+			if (maxPredecende < predecende) {
+				maxPredecende = predecende;
+				maxProvider = s;
+			}
 		}
+		return maxProvider;
 
-		return providers.iterator().next();
+	}
 
+	private int toProcedence(Class<? extends Object> clazz) {
+		if (clazz.isAnnotationPresent(Precedence.class)) {
+			return clazz.getAnnotation(Precedence.class).value();
+		}
+		return Precedence.BUILD_IN;
 	}
 
 	public String toString() {
