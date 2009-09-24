@@ -7,11 +7,12 @@ import java.util.Set;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
-@javax.inject.Singleton
+@Singleton
 public class Injector implements Serializable {
 	private static final long serialVersionUID = -4385238949949794479L;
 	static Log log = Logging.getLog(Injector.class);
