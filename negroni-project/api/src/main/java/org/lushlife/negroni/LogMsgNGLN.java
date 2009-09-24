@@ -17,6 +17,7 @@ package org.lushlife.negroni;
 
 import org.lushlife.stla.Debug;
 import org.lushlife.stla.Error;
+import org.lushlife.stla.Trace;
 
 /**
  * @author Takeshi Kondo
@@ -29,6 +30,9 @@ public enum LogMsgNGLN {
 	NGLN00002,
 
 	@Debug("Mixin class owner[{0}] mixined[{1}]")
-	NGLN00003
+	NGLN00003,
+
+	@Trace("call method [{0}]: return [{1}]")
+	NGLN00004
 
 }
