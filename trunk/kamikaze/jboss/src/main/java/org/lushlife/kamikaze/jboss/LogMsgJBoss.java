@@ -14,7 +14,4 @@ public enum LogMsgJBoss {
 	@Debug("load bean module [{}]")
 	KMKZJ0003,
 
-	@Debug("load class {0} ")
-	KMKZJ0004,
-
 }
