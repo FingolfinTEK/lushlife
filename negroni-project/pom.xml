@@ -17,7 +17,7 @@
 	</developers>
 
 	<modules>
-		<module>api2</module>
+		<module>api</module>
 	</modules>
 
 	<distributionManagement>
