@@ -5,9 +5,9 @@ import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
-import javax.servlet.ServletContext;
 
 import org.lushlife.kamikaze.context.Contexts;
+import org.lushlife.kamikaze.context.SingletonContext;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
@@ -16,7 +16,7 @@ public class Kamikaze {
 	static Log log = Logging.getLog(Kamikaze.class);
 
 	public static boolean isHotdeployMode() {
-		ServletContext context = org.lushlife.kamikaze.context.Contexts
+		SingletonContext<?> context = org.lushlife.kamikaze.context.Contexts
 				.getServletContext();
 		String str = context.getServerInfo();
 		if (!str.contains("Development")) {

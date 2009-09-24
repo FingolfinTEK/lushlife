@@ -8,10 +8,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.servlet.http.HttpServletResponse;
 
 import org.lushlife.kamikaze.util.date.StartupTime;
 import org.lushlife.kamikaze.util.io.WriteTo;
@@ -32,9 +30,6 @@ public class ResourceCacheImpl implements ResourceCache {
 	Long starupTime;
 
 	private Lock lock = new ReentrantLock();
-
-	@Inject
-	Instance<HttpServletResponse> response;
 
 	private Map<String, byte[]> cache;
 

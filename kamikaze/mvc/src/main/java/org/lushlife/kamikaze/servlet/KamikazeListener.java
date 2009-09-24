@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.lushlife.kamikaze.Kamikaze;
 import org.lushlife.kamikaze.LogMsgCore;
 import org.lushlife.kamikaze.context.Contexts;
+import org.lushlife.kamikaze.context.ServletContexts;
 import org.lushlife.kamikaze.event.RequestDestroyedLiteral;
 import org.lushlife.kamikaze.event.RequestInitializedLiteral;
 import org.lushlife.kamikaze.spi.BootstrapService;
@@ -42,8 +43,8 @@ public class KamikazeListener implements ServletRequestListener,
 
 	public void contextDestroyed(ServletContextEvent event) {
 		Contexts.getHiddenScope().clear();
-		Contexts.setServletContext(event.getServletContext());
-		ClassLoaderProducer.produceClassLoader(event.getServletContext());
+		ServletContexts.setServletContext(event.getServletContext());
+		ClassLoaderProducer.produceClassLoader();
 		try {
 			// KamikazeBoostrap.destoryManager();
 			bootstrapService.destoryManager();
@@ -57,8 +58,8 @@ public class KamikazeListener implements ServletRequestListener,
 
 	public void contextInitialized(ServletContextEvent event) {
 		Contexts.getHiddenScope().clear();
-		Contexts.setServletContext(event.getServletContext());
-		ClassLoaderProducer.produceClassLoader(event.getServletContext());
+		ServletContexts.setServletContext(event.getServletContext());
+		ClassLoaderProducer.produceClassLoader();
 		try {
 			// KamikazeBoostrap.initManager();
 			bootstrapService.initManager();
@@ -75,17 +76,17 @@ public class KamikazeListener implements ServletRequestListener,
 	public void requestDestroyed(ServletRequestEvent event) {
 		Contexts.get(BeanManager.class).fireEvent(event,
 				new RequestDestroyedLiteral());
-		Contexts.setServletContext(null);
-		Contexts.setRequest(null);
-		Contexts.setResponse(null);
+		ServletContexts.setServletContext(null);
+		ServletContexts.setRequest(null);
+		ServletContexts.setResponse(null);
 		Contexts.getHiddenScope().clear();
 		servletEvent.requestDestroyed(event);
 
 	}
 
 	public void requestInitialized(ServletRequestEvent event) {
-		Contexts.setServletContext(event.getServletContext());
-		Contexts.setRequest((HttpServletRequest) event
+		ServletContexts.setServletContext(event.getServletContext());
+		ServletContexts.setRequest((HttpServletRequest) event
 				.getServletRequest());
 		Contexts.getHiddenScope().clear();
 		boolean update = isUpdate();
@@ -93,8 +94,7 @@ public class KamikazeListener implements ServletRequestListener,
 
 		if (Kamikaze.isHotdeployMode()) {
 			if (update) {
-				ClassLoaderProducer.produceClassLoader(event
-						.getServletContext());
+				ClassLoaderProducer.produceClassLoader();
 			}
 			Thread.currentThread().setContextClassLoader(
 					ClassLoaderProducer.getClassLoader());
@@ -110,7 +110,7 @@ public class KamikazeListener implements ServletRequestListener,
 	}
 
 	private boolean isUpdate() {
-		ServletContext context = Contexts.getServletContext();
+		ServletContext context = ServletContexts.getServletContext();
 		Long lastUpdate = (Long) context
 				.getAttribute(ClassLoaderProducer.LAST_UPDATE_TIME);
 		if (lastUpdate == null) {
