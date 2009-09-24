@@ -20,7 +20,6 @@ import org.lushlife.stla.spi.LogProvider;
 import org.lushlife.stla.spi.LogProviderDecorator;
 import org.slf4j.MDC;
 
-
 /**
  * @author Takeshi Kondo
  */
@@ -46,10 +45,10 @@ public class PutLogIdToSLF4JMDC extends LogProviderDecoratorBase implements
 			}
 
 			public void log(Level level, Enum<?> logId, String message,
-					Throwable e) {
+					Throwable e, Object[] params) {
 				try {
 					MDC.put(key, logId.name());
-					proceed.log(level, logId, message, e);
+					proceed.log(level, logId, message, e, params);
 				} finally {
 					MDC.remove(key);
 				}
