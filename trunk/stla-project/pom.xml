@@ -4,16 +4,16 @@
 	<groupId>org.lushlife.stla</groupId>
 	<artifactId>stla-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<name>Simple Type-Safe Logging API Root</name>
 	<url>http://maven.apache.org</url>
 
 	<scm>
-		<connection>scm:svn:https://lushlife.googlecode.com/svn/tags/stla-parent-0.2
+		<connection>scm:svn:https://lushlife.googlecode.com/svn/tags/stla-parent-0.1.0
 		</connection>
-		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/tags/stla-parent-0.2
+		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/tags/stla-parent-0.1.0
 		</developerConnection>
-		<url>scm:svn:https://lushlife.googlecode.com/svn/tags/stla-parent-0.2</url>
+		<url>scm:svn:https://lushlife.googlecode.com/svn/tags/stla-parent-0.1.0</url>
 	</scm>
 
 	<modules>
