@@ -3,7 +3,7 @@
 	<groupId>org.lushlife.negroni</groupId>
 	<artifactId>negroni-root</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<name>Method Missing and Mixin</name>
 	<url>http://maven.apache.org</url>
 
