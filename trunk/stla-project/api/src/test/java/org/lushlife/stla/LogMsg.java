@@ -7,10 +7,10 @@ public enum LogMsg {
 	@Debug("Error Message {} {}")
 	TEST0001,
 
-	@Error("Block {} {}")
+	@Info("Block {} {}")
 	TEST0002,
 
-	@Error("Test Message")
+	@Warn("Test Message")
 	TEST0003
 
 }
