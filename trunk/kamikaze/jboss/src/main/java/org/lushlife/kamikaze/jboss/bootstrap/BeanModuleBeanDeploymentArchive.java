@@ -3,18 +3,13 @@ package org.lushlife.kamikaze.jboss.bootstrap;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.jboss.webbeans.bootstrap.api.ServiceRegistry;
 import org.jboss.webbeans.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.webbeans.ejb.spi.EjbDescriptor;
-import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.WebBeansModule;
 import org.lushlife.kamikaze.bootstrap.BeanBinderImpl;
-import org.lushlife.kamikaze.jboss.LogMsgJBoss;
-import org.lushlife.kamikaze.util.loader.ServiceLoader;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
