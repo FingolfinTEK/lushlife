@@ -7,23 +7,12 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 
 import org.lushlife.kamikaze.context.Contexts;
-import org.lushlife.kamikaze.context.SingletonContext;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
 public class Kamikaze {
 
 	static Log log = Logging.getLog(Kamikaze.class);
-
-	public static boolean isHotdeployMode() {
-		SingletonContext<?> context = org.lushlife.kamikaze.context.Contexts
-				.getServletContext();
-		String str = context.getServerInfo();
-		if (!str.contains("Development")) {
-			return false;
-		}
-		return true;
-	}
 
 	static public <T> T $(Class<T> type, Annotation... bindings) {
 		return getInjector().getInstance(type, bindings);
