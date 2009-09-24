@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.lushlife.kamikaze.LogMsgCore;
+import org.lushlife.kamikaze.LogMsgKMKZC;
 import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.WebBeansModule;
 import org.lushlife.kamikaze.util.loader.ServiceLoader;
@@ -26,7 +26,7 @@ public class BeanBinderImpl implements WebBeansBinder {
 	}
 
 	public void model(Class<?> clazz) {
-		log.log(LogMsgCore.KMKZC0008, clazz);
+		log.log(LogMsgKMKZC.KMKZC0008, clazz);
 		classes.add(clazz);
 	}
 

@@ -13,13 +13,15 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 
-import org.lushlife.kamikaze.LogMsgCore;
+import org.lushlife.kamikaze.LogMsgKMKZC;
+import org.lushlife.kamikaze.WebBeansModule;
+import org.lushlife.kamikaze.bootstrap.ModuleLoader;
 import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.event.RequestDestroyedLiteral;
 import org.lushlife.kamikaze.event.RequestInitializedLiteral;
 import org.lushlife.kamikaze.mvc.context.ServletContexts;
+import org.lushlife.kamikaze.mvc.spi.ServletBootService;
 import org.lushlife.kamikaze.mvc.spi.ServletEventService;
-import org.lushlife.kamikaze.spi.BootstrapService;
 import org.lushlife.kamikaze.util.loader.ClassLoaderProducer;
 import org.lushlife.kamikaze.util.loader.ClassLoaderUtil;
 import org.lushlife.kamikaze.util.loader.ServiceLoader;
@@ -29,14 +31,14 @@ import org.lushlife.stla.Logging;
 public class KamikazeListener implements ServletRequestListener,
 		ServletContextListener {
 
-	private BootstrapService bootstrapService;
 	private ServletEventService servletEvent;
 
+	private ServletBootService bootService;
+
 	public KamikazeListener() {
-		bootstrapService = ServiceLoader.load(BootstrapService.class)
-				.getSingle();
 		servletEvent = ServiceLoader.load(ServletEventService.class)
 				.getSingle();
+		bootService = ServiceLoader.load(ServletBootService.class).getSingle();
 	}
 
 	static Log logger = Logging.getLog(KamikazeListener.class);
@@ -46,7 +48,7 @@ public class KamikazeListener implements ServletRequestListener,
 		ServletContexts.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader();
 		try {
-			bootstrapService.destoryManager();
+			bootService.shutdownManager();
 		} finally {
 			Contexts.setServletContext(null);
 			Contexts.getHiddenScope().clear();
@@ -59,8 +61,9 @@ public class KamikazeListener implements ServletRequestListener,
 		ServletContexts.setServletContext(event.getServletContext());
 		ClassLoaderProducer.produceClassLoader();
 		try {
-			// KamikazeBoostrap.initManager();
-			bootstrapService.initManager();
+			Iterable<WebBeansModule> loadModules = ModuleLoader
+					.loadModules(ClassLoaderProducer.getClassLoader());
+			bootService.bootManager(loadModules);
 
 			servletEvent.contextInitialized(event);
 			Contexts.get(BeanManager.class).fireEvent(event,
@@ -88,7 +91,7 @@ public class KamikazeListener implements ServletRequestListener,
 				.getServletRequest());
 		Contexts.getHiddenScope().clear();
 		boolean update = isUpdate();
-		logger.log(LogMsgCore.KMKZC0003, ClassLoaderUtil.isHotdeployMode(),
+		logger.log(LogMsgKMKZC.KMKZC0003, ClassLoaderUtil.isHotdeployMode(),
 				update);
 
 		if (ClassLoaderUtil.isHotdeployMode()) {
@@ -98,8 +101,10 @@ public class KamikazeListener implements ServletRequestListener,
 			Thread.currentThread().setContextClassLoader(
 					ClassLoaderProducer.getClassLoader());
 			if (update) {
-				logger.log(LogMsgCore.KMKZC0002);
-				bootstrapService.initManager();
+				Iterable<WebBeansModule> loadModules = ModuleLoader
+						.loadModules(ClassLoaderProducer.getClassLoader());
+				logger.log(LogMsgKMKZC.KMKZC0002, loadModules);
+				bootService.bootManager(loadModules);
 			}
 		}
 

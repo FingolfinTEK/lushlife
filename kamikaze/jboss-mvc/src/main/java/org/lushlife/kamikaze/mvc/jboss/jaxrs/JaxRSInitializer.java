@@ -27,7 +27,7 @@ public class JaxRSInitializer {
 				.getAttribute(ResteasyProviderFactory.class.getName());
 		final ModuleProcessor processor = new ModuleProcessor(registry,
 				providerFactory);
-		processor.process(deployment.getClasses());
+		processor.process(deployment.getBeanClasses());
 	}
 
 	public void destroy(BeforeShutdown shutdown) {

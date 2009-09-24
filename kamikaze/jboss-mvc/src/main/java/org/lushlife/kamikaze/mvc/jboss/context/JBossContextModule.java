@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.jboss.context;
+package org.lushlife.kamikaze.mvc.jboss.context;
 
 import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.spi.ContextServiceModule;

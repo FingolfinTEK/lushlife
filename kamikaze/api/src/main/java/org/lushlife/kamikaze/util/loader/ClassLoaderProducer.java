@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import javax.enterprise.inject.Produces;
 
-import org.lushlife.kamikaze.LogMsgCore;
+import org.lushlife.kamikaze.LogMsgKMKZC;
 import org.lushlife.kamikaze.context.Contexts;
 import org.lushlife.kamikaze.context.SingletonContext;
 import org.lushlife.stla.Log;
@@ -33,7 +33,7 @@ public class ClassLoaderProducer {
 	private static void produceClassLoader(SingletonContext<?> context,
 			URL... urls) {
 
-		logger.log(LogMsgCore.KMKZC0005, Arrays.toString(urls));
+		logger.log(LogMsgKMKZC.KMKZC0005, Arrays.toString(urls));
 
 		ClassLoader loader = new URLClassLoader(urls, Thread.currentThread()
 				.getContextClassLoader());
