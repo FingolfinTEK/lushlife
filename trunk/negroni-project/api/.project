@@ -1,9 +1,7 @@
 <projectDescription>
-  <name>negroni-simple</name>
+  <name>negroni</name>
   <comment/>
-  <projects>
-    <project>stla</project>
-  </projects>
+  <projects/>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>
