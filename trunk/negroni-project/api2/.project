@@ -1,6 +1,6 @@
 <projectDescription>
   <name>negroni-simple</name>
-  <comment>The reference implementation of JSR 299: Web Beans</comment>
+  <comment/>
   <projects>
     <project>stla</project>
   </projects>

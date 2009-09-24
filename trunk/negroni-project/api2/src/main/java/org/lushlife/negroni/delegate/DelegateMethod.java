@@ -11,6 +11,6 @@ public interface DelegateMethod extends Comparable<DelegateMethod> {
 	Method getDelegateMethod();
 
 	Object invoke(Container container, Object owner, Method method,
-			Object[] args);
+			Object[] args) throws Exception;
 
 }

@@ -1,43 +1,22 @@
 package org.lushlife.negroni.util;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.conversions.Conversions;
 import org.lushlife.negroni.delegate.DelegateMethod;
 import org.lushlife.negroni.delegate.Precedence;
-import org.lushlife.negroni.exception.RuntimeInvocationTargetException;
 
 public class Reflections {
 
-	static public void handleException(Method thisMethod,
-			RuntimeInvocationTargetException e) throws Throwable {
-		Throwable cause = e.getCause();
-		if (cause instanceof InvocationTargetException) {
-			cause = cause.getCause();
-			for (Class<?> ex : thisMethod.getExceptionTypes()) {
-				if (ex.isAssignableFrom(cause.getClass())) {
-					throw cause;
-				}
-			}
-		}
-	}
-
-	static public Object invoke(Object owner, Method m, Object[] args) {
+	static public Object invoke(Object owner, Method m, Object[] args)
+			throws Exception {
 		try {
 			return m.invoke(owner, args);
 		} catch (Exception e) {
@@ -53,7 +32,7 @@ public class Reflections {
 					throw (Error) cause;
 				}
 			}
-			throw new RuntimeInvocationTargetException(e);
+			throw e;
 		}
 	}
 
@@ -78,7 +57,6 @@ public class Reflections {
 		if (args.length < varArgsStartpoint) {
 			return (Object[]) Array.newInstance(type, 0);
 		}
-
 		Object[] varArgs = (Object[]) Array.newInstance(type, args.length
 				- varArgsStartpoint);
 		System.arraycopy(args, varArgsStartpoint, varArgs, 0, varArgs.length);
@@ -108,11 +86,9 @@ public class Reflections {
 		HashMap<String, Method> methodMap = new HashMap<String, Method>();
 		for (Method m : allMethod) {
 			if (Reflections.isUndefined(m)) {
-
 				methodMap.put(Reflections.toTypeId(m), m);
 			}
 		}
-
 		for (Method m : allMethod) {
 			if (!Reflections.isUndefined(m)) {
 				String id = Reflections.toTypeId(m);
@@ -121,10 +97,8 @@ public class Reflections {
 				}
 			}
 		}
-
 		HashSet<Method> methodSet = new HashSet<Method>();
 		methodSet.addAll(methodMap.values());
-
 		return methodSet;
 	}
 
@@ -144,20 +118,6 @@ public class Reflections {
 			}
 		}
 		return allClass;
-	}
-
-	static public Set<Method> getMethodsPresentByAnnotations(Class<?> clazz,
-			Class<? extends Annotation>... annotations) {
-		Set<Method> method = new HashSet<Method>();
-		METHODROOP: for (Method m : clazz.getMethods()) {
-			for (Class<? extends Annotation> an : annotations) {
-				if (!m.isAnnotationPresent(an)) {
-					continue METHODROOP;
-				}
-			}
-			method.add(m);
-		}
-		return method;
 	}
 
 	static public Set<Method> allMethod(Class<?> clazz) {
@@ -201,7 +161,6 @@ public class Reflections {
 		}
 		Class<?>[] toNoVarargsParams = noVarargsParams(to, pos);
 		Class<?> toVarargsParam = varargsParam(to);
-
 		Class<?>[] fromNoVarargsParams = noVarargsParams(from, 0);
 		Class<?> fromVarargsParam = varargsParam(from);
 
@@ -212,15 +171,13 @@ public class Reflections {
 		}
 
 		// 引数の型チェック
-		{
-			if (fromNoVarargsParams.length < toNoVarargsParams.length) {
+		if (fromNoVarargsParams.length < toNoVarargsParams.length) {
+			return false;
+		}
+		for (int i = 0; i < toNoVarargsParams.length; i++) {
+			if (!Conversions.isConvert(fromNoVarargsParams[i],
+					toNoVarargsParams[i])) {
 				return false;
-			}
-			for (int i = 0; i < toNoVarargsParams.length; i++) {
-				if (!Conversions.isConvert(fromNoVarargsParams[i],
-						toNoVarargsParams[i])) {
-					return false;
-				}
 			}
 		}
 
@@ -244,7 +201,6 @@ public class Reflections {
 			System.arraycopy(types, pos, temp, 0, temp.length);
 			return temp;
 		}
-
 	}
 
 	private static Class<?> varargsParam(Method to) {
@@ -265,7 +221,7 @@ public class Reflections {
 		return false;
 	}
 
-	static public String toTypeId(Method m) {
+	static private String toTypeId(Method m) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(m.getReturnType());
 		sb.append(":");
@@ -301,90 +257,6 @@ public class Reflections {
 		return isUndefined;
 	}
 
-	public static Method getMethod(Class<?> clazz, String name,
-			Class<?>... parameterTypes) {
-		try {
-			return clazz.getMethod(name, parameterTypes);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static void set(Object owner, Field f, Object value) {
-		try {
-			f.set(owner, value);
-		} catch (Exception e) {
-			throw new RuntimeException("field is " + f.getDeclaringClass()
-					+ " name " + f.getName(), e);
-		}
-	}
-
-	public static <T extends Annotation> T getEnumAnnotation(Enum<?> e,
-			Class<T> anotation) {
-		try {
-			return e.getDeclaringClass().getDeclaredField(e.name())
-					.getAnnotation(anotation);
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
-	public static Object get(Object e, Field f) {
-		try {
-			return f.get(e);
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
-	public static BeanInfo getBeanInfo(Class<?> clazz) {
-		try {
-			return Introspector.getBeanInfo(clazz);
-		} catch (IntrospectionException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static Field getField(Class<?> clazz, String name) {
-		while (clazz != null) {
-			try {
-				return clazz.getDeclaredField(name);
-			} catch (Exception e) {
-				clazz = clazz.getSuperclass();
-				if (clazz == null) {
-					throw new RuntimeException(e);
-				} else {
-					continue;
-				}
-			}
-		}
-		throw new RuntimeException("field not found [class=" + clazz
-				+ ",field=" + name + "]");
-	}
-
-	public static Field[] getEnumFields(Enum<?> e) {
-		try {
-			Class<?> clazz = e.getClass();
-			if (clazz.equals(e.getDeclaringClass())) {
-				return new Field[0];
-			} else {
-				return clazz.getDeclaredFields();
-			}
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
-	public static boolean isEnumAnnotationPresent(Enum<?> e,
-			Class<? extends Annotation> an) {
-		try {
-			return e.getDeclaringClass().getField(e.name())
-					.isAnnotationPresent(an);
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
 	public static Object[] varargsFlatten(Object[] args) {
 		if (args.length == 0) {
 			return args;
@@ -406,39 +278,4 @@ public class Reflections {
 		return temp;
 	}
 
-	public static Object[] annotationValues(Annotation an) {
-		Class<?> clazz = an.annotationType();
-		ArrayList<Object> obj = new ArrayList<Object>();
-		for (Method m : clazz.getMethods()) {
-			if (m.getDeclaringClass().equals(clazz)) {
-				obj.add(Reflections.invoke(an, m, new Object[0]));
-			}
-		}
-		return obj.toArray();
-	}
-
-	public static Object newInstnace(String className) {
-		return Reflections.newInstnace(forName(className));
-	}
-
-	private static Object newInstnace(Class<?> clazz) {
-		try {
-			return clazz.newInstance();
-		} catch (Exception e) {
-			throw new RuntimeException("newInstnace failed " + clazz, e);
-		}
-	}
-
-	public static Class<?> forName(String className) {
-		try {
-			return Thread.currentThread().getContextClassLoader().loadClass(
-					className);
-		} catch (ClassNotFoundException e) {
-			try {
-				return Class.forName(className);
-			} catch (ClassNotFoundException e1) {
-				throw new RuntimeException("class not found " + className, e1);
-			}
-		}
-	}
 }

@@ -19,7 +19,7 @@ public class MethodMissingVarArgsMethodDelegate extends
 	}
 
 	public Object invoke(Container context, Object owner, Method method,
-			Object[] args) {
+			Object[] args) throws Exception {
 		if (method.isVarArgs()) {
 			args = Reflections.varargsFlatten(args);
 		}

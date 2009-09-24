@@ -26,7 +26,7 @@ public class MixinMethodMissingMethodDelegate extends AbstractDelegateMethod {
 	}
 
 	public Object invoke(Container context, Object owner, Method method,
-			Object[] args) {
+			Object[] args) throws Exception {
 		Object[] tmp = Reflections.toSimpleTypeArgs(new Object[] { owner,
 				method }, args);
 		return Reflections.invoke(context.getInstance(id), getDelegateMethod(),

@@ -32,7 +32,7 @@ public class MixinMethodDelegate extends AbstractDelegateMethod {
 	}
 
 	public Object invoke(Container context, Object owner, Method method,
-			Object[] args) {
+			Object[] args) throws Exception {
 		Object[] tmp = Reflections.toSimpleTypeArgs(new Object[] { owner },
 				args);
 
