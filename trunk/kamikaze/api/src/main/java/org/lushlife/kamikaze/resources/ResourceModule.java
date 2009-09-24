@@ -2,8 +2,8 @@ package org.lushlife.kamikaze.resources;
 
 import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.WebBeansModule;
-import org.lushlife.kamikaze.extension.jspquery.JSPQueryModule;
 import org.lushlife.kamikaze.spi.JaxRsServiceModle;
+import org.lushlife.kamikaze.util.jspquery.JSPQueryModule;
 
 public class ResourceModule implements WebBeansModule {
 

@@ -1,4 +1,4 @@
-package org.lushlife.kamikaze.extension.jspquery.tag;
+package org.lushlife.kamikaze.util.jspquery.tag;
 
 public abstract class CSS extends TagBase<CSS>
 {
