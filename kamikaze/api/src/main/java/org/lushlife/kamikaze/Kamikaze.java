@@ -27,6 +27,7 @@ public class Kamikaze {
 	}
 
 	static public void bootInjector(WebBeansModule... modules) {
+
 		bootService.bootManager(Arrays.asList(modules));
 	}
 
@@ -46,9 +47,17 @@ public class Kamikaze {
 		log.log(LogMsgKMKZC.KMKZC0004, beanManager.hashCode(), beanManager);
 		Set<Bean<?>> beans = beanManager.getBeans(Injector.class);
 		Bean<? extends Object> injectorBean = beanManager.resolve(beans);
+		if (injectorBean == null) {
+			throw new NullPointerException(Logging.getMessage(
+					LogMsgKMKZC.KMKZC0010, Injector.class));
+		}
 		return (Injector) beanManager.getReference(injectorBean,
 				Injector.class, beanManager
 						.createCreationalContext(injectorBean));
+	}
+
+	static public BeanManager getBeanManager() {
+		return Contexts.get(BeanManager.class);
 	}
 
 }

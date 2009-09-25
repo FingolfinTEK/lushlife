@@ -31,7 +31,11 @@
   <classpathentry kind="var" path="M2_REPO/org/scannotation/scannotation/1.0.2/scannotation-1.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-simple/1.5.8/slf4j-simple-1.5.8.jar"/>
-  <classpathentry kind="src" path="/stla"/>
+  <classpathentry kind="var" path="M2_REPO/org/lushlife/stla/stla/0.2/stla-0.2.jar" sourcepath="M2_REPO/org/lushlife/stla/stla/0.2/stla-0.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/konchikisyo/.m2/repository/org/lushlife/stla/stla/0.2/stla-0.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="src" path="/webbeans-api"/>
   <classpathentry kind="src" path="/webbeans-core"/>
   <classpathentry kind="src" path="/webbeans-logging"/>

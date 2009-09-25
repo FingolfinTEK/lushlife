@@ -43,7 +43,7 @@ public class ClassLoaderProducer {
 
 	@Produces
 	static public ClassLoader getClassLoader() {
-		SingletonContext<?> context = Contexts.getServletContext();
+		SingletonContext<?> context = Contexts.getSingletonContext();
 		if (context == null) {
 			return Thread.currentThread().getContextClassLoader();
 		}
@@ -60,6 +60,6 @@ public class ClassLoaderProducer {
 	}
 
 	public static void produceClassLoader() {
-		produceClassLoader(Contexts.getServletContext());
+		produceClassLoader(Contexts.getSingletonContext());
 	}
 }

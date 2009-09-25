@@ -7,7 +7,7 @@ import org.lushlife.kamikaze.context.SingletonContext;
 public class ClassLoaderUtil {
 	public static boolean isHotdeployMode() {
 		SingletonContext<?> context = org.lushlife.kamikaze.context.Contexts
-				.getServletContext();
+				.getSingletonContext();
 		String str = context.getServerInfo();
 		if (!str.contains("Development")) {
 			return false;

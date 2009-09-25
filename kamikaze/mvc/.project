@@ -4,7 +4,6 @@
   <projects>
     <project>jsr299-api</project>
     <project>kamikaze-core</project>
-    <project>stla</project>
     <project>webbeans-api</project>
     <project>webbeans-core</project>
     <project>webbeans-logging</project>
