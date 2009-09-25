@@ -16,6 +16,8 @@
 package org.lushlife.negroni;
 
 /**
+ * mix-inとmethod missingを実装したクラスの生成を担当する。
+ * 
  * @author Takeshi Kondo
  */
 public interface Enhancer {

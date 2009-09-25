@@ -16,10 +16,17 @@
 package org.lushlife.negroni;
 
 /**
- * mix-inのクラスをインスタンス化の役割を担う。 DIコンテナと連携させたい場合には継承する。
+ * mix-inのクラスをインスタンス化の役割を担うクラスです。 DIコンテナと連携させたい場合には継承する。
  * 
  * @author Takeshi Kondo
  */
 public interface Container {
+	/**
+	 * 実装クラスのインスタンスを返してください。
+	 * 
+	 * @param <T>
+	 * @param clazz
+	 * @return
+	 */
 	public <T> T getInstance(Class<T> clazz);
 }

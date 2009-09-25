@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Mixined {
 	/**
-	 * mix-inの実装クラス
+	 * mix-inのクラスを設定します。
 	 * 
 	 * @return
 	 */
