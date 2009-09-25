@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javassist.util.proxy.ProxyFactory;
 
@@ -43,43 +46,63 @@ public class EnhancerImpl implements Enhancer {
 
 	static private Log log = Logging.getLog(EnhancerImpl.class);
 	private Container container;
+	private Map<Class<?>, Class<?>> cache = new ConcurrentHashMap<Class<?>, Class<?>>();
+	private Lock lock = new ReentrantLock();
 
 	public EnhancerImpl(Container container) {
 		super();
 		this.container = container;
 	}
 
-	public <T> Class<? extends T> enhace(Class<T> clazz, Container container) {
-		Map<Method, DelegateMethod> methodMapping = new HashMap<Method, DelegateMethod>();
-		Set<Method> undifinedMethods = Reflections.undifinedMethods(clazz);
-		Set<Class<?>> mixinImplementClasses = Reflections
-				.mixinImplementClasses(clazz);
-		for (Method method : undifinedMethods) {
-			List<DelegateMethod> delegateMethods = new ArrayList<DelegateMethod>();
-			delegateMethods.addAll(findDelegateMethods(clazz, clazz, method));
+	protected <T> Class<? extends T> enhace(Class<T> clazz, Container container) {
+		Class<? extends T> enhahcedClass = (Class<? extends T>) cache
+				.get(clazz);
+		if (enhahcedClass == null) {
+			lock.lock();
+			try {
+				enhahcedClass = (Class<? extends T>) cache.get(clazz);
+				if (enhahcedClass == null) {
+					Map<Method, DelegateMethod> methodMapping = new HashMap<Method, DelegateMethod>();
+					Set<Method> undifinedMethods = Reflections
+							.undifinedMethods(clazz);
+					Set<Class<?>> mixinImplementClasses = Reflections
+							.mixinImplementClasses(clazz);
+					for (Method method : undifinedMethods) {
+						List<DelegateMethod> delegateMethods = new ArrayList<DelegateMethod>();
+						delegateMethods.addAll(findDelegateMethods(clazz,
+								clazz, method));
 
-			for (Class<?> mixinClass : mixinImplementClasses) {
-				log.log(LogMsgNGLN.NGLN00003, clazz, mixinClass);
-				delegateMethods.addAll(findDelegateMethods(clazz, mixinClass,
-						method));
-			}
-			if (delegateMethods.size() == 0) {
-				throw new NullPointerException(Logging.getMessage(
-						LogMsgNGLN.NGLN00001, method));
-			}
-			DelegateMethod delegateMethod = select(delegateMethods);
-			methodMapping.put(method, delegateMethod);
-		}
+						for (Class<?> mixinClass : mixinImplementClasses) {
+							log.log(LogMsgNGLN.NGLN00003, clazz, mixinClass);
+							delegateMethods.addAll(findDelegateMethods(clazz,
+									mixinClass, method));
+						}
+						if (delegateMethods.size() == 0) {
+							throw new NullPointerException(Logging.getMessage(
+									LogMsgNGLN.NGLN00001, method));
+						}
+						DelegateMethod delegateMethod = select(delegateMethods);
+						methodMapping.put(method, delegateMethod);
+					}
 
-		ProxyFactory factory = new ProxyFactory();
-		if (clazz.isInterface()) {
-			factory.setInterfaces(new Class[] { clazz });
-		} else {
-			factory.setSuperclass(clazz);
+					ProxyFactory factory = new ProxyFactory();
+					if (clazz.isInterface()) {
+						factory.setInterfaces(new Class[] { clazz });
+					} else {
+						factory.setSuperclass(clazz);
+					}
+					factory.setFilter(new TargetMethodFilter(methodMapping
+							.keySet()));
+					factory.setHandler(new DelegateMethodHandler(container,
+							methodMapping));
+					enhahcedClass = factory.createClass();
+					cache.put(clazz, enhahcedClass);
+				}
+			} finally {
+				lock.unlock();
+			}
 		}
-		factory.setFilter(new TargetMethodFilter(methodMapping.keySet()));
-		factory.setHandler(new DelegateMethodHandler(container, methodMapping));
-		return factory.createClass();
+		return enhahcedClass;
 	}
 
 	private DelegateMethod select(List<DelegateMethod> delegateMethods) {
