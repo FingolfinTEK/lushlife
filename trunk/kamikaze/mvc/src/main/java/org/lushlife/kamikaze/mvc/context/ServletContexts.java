@@ -46,7 +46,7 @@ public class ServletContexts {
 
 	@Produces
 	public static ServletContext getServletContext() {
-		SingletonContext<?> servletContext = Contexts.getServletContext();
+		SingletonContext<?> servletContext = Contexts.getSingletonContext();
 		if (servletContext == null) {
 			return null;
 		}
