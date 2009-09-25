@@ -7,9 +7,9 @@
 		<version>0.3-SNAPSHOT</version>
 	</parent>
 	<groupId>org.lushlife.negroni</groupId>
-	<artifactId>negroni-guice</artifactId>
+	<artifactId>negroni-jsr299</artifactId>
 	<packaging>jar</packaging>
-	<name>Negroni Guice</name>
+	<name>Negroni Condext and Dependency Injection</name>
 
 	<dependencies>
 		<dependency>
@@ -26,9 +26,22 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>2.0</version>
+			<groupId>org.jboss.webbeans</groupId>
+			<artifactId>jsr299-api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>inject-api</artifactId>
+			<version>1.0.0-PRD</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.lushlife.kamikaze</groupId>
+			<artifactId>kamikaze-jboss</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

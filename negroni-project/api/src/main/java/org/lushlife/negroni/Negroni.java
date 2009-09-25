@@ -22,19 +22,37 @@ import org.lushlife.negroni.impl.SimpleContainer;
 import org.lushlife.negroni.util.Reflections;
 
 /**
+ * Negroni API のファサードクラスです。
+ * 
  * @author Takeshi Kondo
  */
 public class Negroni {
 
+	/**
+	 * Enhancerを生成します。ContainerはSimpleContainerを使用します。
+	 * 
+	 * @return
+	 */
 	static public Enhancer create() {
 		return create(new SimpleContainer());
 	}
 
+	/**
+	 * DIコンテナと連携させたEnhahcerを生成します。 Containerを連携させたいDIコンテナ用に作成してください。
+	 * 
+	 * @param container
+	 * @return
+	 */
 	static public Enhancer create(Container container) {
 		return new EnhancerImpl(container);
 	}
 
-	Set<Class<?>> mixinCLasses(Class<?> clazz) {
+	/**
+	 * @Mixinedアノテーションの一覧を取得します。
+	 * @param clazz
+	 * @return
+	 */
+	static public Set<Class<?>> mixinCLasses(Class<?> clazz) {
 		return Reflections.mixinImplementClasses(clazz);
 	}
 }
