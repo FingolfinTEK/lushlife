@@ -1,13 +1,16 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+== Introduction ==
+RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
+しかし,それらの多くはJavaにはないメタプログラミングのパラダイムでした。
 
-Add your content here.
+mix-inとmethod missingはRubyでは重要な概念ですがJavaにはありません。
+ということで、Javaでmix-inとmethod missingを実現するライブラリを作ってみました。
+「型付き言語のJavaの良さを活かしたmix-inとmethod missingを実現すること」をコンセプトにしています。
 
+== Install ==
+ 次の２つのjarをダウンロードしてクラスパスを通してください。
+ * maven
+{{{
 
-= Install =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+}}}
