@@ -6,7 +6,7 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 
 mix-inとmethod missingはRubyでは重要な概念ですがJavaにはありません。
 ということで、Javaでmix-inとmethod missingを実現するライブラリを作ってみました。
-「型付き言語のJavaの良さを活かしたmix-inとmethod missingを実現すること」をコンセプトにしています。
+「型付き言語の良さを活かしたmix-inとmethod missingを実現すること」をコンセプトにしています。
 
 == Install ==
  次の２つのjarをダウンロードしてクラスパスを通してください。
