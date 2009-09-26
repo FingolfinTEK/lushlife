@@ -29,6 +29,7 @@
 		<module>api</module>
 		<module>guice</module>
 		<module>jsr-299</module>
+		<module>sample</module>
 	</modules>
 
 	<distributionManagement>
