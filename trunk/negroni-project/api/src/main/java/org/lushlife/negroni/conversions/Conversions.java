@@ -76,20 +76,4 @@ public class Conversions {
 		return converter.isAssignableTo(from);
 	}
 
-	static public Object convertTo(Object from, Class<?> to) {
-		if (to.isAssignableFrom(from.getClass())) {
-			return from;
-		}
-		Converter<?> converter = converters.get(to);
-		if (converter == null) {
-			throw new RuntimeException("can't convert from " + from + " to ="
-					+ to);
-		}
-		if (!converter.isAssignableTo(from.getClass())) {
-			throw new RuntimeException("can't convert from " + from + " to ="
-					+ to);
-		}
-		return converter.convert(from);
-	}
-
 }
