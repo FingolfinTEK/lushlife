@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>sample</groupId>
+	<artifactId>negroni-sample</artifactId>
+	<packaging>jar</packaging>
+	<name>Negroni Sample</name>
+	<version>0.3-SNAPSHOT</version>
+
+	<repositories>
+		<repository>
+			<id>repository.lushlife.code.google.com</id>
+			<name>LushLife Repository</name>
+			<url>https://lushlife.googlecode.com/svn/maven2</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.lushlife.negroni</groupId>
+			<artifactId>negroni</artifactId>
+			<version>0.3-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+
+</project>
