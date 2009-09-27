@@ -1,0 +1,11 @@
+#summary Negroni Method Mapping Algorithm
+
+= mix-inとmethod-missingのメソッドのマッピング方法 =
+
+Add your content here.
+
+== 可変長引数 ==
+ * 
+
+== 優先順位 ==
+ * 
