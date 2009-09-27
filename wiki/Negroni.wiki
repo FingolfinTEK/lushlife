@@ -1,12 +1,15 @@
-#summary Type-safe mix-in and method-missing for Java
+#summary a java library type-safe mix-in and method-missing
+== Negroniとは ==
+ * Javaでmix-inとmethod-missingのライブラリです
+ * 型付き言語の良さを活かしたmix-inとmethod-missingをコンセプトに設計しています
+ * DIコンテナと連携できます(GuiceとJSR-299の連携は実装しました）
 
 == Introduction ==
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
 しかし,それらの多くはJavaにはないメタプログラミングのパラダイムだったことが残念でした。
 特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能と思います。
 
-だからJavaでmix-inとmethod missingを実現するライブラリを作ってみました。
-「型付き言語の良さを活かしたmix-inとmethod missingを実現する」をコンセプトにしています。
+だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
 == Install ==
  次の３つのjarをダウンロードしてクラスパスを通してください。
@@ -14,8 +17,8 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
 
-=== maven2===
- maven2の場合には、以下のdependencyとrepositoryを設定してください。
+== Maven2統合 ==
+ maven2を使っている場合には、dependencyとrepositoryを設定することで統合できます。
  * dependency
 {{{
 <dependency>
@@ -39,7 +42,10 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 </repository>
 
 }}}
- * pom.xmlサンプル
+== Getting stated ==
+method-missingとmix-inの簡単なサンプルを説明します。
+サンプルはsample pom.xmlで動作させています。
+ * sample pom.xml
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -85,7 +91,65 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 			</plugins>
 		</pluginManagement>
 	</build>
-
 </project>
 
 }}}
+
+=== Step.1 method-missing ===
+method-missingは定義していないメソッドが呼び出された場合の処理のハンドリングします。
+Javaでは定義していないメソッドは呼び出すことができないので、abstract methodが呼び出された場合のハンドリングするメソッドとして実装しています。
+
+method-missingは*実装されていないメソッド*がハンドリング対象ですので、Methodクラスを引数に取る必要があります。
+Negroniでは@MissingMethodアノテーションを付加したMethodクラスを引数に取るメソッドで,method-missingの実装を記述します。
+
+簡単な例を用意しました。引数のない未実装のメソッドが呼び出された場合にそのメソッドをSystem.outに出力する場合のサンプルです。
+ * MethodMissingSample
+{{{
+package example;
+
+import java.lang.reflect.Method;
+
+import org.lushlife.negroni.MissingMethod;
+
+public abstract class MethodMissingSample {
+        // method-missingの実装
+	public void methodMissing(@MissingMethod Method method) {
+		System.out.println(method);
+	}
+        // 未実装のメソッド
+	public abstract void invoke();
+}
+
+}}}
+
+未実装のメソッドを残しておくために、method-missingを実装したクラスは抽象クラスとしています。Javaの言語仕様上、抽象クラスはインスタンス化できませんのでNegroniではEnhancerクラスにより実装クラスを動的に生成します。
+
+先ほど作成したMethodMissingSampleを動作させるサンプルです。
+ * MethodMissingMain
+{{{
+package example;
+
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+
+public class MethodMissingMain {
+	public static void main(String[] args) throws InstantiationException,
+			IllegalAccessException {
+		// Enhancerの取得
+		Enhancer enhancer = Negroni.create();
+		// クラスの拡張
+		Class<? extends MethodMissingSample> enhacedClass = enhancer
+				.enhace(MethodMissingSample.class);
+		// インスタンスの生成
+		MethodMissingSample methodMissingSample = enhacedClass.newInstance();
+		// メソッドの実行
+		methodMissingSample.invoke();
+	}
+}
+}}}
+実行すると以下のように出力されます。
+ * 実行結果
+{{{
+public abstract void example.MethodMissingSample.invoke()
+}}}
+
