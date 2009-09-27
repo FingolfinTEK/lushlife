@@ -1,11 +1,11 @@
-#Type-safe mix-in and method-missing for Java
+#summary Type-safe mix-in and method-missing for Java
 
 == Introduction ==
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
 しかし,それらの多くはJavaにはないメタプログラミングのパラダイムだったことが残念でした。
-特にmix-inとmethod missingはRubyではフレームワーク開発者にとって魅力的な機能と思います。
+特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能と思います。
 
-だから、Javaでmix-inとmethod missingを実現するライブラリを作ってみました。
+だからJavaでmix-inとmethod missingを実現するライブラリを作ってみました。
 「型付き言語の良さを活かしたmix-inとmethod missingを実現する」をコンセプトにしています。
 
 == Install ==
