@@ -6,7 +6,7 @@ import org.lushlife.negroni.MissingMethod;
 
 public abstract class MethodMissingSample {
 
-	public void missing(@MissingMethod Method method) {
+	public void methodMissing(@MissingMethod Method method) {
 		System.out.println(method);
 	}
 
