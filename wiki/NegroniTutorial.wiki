@@ -1,3 +1,4 @@
+#labels Tutorial,Phase-Implementation
 method-missingとmix-inの単純なサンプルを用いて説明します。
 
 == 動作環境 ==
@@ -250,4 +251,4 @@ mixin and method missing example.MixInMethodMissingImpl_$$_javassist_0@18f51f : 
 }}}
 
 == Next ==
- チュートリアルでは、メソッドに引数がある場合やタイプセーフ性についての説明はしていません。それらは、MethodMappingで説明しています。
+ チュートリアルでは、メソッドに引数がある場合やタイプセーフ性についての説明はしていません。それらはMethodMappingで説明しています。
