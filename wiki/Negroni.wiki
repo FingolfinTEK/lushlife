@@ -10,11 +10,6 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
 だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
-
-== システム用件 ==
- * OS: Java をサポートする Windows または Unix 系 OS
- * JVM: 1.5.0 またはそれ以降 
-
 == ダウンロード ==
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
 
@@ -24,10 +19,25 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
 
 == インストール ==
- ダウンロードにある３つのjarにクラスパスを通してください。
+ ダウンロードの３つのjarにクラスパスを通してください。
 
 == ドキュメント ==
  * [NegroniTutorial チュートリアル]
+
+== メーリングリスト == 
+Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽。
+
+ * グループ アドレス
+  http://groups.google.com/group/lushlife4j
+ * メールアドレス:
+  lushlife4j@googlegroups.com
+<?
+<form action="http://groups.google.com/group/lushlife4j/boxsubscribe">
+  メール: <input type=text name=email>
+  <input type=submit name="sub" value="登録">
+</form>
+?>
+<a href="http://groups.google.com/group/lushlife4j">このグループにアクセス</a> 
 
 == Maven2統合 ==
  maven2を使っている場合には、dependencyとrepositoryを設定することで統合できます。
