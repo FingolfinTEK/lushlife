@@ -1,3 +1,4 @@
+#summary Negroni Tutorial
 #labels Tutorial,Phase-Implementation
 method-missingとmix-inの単純なサンプルを用いて説明します。
 
