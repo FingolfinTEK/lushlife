@@ -8,7 +8,6 @@
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
 しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
 特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
-
 だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
 == Install ==
@@ -226,4 +225,67 @@ public class MixInMain {
  * 実行結果
 {{{
 mixin example.MixInedSample_$$_javassist_0@fd7f6
+}}}
+
+=== Step.3 mix-in & method-missing
+mix-inとmethod-missingを組み合わせたて使用することもできます。
+@MissingMethodと@MixinInstanceを組み合わせて使います。
+
+ * MixInMethodMissingSample
+{{{
+package example;
+
+import java.lang.reflect.Method;
+
+import org.lushlife.negroni.MissingMethod;
+import org.lushlife.negroni.MixinInstance;
+
+public class MixInMethodMissingSample {
+	// mix-in & method-missingの実装
+	public void methodMissing(@MixinInstance Object obj,
+			@MissingMethod Method method) {
+		System.out.println("mixin and method missing " + obj + " : " + method);
+	}
+}
+}}}
+
+ 使用方法はmix-inと同じです。@Mixinedアノテーションによりmix-inの実装クラスを指定します。
+ * MixInMethodMissingSample
+{{{
+package example;
+
+import org.lushlife.negroni.Mixined;
+
+@Mixined(MixInMethodMissingSample.class)
+public abstract class MixInMethodMissingImpl {
+
+	public abstract void invoke();
+
+}
+}}}
+
+実行は他と同様にEnhancerにより拡張したクラスを生成して実行します。
+{{{
+package example;
+
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+
+public class MixInMethodMissingMain {
+	public static void main(String[] args) throws InstantiationException,
+			IllegalAccessException {
+
+		Enhancer enhancer = Negroni.create();
+		Class<? extends MixInMethodMissingImpl> enhancedClass = enhancer
+				.enhace(MixInMethodMissingImpl.class);
+
+		MixInMethodMissingImpl mixinSample = enhancedClass.newInstance();
+		mixinSample.invoke();
+	}
+}
+}}}
+ * 実行結果
+{{{
+mixin and method missing example.MixInMethodMissingImpl_$$_javassist_0@18f51f : public abstract void example.MixInMethodMissingImpl.invoke()
+
 }}}
