@@ -1,16 +1,91 @@
-#summary One-sentence summary of this page.
+#Type-safe mix-in and method-missing for Java
 
 == Introduction ==
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
-しかし,それらの多くはJavaにはないメタプログラミングのパラダイムでした。
+しかし,それらの多くはJavaにはないメタプログラミングのパラダイムだったことが残念でした。
+特にmix-inとmethod missingはRubyではフレームワーク開発者にとって魅力的な機能と思います。
 
-mix-inとmethod missingはRubyでは重要な概念ですがJavaにはありません。
-ということで、Javaでmix-inとmethod missingを実現するライブラリを作ってみました。
-「型付き言語の良さを活かしたmix-inとmethod missingを実現すること」をコンセプトにしています。
+だから、Javaでmix-inとmethod missingを実現するライブラリを作ってみました。
+「型付き言語の良さを活かしたmix-inとmethod missingを実現する」をコンセプトにしています。
 
 == Install ==
- 次の２つのjarをダウンロードしてクラスパスを通してください。
- * maven
+ 次の３つのjarをダウンロードしてクラスパスを通してください。
+  * [http://repository.jboss.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar javassist-3.8.0.GA]
+  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
+  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
+
+=== maven2===
+ maven2の場合には、以下のdependencyとrepositoryを設定してください。
+ * dependency
 {{{
+<dependency>
+	<groupId>org.lushlife.negroni</groupId>
+	<artifactId>negroni</artifactId>
+	<version>0.4</version>
+</dependency>
+}}}
+
+ * repository
+{{{
+<repository>
+	<id>repository.jboss.org</id>
+	<name>JBoss Repository</name>
+	<url>http://repository.jboss.org/maven2</url>
+</repository>
+<repository>
+	<id>repository.lushlife.code.google.com</id>
+	<name>LushLife Repository</name>
+	<url>http://lushlife.googlecode.com/svn/maven2</url>
+</repository>
+
+}}}
+ * pom.xmlサンプル
+{{{
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>sample</groupId>
+	<artifactId>negroni-sample</artifactId>
+	<packaging>jar</packaging>
+	<name>Negroni Sample</name>
+	<version>1.0</version>
+
+	<repositories>
+		<repository>
+			<id>repository.jboss.org</id>
+			<name>JBoss Repository</name>
+			<url>http://repository.jboss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>repository.lushlife.code.google.com</id>
+			<name>LushLife Repository</name>
+			<url>http://lushlife.googlecode.com/svn/maven2</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.lushlife.negroni</groupId>
+			<artifactId>negroni</artifactId>
+			<version>0.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
 
 }}}
