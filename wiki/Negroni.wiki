@@ -25,19 +25,9 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
  * [NegroniTutorial チュートリアル]
 
 == メーリングリスト == 
-Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽。
-
- * グループ アドレス
-  http://groups.google.com/group/lushlife4j
+Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽に。
  * メールアドレス:
   lushlife4j@googlegroups.com
-<?
-<form action="http://groups.google.com/group/lushlife4j/boxsubscribe">
-  メール: <input type=text name=email>
-  <input type=submit name="sub" value="登録">
-</form>
-?>
-<a href="http://groups.google.com/group/lushlife4j">このグループにアクセス</a> 
 
 == Maven2統合 ==
  maven2を使っている場合には、dependencyとrepositoryを設定することで統合できます。
