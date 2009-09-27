@@ -4,6 +4,13 @@
  * 型付き言語の良さを活かしたmix-inとmethod-missingをコンセプトに設計しています
  * DIコンテナと連携できます(GuiceとJSR-299の連携は実装済です）
 
+== はじめに ==
+RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
+しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
+特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
+だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
+
+
 == システム用件 ==
  * OS: Java をサポートする Windows または Unix 系 OS
  * JVM: 1.5.0 またはそれ以降 
@@ -15,12 +22,6 @@
 
   * [http://repository.jboss.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar javassist-3.8.0.GA]
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
-
-== はじめに ==
-RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
-しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
-特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
-だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
 == インストール ==
  negroniとstlaとjavassistをダウンロードしてクラスパスを通してください。
