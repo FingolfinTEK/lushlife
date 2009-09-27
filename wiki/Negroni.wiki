@@ -7,7 +7,7 @@
 == Introduction ==
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
 しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
-特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能と思います。
+特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
 
 だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
