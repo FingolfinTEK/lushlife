@@ -1,7 +1,7 @@
 method-missingとmix-inの単純なサンプルを説明します。
 
 == 動作環境 ==
- サンプルはsample pom.xmlで動作させています。
+ サンプルはsample pom.xmlの環境で動作させています。
  * sample pom.xml
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
