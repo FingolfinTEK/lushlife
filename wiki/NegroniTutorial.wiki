@@ -1,4 +1,4 @@
-method-missingとmix-inの単純なサンプルを説明します。
+method-missingとmix-inの単純なサンプルを用いて説明します。
 
 == 動作環境 ==
  サンプルはsample pom.xmlの環境で動作させています。
