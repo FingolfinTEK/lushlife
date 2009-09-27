@@ -2,7 +2,7 @@
 == Negroniとは ==
  * Javaでmix-inとmethod-missingのライブラリです
  * 型付き言語の良さを活かしたmix-inとmethod-missingをコンセプトに設計しています
- * DIコンテナと連携できます(GuiceとJSR-299の連携は実装済です）
+ * DIコンテナと連携できます(GuiceとJSR-299の連携は作りました）
 
 == はじめに ==
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
