@@ -24,7 +24,7 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
 
 == インストール ==
- ダウンロードした３つのjarにクラスパスを通してください。
+ ダウンロードにある３つのjarにクラスパスを通してください。
 
 == ドキュメント ==
  * [NegroniTutorial チュートリアル]
