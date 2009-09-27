@@ -20,25 +20,21 @@ public class MethodMissingTest {
 
 		abstract public void invoke(String... str);
 
-		@MethodMissing
-		public void methodMissing(Method method) {
+		public void methodMissing(@MissingMethod Method method) {
 			call = true;
 		}
 
-		@MethodMissing
-		public void methodMissing(Method method, Integer integer) {
+		public void methodMissing(@MissingMethod Method method, Integer integer) {
 			call = true;
 			args = integer;
 		}
 
-		@MethodMissing
-		public void methodMissing(Method method, String integer) {
+		public void methodMissing(@MissingMethod Method method, String integer) {
 			call = true;
 			args = integer;
 		}
 
-		@MethodMissing
-		public void methodMissing(Method method, String... str) {
+		public void methodMissing(@MissingMethod Method method, String... str) {
 			call = true;
 			args = str;
 		}

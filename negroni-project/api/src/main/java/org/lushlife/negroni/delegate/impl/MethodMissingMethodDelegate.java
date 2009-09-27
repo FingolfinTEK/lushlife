@@ -27,8 +27,11 @@ import org.lushlife.negroni.util.Reflections;
 @DelegateMethodPrecedence(300)
 public class MethodMissingMethodDelegate extends AbstractDelegateMethod {
 
-	public MethodMissingMethodDelegate(Method method) {
+	private int methodMissing;
+
+	public MethodMissingMethodDelegate(int methodMissing, Method method) {
 		super(method);
+		this.methodMissing = methodMissing;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {

@@ -12,16 +12,14 @@ public class MixinMethodMixxing {
 		static public Object owner;
 		static public String[] args;
 
-		@MethodMissing
-		@MixinMethod
-		public void xxx(Object owner, Method method, String str) {
+		public void xxx(@MixinInstance Object owner,
+				@MissingMethod Method method, String str) {
 			Mixin.owner = owner;
 			args = new String[] { str };
 		}
 
-		@MethodMissing
-		@MixinMethod
-		public void xxx(Object owner, Method m, String... str) {
+		public void xxx(@MixinInstance Object owner, @MissingMethod Method m,
+				String... str) {
 			Mixin.owner = owner;
 			args = str;
 		}

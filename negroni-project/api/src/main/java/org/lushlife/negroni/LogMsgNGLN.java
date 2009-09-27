@@ -33,6 +33,9 @@ public enum LogMsgNGLN {
 	NGLN00003,
 
 	@Trace("call method [{0}]: return [{1}]")
-	NGLN00004
+	NGLN00004,
+
+	@Error("Illegal Annotation @MissingMethod method[{0}],args[{1}]")
+	NGLN00005
 
 }

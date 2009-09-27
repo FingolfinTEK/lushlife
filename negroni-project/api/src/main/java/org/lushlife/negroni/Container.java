@@ -16,7 +16,7 @@
 package org.lushlife.negroni;
 
 /**
- * mix-inのクラスをインスタンス化の役割を担うクラスです。 DIコンテナと連携させたい場合には継承する。
+ * mix-inのクラスをインスタンス化の役割を担うクラスです。
  * 
  * @author Takeshi Kondo
  */

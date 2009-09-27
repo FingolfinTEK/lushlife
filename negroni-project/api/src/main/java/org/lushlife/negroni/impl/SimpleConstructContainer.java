@@ -20,7 +20,7 @@ import org.lushlife.negroni.Container;
 /**
  * @author Takeshi Kondo
  */
-public class SimpleContainer implements Container {
+public class SimpleConstructContainer implements Container {
 
 	public <T> T getInstance(Class<T> clazz) {
 		try {

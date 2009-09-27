@@ -10,14 +10,12 @@ public class MixinTest {
 		static public Object owner;
 		static public String[] args;
 
-		@MixinMethod
-		public void mixin(Object owner, String str) {
+		public void mixin(@MixinInstance Object owner, String str) {
 			Mixin.owner = owner;
 			args = new String[] { str };
 		}
 
-		@MixinMethod
-		public void mixin(Object owner, String... str) {
+		public void mixin(@MixinInstance Object owner, String... str) {
 			Mixin.owner = owner;
 			args = str;
 		}

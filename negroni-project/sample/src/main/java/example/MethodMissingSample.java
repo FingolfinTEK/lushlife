@@ -2,13 +2,11 @@ package example;
 
 import java.lang.reflect.Method;
 
-import org.lushlife.negroni.Enhancer;
-import org.lushlife.negroni.MethodMissing;
-import org.lushlife.negroni.Negroni;
+import org.lushlife.negroni.MissingMethod;
 
 public abstract class MethodMissingSample {
-	@MethodMissing
-	public void missing(Method method) {
+
+	public void missing(@MissingMethod Method method) {
 		System.out.println(method);
 	}
 

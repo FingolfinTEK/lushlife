@@ -15,6 +15,7 @@
  */
 package org.lushlife.negroni.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,6 +24,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import org.lushlife.negroni.MissingMethod;
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.conversions.Conversions;
 import org.lushlife.negroni.delegate.DelegateMethod;
@@ -298,4 +300,16 @@ public class Reflections {
 		return temp;
 	}
 
+	public static int searchParameterAnnotation(Method m,
+			Class<? extends Annotation> c) {
+		Annotation[][] annotations = m.getParameterAnnotations();
+		for (int i = 0; i < annotations.length; i++) {
+			for (Annotation annotation : annotations[i]) {
+				if (annotation.annotationType().equals(c)) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
 }

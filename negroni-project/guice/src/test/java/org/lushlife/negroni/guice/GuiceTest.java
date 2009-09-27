@@ -7,8 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.Enhancer;
-import org.lushlife.negroni.MethodMissing;
-import org.lushlife.negroni.MixinMethod;
+import org.lushlife.negroni.MissingMethod;
+import org.lushlife.negroni.MixinInstance;
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.Negroni;
 
@@ -24,19 +24,16 @@ public class GuiceTest {
 		@Inject
 		private AtomicInteger counter;
 
-		@MixinMethod
-		public int getCount(Sample sample) {
+		public int getCount(@MixinInstance Sample sample) {
 			return counter.get();
 		}
 
-		@MixinMethod
-		public int getCount(Sample2 sample) {
+		public int getCount(@MixinInstance Sample2 sample) {
 			return counter.get();
 		}
 
-		@MethodMissing
-		@MixinMethod
-		public void methodMissing(Object obj, Method m, Object... args) {
+		public void methodMissing(@MixinInstance Object obj,
+				@MissingMethod Method m, Object... args) {
 			System.out.println("call " + m);
 			counter.incrementAndGet();
 		}

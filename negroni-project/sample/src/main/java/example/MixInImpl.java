@@ -2,19 +2,28 @@ package example;
 
 import java.lang.reflect.Method;
 
-import org.lushlife.negroni.MethodMissing;
-import org.lushlife.negroni.MixinMethod;
+import org.lushlife.negroni.MissingMethod;
+import org.lushlife.negroni.MixinInstance;
 
 public class MixInImpl {
 
-	@MixinMethod
-	public void mixin(Object obj) {
+	/**
+	 * mix-inの実装
+	 * 
+	 * @param obj
+	 */
+	public void mixin(@MixinInstance Object obj) {
 		System.out.println("mixin " + obj);
 	}
 
-	@MixinMethod
-	@MethodMissing
-	public void methodMissing(Object obj, Method method) {
+	/**
+	 * mix-in & method-missingの実装
+	 * 
+	 * @param obj
+	 * @param method
+	 */
+	public void methodMissing(@MixinInstance Object obj,
+			@MissingMethod Method method) {
 		System.out.println("mixin and method missing " + obj + " : " + method);
 	}
 
