@@ -28,8 +28,11 @@ import org.lushlife.negroni.util.Reflections;
 public class MethodMissingVarArgsMethodDelegate extends
 		AbstractVarArgsDelegatemMethod {
 
-	public MethodMissingVarArgsMethodDelegate(Method method) {
+	private int methodMissing;
+
+	public MethodMissingVarArgsMethodDelegate(int methodMissing, Method method) {
 		super(method);
+		this.methodMissing = methodMissing;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {

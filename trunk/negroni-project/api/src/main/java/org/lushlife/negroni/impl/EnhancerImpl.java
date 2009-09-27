@@ -55,57 +55,57 @@ public class EnhancerImpl implements Enhancer {
 	}
 
 	protected <T> Class<? extends T> enhace(Class<T> clazz, Container container) {
-		Class<? extends T> enhahcedClass = (Class<? extends T>) cache
-				.get(clazz);
-		if (enhahcedClass == null) {
-			lock.lock();
-			try {
-				enhahcedClass = (Class<? extends T>) cache.get(clazz);
-				if (enhahcedClass == null) {
-					Map<Method, DelegateMethod> methodMapping = new HashMap<Method, DelegateMethod>();
-					Set<Method> undifinedMethods = Reflections
-							.undifinedMethods(clazz);
-					Set<Class<?>> mixinImplementClasses = Reflections
-							.mixinImplementClasses(clazz);
-					for (Method method : undifinedMethods) {
-						List<DelegateMethod> delegateMethods = new ArrayList<DelegateMethod>();
-						delegateMethods.addAll(findDelegateMethods(clazz,
-								clazz, method));
-
-						for (Class<?> mixinClass : mixinImplementClasses) {
-							log.log(LogMsgNGLN.NGLN00003, clazz, mixinClass);
-							delegateMethods.addAll(findDelegateMethods(clazz,
-									mixinClass, method));
-						}
-						if (delegateMethods.size() == 0) {
-							throw new NullPointerException(Logging.getMessage(
-									LogMsgNGLN.NGLN00001, method));
-						}
-						DelegateMethod delegateMethod = select(delegateMethods);
-						methodMapping.put(method, delegateMethod);
-					}
-
-					ProxyFactory factory = new ProxyFactory();
-					if (clazz.isInterface()) {
-						factory.setInterfaces(new Class[] { clazz });
-					} else {
-						factory.setSuperclass(clazz);
-					}
-					factory.setFilter(new TargetMethodFilter(methodMapping
-							.keySet()));
-					factory.setHandler(new DelegateMethodHandler(container,
-							methodMapping));
-					enhahcedClass = factory.createClass();
-					cache.put(clazz, enhahcedClass);
-				}
-			} finally {
-				lock.unlock();
-			}
-		}
-		return enhahcedClass;
+		Map<Method, DelegateMethod> methodMapping = createDelegateMethodMapping(clazz);
+		return createEnhancedClass(clazz, container, methodMapping);
 	}
 
-	private DelegateMethod select(List<DelegateMethod> delegateMethods) {
+	private <T> Class<? extends T> createEnhancedClass(Class<T> clazz,
+			Container container, Map<Method, DelegateMethod> methodMapping) {
+		ProxyFactory factory = new ProxyFactory();
+		if (clazz.isInterface()) {
+			factory.setInterfaces(new Class[] { clazz });
+		} else {
+			factory.setSuperclass(clazz);
+		}
+		factory.setFilter(new TargetMethodFilter(methodMapping.keySet()));
+		factory.setHandler(new DelegateMethodHandler(container, methodMapping));
+		return factory.createClass();
+	}
+
+	private <T> Map<Method, DelegateMethod> createDelegateMethodMapping(
+			Class<T> clazz) {
+		Map<Method, DelegateMethod> methodMapping = new HashMap<Method, DelegateMethod>();
+		Set<Method> undifinedMethods = Reflections.undifinedMethods(clazz);
+		Set<Class<?>> mixinImplementClasses = Reflections
+				.mixinImplementClasses(clazz);
+		for (Method method : undifinedMethods) {
+			List<DelegateMethod> delegateMethods = findDelegateMethods(clazz,
+					mixinImplementClasses, method);
+			if (delegateMethods.size() == 0) {
+				throw new NullPointerException(Logging.getMessage(
+						LogMsgNGLN.NGLN00001, method));
+			}
+			DelegateMethod delegateMethod = selectMaxPrecidenceDelegateMethod(delegateMethods);
+			methodMapping.put(method, delegateMethod);
+		}
+		return methodMapping;
+	}
+
+	private <T> List<DelegateMethod> findDelegateMethods(Class<T> clazz,
+			Set<Class<?>> mixinImplementClasses, Method method) {
+		List<DelegateMethod> delegateMethods = new ArrayList<DelegateMethod>();
+		delegateMethods.addAll(findDelegateMethods(clazz, clazz, method));
+
+		for (Class<?> mixinClass : mixinImplementClasses) {
+			log.log(LogMsgNGLN.NGLN00003, clazz, mixinClass);
+			delegateMethods.addAll(findDelegateMethods(clazz, mixinClass,
+					method));
+		}
+		return delegateMethods;
+	}
+
+	private DelegateMethod selectMaxPrecidenceDelegateMethod(
+			List<DelegateMethod> delegateMethods) {
 		Collections.sort(delegateMethods);
 		return delegateMethods.get(0);
 	}
@@ -117,10 +117,10 @@ public class EnhancerImpl implements Enhancer {
 			DelegateMethod delegateMethod = DelegateMethodFactory
 					.toDelegateMethod(mixinMethod, mixinClass);
 			if (delegateMethod != null) {
-				boolean isAccept = delegateMethod.isAccept(ownerClass, method);
+				boolean accept = delegateMethod.isAccept(ownerClass, method);
 				log.log(LogMsgNGLN.NGLN00002, delegateMethod
-						.getDelegateMethod(), method, isAccept);
-				if (isAccept) {
+						.getDelegateMethod(), method, accept);
+				if (accept) {
 					delegateMethods.add(delegateMethod);
 				}
 			}

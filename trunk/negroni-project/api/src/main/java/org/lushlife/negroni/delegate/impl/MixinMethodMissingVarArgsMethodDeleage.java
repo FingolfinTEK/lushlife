@@ -30,15 +30,20 @@ public class MixinMethodMissingVarArgsMethodDeleage extends
 		AbstractVarArgsDelegatemMethod {
 
 	private Class id;
+	private int mixin;
+	private int methodMissing;
 
-	public MixinMethodMissingVarArgsMethodDeleage(Method method, Class id) {
+	public MixinMethodMissingVarArgsMethodDeleage(int mixin, int methodMissing,
+			Method method, Class id) {
 		super(method);
+		this.mixin = mixin;
+		this.methodMissing = methodMissing;
 		this.id = id;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {
 		if (!Conversions.isConvert(owner, getDelegateMethod()
-				.getParameterTypes()[0])) {
+				.getParameterTypes()[mixin])) {
 			return false;
 		}
 		return Reflections.isVarArgsAccept(m, getDelegateMethod(), 2);

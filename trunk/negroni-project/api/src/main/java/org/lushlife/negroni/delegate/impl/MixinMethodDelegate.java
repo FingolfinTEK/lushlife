@@ -27,11 +27,13 @@ import org.lushlife.negroni.util.Reflections;
  */
 @DelegateMethodPrecedence(100)
 public class MixinMethodDelegate extends AbstractDelegateMethod {
-	final Class id;
+	final private Class mixinClass;
+	private int mixIn;
 
-	public MixinMethodDelegate(Method method, Class id) {
+	public MixinMethodDelegate(int mixIn, Method method, Class mixinClass) {
 		super(method);
-		this.id = id;
+		this.mixinClass = mixinClass;
+		this.mixIn = mixIn;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {
@@ -42,7 +44,7 @@ public class MixinMethodDelegate extends AbstractDelegateMethod {
 		if (classes.length == 0) {
 			return false;
 		}
-		if (!Conversions.isConvert(owner, classes[0])) {
+		if (!Conversions.isConvert(owner, classes[mixIn])) {
 			return false;
 		}
 
@@ -54,7 +56,7 @@ public class MixinMethodDelegate extends AbstractDelegateMethod {
 		Object[] tmp = Reflections.toSimpleTypeArgs(new Object[] { owner },
 				args);
 
-		return Reflections.invoke(context.getInstance(id), getDelegateMethod(),
-				tmp);
+		return Reflections.invoke(context.getInstance(mixinClass),
+				getDelegateMethod(), tmp);
 	}
 }

@@ -28,16 +28,21 @@ import org.lushlife.negroni.util.Reflections;
 @DelegateMethodPrecedence(500)
 public class MixinMethodMissingMethodDelegate extends AbstractDelegateMethod {
 
-	Class id;
+	private Class id;
+	private int mixin;
+	private int methodMissing;
 
-	public MixinMethodMissingMethodDelegate(Method method, Class id) {
+	public MixinMethodMissingMethodDelegate(int mixin, int methodMissing,
+			Method method, Class id) {
 		super(method);
 		this.id = id;
+		this.mixin = mixin;
+		this.methodMissing = methodMissing;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {
 		if (!Conversions.isConvert(owner, getDelegateMethod()
-				.getParameterTypes()[0])) {
+				.getParameterTypes()[mixin])) {
 			return false;
 		}
 		return Reflections.isSimpleTypeAccept(m, getDelegateMethod(), 2);

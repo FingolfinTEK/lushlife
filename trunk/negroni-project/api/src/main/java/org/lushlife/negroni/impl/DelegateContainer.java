@@ -18,7 +18,7 @@ package org.lushlife.negroni.impl;
 import org.lushlife.negroni.Container;
 
 /**
- * コンテナの初期化前にEnhancerを使いたい場合に便利です。
+ * Containerの初期化を遅延される場合に使用します。
  * 
  * @author Takeshi Kondo
  * 
