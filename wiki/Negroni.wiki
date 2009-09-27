@@ -27,7 +27,7 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 == メーリングリスト == 
 Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽に。
  * メーリングリスト 
-  * lushlife4j@googlegroups.com
+  * <a href="mailto:lushlife4j@googlegroups.com"><b>lushlife4j</b>@googlegroups.com</a>
  * グループ
   * http://groups.google.com/group/lushlife4j
 == Maven2統合 ==
