@@ -116,7 +116,7 @@ public abstract void example.MethodMissingSample.invoke()
 
  Rubyではmix-inとクラスの統合はダックタイピングなのでメソッド名を合わせるだけで動作させられます。
  Javaではダックタイピングは使えないので別の方法を準備する必要がありました。
-Negroniではmix-inを引数として取ることで連携をさせています。メソッドの引数に@MixinInstanceアノテーションを付加することで、連携クラスのインスタンスを引数として取るようにしています。
+ Negroniではmix-inを引数として取ることで連携をさせています。メソッドの引数に@MixinInstanceアノテーションを付加することで、連携クラスのインスタンスを引数として取るようにしています。
 
 
  サンプルでは連携クラスをSystem.outに出力しています。
