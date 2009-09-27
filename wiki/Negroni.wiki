@@ -26,6 +26,9 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 == インストール ==
  ダウンロードした３つのjarにクラスパスを通してください。
 
+== ドキュメント ==
+ * [NegroniTutorial チュートリアル]
+
 == Maven2統合 ==
  maven2を使っている場合には、dependencyとrepositoryを設定することで統合できます。
  * dependency
@@ -51,5 +54,3 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 </repository>
 
 }}}
-== Getting Started ==
- * NegroniTutorial    
