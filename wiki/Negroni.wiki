@@ -30,6 +30,12 @@
   * <a href="mailto:lushlife4j@googlegroups.com"><b>lushlife4j</b>@googlegroups.com</a>
  * グループ
   * http://groups.google.com/group/lushlife4j
+
+== ソースコード == 
+ ソースコードはmavenレポジトリにアップロードしています。
+  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/ NegroniMavenレポジトリ]
+ プロジェクトのリポジトリには以下の URL からアクセスできます。 
+  http://lushlife.googlecode.com/svn/trunk/negroni-project/
 == Maven2統合 ==
  maven2を使っている場合には、dependencyとrepositoryを設定することで統合できます。
  * dependency
