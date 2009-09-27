@@ -1,7 +1,7 @@
 method-missingとmix-inの単純なサンプルを説明します。
 
 == 動作環境 ==
-サンプルはsample pom.xmlで動作させています。
+ サンプルはsample pom.xmlで動作させています。
  * sample pom.xml
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -53,13 +53,13 @@ method-missingとmix-inの単純なサンプルを説明します。
 }}}
 
 === Step.1 method-missing ===
-method-missingは定義していないメソッドが呼び出された場合の処理のハンドリングします。
-Javaでは定義していないメソッドは呼び出すことができないので、abstract methodが呼び出された場合のハンドリングするメソッドとして実装しています。
+ method-missingは定義していないメソッドが呼び出された場合の処理のハンドリングします。
+ Javaでは定義していないメソッドは呼び出すことができないので、abstract methodが呼び出された場合のハンドリングするメソッドとして実装しています。
 
-method-missingは*実装されていないメソッド*がハンドリング対象ですので、Methodクラスを引数に取る必要があります。
-Negroniでは@MissingMethodアノテーションを付加したMethodクラスを引数に取るメソッドで,method-missingの実装を記述します。
+ method-missingは*実装されていないメソッド*がハンドリング対象ですので、Methodクラスを引数に取る必要があります。
+ Negroniでは@MissingMethodアノテーションを付加したMethodクラスを引数に取るメソッドで,method-missingの実装を記述します。
 
-簡単な例を用意しました。引数のない未実装のメソッドが呼び出された場合にそのメソッドをSystem.outに出力する場合のサンプルです。
+ 簡単な例を用意しました。引数のない未実装のメソッドが呼び出された場合にそのメソッドをSystem.outに出力する場合のサンプルです。
  * MethodMissingSample
 {{{
 package example;
@@ -79,9 +79,9 @@ public abstract class MethodMissingSample {
 
 }}}
 
-未実装のメソッドを残しておくために、method-missingを実装したクラスは抽象クラスとしています。Javaの言語仕様上、抽象クラスはインスタンス化できませんのでNegroniではEnhancerクラスにより実装クラスを動的に生成します。
+ 未実装のメソッドを残しておくために、method-missingを実装したクラスは抽象クラスとしています。Javaの言語仕様上、抽象クラスはインスタンス化できませんのでNegroniではEnhancerクラスにより実装クラスを動的に生成します。
 
-先ほど作成したMethodMissingSampleを動作させるサンプルです。
+ 先ほど作成したMethodMissingSampleを動作させるサンプルです。
  * MethodMissingMain
 {{{
 package example;
@@ -104,7 +104,7 @@ public class MethodMissingMain {
 	}
 }
 }}}
-実行すると以下のように出力されます。
+ 実行すると以下のように出力されます。
  * 実行結果
 {{{
 public abstract void example.MethodMissingSample.invoke()
@@ -112,14 +112,14 @@ public abstract void example.MethodMissingSample.invoke()
 
 
 == Step.2 mix-in ==
-mix-inは単体では動作しないメソッドを記述する。クラスと組み合わせることで動作するメソッドとなります。多重継承を禁止している言語で、複数のクラスで汎用的に利用する場合に便利な機能です。
+ mix-inは単体では動作しないメソッドを記述する。クラスと組み合わせることで動作するメソッドとなります。多重継承を禁止している言語で、複数のクラスで汎用的に利用する場合に便利な機能です。
 
-Rubyではmix-inとクラスの統合はダックタイピングなのでメソッド名を合わせるだけで動作させられます。
-Javaではダックタイピングは使えないので別の方法を準備する必要がありました。
+ Rubyではmix-inとクラスの統合はダックタイピングなのでメソッド名を合わせるだけで動作させられます。
+ Javaではダックタイピングは使えないので別の方法を準備する必要がありました。
 Negroniではmix-inを引数として取ることで連携をさせています。メソッドの引数に@MixinInstanceアノテーションを付加することで、連携クラスのインスタンスを引数として取るようにしています。
 
 
-サンプルでは連携クラスをSystem.outに出力しています。
+ サンプルでは連携クラスをSystem.outに出力しています。
  * MixinSample
 {{{
 package example;
@@ -134,9 +134,9 @@ public class MixInSample {
 }
 }}}
 
-次にmix-inメソッドに対応するインタフェースを用意します。
-@MixinInstanceが付与された引数を除いたメソッドを用意することになります。
-また@Mixinedアノテーションにより実装クラスと連携させます。
+ 次にmix-inメソッドに対応するインタフェースを用意します。
+ @MixinInstanceが付与された引数を除いたメソッドを用意することになります。
+ また@Mixinedアノテーションにより実装クラスと連携させます。
  * MixInInterface
 {{{
 package example;
@@ -150,7 +150,7 @@ public interface MixInInterface {
 }
 }}}
 
-mix-inとクラスを連携させるには、mix-inのインタフェースをimplementsに加えます。
+ mix-inとクラスを連携させるには、mix-inのインタフェースをimplementsに加えます。
  * MixInedSample
 {{{
 package example;
@@ -160,7 +160,7 @@ public abstract class MixInedSample implements MixInInterface {
 }
 }}}
 
-mix-inのクラスも抽象クラスとなるため,Enhancerで実装クラスを生成してインスタンス化させて呼び出します。
+ mix-inのクラスも抽象クラスとなるため,Enhancerで実装クラスを生成してインスタンス化させて呼び出します。
  * MixInMain
 {{{
 package example;
@@ -179,15 +179,15 @@ public class MixInMain {
 
 }
 }}}
-実行すると次のように出力されます。
+ 実行すると次のように出力されます。
  * 実行結果
 {{{
 mixin example.MixInedSample_$$_javassist_0@fd7f6
 }}}
 
 === Step.3 mix-in & method-missing ===
-mix-inとmethod-missingを組み合わせたて使用することもできます。
-@MissingMethodと@MixinInstanceを組み合わせて使います。
+ mix-inとmethod-missingを組み合わせたて使用することもできます。
+ @MissingMethodと@MixinInstanceを組み合わせて使います。
 
  * MixInMethodMissingSample
 {{{
@@ -222,7 +222,7 @@ public abstract class MixInMethodMissingImpl {
 }
 }}}
 
-実行は他と同様にEnhancerにより拡張したクラスを生成して実行します。
+ 実行は他と同様にEnhancerにより拡張したクラスを生成して実行します。
  * MixInMethodMissingMain
 {{{
 package example;
@@ -248,3 +248,6 @@ public class MixInMethodMissingMain {
 mixin and method missing example.MixInMethodMissingImpl_$$_javassist_0@18f51f : public abstract void example.MixInMethodMissingImpl.invoke()
 
 }}}
+
+== Next ==
+ チュートリアルでは、メソッドに引数がある場合やタイプセーフ性についての説明はしていません。それらは、MethodMappingで説明しています。
