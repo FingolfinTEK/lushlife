@@ -5,15 +5,15 @@
  * DIコンテナと連携できます(GuiceとJSR-299の連携は作りました）
 
 == はじめに ==
-RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
-しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
-特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
-だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
+ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
+ しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
+ 特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
+ だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
 == ダウンロード ==
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
 
-以下の２つのライブラリに依存していますので合わせてダウンロードしてください。
+ 以下の２つのライブラリに依存していますので合わせてダウンロードしてください。
 
   * [http://repository.jboss.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar javassist-3.8.0.GA]
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
@@ -25,7 +25,7 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
  * [NegroniTutorial チュートリアル]
  * [MethodMapping メソッドのマッピングロジック]
 == メーリングリスト == 
-Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽に。
+ Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽に。
  * メーリングリスト 
   * <a href="mailto:lushlife4j@googlegroups.com"><b>lushlife4j</b>@googlegroups.com</a>
  * グループ
