@@ -1,4 +1,4 @@
-#summary a java library type-safe mix-in and method-missing
+#summary A java library type-safe mix-in and method-missing
 == Negroniとは ==
  * Javaでmix-inとmethod-missingのライブラリです
  * 型付き言語の良さを活かしたmix-inとmethod-missingをコンセプトに設計しています
