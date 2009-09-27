@@ -4,17 +4,26 @@
  * 型付き言語の良さを活かしたmix-inとmethod-missingをコンセプトに設計しています
  * DIコンテナと連携できます(GuiceとJSR-299の連携は実装済です）
 
-== Introduction ==
+== システム用件 ==
+ * OS: Java をサポートする Windows または Unix 系 OS
+ * JVM: 1.5.0 またはそれ以降 
+
+== ダウンロード ==
+  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
+
+以下の２つのライブラリに依存していますので合わせてダウンロードしてください。
+
+  * [http://repository.jboss.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar javassist-3.8.0.GA]
+  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
+
+== はじめに ==
 RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非常に上手く利用しています。
 しかしJavaにはないメタプログラミングのパラダイムだったことが残念でした。
 特にmix-inとmethod missingはフレームワーク開発者にとって魅力的な機能です。
 だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
-== Install ==
- 次の３つのjarをダウンロードしてクラスパスを通してください。
-  * [http://repository.jboss.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar javassist-3.8.0.GA]
-  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
-  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
+== インストール ==
+ negroniとstlaとjavassistをダウンロードしてクラスパスを通してください。
 
 == Maven2統合 ==
  maven2を使っている場合には、dependencyとrepositoryを設定することで統合できます。
@@ -41,7 +50,7 @@ RoR(Ruby on Rails)はRubyのメタプログラミングのパラダイムを非�
 </repository>
 
 }}}
-== Getting stated ==
+== 動かしてみる ==
 method-missingとmix-inの簡単なサンプルを説明します。
 サンプルはsample pom.xmlで動作させています。
  * sample pom.xml
@@ -227,7 +236,7 @@ public class MixInMain {
 mixin example.MixInedSample_$$_javassist_0@fd7f6
 }}}
 
-=== Step.3 mix-in & method-missing
+=== Step.3 mix-in & method-missing ===
 mix-inとmethod-missingを組み合わせたて使用することもできます。
 @MissingMethodと@MixinInstanceを組み合わせて使います。
 
@@ -265,6 +274,7 @@ public abstract class MixInMethodMissingImpl {
 }}}
 
 実行は他と同様にEnhancerにより拡張したクラスを生成して実行します。
+ * MixInMethodMissingMain
 {{{
 package example;
 
