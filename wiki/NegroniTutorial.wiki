@@ -2,7 +2,7 @@
 #labels Tutorial,Phase-Implementation
 method-missingとmix-inの単純なサンプルを用いて説明します。
 
-== Tutorial ==
+== サンプル ==
  * [MethodMissingTutorial method-missingのサンプル]
  * [MixinTutorial mix-inのサンプル]
  * [MixinMethodMissingTutorial mix-inとmethod-missingを組み合わせたサンプル]
