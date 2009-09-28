@@ -2,9 +2,9 @@
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/javassist/javassist/3.11.0.GA/javassist-3.11.0.GA.jar" sourcepath="M2_REPO/javassist/javassist/3.11.0.GA/javassist-3.11.0.GA-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/lushlife/negroni/negroni/0.5/negroni-0.5.jar" sourcepath="M2_REPO/org/lushlife/negroni/negroni/0.5/negroni-0.5-sources.jar">
+  <classpathentry kind="var" path="M2_REPO/org/lushlife/negroni/negroni/0.6/negroni-0.6.jar" sourcepath="M2_REPO/org/lushlife/negroni/negroni/0.6/negroni-0.6-sources.jar">
     <attributes>
-      <attribute value="jar:file:/Users/konchikisyo/.m2/repository/org/lushlife/negroni/negroni/0.5/negroni-0.5-javadoc.jar!/" name="javadoc_location"/>
+      <attribute value="jar:file:/Users/konchikisyo/.m2/repository/org/lushlife/negroni/negroni/0.6/negroni-0.6-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/lushlife/stla/stla/0.2/stla-0.2.jar"/>
