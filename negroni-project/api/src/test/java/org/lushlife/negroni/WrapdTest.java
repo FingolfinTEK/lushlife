@@ -46,11 +46,11 @@ public class WrapdTest {
 	public void testWrap() {
 		Enhancer enhancer = Negroni.create();
 		String str = "xxx";
-		Size size = enhancer.wrap(Size.class, str);
+		Size size = enhancer.mixin(Size.class, str);
 		Assert.assertEquals(str.length(), size.size());
 
 		List<String> list = Arrays.asList("xxx", "vvv");
-		size = enhancer.wrap(Size.class, list);
+		size = enhancer.mixin(Size.class, list);
 		Assert.assertEquals(list.size(), size.size());
 	}
 }
