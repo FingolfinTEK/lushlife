@@ -1,0 +1,75 @@
+#summary mix-in tutorial
+#labels tutorial
+== Step.2 mix-in ==
+ mix-inは単体では動作しないメソッドを記述する。クラスと組み合わせることで動作するメソッドとなります。多重継承を禁止している言語で、複数のクラスで汎用的に利用する場合に便利な機能です。
+
+ Rubyではmix-inとクラスの統合はダックタイピングなのでメソッド名を合わせるだけで動作させられます。
+ Javaではダックタイピングは使えないので別の方法を準備する必要がありました。
+ Negroniではmix-inを引数として取ることで連携をさせています。メソッドの引数に@MixinInstanceアノテーションを付加することで、連携クラスのインスタンスを引数として取るようにしています。
+
+
+ サンプルでは連携クラスをSystem.outに出力しています。
+ * MixinSample
+{{{
+package example;
+
+import org.lushlife.negroni.MixinInstance;
+
+public class MixInSample {
+	// mix-inの実装
+	public void mixin(@MixinInstance Object obj) {
+		System.out.println("mixin " + obj);
+	}
+}
+}}}
+
+ 次にmix-inメソッドに対応するインタフェースを用意します。
+ @MixinInstanceが付与された引数を除いたメソッドを用意することになります。
+ また@Mixinedアノテーションにより実装クラスと連携させます。
+ * MixInInterface
+{{{
+package example;
+
+import org.lushlife.negroni.Mixined;
+
+@Mixined(MixInSample.class)
+public interface MixInInterface {
+	// mix-in メソッド
+	public void mixin();
+}
+}}}
+
+ mix-inとクラスを連携させるには、mix-inのインタフェースをimplementsに加えます。
+ * MixInedSample
+{{{
+package example;
+
+public abstract class MixInedSample implements MixInInterface {
+
+}
+}}}
+
+ mix-inのクラスも抽象クラスとなるため,Enhancerで実装クラスを生成してインスタンス化させて呼び出します。
+ * MixInMain
+{{{
+package example;
+
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+public class MixInMain {
+	public static void main(String[] args) throws InstantiationException,
+			IllegalAccessException {
+		Enhancer enhancer = Negroni.create();
+		Class<? extends MixInedSample> enhancedClass = enhancer
+				.enhace(MixInedSample.class);
+		MixInedSample mixinSample = enhancedClass.newInstance();
+		mixinSample.mixin();
+	}
+
+}
+}}}
+ 実行すると次のように出力されます。
+ * 実行結果
+{{{
+mixin example.MixInedSample_$$_javassist_0@fd7f6
+}}}
