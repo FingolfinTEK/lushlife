@@ -28,6 +28,7 @@ public class SampleMixinImpl implements SampleMixin, MixinInterface<Object> {
 }
 }}}
  MixinInterface`<Object>`インタフェースを実装することでObject型を継承したクラス（つまりすべてのクラス）に組み込むことができるmix-inの定義となります(MixinInterfaceについてはMethodMappingで詳しく説明します)。
+ 
  SampleMixinインターフェースはmix-inインタフェースを定義しています。
  @Mixinedアノテーションによりmix-inクラスと連携させます。
  * SampleMixin
