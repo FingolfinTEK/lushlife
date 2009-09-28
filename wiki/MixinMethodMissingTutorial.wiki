@@ -64,6 +64,3 @@ public class MixInMethodMissingMain {
 mixin and method missing example.MixInMethodMissingImpl_$$_javassist_0@18f51f : public abstract void example.MixInMethodMissingImpl.invoke()
 
 }}}
-
-== Next ==
- チュートリアルでは、メソッドに引数がある場合やタイプセーフ性についての説明はしていません。それらはMethodMappingで説明しています。
