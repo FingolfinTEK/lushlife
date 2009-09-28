@@ -32,7 +32,7 @@ method-missingとmix-inの単純なサンプルを用いて説明します。
 		<dependency>
 			<groupId>org.lushlife.negroni</groupId>
 			<artifactId>negroni</artifactId>
-			<version>0.4</version>
+			<version>0.5</version>
 		</dependency>
 	</dependencies>
 
@@ -50,6 +50,7 @@ method-missingとmix-inの単純なサンプルを用いて説明します。
 			</plugins>
 		</pluginManagement>
 	</build>
+
 </project>
 
 }}}
@@ -71,27 +72,29 @@ import java.lang.reflect.Method;
 import org.lushlife.negroni.MissingMethod;
 
 public abstract class MethodMissingSample {
-        // method-missingの実装
+
 	public void methodMissing(@MissingMethod Method method) {
 		System.out.println(method);
 	}
-        // 未実装のメソッド
+
 	public abstract void invoke();
+
 }
+
 
 }}}
 
  未実装のメソッドを残しておくために、method-missingを実装したクラスは抽象クラスとしています。Javaの言語仕様上、抽象クラスはインスタンス化できませんのでNegroniではEnhancerクラスにより実装クラスを動的に生成します。
 
  先ほど作成したMethodMissingSampleを動作させるサンプルです。
- * MethodMissingMain
+ * MainMethodMissing
 {{{
 package example;
 
 import org.lushlife.negroni.Enhancer;
 import org.lushlife.negroni.Negroni;
 
-public class MethodMissingMain {
+public class MainMethodMissing {
 	public static void main(String[] args) throws InstantiationException,
 			IllegalAccessException {
 		// Enhancerの取得
