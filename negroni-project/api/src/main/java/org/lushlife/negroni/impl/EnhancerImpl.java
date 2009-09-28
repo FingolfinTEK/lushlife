@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javassist.util.proxy.ProxyFactory;
 import javassist.util.proxy.ProxyObject;
@@ -138,10 +139,7 @@ public class EnhancerImpl implements Enhancer {
 		Map<Method, DelegateMethod> mapping = createDelegateMethodMapping(
 				instance.getClass(), mixinInterface);
 
-		ProxyFactory factory = new ProxyFactory();
-		factory.setInterfaces(new Class[] { mixinInterface });
-		factory.setFilter(new AbstractMethodFilter());
-		Class<? extends ProxyObject> proxyClass = factory.createClass();
+		Class<? extends ProxyObject> proxyClass = getProxyClass(mixinInterface);
 		ProxyObject po;
 		try {
 			po = proxyClass.newInstance();
@@ -152,6 +150,28 @@ public class EnhancerImpl implements Enhancer {
 			throw new IllegalArgumentException(e);
 		}
 		return (T) po;
+	}
+
+	static private Map<Class<?>, Class<?>> cache = new ConcurrentHashMap<Class<?>, Class<?>>();
+
+	private <T> Class<? extends ProxyObject> getProxyClass(
+			Class<T> mixinInterface) {
+		Class<? extends ProxyObject> proxyClass = (Class<? extends ProxyObject>) cache
+				.get(mixinInterface);
+		if (proxyClass == null) {
+			synchronized (cache) {
+				proxyClass = (Class<? extends ProxyObject>) cache
+						.get(mixinInterface);
+				if (proxyClass == null) {
+					ProxyFactory factory = new ProxyFactory();
+					factory.setInterfaces(new Class[] { mixinInterface });
+					factory.setFilter(new AbstractMethodFilter());
+					proxyClass = factory.createClass();
+					cache.put(mixinInterface, proxyClass);
+				}
+			}
+		}
+		return proxyClass;
 	}
 
 	public <T> T mixin(Class<T> mixinInterface, Object instance) {
