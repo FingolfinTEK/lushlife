@@ -5,7 +5,7 @@ method-missingとmix-inの単純なサンプルを用いて説明します。
 == サンプル ==
  * step1 [MethodMissingTutorial method-missingのサンプル]
  * step2 [MixinTutorial mix-inのサンプル]
- * step3 [MixinMethodMissingTutorial mix-inとmethod-missingを組み合わせたサンプル]
+ * step3 [MixinMethodMissingTutorial mix-inとmethod-missingを組み合わせのサンプル]
 
 == Next ==
  チュートリアルでは、メソッドに引数がある場合やタイプセーフ性についての説明はしていません。それらはMethodMappingで説明しています。
