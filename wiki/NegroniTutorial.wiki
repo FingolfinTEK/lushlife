@@ -7,6 +7,9 @@ method-missingとmix-inの単純なサンプルを用いて説明します。
  * step2 [MixinTutorial mix-inのサンプル]
  * step3 [MixinMethodMissingTutorial mix-inとmethod-missingを組み合わせたサンプル]
 
+== Next ==
+ チュートリアルでは、メソッドに引数がある場合やタイプセーフ性についての説明はしていません。それらはMethodMappingで説明しています。
+
 == 動作環境 ==
  サンプルはsample pom.xmlの環境で動作させています。
  * sample pom.xml
