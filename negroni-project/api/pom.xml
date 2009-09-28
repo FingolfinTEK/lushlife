@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.lushlife.negroni</groupId>
 		<artifactId>negroni-root</artifactId>
-		<version>0.5</version>
+		<version>0.6-SNAPSHOT</version>
 	</parent>
 	<groupId>org.lushlife.negroni</groupId>
 	<artifactId>negroni</artifactId>
