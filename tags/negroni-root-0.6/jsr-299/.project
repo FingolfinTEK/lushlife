@@ -1,0 +1,22 @@
+<projectDescription>
+  <name>negroni-jsr299</name>
+  <comment/>
+  <projects>
+    <project>jsr299-api</project>
+    <project>kamikaze-core</project>
+    <project>kamikaze-jboss</project>
+    <project>negroni</project>
+    <project>webbeans-api</project>
+    <project>webbeans-core</project>
+    <project>webbeans-logging</project>
+    <project>webbeans-spi</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>
