@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.lushlife.negroni.Enhancer;
 import org.lushlife.negroni.MissingMethod;
-import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.MixinMethod;
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.Negroni;
@@ -20,7 +19,7 @@ import com.google.inject.Singleton;
 public class GuiceTest {
 
 	@Singleton
-	public static class Mixin implements MixinInterface<Object> {
+	public static class Mixin {
 		@Inject
 		private AtomicInteger counter;
 
@@ -33,10 +32,6 @@ public class GuiceTest {
 		public void methodMissing(@MissingMethod Method m, Object... args) {
 			System.out.println("call " + m);
 			counter.incrementAndGet();
-		}
-
-		public void setMixinInstance(Object instance) {
-
 		}
 
 	}
