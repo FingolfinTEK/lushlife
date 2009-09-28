@@ -1,0 +1,60 @@
+#summary One-sentence summary of this page.
+=== Step.1 method-missing ===
+ method-missingは定義していないメソッドが呼び出された場合の処理のハンドリングします。
+ Javaでは定義していないメソッドは呼び出すことができないので、abstract methodが呼び出された場合のハンドリングするメソッドとして実装しています。
+
+ method-missingは*実装されていないメソッド*がハンドリング対象ですので、Methodクラスを引数に取る必要があります。
+ Negroniでは@MissingMethodアノテーションを付加したMethodクラスを引数に取るメソッドで,method-missingの実装を記述します。
+
+ 簡単な例を用意しました。引数のない未実装のメソッドが呼び出された場合にそのメソッドをSystem.outに出力する場合のサンプルです。
+ * MethodMissingSample
+{{{
+package example;
+
+import java.lang.reflect.Method;
+
+import org.lushlife.negroni.MissingMethod;
+
+public abstract class MethodMissingSample {
+
+	public void methodMissing(@MissingMethod Method method) {
+		System.out.println(method);
+	}
+
+	public abstract void invoke();
+
+}
+
+
+}}}
+
+ 未実装のメソッドを残しておくために、method-missingを実装したクラスは抽象クラスとしています。Javaの言語仕様上、抽象クラスはインスタンス化できませんのでNegroniではEnhancerクラスにより実装クラスを動的に生成します。
+
+ 先ほど作成したMethodMissingSampleを動作させるサンプルです。
+ * MainMethodMissing
+{{{
+package example;
+
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+
+public class MainMethodMissing {
+	public static void main(String[] args) throws InstantiationException,
+			IllegalAccessException {
+		// Enhancerの取得
+		Enhancer enhancer = Negroni.create();
+		// クラスの拡張
+		Class<? extends MethodMissingSample> enhacedClass = enhancer
+				.enhace(MethodMissingSample.class);
+		// インスタンスの生成
+		MethodMissingSample methodMissingSample = enhacedClass.newInstance();
+		// メソッドの実行
+		methodMissingSample.invoke();
+	}
+}
+}}}
+ 実行すると以下のように出力されます。
+ * 実行結果
+{{{
+public abstract void example.MethodMissingSample.invoke()
+}}}
