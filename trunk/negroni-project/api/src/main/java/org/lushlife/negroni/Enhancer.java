@@ -31,4 +31,6 @@ public interface Enhancer {
 	 */
 	<T> Class<? extends T> enhace(Class<T> clazz);
 
+	<T> T wrap(Class<T> mixinInterface, Object instance);
+
 }

@@ -22,15 +22,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
+import javassist.util.proxy.ProxyFactory;
+import javassist.util.proxy.ProxyObject;
 
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.Enhancer;
 import org.lushlife.negroni.LogMsgNGLN;
 import org.lushlife.negroni.delegate.DelegateMethod;
 import org.lushlife.negroni.delegate.DelegateMethodFactory;
+import org.lushlife.negroni.util.AbstractMethodFilter;
+import org.lushlife.negroni.util.DelegateMethodHandler;
 import org.lushlife.negroni.util.Javassist;
 import org.lushlife.negroni.util.Reflections;
 import org.lushlife.stla.Log;
@@ -43,8 +45,6 @@ public class EnhancerImpl implements Enhancer {
 
 	static private Log log = Logging.getLog(EnhancerImpl.class);
 	private Container container;
-	private Map<Class<?>, Class<?>> cache = new ConcurrentHashMap<Class<?>, Class<?>>();
-	private Lock lock = new ReentrantLock();
 
 	public EnhancerImpl(Container container) {
 		super();
@@ -52,7 +52,8 @@ public class EnhancerImpl implements Enhancer {
 	}
 
 	protected <T> Class<? extends T> enhace(Class<T> clazz, Container container) {
-		Map<Method, DelegateMethod> methodMapping = createDelegateMethodMapping(clazz);
+		Map<Method, DelegateMethod> methodMapping = createDelegateMethodMapping(
+				clazz, clazz);
 		return createEnhancedClass(clazz, container, methodMapping);
 	}
 
@@ -68,17 +69,17 @@ public class EnhancerImpl implements Enhancer {
 	}
 
 	private <T> Map<Method, DelegateMethod> createDelegateMethodMapping(
-			Class<T> clazz) {
+			Class<?> ownerClass, Class<T> mixinClass) {
 		Map<Method, DelegateMethod> methodMapping = new HashMap<Method, DelegateMethod>();
-		Set<Method> undifinedMethods = Reflections.undifinedMethods(clazz);
+		Set<Method> undifinedMethods = Reflections.undifinedMethods(mixinClass);
 		Set<Class<?>> mixinImplementClasses = Reflections
-				.mixinImplementClasses(clazz);
+				.mixinImplementClasses(mixinClass);
 		for (Method method : undifinedMethods) {
-			List<DelegateMethod> delegateMethods = findDelegateMethods(clazz,
-					mixinImplementClasses, method);
+			List<DelegateMethod> delegateMethods = findDelegateMethods(
+					ownerClass, mixinImplementClasses, method);
 			if (delegateMethods.size() == 0) {
 				throw new IllegalArgumentException(Logging.getMessage(
-						LogMsgNGLN.NGLN00001, method));
+						LogMsgNGLN.NGLN00001, method, ownerClass));
 			}
 			DelegateMethod delegateMethod = selectMaxPrecidenceDelegateMethod(delegateMethods);
 			methodMapping.put(method, delegateMethod);
@@ -86,14 +87,15 @@ public class EnhancerImpl implements Enhancer {
 		return methodMapping;
 	}
 
-	private <T> List<DelegateMethod> findDelegateMethods(Class<T> clazz,
+	private <T> List<DelegateMethod> findDelegateMethods(Class<T> ownerClass,
 			Set<Class<?>> mixinImplementClasses, Method method) {
 		List<DelegateMethod> delegateMethods = new ArrayList<DelegateMethod>();
-		delegateMethods.addAll(findDelegateMethods(clazz, clazz, method));
+		delegateMethods.addAll(findDelegateMethods(ownerClass, ownerClass,
+				method));
 
 		for (Class<?> mixinClass : mixinImplementClasses) {
-			log.log(LogMsgNGLN.NGLN00003, clazz, mixinClass);
-			delegateMethods.addAll(findDelegateMethods(clazz, mixinClass,
+			log.log(LogMsgNGLN.NGLN00003, ownerClass, mixinClass);
+			delegateMethods.addAll(findDelegateMethods(ownerClass, mixinClass,
 					method));
 		}
 		return delegateMethods;
@@ -125,5 +127,34 @@ public class EnhancerImpl implements Enhancer {
 
 	public <T> Class<? extends T> enhace(Class<T> clazz) {
 		return enhace(clazz, container);
+	}
+
+	protected <T> T wrap(Object instance, Class<T> mixinInterface,
+			Container container) {
+		if (!mixinInterface.isInterface()) {
+			throw new IllegalStateException("mixinInterface is not interface. "
+					+ mixinInterface);
+		}
+		Map<Method, DelegateMethod> mapping = createDelegateMethodMapping(
+				instance.getClass(), mixinInterface);
+
+		ProxyFactory factory = new ProxyFactory();
+		factory.setInterfaces(new Class[] { mixinInterface });
+		factory.setFilter(new AbstractMethodFilter());
+		Class<? extends ProxyObject> proxyClass = factory.createClass();
+		ProxyObject po;
+		try {
+			po = proxyClass.newInstance();
+			DelegateMethodHandler handler = new DelegateMethodHandler(instance,
+					container, mapping);
+			po.setHandler(handler);
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+		return (T) po;
+	}
+
+	public <T> T wrap(Class<T> mixinInterface, Object instance) {
+		return wrap(instance, mixinInterface, container);
 	}
 }

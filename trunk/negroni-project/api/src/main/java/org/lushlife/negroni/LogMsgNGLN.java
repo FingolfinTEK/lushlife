@@ -23,7 +23,7 @@ import org.lushlife.stla.Trace;
  * @author Takeshi Kondo
  */
 public enum LogMsgNGLN {
-	@Error("delegete method not found {0}")
+	@Error("delegete method not found method[{0}] owner[{1}]")
 	NGLN00001,
 
 	@Debug("accept [{0},{1}] [{2}]")
