@@ -15,6 +15,7 @@ public class MethodMIssingMixinSample implements MixinInterface<Object> {
 
 	private Object obj;
 
+	// 実装クラスのインスタンスを取得
 	public void setMixinInstance(Object instance) {
 		this.obj = instance;
 	}
