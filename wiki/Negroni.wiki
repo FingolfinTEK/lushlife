@@ -12,7 +12,7 @@
  だからJavaでmix-inとmethod missingを実現するライブラリを作りました。
 
 == ダウンロード ==
-  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.4.jar negroni-0.4]
+  * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.5.jar negroni-0.5]
 
  以下の２つのライブラリに依存していますので合わせてダウンロードしてください。
 
@@ -44,7 +44,7 @@
 <dependency>
 	<groupId>org.lushlife.negroni</groupId>
 	<artifactId>negroni</artifactId>
-	<version>0.4</version>
+	<version>0.5</version>
 </dependency>
 }}}
 
