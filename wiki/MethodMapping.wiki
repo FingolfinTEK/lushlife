@@ -1,5 +1,5 @@
-#summary Negroni Method Mapping Algorithm
-(作成中）
+#summary Negroni Method Mapping Algorithm(作成中）
+
 == mix-inとmethod-missingのメソッドのマッピング方法 ==
 
 Add your content here.
