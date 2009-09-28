@@ -3,64 +3,71 @@
 
 === Step.3 mix-in & method-missing ===
  mix-inとmethod-missingを組み合わせたて使用することもできます。
- @MissingMethodと@MixinInstanceを組み合わせて使います。
+ @MissingMethodと@MixinMethodを組み合わせて使います。
 
- * MixInMethodMissingSample
+ * MethodMIssingMixinSample
 {{{
 package example;
 
 import java.lang.reflect.Method;
 
 import org.lushlife.negroni.MissingMethod;
-import org.lushlife.negroni.MixinInstance;
+import org.lushlife.negroni.MixinInterface;
+import org.lushlife.negroni.MixinMethod;
 
-public class MixInMethodMissingSample {
+public class MethodMIssingMixinSample implements MixinInterface<Object> {
 	// mix-in & method-missingの実装
-	public void methodMissing(@MixinInstance Object obj,
-			@MissingMethod Method method) {
+	@MixinMethod
+	public void methodMissing(@MissingMethod Method method) {
 		System.out.println("mixin and method missing " + obj + " : " + method);
 	}
+
+	private Object obj;
+
+	// 実装クラスのインスタンスを取得
+	public void setMixinInstance(Object instance) {
+		this.obj = instance;
+	}
 }
+
 }}}
 
- 使用方法はmix-inと同じです。@Mixinedアノテーションによりmix-inの実装クラスを指定します。
- * MixInMethodMissingSample
+ クラスへの組み込みは@Mixinedアノテーションでmix-inクラスを指定します。
+ * MethodMissingMixinedSample
 {{{
 package example;
 
 import org.lushlife.negroni.Mixined;
 
-@Mixined(MixInMethodMissingSample.class)
-public abstract class MixInMethodMissingImpl {
+@Mixined(MethodMIssingMixinSample.class)
+public abstract class MethodMissingMixinedSample {
 
 	public abstract void invoke();
 
 }
 }}}
 
- 実行は他と同様にEnhancerにより拡張したクラスを生成して実行します。
- * MixInMethodMissingMain
+ 実行するにはEnhancerにより拡張したクラスを生成します。
+ * MainMethodMissingMixin
 {{{
 package example;
 
 import org.lushlife.negroni.Enhancer;
 import org.lushlife.negroni.Negroni;
 
-public class MixInMethodMissingMain {
+public class MainMethodMissingMixin {
 	public static void main(String[] args) throws InstantiationException,
 			IllegalAccessException {
-
 		Enhancer enhancer = Negroni.create();
-		Class<? extends MixInMethodMissingImpl> enhancedClass = enhancer
-				.enhace(MixInMethodMissingImpl.class);
-
-		MixInMethodMissingImpl mixinSample = enhancedClass.newInstance();
+		Class<? extends MethodMissingMixinedSample> enhancedClass = enhancer
+				.enhace(MethodMissingMixinedSample.class);
+		MethodMissingMixinedSample mixinSample = enhancedClass.newInstance();
 		mixinSample.invoke();
 	}
 }
+
 }}}
  * 実行結果
 {{{
-mixin and method missing example.MixInMethodMissingImpl_$$_javassist_0@18f51f : public abstract void example.MixInMethodMissingImpl.invoke()
-
+mixin and method missing example.MethodMissingMixinedSample_negloni$$0@be76c7 : public abstract void example.MethodMissingMixinedSample.invoke()
 }}}
