@@ -14,9 +14,9 @@
 == ダウンロード ==
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/negroni/negroni/0.4/negroni-0.6.jar negroni-0.6]
 
- 以下の２つのライブラリに依存していますので合わせてダウンロードしてください。
+ 以下の２つのライブラリに依存しています。合わせてダウンロードしてください。
 
-  * [http://repository.jboss.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar javassist-3.8.0.GA]
+  * [http://repository.jboss.org/maven2/javassist/javassist/3.11.0.GA/javassist-3.11.0.GA.jar javassist-3.11.0.GA]
   * [http://lushlife.googlecode.com/svn/maven2/org/lushlife/stla/stla/0.2/stla-0.2.jar stla-0.2]
 
 == インストール ==
