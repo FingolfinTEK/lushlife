@@ -30,4 +30,8 @@ public class SimpleConstructContainer implements Container {
 		}
 	}
 
+	public boolean isManagementScope(Class<?> clazz) {
+		return false;
+	}
+
 }

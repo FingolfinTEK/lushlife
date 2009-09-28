@@ -16,6 +16,7 @@
 package org.lushlife.negroni.delegate.impl;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.delegate.DelegateMethodPrecedence;
@@ -39,8 +40,8 @@ public class MethodMissingVarArgsMethodDelegate extends
 		return Reflections.isVarArgsAccept(m, getDelegateMethod(), 1);
 	}
 
-	public Object invoke(Container context, Object owner, Method method,
-			Object[] args) throws Exception {
+	public Object invoke(Map<String, Object> contextMap, Container context,
+			Object owner, Method method, Object[] args) throws Exception {
 		if (method.isVarArgs()) {
 			args = Reflections.varargsFlatten(args);
 		}

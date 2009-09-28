@@ -5,10 +5,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.lushlife.negroni.Container;
 import org.lushlife.negroni.Enhancer;
 import org.lushlife.negroni.MissingMethod;
-import org.lushlife.negroni.MixinInstance;
+import org.lushlife.negroni.MixinInterface;
+import org.lushlife.negroni.MixinMethod;
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.Negroni;
 
@@ -20,38 +20,41 @@ import com.google.inject.Singleton;
 public class GuiceTest {
 
 	@Singleton
-	public static class Mixin {
+	public static class Mixin implements MixinInterface<Object> {
 		@Inject
 		private AtomicInteger counter;
 
-		public int getCount(@MixinInstance Sample sample) {
+		@MixinMethod
+		public int getCounter() {
 			return counter.get();
 		}
 
-		public int getCount(@MixinInstance Sample2 sample) {
-			return counter.get();
-		}
-
-		public void methodMissing(@MixinInstance Object obj,
-				@MissingMethod Method m, Object... args) {
+		@MixinMethod
+		public void methodMissing(@MissingMethod Method m, Object... args) {
 			System.out.println("call " + m);
 			counter.incrementAndGet();
 		}
 
+		public void setMixinInstance(Object instance) {
+
+		}
+
 	}
 
 	@Mixined(Mixin.class)
-	public static interface Sample {
-		public int getCount();
+	abstract public static class Sample {
+		abstract public Integer getCounter();
 
-		public void invoke();
+		abstract public void invoke();
+
+		abstract public int[] invoke2();
 	}
 
 	@Mixined(Mixin.class)
-	public static interface Sample2 {
-		public int getCount();
+	abstract public static class Sample2 {
+		abstract public Integer getCounter();
 
-		public void invoke();
+		abstract public void invoke();
 	}
 
 	@Test
@@ -69,8 +72,9 @@ public class GuiceTest {
 		sample.invoke();
 		sample2.invoke();
 
-		Assert.assertEquals(2, sample.getCount());
-		Assert.assertEquals(2, sample2.getCount());
+		Assert.assertEquals((Integer) 2, sample.getCounter());
+		Assert.assertEquals((Integer) 2, sample2.getCounter());
+		sample.invoke2();
 
 	}
 

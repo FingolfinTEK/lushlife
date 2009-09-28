@@ -11,7 +11,7 @@ import org.lushlife.kamikaze.WebBeansBinder;
 import org.lushlife.kamikaze.WebBeansModule;
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.Enhancer;
-import org.lushlife.negroni.MixinInstance;
+import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.Negroni;
 import org.lushlife.negroni.impl.DelegateContainer;
@@ -22,13 +22,13 @@ public class JSR299Test {
 	static public class TestMixIn {
 		static public String str;
 
-		public void invoke(@MixinInstance Object obj, String str) {
+		public void invoke(@MixinInterface Object obj, String str) {
 			TestMixIn.str = str;
 		}
 
 		int count = 0;
 
-		public int count(@MixinInstance Object obj) {
+		public int count(@MixinInterface Object obj) {
 			return ++count;
 		}
 	}

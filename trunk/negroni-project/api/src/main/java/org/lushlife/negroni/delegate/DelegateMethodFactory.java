@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 
 import org.lushlife.negroni.LogMsgNGLN;
 import org.lushlife.negroni.MissingMethod;
-import org.lushlife.negroni.MixinInstance;
+import org.lushlife.negroni.MixinMethod;
 import org.lushlife.negroni.delegate.impl.MethodMissingMethodDelegate;
 import org.lushlife.negroni.delegate.impl.MethodMissingVarArgsMethodDelegate;
 import org.lushlife.negroni.delegate.impl.MixinMethodDelegate;
@@ -34,26 +34,26 @@ import org.lushlife.stla.Logging;
  */
 public class DelegateMethodFactory {
 
-	static public DelegateMethod toDelegateMethod(Method m, Class<?> clazz) {
+	static public DelegateMethod toDelegateMethod(Method m, Class<?> mixinClass) {
 		int methodMissingPosition = Reflections.searchParameterAnnotation(m,
 				MissingMethod.class);
-		int mixinPosition = Reflections.searchParameterAnnotation(m,
-				MixinInstance.class);
+		boolean isMixin = m.isAnnotationPresent(MixinMethod.class);
 		boolean isVarArgs = m.isVarArgs();
-		if (methodMissingPosition > 0) {
+		Class<?> mixinInstanceType = Reflections.getActualMixinType(mixinClass);
+		if (methodMissingPosition >= 0) {
 			Class<?> methodMissing = m.getParameterTypes()[methodMissingPosition];
 			if (!methodMissing.equals(Method.class)) {
 				throw new IllegalArgumentException(Logging.getMessage(
 						LogMsgNGLN.NGLN00005, m, methodMissingPosition));
 			}
 		}
-		if (methodMissingPosition >= 0 && mixinPosition >= 0) {
+		if (methodMissingPosition >= 0 && isMixin) {
 			if (isVarArgs) {
 				return new MixinMethodMissingVarArgsMethodDeleage(
-						mixinPosition, methodMissingPosition, m, clazz);
+						mixinInstanceType, methodMissingPosition, m, mixinClass);
 			} else {
-				return new MixinMethodMissingMethodDelegate(mixinPosition,
-						methodMissingPosition, m, clazz);
+				return new MixinMethodMissingMethodDelegate(mixinInstanceType,
+						methodMissingPosition, m, mixinClass);
 			}
 		}
 		if (methodMissingPosition >= 0) {
@@ -64,11 +64,12 @@ public class DelegateMethodFactory {
 				return new MethodMissingMethodDelegate(methodMissingPosition, m);
 			}
 		}
-		if (mixinPosition >= 0) {
+		if (isMixin) {
 			if (isVarArgs) {
-				return new MixinVarArgsMethodDelegate(mixinPosition, m, clazz);
+				return new MixinVarArgsMethodDelegate(mixinInstanceType, m,
+						mixinClass);
 			} else {
-				return new MixinMethodDelegate(mixinPosition, m, clazz);
+				return new MixinMethodDelegate(mixinInstanceType, m, mixinClass);
 			}
 		}
 		return null;

@@ -6,23 +6,26 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MixinMethodMixxing {
+public class MixinMethodMissing {
 
-	static public class Mixin {
+	static public class Mixin implements MixinInterface<Object> {
 		static public Object owner;
 		static public String[] args;
 
-		public void xxx(@MixinInstance Object owner,
-				@MissingMethod Method method, String str) {
-			Mixin.owner = owner;
+		@MixinMethod
+		public void xxx(@MissingMethod Method method, String str) {
 			args = new String[] { str };
 		}
 
-		public void xxx(@MixinInstance Object owner, @MissingMethod Method m,
-				String... str) {
-			Mixin.owner = owner;
+		@MixinMethod
+		public void xxx(@MissingMethod Method m, String... str) {
 			args = str;
 		}
+
+		public void setMixinInstance(Object instance) {
+			Mixin.owner = instance;
+		}
+
 	}
 
 	@Mixined(Mixin.class)
@@ -41,6 +44,8 @@ public class MixinMethodMixxing {
 		this.enhancer = Negroni.create();
 		Mixin.owner = null;
 	}
+
+	static public org.lushlife.negroni.Container __container;
 
 	@Test
 	public void testMixin() throws InstantiationException,

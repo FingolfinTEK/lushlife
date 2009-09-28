@@ -16,16 +16,10 @@
 
 package org.lushlife.negroni;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 /**
  * @author Takeshi Kondo
  */
-@Target(ElementType.PARAMETER)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface MixinInstance {
 
+public interface MixinInterface<T> {
+	public void setMixinInstance(T instance);
 }

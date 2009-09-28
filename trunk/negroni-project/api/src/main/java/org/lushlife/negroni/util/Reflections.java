@@ -19,12 +19,15 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import org.lushlife.negroni.MissingMethod;
+import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.Mixined;
 import org.lushlife.negroni.conversions.Conversions;
 import org.lushlife.negroni.delegate.DelegateMethod;
@@ -312,4 +315,100 @@ public class Reflections {
 		}
 		return -1;
 	}
+
+	public static Type findActualType(Type type, TypeVariable<?> typeVariable) {
+		if (type instanceof Class<?>) {
+			Type findType = findActualType(((Class<?>) type)
+					.getGenericSuperclass(), typeVariable);
+			if (findType != null) {
+				return findType;
+			}
+			for (Type interfaceType : ((Class<?>) type).getGenericInterfaces()) {
+				findType = findActualType(interfaceType, typeVariable);
+				if (findType != null) {
+					return findType;
+				}
+			}
+		}
+		if (type instanceof ParameterizedType) {
+			ParameterizedType parameterizedType = (ParameterizedType) type;
+			Class<?> rawType = toClass(parameterizedType.getRawType());
+			for (int i = 0; i < rawType.getTypeParameters().length; i++) {
+				if (rawType.getTypeParameters()[i].equals(typeVariable)) {
+					return parameterizedType.getActualTypeArguments()[i];
+				}
+			}
+		}
+		return null;
+	}
+
+	public static Class<?> getActualMixinType(Class<?> mixinClass) {
+		Type type = getMixinInstanceType(mixinClass);
+		return findActualType(mixinClass, type);
+	}
+
+	private static Class<?> findActualType(Class<?> mixinClass, Type type) {
+		if (type instanceof Class<?>) {
+			return (Class<?>) type;
+		}
+		if (type instanceof TypeVariable<?>) {
+			Type findType = findActualType(mixinClass.getGenericSuperclass(),
+					(TypeVariable<?>) type);
+			if (findType != null) {
+				return findActualType(mixinClass, findType);
+			}
+			for (Type interfaceType : mixinClass.getGenericInterfaces()) {
+				findType = findActualType(interfaceType, (TypeVariable<?>) type);
+				if (findType != null) {
+					return findActualType(mixinClass, findType);
+				}
+			}
+
+		}
+		return null;
+	}
+
+	public static Type getMixinInstanceType(Class<?> mixinClass) {
+		if (!MixinInterface.class.isAssignableFrom(mixinClass)) {
+			return null;
+		}
+		Type type = getMixinInstanceType(mixinClass.getGenericSuperclass());
+		if (type != null) {
+			return type;
+		}
+		for (Type interfaces : mixinClass.getGenericInterfaces()) {
+			type = getMixinInstanceType(interfaces);
+			if (type != null) {
+				return type;
+			}
+		}
+		return null;
+	}
+
+	private static Type getMixinInstanceType(Type type) {
+		if (type instanceof Class<?>) {
+			return getMixinInstanceType((Class<?>) type);
+		}
+		if (type instanceof ParameterizedType) {
+			ParameterizedType parameterizedType = (ParameterizedType) type;
+			Class<?> rawType = toClass(parameterizedType.getRawType());
+			if (rawType.equals(MixinInterface.class)) {
+				return parameterizedType.getActualTypeArguments()[0];
+			}
+			return getMixinInstanceType(rawType);
+		}
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static Class<?> toClass(Type type) {
+		if (type instanceof Class<?>) {
+			return (Class<?>) type;
+		}
+		if (type instanceof ParameterizedType) {
+			return toClass(((ParameterizedType) type).getRawType());
+		}
+		return null;
+	}
+
 }

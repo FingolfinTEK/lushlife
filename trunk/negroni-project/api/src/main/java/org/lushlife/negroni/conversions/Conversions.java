@@ -66,6 +66,9 @@ public class Conversions {
 	}
 
 	static public boolean isConvert(Class<?> from, Class<?> to) {
+		if (to == null) {
+			return true;
+		}
 		if (to.isAssignableFrom(from)) {
 			return true;
 		}
