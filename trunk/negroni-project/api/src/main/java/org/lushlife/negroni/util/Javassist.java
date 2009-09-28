@@ -35,6 +35,8 @@ import javassist.CtMethod;
 import javassist.CtNewConstructor;
 import javassist.LoaderClassPath;
 import javassist.NotFoundException;
+import javassist.bytecode.AnnotationsAttribute;
+import javassist.bytecode.AttributeInfo;
 
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.delegate.DelegateMethod;
@@ -128,7 +130,7 @@ public class Javassist {
 
 	private static <T> CtClass createCtClass(Class<T> clazz,
 			ClassPool classPool, CtClass superClass)
-			throws CannotCompileException {
+			throws CannotCompileException, NotFoundException {
 		CtClass ctClass;
 		String className = clazz.getName() + "_negloni$$"
 				+ counter.getAndIncrement();
@@ -139,6 +141,20 @@ public class Javassist {
 			ctClass = classPool.makeClass(className, superClass);
 		}
 		ctClass.setModifiers(Modifier.PUBLIC);
+		for (CtConstructor constructor : superClass.getConstructors()) {
+			CtConstructor ctConstructor = new CtConstructor(constructor
+					.getParameterTypes(), ctClass);
+			ctConstructor.setExceptionTypes(constructor.getExceptionTypes());
+			AttributeInfo annottion = constructor.getMethodInfo().getAttribute(
+					AnnotationsAttribute.visibleTag);
+			if (annottion != null) {
+				ctConstructor.getMethodInfo().addAttribute(annottion);
+			}
+			ctConstructor.setBody("super($$);");
+			ctConstructor.setModifiers(Modifier.PUBLIC);
+			ctClass.addConstructor(ctConstructor);
+		}
+
 		if (ctClass.getConstructors().length == 0) {
 			CtConstructor constructor = CtNewConstructor
 					.defaultConstructor(ctClass);

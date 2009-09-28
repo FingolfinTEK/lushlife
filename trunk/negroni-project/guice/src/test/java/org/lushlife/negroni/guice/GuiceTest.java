@@ -43,6 +43,11 @@ public class GuiceTest {
 
 	@Mixined(Mixin.class)
 	abstract public static class Sample {
+		@Inject
+		public Sample(AtomicInteger atomic) {
+			System.out.println(atomic);
+		}
+
 		abstract public Integer getCounter();
 
 		abstract public void invoke();
