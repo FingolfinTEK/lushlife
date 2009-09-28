@@ -351,6 +351,10 @@ public class Reflections {
 		if (type instanceof Class<?>) {
 			return (Class<?>) type;
 		}
+		if (type instanceof ParameterizedType) {
+			return findActualType(mixinClass, ((ParameterizedType) type)
+					.getRawType());
+		}
 		if (type instanceof TypeVariable<?>) {
 			Type findType = findActualType(mixinClass.getGenericSuperclass(),
 					(TypeVariable<?>) type);
