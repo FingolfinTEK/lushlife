@@ -29,4 +29,6 @@ public interface Container {
 	 * @return
 	 */
 	public <T> T getInstance(Class<T> clazz);
+
+	public boolean isManagementScope(Class<?> clazz);
 }

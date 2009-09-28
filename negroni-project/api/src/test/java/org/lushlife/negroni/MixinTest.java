@@ -6,18 +6,22 @@ import org.junit.Test;
 
 public class MixinTest {
 
-	static public class Mixin {
+	static public class Mixin implements MixinInterface<Object> {
 		static public Object owner;
 		static public String[] args;
 
-		public void mixin(@MixinInstance Object owner, String str) {
-			Mixin.owner = owner;
+		@MixinMethod
+		public void mixin(String str) {
 			args = new String[] { str };
 		}
 
-		public void mixin(@MixinInstance Object owner, String... str) {
-			Mixin.owner = owner;
+		@MixinMethod
+		public void mixin(String... str) {
 			args = str;
+		}
+
+		public void setMixinInstance(Object instance) {
+			Mixin.owner = instance;
 		}
 	}
 
@@ -30,7 +34,7 @@ public class MixinTest {
 
 	}
 
-	Enhancer enhancer;
+	private Enhancer enhancer;
 
 	@Before
 	public void init() {

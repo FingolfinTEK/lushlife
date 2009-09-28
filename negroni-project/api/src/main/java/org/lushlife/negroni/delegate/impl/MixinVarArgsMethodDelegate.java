@@ -16,6 +16,7 @@
 package org.lushlife.negroni.delegate.impl;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.conversions.Conversions;
@@ -29,33 +30,34 @@ import org.lushlife.negroni.util.Reflections;
 public class MixinVarArgsMethodDelegate extends AbstractVarArgsDelegatemMethod {
 
 	private Class mixinClass;
-	private int mixin;
+	private Class<?> mixinInstanceType;
 
-	public MixinVarArgsMethodDelegate(int mixin, Method method, Class mixinClass) {
+	public MixinVarArgsMethodDelegate(Class<?> mixin, Method method,
+			Class mixinClass) {
 		super(method);
 		this.mixinClass = mixinClass;
-		this.mixin = mixin;
+		this.mixinInstanceType = mixin;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {
 		if (!getDelegateMethod().getName().equals(m.getName())) {
 			return false;
 		}
-		if (!Conversions.isConvert(owner, getDelegateMethod()
-				.getParameterTypes()[mixin])) {
+		if (!Conversions.isConvert(owner, mixinInstanceType)) {
 			return false;
 		}
-		return Reflections.isVarArgsAccept(m, getDelegateMethod(), 1);
+		return Reflections.isVarArgsAccept(m, getDelegateMethod(), 0);
 	}
 
-	public Object invoke(Container context, Object owner, Method method,
-			Object[] args) throws Exception {
+	public Object invoke(Map<String, Object> contextMap, Container context,
+			Object owner, Method method, Object[] args) throws Exception {
 		if (method.isVarArgs()) {
 			args = Reflections.varargsFlatten(args);
 		}
-		Object[] tmp = Reflections.toVarargsArgs(new Object[] { owner }, args,
+		Object[] tmp = Reflections.toVarargsArgs(new Object[] {}, args,
 				getVarArgsPosition(), getVarArgsType());
-		return Reflections.invoke(context.getInstance(mixinClass), getDelegateMethod(),
-				tmp);
+		Object instance = getMixinInstance(context, owner, mixinClass,
+				contextMap);
+		return Reflections.invoke(instance, getDelegateMethod(), tmp);
 	}
 }

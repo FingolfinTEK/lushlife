@@ -26,16 +26,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javassist.util.proxy.ProxyFactory;
-
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.Enhancer;
 import org.lushlife.negroni.LogMsgNGLN;
 import org.lushlife.negroni.delegate.DelegateMethod;
 import org.lushlife.negroni.delegate.DelegateMethodFactory;
-import org.lushlife.negroni.util.DelegateMethodHandler;
+import org.lushlife.negroni.util.Javassist;
 import org.lushlife.negroni.util.Reflections;
-import org.lushlife.negroni.util.TargetMethodFilter;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
@@ -61,15 +58,13 @@ public class EnhancerImpl implements Enhancer {
 
 	private <T> Class<? extends T> createEnhancedClass(Class<T> clazz,
 			Container container, Map<Method, DelegateMethod> methodMapping) {
-		ProxyFactory factory = new ProxyFactory();
-		if (clazz.isInterface()) {
-			factory.setInterfaces(new Class[] { clazz });
-		} else {
-			factory.setSuperclass(clazz);
+		try {
+			return Javassist.createEnhancedClass(clazz, container,
+					methodMapping, Thread.currentThread()
+							.getContextClassLoader(), null);
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
 		}
-		factory.setFilter(new TargetMethodFilter(methodMapping.keySet()));
-		factory.setHandler(new DelegateMethodHandler(container, methodMapping));
-		return factory.createClass();
 	}
 
 	private <T> Map<Method, DelegateMethod> createDelegateMethodMapping(
@@ -82,7 +77,7 @@ public class EnhancerImpl implements Enhancer {
 			List<DelegateMethod> delegateMethods = findDelegateMethods(clazz,
 					mixinImplementClasses, method);
 			if (delegateMethods.size() == 0) {
-				throw new NullPointerException(Logging.getMessage(
+				throw new IllegalArgumentException(Logging.getMessage(
 						LogMsgNGLN.NGLN00001, method));
 			}
 			DelegateMethod delegateMethod = selectMaxPrecidenceDelegateMethod(delegateMethods);

@@ -16,8 +16,10 @@
 package org.lushlife.negroni.delegate.impl;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import org.lushlife.negroni.Container;
+import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.conversions.Conversions;
 import org.lushlife.negroni.delegate.DelegateMethodPrecedence;
 import org.lushlife.negroni.util.Reflections;
@@ -28,35 +30,32 @@ import org.lushlife.negroni.util.Reflections;
 @DelegateMethodPrecedence(100)
 public class MixinMethodDelegate extends AbstractDelegateMethod {
 	final private Class mixinClass;
-	private int mixIn;
+	private Class<?> mixInstanceType;
 
-	public MixinMethodDelegate(int mixIn, Method method, Class mixinClass) {
+	public MixinMethodDelegate(Class<?> mixInstanceType, Method method,
+			Class mixinClass) {
 		super(method);
 		this.mixinClass = mixinClass;
-		this.mixIn = mixIn;
+		this.mixInstanceType = mixInstanceType;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {
 		if (!getDelegateMethod().getName().equals(m.getName())) {
 			return false;
 		}
-		Class<?>[] classes = getDelegateMethod().getParameterTypes();
-		if (classes.length == 0) {
-			return false;
-		}
-		if (!Conversions.isConvert(owner, classes[mixIn])) {
+		if (!Conversions.isConvert(owner, mixInstanceType)) {
 			return false;
 		}
 
-		return Reflections.isSimpleTypeAccept(m, getDelegateMethod(), 1);
+		return Reflections.isSimpleTypeAccept(m, getDelegateMethod(), 0);
 	}
 
-	public Object invoke(Container context, Object owner, Method method,
-			Object[] args) throws Exception {
-		Object[] tmp = Reflections.toSimpleTypeArgs(new Object[] { owner },
-				args);
-
-		return Reflections.invoke(context.getInstance(mixinClass),
-				getDelegateMethod(), tmp);
+	public Object invoke(Map<String, Object> contextMap, Container context,
+			Object owner, Method method, Object[] args) throws Exception {
+		Object[] tmp = Reflections.toSimpleTypeArgs(new Object[] {}, args);
+		Object instance = getMixinInstance(context, owner, mixinClass,
+				contextMap);
+		return Reflections.invoke(instance, getDelegateMethod(), tmp);
 	}
+
 }

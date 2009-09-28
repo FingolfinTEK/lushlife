@@ -16,7 +16,10 @@
 package org.lushlife.negroni.delegate.impl;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 
+import org.lushlife.negroni.Container;
+import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.delegate.DelegateMethod;
 import org.lushlife.negroni.util.Reflections;
 
@@ -48,6 +51,33 @@ public abstract class AbstractDelegateMethod implements DelegateMethod {
 
 	public String toString() {
 		return this.getClass().getSimpleName() + ":" + method;
+	}
+
+	protected Object getMixinInstance(Container context, Object owner,
+			Class mixinClass, Map<String, Object> contextMap) {
+
+		if (context.isManagementScope(mixinClass)) {
+			Object instance = createAndInject(context, mixinClass, owner);
+			return instance;
+		} else {
+			Object instance = contextMap.get(mixinClass.getName());
+			if (instance != null) {
+				return instance;
+			}
+			instance = createAndInject(context, mixinClass, owner);
+			contextMap.put(mixinClass.getName(), instance);
+			return instance;
+		}
+	}
+
+	private Object createAndInject(Container context, Class mixinClass,
+			Object owner) {
+		Object instance;
+		instance = context.getInstance(mixinClass);
+		if (instance instanceof MixinInterface) {
+			((MixinInterface) instance).setMixinInstance(owner);
+		}
+		return instance;
 	}
 
 }
