@@ -24,13 +24,12 @@ public interface Enhancer {
 
 	/**
 	 * mix-inとMethodMissingメソッドを未定義のメソッドに織り込む。
-	 * 
-	 * @param <T>
-	 * @param clazz
-	 * @return
 	 */
 	<T> Class<? extends T> enhace(Class<T> clazz);
 
+	/**
+	 * instanceにmixinメソッドを動的に追加する。
+	 */
 	<T> T mixin(Class<T> mixinInterface, Object instance);
 
 }
