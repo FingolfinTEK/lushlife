@@ -15,7 +15,8 @@ public class WrapdTest {
 		public int size();
 	}
 
-	static public class SizeString implements Size, MixinInterface<String> {
+	static public class SizeString implements Size {
+		@Mixin
 		String instance;
 
 		@MixinMethod
@@ -28,8 +29,8 @@ public class WrapdTest {
 		}
 	}
 
-	static public class SizeCollection implements Size,
-			MixinInterface<Collection<?>> {
+	static public class SizeCollection implements Size {
+		@Mixin
 		Collection<?> instance;
 
 		@MixinMethod

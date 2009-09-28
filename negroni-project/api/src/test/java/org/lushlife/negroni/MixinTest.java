@@ -6,7 +6,8 @@ import org.junit.Test;
 
 public class MixinTest {
 
-	static public class Mixin implements MixinInterface<Object> {
+	static public class MixinSample {
+		@Mixin
 		static public Object owner;
 		static public String[] args;
 
@@ -21,11 +22,11 @@ public class MixinTest {
 		}
 
 		public void setMixinInstance(Object instance) {
-			Mixin.owner = instance;
+			MixinSample.owner = instance;
 		}
 	}
 
-	@Mixined(Mixin.class)
+	@Mixined(MixinSample.class)
 	static public interface MixindClass {
 
 		public void mixin(String str);
@@ -39,7 +40,7 @@ public class MixinTest {
 	@Before
 	public void init() {
 		this.enhancer = Negroni.create();
-		Mixin.owner = null;
+		MixinSample.owner = null;
 	}
 
 	@Test
@@ -48,7 +49,7 @@ public class MixinTest {
 		MixindClass newInstance = enhancer.enhace(MixindClass.class)
 				.newInstance();
 		newInstance.mixin("xxx");
-		Assert.assertEquals(Mixin.args[0], "xxx");
+		Assert.assertEquals(MixinSample.args[0], "xxx");
 	}
 
 	@Test
@@ -57,8 +58,8 @@ public class MixinTest {
 		MixindClass newInstance = enhancer.enhace(MixindClass.class)
 				.newInstance();
 		newInstance.mixin("xxx", "yyy");
-		Assert.assertEquals(Mixin.args[0], "xxx");
-		Assert.assertEquals(Mixin.args[1], "yyy");
+		Assert.assertEquals(MixinSample.args[0], "xxx");
+		Assert.assertEquals(MixinSample.args[1], "yyy");
 
 	}
 

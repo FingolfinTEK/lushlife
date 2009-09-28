@@ -15,11 +15,11 @@
  */
 package org.lushlife.negroni.delegate.impl;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.lushlife.negroni.Container;
-import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.delegate.DelegateMethod;
 import org.lushlife.negroni.util.Reflections;
 
@@ -53,29 +53,32 @@ public abstract class AbstractDelegateMethod implements DelegateMethod {
 		return this.getClass().getSimpleName() + ":" + method;
 	}
 
-	protected Object getMixinInstance(Container context, Object owner,
-			Class mixinClass, Map<String, Object> contextMap) {
+	protected Object getMixinInstance(Field mixinField, Container context,
+			Object owner, Class mixinClass, Map<String, Object> contextMap)
+			throws IllegalArgumentException, IllegalAccessException {
 
 		if (context.isManagementScope(mixinClass)) {
-			Object instance = createAndInject(context, mixinClass, owner);
+			Object instance = createAndInject(mixinField, context, mixinClass,
+					owner);
 			return instance;
 		} else {
 			Object instance = contextMap.get(mixinClass.getName());
 			if (instance != null) {
 				return instance;
 			}
-			instance = createAndInject(context, mixinClass, owner);
+			instance = createAndInject(mixinField, context, mixinClass, owner);
 			contextMap.put(mixinClass.getName(), instance);
 			return instance;
 		}
 	}
 
-	private Object createAndInject(Container context, Class mixinClass,
-			Object owner) {
+	private Object createAndInject(Field mixinField, Container context,
+			Class mixinClass, Object owner) throws IllegalArgumentException,
+			IllegalAccessException {
 		Object instance;
 		instance = context.getInstance(mixinClass);
-		if (instance instanceof MixinInterface) {
-			((MixinInterface) instance).setMixinInstance(owner);
+		if (mixinField != null) {
+			mixinField.set(instance, owner);
 		}
 		return instance;
 	}
