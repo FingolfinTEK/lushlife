@@ -154,7 +154,7 @@ public class EnhancerImpl implements Enhancer {
 		return (T) po;
 	}
 
-	public <T> T wrap(Class<T> mixinInterface, Object instance) {
+	public <T> T mixin(Class<T> mixinInterface, Object instance) {
 		return wrap(instance, mixinInterface, container);
 	}
 }
