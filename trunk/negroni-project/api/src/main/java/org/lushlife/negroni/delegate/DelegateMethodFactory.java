@@ -15,10 +15,12 @@
  */
 package org.lushlife.negroni.delegate;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import org.lushlife.negroni.LogMsgNGLN;
 import org.lushlife.negroni.MissingMethod;
+import org.lushlife.negroni.Mixin;
 import org.lushlife.negroni.MixinMethod;
 import org.lushlife.negroni.delegate.impl.MethodMissingMethodDelegate;
 import org.lushlife.negroni.delegate.impl.MethodMissingVarArgsMethodDelegate;
@@ -39,7 +41,11 @@ public class DelegateMethodFactory {
 				MissingMethod.class);
 		boolean isMixin = m.isAnnotationPresent(MixinMethod.class);
 		boolean isVarArgs = m.isVarArgs();
-		Class<?> mixinInstanceType = Reflections.getActualMixinType(mixinClass);
+		Field mixinField = Reflections.getAnnotatedField(mixinClass,
+				Mixin.class);
+		if (mixinField != null) {
+			mixinField.setAccessible(true);
+		}
 		if (methodMissingPosition >= 0) {
 			Class<?> methodMissing = m.getParameterTypes()[methodMissingPosition];
 			if (!methodMissing.equals(Method.class)) {
@@ -49,10 +55,10 @@ public class DelegateMethodFactory {
 		}
 		if (methodMissingPosition >= 0 && isMixin) {
 			if (isVarArgs) {
-				return new MixinMethodMissingVarArgsMethodDeleage(
-						mixinInstanceType, methodMissingPosition, m, mixinClass);
+				return new MixinMethodMissingVarArgsMethodDeleage(mixinField,
+						methodMissingPosition, m, mixinClass);
 			} else {
-				return new MixinMethodMissingMethodDelegate(mixinInstanceType,
+				return new MixinMethodMissingMethodDelegate(mixinField,
 						methodMissingPosition, m, mixinClass);
 			}
 		}
@@ -66,10 +72,9 @@ public class DelegateMethodFactory {
 		}
 		if (isMixin) {
 			if (isVarArgs) {
-				return new MixinVarArgsMethodDelegate(mixinInstanceType, m,
-						mixinClass);
+				return new MixinVarArgsMethodDelegate(mixinField, m, mixinClass);
 			} else {
-				return new MixinMethodDelegate(mixinInstanceType, m, mixinClass);
+				return new MixinMethodDelegate(mixinField, m, mixinClass);
 			}
 		}
 		return null;

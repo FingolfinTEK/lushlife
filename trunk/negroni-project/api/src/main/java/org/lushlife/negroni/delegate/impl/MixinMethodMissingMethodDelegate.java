@@ -15,11 +15,11 @@
  */
 package org.lushlife.negroni.delegate.impl;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.lushlife.negroni.Container;
-import org.lushlife.negroni.MixinInterface;
 import org.lushlife.negroni.conversions.Conversions;
 import org.lushlife.negroni.delegate.DelegateMethodPrecedence;
 import org.lushlife.negroni.util.Reflections;
@@ -31,19 +31,19 @@ import org.lushlife.negroni.util.Reflections;
 public class MixinMethodMissingMethodDelegate extends AbstractDelegateMethod {
 
 	private Class mixinClass;
-	private Class<?> mixinInstanceType;
+	private Field mixinField;
 	private int methodMissing;
 
-	public MixinMethodMissingMethodDelegate(Class<?> mixinInstanceType,
+	public MixinMethodMissingMethodDelegate(Field mixinInstanceType,
 			int methodMissing, Method method, Class id) {
 		super(method);
 		this.mixinClass = id;
-		this.mixinInstanceType = mixinInstanceType;
+		this.mixinField = mixinInstanceType;
 		this.methodMissing = methodMissing;
 	}
 
 	public boolean isAccept(Class<?> owner, Method m) {
-		if (!Conversions.isConvert(owner, mixinInstanceType)) {
+		if (mixinField!=  null &&!Conversions.isConvert(owner, mixinField.getType())) {
 			return false;
 		}
 		return Reflections.isSimpleTypeAccept(m, getDelegateMethod(), 1);
@@ -53,7 +53,8 @@ public class MixinMethodMissingMethodDelegate extends AbstractDelegateMethod {
 			Object owner, Method method, Object[] args) throws Exception {
 		Object[] tmp = Reflections.toSimpleTypeArgs(new Object[] { method },
 				args);
-		Object instance = getMixinInstance(context, owner, mixinClass, contextMap);
+		Object instance = getMixinInstance(mixinField, context, owner,
+				mixinClass, contextMap);
 		return Reflections.invoke(instance, getDelegateMethod(), tmp);
 	}
 
