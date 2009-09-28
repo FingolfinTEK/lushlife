@@ -46,7 +46,7 @@ public interface SampleMixin {
 
 }}}
 
- mix-inとクラスを連携させるには、mix-inインタフェースをimplementsに加えます。
+ mix-inとクラスに組み込むにはmix-inインタフェースをimplementsに加えます。
  * MixInedSample
 {{{
 package example;
@@ -56,7 +56,7 @@ public abstract class SampleMixined implements SampleMixin {
 }
 }}}
 
- 最後にEnhancerで実装クラスを生成してインスタンス化させて呼び出します。
+ Enhancerで実装クラスを生成してインスタンス化させて呼び出します。
  * MainSampleMixin
 {{{
 package example;
