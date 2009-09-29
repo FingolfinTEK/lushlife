@@ -1,6 +1,6 @@
 #summary One-sentence summary of this page.
 
-= 実行時のmix-inを生成する =
+== dynamic mix-in ==
  Negroniではmix-inを動的に生成することができます。
  mix-inの定義方法はMixinTutorialと同じです。動的生成にはEnhancer#mixinメソッドを使います。
 
