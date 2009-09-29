@@ -40,7 +40,7 @@ method-missingとmix-inの単純なサンプルを用いて説明します。
 		<dependency>
 			<groupId>org.lushlife.negroni</groupId>
 			<artifactId>negroni</artifactId>
-			<version>0.5</version>
+			<version>0.7</version>
 		</dependency>
 	</dependencies>
 
