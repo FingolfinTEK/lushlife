@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * mix-in対象のインスタンスを取得します。
+ * mix-in対象のインスタンスを取得するためのアノテーションです。 フィールドにアノテーションを付与してください。
  * 
  * @author Takeshi Kondo
  */

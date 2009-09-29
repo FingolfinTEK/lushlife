@@ -23,12 +23,12 @@ package org.lushlife.negroni;
 public interface Enhancer {
 
 	/**
-	 * mix-inとMethodMissingメソッドを未定義のメソッドに織り込む。
+	 * mix-inとMethodMissingメソッドを未定義のメソッドに織り込みます。
 	 */
 	<T> Class<? extends T> enhace(Class<T> clazz);
 
 	/**
-	 * instanceにmixinメソッドを動的に追加する。
+	 * instanceをmix-interfaceでラップして mix-inのメソッドを動的に組み込みます。
 	 */
 	<T> T mixin(Class<T> mixinInterface, Object instance);
 

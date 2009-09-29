@@ -19,6 +19,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * DelegateMethodの優先順位を定義する
+ * 
  * @author Takeshi Kondo
  */
 @Retention(RetentionPolicy.RUNTIME)

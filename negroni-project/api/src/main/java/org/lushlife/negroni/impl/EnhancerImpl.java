@@ -113,7 +113,7 @@ public class EnhancerImpl implements Enhancer {
 		List<DelegateMethod> delegateMethods = new ArrayList<DelegateMethod>();
 		for (Method mixinMethod : mixinClass.getMethods()) {
 			DelegateMethod delegateMethod = DelegateMethodFactory
-					.toDelegateMethod(mixinMethod, mixinClass);
+					.createDelegateMethod(mixinMethod, mixinClass);
 			if (delegateMethod != null) {
 				boolean accept = delegateMethod.isAccept(ownerClass, method);
 				log.log(LogMsgNGLN.NGLN00002, delegateMethod
@@ -130,31 +130,33 @@ public class EnhancerImpl implements Enhancer {
 		return enhace(clazz, container);
 	}
 
-	protected <T> T wrap(Object instance, Class<T> mixinInterface,
+	protected <T> T mixin(Object instance, Class<T> mixinInterface,
 			Container container) {
+		// mixinInterfaceはインタフェースのみとする
+		// クラスを許可するとコンストラクタの処理が必要になり複雑化する。
 		if (!mixinInterface.isInterface()) {
 			throw new IllegalStateException("mixinInterface is not interface. "
 					+ mixinInterface);
 		}
+		// メソッドと委譲先のメソッドのマッピング
 		Map<Method, DelegateMethod> mapping = createDelegateMethodMapping(
 				instance.getClass(), mixinInterface);
 
-		Class<? extends ProxyObject> proxyClass = getProxyClass(mixinInterface);
-		ProxyObject po;
+		Class<? extends ProxyObject> proxyClass = createProxyIfAbsent(mixinInterface);
 		try {
-			po = proxyClass.newInstance();
+			ProxyObject po = proxyClass.newInstance();
 			DelegateMethodHandler handler = new DelegateMethodHandler(instance,
 					container, mapping);
 			po.setHandler(handler);
+			return (T) po;
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e);
 		}
-		return (T) po;
 	}
 
 	static private Map<Class<?>, Class<?>> cache = new ConcurrentHashMap<Class<?>, Class<?>>();
 
-	private <T> Class<? extends ProxyObject> getProxyClass(
+	private <T> Class<? extends ProxyObject> createProxyIfAbsent(
 			Class<T> mixinInterface) {
 		Class<? extends ProxyObject> proxyClass = (Class<? extends ProxyObject>) cache
 				.get(mixinInterface);
@@ -175,6 +177,6 @@ public class EnhancerImpl implements Enhancer {
 	}
 
 	public <T> T mixin(Class<T> mixinInterface, Object instance) {
-		return wrap(instance, mixinInterface, container);
+		return mixin(instance, mixinInterface, container);
 	}
 }

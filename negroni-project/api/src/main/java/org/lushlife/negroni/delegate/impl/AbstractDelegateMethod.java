@@ -53,32 +53,37 @@ public abstract class AbstractDelegateMethod implements DelegateMethod {
 		return this.getClass().getSimpleName() + ":" + method;
 	}
 
-	protected Object getMixinInstance(Field mixinField, Container context,
+	protected Object getMixinInstance(Field[] mixinField, Container context,
 			Object owner, Class mixinClass, Map<String, Object> contextMap)
 			throws IllegalArgumentException, IllegalAccessException {
-
 		if (context.isManagementScope(mixinClass)) {
+			// TODO スコープがコンテナ管理の場合、毎回Fieldインジェクションが動作してしまうが、解決策が思いつかない。
 			Object instance = createAndInject(mixinField, context, mixinClass,
 					owner);
 			return instance;
 		} else {
+			// dependスコープの実装
 			Object instance = contextMap.get(mixinClass.getName());
-			if (instance != null) {
-				return instance;
+			if (instance == null) {
+				synchronized (contextMap) {
+					instance = contextMap.get(mixinClass.getName());
+					if (instance == null) {
+						instance = createAndInject(mixinField, context,
+								mixinClass, owner);
+						contextMap.put(mixinClass.getName(), instance);
+					}
+				}
 			}
-			instance = createAndInject(mixinField, context, mixinClass, owner);
-			contextMap.put(mixinClass.getName(), instance);
 			return instance;
 		}
 	}
 
-	private Object createAndInject(Field mixinField, Container context,
+	private Object createAndInject(Field[] mixinField, Container context,
 			Class mixinClass, Object owner) throws IllegalArgumentException,
 			IllegalAccessException {
-		Object instance;
-		instance = context.getInstance(mixinClass);
-		if (mixinField != null) {
-			mixinField.set(instance, owner);
+		Object instance = context.getInstance(mixinClass);
+		for (Field f : mixinField) {
+			f.set(instance, owner);
 		}
 		return instance;
 	}

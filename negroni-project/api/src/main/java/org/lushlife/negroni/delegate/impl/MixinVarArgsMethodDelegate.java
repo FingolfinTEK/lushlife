@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.lushlife.negroni.Container;
 import org.lushlife.negroni.conversions.Conversions;
+import org.lushlife.negroni.delegate.DelegateMethod;
 import org.lushlife.negroni.delegate.DelegateMethodPrecedence;
 import org.lushlife.negroni.util.Reflections;
 
@@ -31,9 +32,18 @@ import org.lushlife.negroni.util.Reflections;
 public class MixinVarArgsMethodDelegate extends AbstractVarArgsDelegatemMethod {
 
 	private Class mixinClass;
-	private Field mixinField;
+	private Field[] mixinField;
 
-	public MixinVarArgsMethodDelegate(Field mixin, Method method,
+	public int compareTo(DelegateMethod o) {
+		int com = super.compareTo(o);
+		if (com != 0) {
+			return com;
+		}
+		MixinVarArgsMethodDelegate other = (MixinVarArgsMethodDelegate) o;
+		return Reflections.compareField(mixinField, other.mixinField);
+	}
+
+	public MixinVarArgsMethodDelegate(Field[] mixin, Method method,
 			Class mixinClass) {
 		super(method);
 		this.mixinClass = mixinClass;
@@ -44,8 +54,10 @@ public class MixinVarArgsMethodDelegate extends AbstractVarArgsDelegatemMethod {
 		if (!getDelegateMethod().getName().equals(m.getName())) {
 			return false;
 		}
-		if (mixinField!=  null &&!Conversions.isConvert(owner, mixinField.getType())) {
-			return false;
+		for (Field f : mixinField) {
+			if (!Conversions.isConvert(owner, f.getType())) {
+				return false;
+			}
 		}
 		return Reflections.isVarArgsAccept(m, getDelegateMethod(), 0);
 	}

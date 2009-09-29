@@ -18,12 +18,16 @@ package org.lushlife.negroni.delegate.impl;
 import java.lang.reflect.Method;
 
 /**
+ * 可変長引数のMethodDelegate
+ * 
  * @author Takeshi Kondo
  */
 public abstract class AbstractVarArgsDelegatemMethod extends
 		AbstractDelegateMethod {
 
+	// 可変長引数の開始位置
 	private int varArgsPosition;
+	// 可変長引数の型
 	private Class<?> varArgsType;
 
 	public AbstractVarArgsDelegatemMethod(Method method) {
