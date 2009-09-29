@@ -1,8 +1,13 @@
 #summary Negroni User Guide
 #labels UserGuide
-== Motivation ==
+ NegroniはJavaでmethod-missingとmix-inを実現するためのフレームワークです。
 
-== Getting Started ==
+ method-missingとは、Rubyにある機能なのですが、定義していないメソッドが呼び出された場合に呼び出されるメソッドです。Ruby on Railsはこれを上手く利用してフレームワークを作り上げています。
+ mix-inとは,これもRubyにある機能なのですが、継承を使わずにクラスにメソッドのインタフェースと実装を差し込む機能です。
+
+
+ 
+== Core Idea ==
 
 == Mix-in ==
 
