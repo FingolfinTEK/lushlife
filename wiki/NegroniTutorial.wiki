@@ -3,10 +3,10 @@
 method-missingとmix-inの単純なサンプルを用いて説明します。
 
 == サンプル ==
- * 1 [MethodMissingTutorial method-missingのサンプル]
- * 2 [MixinTutorial mix-inのサンプル]
- * 3 [MixinMethodMissingTutorial mix-inとmethod-missingを組み合わせのサンプル]
- * 4 [MixinTutorial2 mix-inの動的生成のサンプル]
+ # [MethodMissingTutorial method-missingのサンプル]
+ # [MixinTutorial mix-inのサンプル]
+ # [MixinMethodMissingTutorial mix-inとmethod-missingを組み合わせのサンプル]
+ # [MixinTutorial2 mix-inの動的生成のサンプル]
 == Next ==
  チュートリアルでは引数のマッピング方法やタイプセーフ性についての説明はしていません。それらはMethodMappingで説明しています。
 
