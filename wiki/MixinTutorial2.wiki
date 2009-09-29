@@ -1,0 +1,29 @@
+#summary One-sentence summary of this page.
+
+= 実行時のmix-inを生成する =
+ Negroniではmix-inを動的に生成することができます。
+ mix-inの定義方法はMixinTutorialと同じです。動的生成にはEnhancer#mixinメソッドを使います。
+
+ 次のサンプルはStringをSampleMixinのmix-inインタフェースでラップしています。
+ * MainDynamicMixin
+{{{
+package example;
+
+import org.lushlife.negroni.Enhancer;
+import org.lushlife.negroni.Negroni;
+
+public class MainDynamicMixin {
+	public static void main(String[] args) {
+		Enhancer enhancer = Negroni.create();
+		// mix-inインタフェースでラッピングする
+		SampleMixin sampleMixin = enhancer.mixin(SampleMixin.class, "xxxxxx");
+		// mix-inのメソッドを呼び出す
+		sampleMixin.mixin();
+	}
+}
+
+}}}
+ * 実行結果
+{{{
+ mixin xxxxxx
+}}}
