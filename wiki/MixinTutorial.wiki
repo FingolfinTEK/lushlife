@@ -1,5 +1,5 @@
 #summary mix-in tutorial
-#labels tutorial
+#labels Tutorial
 == Step.2 mix-in ==
  mix-inは単体では動作しないメソッドを定義します。そしてクラスに組み込み利用します。複数のクラスで汎用的に利用するメソッドを定義する場合な機能です。
 
