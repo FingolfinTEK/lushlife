@@ -4,28 +4,28 @@
  mix-inは単体では動作しないメソッドを定義します。そしてクラスに組み込み利用します。複数のクラスで汎用的に利用するメソッドを定義する場合な機能です。
 
  mix-inの定義ではどのクラスに組み込むか分からないので組み込むクラスのインスタンスが変数になります。
- Negroniでは組み込まれるクラスのインスタンスを取得するためのインタフェース(MixinInterface)を用意しています。またmix-inのメソッドには@MixinMethodアノテーションを付与します。
+ Negroniでは@Mixinアノテーションによりインスタンスを取得します。また、mix-inのメソッドには@MixinMethodアノテーションを付与します。
  
  サンプルでは連携クラスをSystem.outに出力しています。
  * MixinSample
 {{{
 package example;
 
-import org.lushlife.negroni.MixinInterface;
+import org.lushlife.negroni.Mixin;
 import org.lushlife.negroni.MixinMethod;
 
-public class SampleMixinImpl implements SampleMixin, MixinInterface<Object> {
+public class SampleMixinImpl implements SampleMixin {
+	@Mixin
 	private Object obj;
+
 	// mix-inの実装
 	@MixinMethod
 	public void mixin() {
 		System.out.println("mixin " + obj);
 	}
-	// 実装クラスのインスタンスを取得する
-	public void setMixinInstance(Object instance) {
-		this.obj = instance;
-	}
+
 }
+
 }}}
  MixinInterface`<Object>`インタフェースを実装することでObject型を継承したクラス（つまりすべてのクラス）に組み込むことができるmix-inの定義となります(MixinInterfaceについてはMethodMappingで詳しく説明します)。
  
