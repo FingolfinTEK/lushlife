@@ -1,4 +1,5 @@
 #summary method-missing tutorial
+#labels Tutorial
 === Step.1 method-missing ===
  method-missingは定義していないメソッドが呼び出された場合の処理のハンドリングします。
  Javaでは定義していないメソッドは呼び出すことができないので、abstract methodが呼び出された場合のハンドリングするメソッドとして実装しています。
