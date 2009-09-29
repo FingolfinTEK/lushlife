@@ -1,3 +1,0 @@
-#summary Negroni User Guide
-== xxxx ==
- * [User xxxx]
