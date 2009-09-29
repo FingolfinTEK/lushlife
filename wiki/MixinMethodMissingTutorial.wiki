@@ -1,5 +1,5 @@
 #summary mix-in & method-missing tutorial
-#labels tutorial
+#labels Tutorial
 
 === Step.3 mix-in & method-missing ===
  mix-inとmethod-missingを組み合わせたて使用することもできます。
