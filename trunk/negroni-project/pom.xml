@@ -3,16 +3,16 @@
 	<groupId>org.lushlife.negroni</groupId>
 	<artifactId>negroni-root</artifactId>
 	<packaging>pom</packaging>
-	<version>0.7</version>
+	<version>0.8-SNAPSHOT</version>
 	<name>Method Missing and Mixin</name>
 	<url>http://maven.apache.org</url>
 
 	<scm>
-		<connection>scm:svn:https://lushlife.googlecode.com/svn/tags/negroni-root-0.7
+		<connection>scm:svn:https://lushlife.googlecode.com/svn/tags/negroni-root-0.2
 		</connection>
-		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/tags/negroni-root-0.7
+		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/tags/negroni-root-0.2
 		</developerConnection>
-		<url>scm:svn:https://lushlife.googlecode.com/svn/tags/negroni-root-0.7</url>
+		<url>scm:svn:https://lushlife.googlecode.com/svn/tags/negroni-root-0.2</url>
 	</scm>
 
 
