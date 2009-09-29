@@ -36,15 +36,16 @@ import org.lushlife.stla.Logging;
  */
 public class DelegateMethodFactory {
 
-	static public DelegateMethod toDelegateMethod(Method m, Class<?> mixinClass) {
+	static public DelegateMethod createDelegateMethod(Method m,
+			Class<?> mixinClass) {
 		int methodMissingPosition = Reflections.searchParameterAnnotation(m,
 				MissingMethod.class);
 		boolean isMixin = m.isAnnotationPresent(MixinMethod.class);
 		boolean isVarArgs = m.isVarArgs();
-		Field mixinField = Reflections.getAnnotatedField(mixinClass,
+		Field[] mixinField = Reflections.getAnnotatedFields(mixinClass,
 				Mixin.class);
-		if (mixinField != null) {
-			mixinField.setAccessible(true);
+		for (Field f : mixinField) {
+			f.setAccessible(true);
 		}
 		if (methodMissingPosition >= 0) {
 			Class<?> methodMissing = m.getParameterTypes()[methodMissingPosition];

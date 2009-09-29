@@ -19,8 +19,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.Method;
 
 /**
+ * method-missingのメソッドに使用するアノテーションです。 {@link Method}
+ * を第一引数として取るメソッドのパラメータにアノテーションを付与してください。
+ * 
  * @author Takeshi Kondo
  */
 @Target(ElementType.PARAMETER)

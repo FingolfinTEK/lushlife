@@ -22,13 +22,13 @@ package org.lushlife.negroni;
  */
 public interface Container {
 	/**
-	 * 実装クラスのインスタンスを返してください。
-	 * 
-	 * @param <T>
-	 * @param clazz
-	 * @return
+	 * 実装クラスのインスタンスを取得します。
 	 */
 	public <T> T getInstance(Class<T> clazz);
 
+	/**
+	 * コンテナでスコープ管理しているインスタンスかどうかを識別します。
+	 * falseの場合にはDependeスコープ(組み込まれたクラスのフィールドと同じスコープ）になります。
+	 */
 	public boolean isManagementScope(Class<?> clazz);
 }

@@ -20,6 +20,8 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -313,16 +315,59 @@ public class Reflections {
 		return -1;
 	}
 
-	public static Field getAnnotatedField(Class<?> clazz,
+	public static Field[] getAnnotatedFields(Class<?> clazz,
 			Class<? extends Annotation> annotation) {
+		ArrayList<Field> fields = new ArrayList<Field>();
 		while (clazz != null) {
 			for (Field f : clazz.getDeclaredFields()) {
 				if (f.isAnnotationPresent(annotation)) {
-					return f;
+					fields.add(f);
 				}
 			}
 			clazz = clazz.getSuperclass();
 		}
-		return null;
+		return fields.toArray(new Field[0]);
+	}
+
+	static public boolean isSubClass(Class<?> clazz1, Class<?> clazz2) {
+		if (clazz1.equals(clazz2)) {
+			return false;
+		}
+		return clazz1.isAssignableFrom(clazz2);
+	}
+
+	/**
+	 * 具体性の高い型が優先される。
+	 * 
+	 * @return
+	 */
+	public static int compareField(Field[] fields1, Field[] fields2) {
+		boolean hasSuperClass12 = true;
+		boolean hasSuperClass21 = true;
+		for (Field f1 : fields1) {
+			if (f1 != null) {
+				for (Field f2 : fields2) {
+					hasSuperClass12 &= !isSubClass(f1.getType(), f2.getType());
+				}
+			}
+		}
+		for (Field f2 : fields2) {
+			for (Field f1 : fields1) {
+				hasSuperClass21 &= !isSubClass(f2.getType(), f1.getType());
+			}
+		}
+		if (hasSuperClass12 && hasSuperClass21) {
+			return 0;
+		}
+		if (hasSuperClass12) {
+			return -1;
+		}
+		if (hasSuperClass21) {
+			return 1;
+		}
+
+		throw new UnComparableException("can't compare "
+				+ Arrays.toString(fields1) + " and " + Arrays.toString(fields2));
+
 	}
 }

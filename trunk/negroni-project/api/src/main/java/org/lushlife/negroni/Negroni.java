@@ -30,8 +30,6 @@ public class Negroni {
 
 	/**
 	 * Enhancerを生成します。ContainerはSimpleContainerを使用します。
-	 * 
-	 * @return
 	 */
 	static public Enhancer create() {
 		return create(new SimpleConstructContainer());
@@ -39,9 +37,6 @@ public class Negroni {
 
 	/**
 	 * DIコンテナと連携させたEnhahcerを生成します。 Containerを連携させたいDIコンテナ用に作成してください。
-	 * 
-	 * @param container
-	 * @return
 	 */
 	static public Enhancer create(Container container) {
 		return new EnhancerImpl(container);
@@ -49,8 +44,6 @@ public class Negroni {
 
 	/**
 	 * @Mixinedアノテーションの一覧を取得します。
-	 * @param clazz
-	 * @return
 	 */
 	static public Set<Class<?>> mixinCLasses(Class<?> clazz) {
 		return Reflections.mixinImplementClasses(clazz);

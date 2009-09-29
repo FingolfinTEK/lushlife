@@ -45,25 +45,39 @@ import org.lushlife.negroni.delegate.DelegateMethod;
  * @author Takeshi Kondo
  */
 public class Javassist {
+	// クラス名に付与する数字
 	static final AtomicInteger counter = new AtomicInteger();
 	static final WeakHashMap<ClassLoader, ClassPool> pools = new WeakHashMap<ClassLoader, ClassPool>();
+	// dependスコープを保持するMapのfieldの名前
 	private static final String CONTEXT_MAP_FIELD = "__$contextMap";
+	// Containerを保持するstatic fieldの名前
+	private static String CONTAINER_FIELD_NAME = "__$container";
 
 	synchronized static public <T> Class<? extends T> createEnhancedClass(
 			Class<T> clazz, Container container,
 			Map<Method, DelegateMethod> mapping, ClassLoader loader,
 			ProtectionDomain domain) throws Exception {
-
-		ClassPool classPool = getClassPool(loader);
+		// ClassLoaderごとにClassPoolは生成される
+		ClassPool classPool = createClassPoolIfAbsent(loader);
+		// 親クラス
 		CtClass superClass = classPool.get(clazz.getName());
-		CtClass ctClass = createCtClass(clazz, classPool, superClass);
-		addClassField(ctClass);
+		// 拡張用のクラス
+		CtClass enhahcedClass = createCtClass(clazz, classPool, superClass);
 
+		addStaticField(enhahcedClass);
+
+		// delegateメソッドとフィールド名のマッピングを保持する
 		Map<String, Method> methodMapping = new HashMap<String, Method>();
+		// methodとフィールド名のマッピングを保持する
 		Map<String, DelegateMethod> delegateMethodMapping = new HashMap<String, DelegateMethod>();
+
 		addMethodAndStaticField(clazz, mapping, loader, domain, superClass,
-				ctClass, methodMapping, delegateMethodMapping);
-		Class<? extends T> enhancedClass = ctClass.toClass(loader, domain);
+				enhahcedClass, methodMapping, delegateMethodMapping);
+
+		Class<? extends T> enhancedClass = enhahcedClass
+				.toClass(loader, domain);
+
+		// static変数に値を設定する
 		setStaticFields(container, methodMapping, delegateMethodMapping,
 				enhancedClass);
 
@@ -71,12 +85,17 @@ public class Javassist {
 
 	}
 
-	private static ClassPool getClassPool(ClassLoader loader) {
+	private static ClassPool createClassPoolIfAbsent(ClassLoader loader) {
 		ClassPool classPool = pools.get(loader);
 		if (classPool == null) {
-			classPool = new ClassPool();
-			classPool.appendClassPath(new LoaderClassPath(loader));
-			pools.put(loader, classPool);
+			synchronized (pools) {
+				classPool = pools.get(loader);
+				if (classPool == null) {
+					classPool = new ClassPool();
+					classPool.appendClassPath(new LoaderClassPath(loader));
+					pools.put(loader, classPool);
+				}
+			}
 		}
 		return classPool;
 	}
@@ -93,6 +112,8 @@ public class Javassist {
 			if (Modifier.isAbstract(method.getModifiers())) {
 				Method originalMethod = clazz.getMethod(method.getName(),
 						toClasses(method.getParameterTypes(), loader, domain));
+				// メソッドの呼び出しの差異に固定で使うMethodとMethodDelegateを保持する
+				// static fieldを作成する。
 				String methodField = "__$method" + counter;
 				String delegateMethodField = "__$delegateMethod" + counter;
 				methodMapping.put(methodField, originalMethod);
@@ -107,8 +128,11 @@ public class Javassist {
 						+ Method.class.getName() + " " + methodField + ";",
 						ctClass));
 
+				// method-missing と mix-inのメソッドを作成する
 				CtMethod createMethod = new CtMethod(method.getReturnType(),
 						method.getName(), method.getParameterTypes(), ctClass);
+				// returnに相当するソース
+				// voidの場合にはreturnは必要ない
 				String returnSource;
 				if (createMethod.getReturnType().getName().equals("void")) {
 					returnSource = "";
@@ -141,20 +165,23 @@ public class Javassist {
 			ctClass = classPool.makeClass(className, superClass);
 		}
 		ctClass.setModifiers(Modifier.PUBLIC);
+		// コンストラクタのコピー
 		for (CtConstructor constructor : superClass.getConstructors()) {
 			CtConstructor ctConstructor = new CtConstructor(constructor
 					.getParameterTypes(), ctClass);
 			ctConstructor.setExceptionTypes(constructor.getExceptionTypes());
+			ctConstructor.setBody("super($$);");
+			ctConstructor.setModifiers(Modifier.PUBLIC);
+
+			// アノテーションのコピー
 			AttributeInfo annottion = constructor.getMethodInfo().getAttribute(
 					AnnotationsAttribute.visibleTag);
 			if (annottion != null) {
 				ctConstructor.getMethodInfo().addAttribute(annottion);
 			}
-			ctConstructor.setBody("super($$);");
-			ctConstructor.setModifiers(Modifier.PUBLIC);
 			ctClass.addConstructor(ctConstructor);
 		}
-
+		// コンストラクタが一つもない場合にはデフォルトコンストラクタを生成する
 		if (ctClass.getConstructors().length == 0) {
 			CtConstructor constructor = CtNewConstructor
 					.defaultConstructor(ctClass);
@@ -163,14 +190,13 @@ public class Javassist {
 		return ctClass;
 	}
 
-	static String CONTAINER_FIELD_NAME = "__$container";
-
-	private static void addClassField(CtClass ctClass)
+	private static void addStaticField(CtClass ctClass)
 			throws CannotCompileException {
+		// Containerを保持するための領域を作成する。
 		String source = "static public " + Container.class.getName() + " "
 				+ CONTAINER_FIELD_NAME + ";";
 		ctClass.addField(CtField.make(source, ctClass));
-		// インスタンスごとのスコープ
+		// インスタンスごとのスコープを保持する領域を作成する。
 		ctClass.addField(CtField.make("private java.util.Map "
 				+ CONTEXT_MAP_FIELD + " = new "
 				+ ConcurrentHashMap.class.getName() + "();", ctClass));

@@ -30,8 +30,6 @@ import java.lang.annotation.Target;
 public @interface Mixined {
 	/**
 	 * mix-inのクラスを設定します。
-	 * 
-	 * @return
 	 */
 	Class<?>[] value();
 }

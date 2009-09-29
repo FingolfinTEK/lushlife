@@ -24,7 +24,11 @@ import org.lushlife.negroni.Container;
  * @author Takeshi Kondo
  */
 public interface DelegateMethod extends Comparable<DelegateMethod> {
-
+	/**
+	 * Method呼び出しの委譲が可能かどうか?
+	 * 
+	 * trueならば委譲可能、そうでなければ委譲不可
+	 */
 	boolean isAccept(Class<?> owner, Method m);
 
 	Method getDelegateMethod();
