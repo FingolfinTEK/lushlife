@@ -5,7 +5,7 @@
  Negroniではmix-inを動的に生成することができます。
  mix-inの定義方法はMixinTutorialと同じです。動的生成にはEnhancer#mixinメソッドを使います。
 
- 次のサンプルはStringをSampleMixinのmix-inインタフェースでラップしています。
+ 次のサンプルは、StringにSampleMixinのメソッドを追加しています。
  * MainDynamicMixin
 {{{
 package example;
