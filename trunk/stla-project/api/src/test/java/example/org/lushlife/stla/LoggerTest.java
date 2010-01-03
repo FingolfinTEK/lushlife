@@ -1,6 +1,8 @@
-package org.lushlife.stla;
+package example.org.lushlife.stla;
 
 import org.junit.Test;
+import org.lushlife.stla.Log;
+import org.lushlife.stla.Logging;
 
 public class LoggerTest {
 	static Log logger = Logging.getLog(LoggerTest.class);

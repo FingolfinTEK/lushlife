@@ -1,6 +1,7 @@
 package org.lushlife.stla.provider;
 
 import java.text.MessageFormat;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import org.lushlife.stla.Level;
@@ -47,23 +48,65 @@ public class JDKLogProvider implements LogProvider {
 
 		switch (level) {
 		case ERROR:
-			logger.log(java.util.logging.Level.SEVERE, message, e);
+			log(SELF, java.util.logging.Level.SEVERE, message, e);
 			return;
 		case WARN:
-			logger.log(java.util.logging.Level.WARNING, message, e);
+			log(SELF, java.util.logging.Level.WARNING, message, e);
 			return;
 		case INFO:
-			logger.log(java.util.logging.Level.INFO, message, e);
+			log(SELF, java.util.logging.Level.INFO, message, e);
 			return;
 		case DEBUG:
-			logger.log(java.util.logging.Level.FINE, message, e);
+			log(SELF, java.util.logging.Level.FINE, message, e);
 			return;
 		case TRACE:
-			logger.log(java.util.logging.Level.FINER, message, e);
+			log(SELF, java.util.logging.Level.FINER, message, e);
 			return;
 		}
 		throw new IllegalArgumentException("Unreachable code " + level);
 
 	}
 
+	private void log(String callerFQCN, java.util.logging.Level level,
+			String msg, Throwable t) {
+		LogRecord record = new LogRecord(level, msg);
+		record.setLoggerName(getName());
+		record.setThrown(t);
+		fillCallerData(callerFQCN, record);
+		logger.log(record);
+
+	}
+
+	static String SELF = JDKLogProvider.class.getName();
+	static String SUPER = LogProvider.class.getName();
+
+	final private void fillCallerData(String callerFQCN, LogRecord record) {
+		StackTraceElement[] steArray = new Throwable().getStackTrace();
+
+		int selfIndex = -1;
+		for (int i = 0; i < steArray.length; i++) {
+			final String className = steArray[i].getClassName();
+			if (className.equals(callerFQCN) || className.equals(SUPER)) {
+				selfIndex = i;
+				break;
+			}
+		}
+
+		int found = -1;
+		for (int i = selfIndex + 1; i < steArray.length; i++) {
+			final String className = steArray[i].getClassName();
+			if (!className.startsWith("org.lushlife.stla")) {
+				found = i;
+				break;
+			}
+		}
+
+		if (found != -1) {
+			StackTraceElement ste = steArray[found];
+			// setting the class name has the side effect of setting
+			// the needToInferCaller variable to false.
+			record.setSourceClassName(ste.getClassName());
+			record.setSourceMethodName(ste.getMethodName());
+		}
+	}
 }
