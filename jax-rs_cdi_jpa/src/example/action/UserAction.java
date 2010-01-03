@@ -46,7 +46,7 @@ public class UserAction extends ActionBase {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("users", users);
-		return to("/users.jsp", map);
+		return forward("/users.jsp", map);
 	}
 
 	@GET

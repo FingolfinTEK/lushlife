@@ -18,12 +18,12 @@ public class JSPPageManager implements Serializable {
 	@Inject
 	Injector injector;
 
-	public JSPPage to(String page, Map<String, Object> requestContext) {
+	public JSPPage forward(String page, Map<String, Object> requestContext) {
 		return injector.getInstnace(JSPPage.class).init(page, requestContext);
 	}
 
-	public JSPPage to(String page) {
-		return to(page, new HashMap<String, Object>());
+	public JSPPage forward(String page) {
+		return forward(page, new HashMap<String, Object>());
 	}
 
 }
