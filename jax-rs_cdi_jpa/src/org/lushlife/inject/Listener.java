@@ -25,8 +25,10 @@ import org.jboss.weld.Container;
 import org.jboss.weld.Container.Status;
 import org.jboss.weld.bootstrap.api.Bootstrap;
 import org.jboss.weld.bootstrap.api.Environments;
+import org.jboss.weld.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.weld.context.api.BeanStore;
 import org.jboss.weld.context.api.helpers.ConcurrentHashMapBeanStore;
+import org.jboss.weld.environment.servlet.deployment.ServletDeployment;
 import org.jboss.weld.environment.servlet.services.ServletServicesImpl;
 import org.jboss.weld.environment.servlet.util.Reflections;
 import org.jboss.weld.environment.tomcat.WeldAnnotationProcessor;
@@ -34,7 +36,6 @@ import org.jboss.weld.manager.api.WeldManager;
 import org.jboss.weld.servlet.api.ServletListener;
 import org.jboss.weld.servlet.api.ServletServices;
 import org.jboss.weld.servlet.api.helpers.ForwardingServletListener;
-import org.lushlife.inject.dsl.DSLDeployment;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
@@ -72,13 +73,10 @@ public class Listener extends ForwardingServletListener {
 	public void requestInitialized(ServletRequestEvent sre) {
 
 		logger.log(LogInject.BEGIN_REQUEST);
-
 		super.requestInitialized(sre);
 		Injector injector = new Injector(manager);
-
 		HiddenContextManager hiddenContextManager = injector
 				.getInstnace(HiddenContextManager.class);
-
 		hiddenContextManager
 				.begin((HttpServletRequest) sre.getServletRequest());
 	}
@@ -118,25 +116,20 @@ public class Listener extends ForwardingServletListener {
 
 		sce.getServletContext().setAttribute(
 				APPLICATION_BEAN_STORE_ATTRIBUTE_NAME, applicationBeanStore);
-
-		DSLDeployment deployment = new DSLDeployment(new ServiceLoaderModule(
-				Thread.currentThread().getContextClassLoader()));
-
+		ServletDeployment deployment = new ServletDeployment(sce
+				.getServletContext());
+		BeanDeploymentArchive archive = deployment
+				.getWebAppBeanDeploymentArchive();
 		deployment.getServices().add(ServletServices.class,
-				new ServletServicesImpl(deployment.getBeanDeploymentArchive()));
-
+				new ServletServicesImpl(archive));
 		bootstrap.startContainer(Environments.SERVLET, deployment,
 				applicationBeanStore).startInitialization();
-		manager = bootstrap.getManager(deployment.getBeanDeploymentArchive());
-
+		manager = bootstrap.getManager(archive);
 		bootstrap.deployBeans().validateBeans().endInitialization();
-
 		super.contextInitialized(sce);
-
 		Container.initialize((BeanManagerImpl) manager, deployment
 				.getServices());
 		Container.instance().setStatus(Status.INITIALIZED);
-
 		addContext();
 	}
 
