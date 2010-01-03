@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+  <groupId>org.lushlife.stla</groupId>
+  <artifactId>stla-parent</artifactId>
+  <version>0.3-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20100103.044120</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20100103044126</lastUpdated>
+  </versioning>
+</metadata>
