@@ -24,7 +24,7 @@ import org.jboss.weld.context.beanstore.HashMapBeanStore;
 import org.jboss.weld.serialization.spi.helpers.SerializableContextual;
 
 @RequestScoped
-public class HiddenContextManager {
+public class ClientContextManager {
 
 	private String key = "__lush_hidden__";
 
@@ -32,7 +32,7 @@ public class HiddenContextManager {
 	private HashMapBeanStore currentBeanStore;
 
 	@Inject
-	private HiddenContext hiddenContext;
+	private ClientContext hiddenContext;
 
 	@Inject
 	BeanManager manager;
@@ -136,7 +136,7 @@ public class HiddenContextManager {
 	}
 
 	public void destroy() {
-		HiddenContext mock = new HiddenContext();
+		ClientContext mock = new ClientContext();
 		mock.setActive(true);
 		mock.setBeanStore(this.currentBeanStore);
 		mock.destroy();

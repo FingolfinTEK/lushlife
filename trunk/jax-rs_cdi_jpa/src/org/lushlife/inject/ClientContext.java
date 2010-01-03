@@ -5,10 +5,10 @@ import javax.inject.Singleton;
 import org.jboss.weld.context.AbstractThreadLocalMapContext;
 
 @Singleton
-public class HiddenContext extends AbstractThreadLocalMapContext {
+public class ClientContext extends AbstractThreadLocalMapContext {
 
-	public HiddenContext() {
-		super(HiddenScoped.class);
+	public ClientContext() {
+		super(ClientScoped.class);
 	}
 
 	@Override
