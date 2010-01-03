@@ -1,4 +1,4 @@
-package org.lushlife.stla.configuration;
+package example.org.lushlife.stla.configuration;
 
 import java.net.URL;
 import java.util.concurrent.atomic.AtomicBoolean;

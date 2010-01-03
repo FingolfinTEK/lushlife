@@ -47,7 +47,12 @@ public class Logging {
 	private static void initializeLoggingFactory() {
 		try {
 			Class.forName("org.slf4j.Logger");
-			loggingFactory = new SLF4JLogProviderFactory();
+			try {
+				Class.forName("org.slf4j.impl.JDK14LoggerFactory");
+				loggingFactory = new JDKLogProviderFactory();
+			} catch (ClassNotFoundException e) {
+				loggingFactory = new SLF4JLogProviderFactory();
+			}
 		} catch (ClassNotFoundException e) {
 			loggingFactory = new JDKLogProviderFactory();
 		}
