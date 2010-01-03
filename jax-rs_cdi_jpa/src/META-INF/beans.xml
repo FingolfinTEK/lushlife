@@ -1,0 +1,8 @@
+<beans>
+
+	<interceptors>
+		<class>org.lushlife.log.TraceInterceptor</class>
+		<class>org.lushlife.transaction.TransactionalInterceptor</class>
+	</interceptors>
+
+</beans>
