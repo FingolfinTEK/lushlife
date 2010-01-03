@@ -8,12 +8,12 @@ public abstract class ActionBase {
 	@Inject
 	JSPPageManager pageManager;
 
-	protected JSPPage to(String page, Map<String, Object> requestContext) {
-		return pageManager.to(page, requestContext);
+	protected JSPPage forward(String page, Map<String, Object> requestContext) {
+		return pageManager.forward(page, requestContext);
 	}
 
 	protected JSPPage forward(String page) {
-		return pageManager.to(page);
+		return pageManager.forward(page);
 	}
 
 }
