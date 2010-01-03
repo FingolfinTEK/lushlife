@@ -4,7 +4,7 @@
 	<groupId>org.lushlife.stla</groupId>
 	<artifactId>stla-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3</version>
+	<version>0.4-SNAPSHOT</version>
 	<name>Simple Type-Safe Logging API Root</name>
 	<url>http://maven.apache.org</url>
 
