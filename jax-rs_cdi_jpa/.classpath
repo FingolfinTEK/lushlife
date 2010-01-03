@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/weld-servlet.jar" sourcepath="src-lib/weld-servlet-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-beanutils-1.8.2.jar" sourcepath="src-lib/commons-beanutils-1.8.2-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/stla-0.3.jar" sourcepath="src-lib/stla-0.3-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/slim3-EA1-SNAPSHOT.jar" sourcepath="src-lib/slim3-EA1-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="lib/slim3-gen-EA1-SNAPSHOT.jar" sourcepath="src-lib/slim3-gen-EA1-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

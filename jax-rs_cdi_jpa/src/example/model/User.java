@@ -9,10 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.lushlife.inject.HiddenScoped;
+import org.lushlife.inject.ClientScoped;
 
 @Entity
-@HiddenScoped
+@ClientScoped
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;

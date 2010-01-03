@@ -61,8 +61,8 @@ public class Listener extends ForwardingServletListener {
 		logger.log(LogInject.END_REQUEST);
 		Injector injector = new Injector(manager);
 
-		HiddenContextManager hiddenContextManager = injector
-				.getInstnace(HiddenContextManager.class);
+		ClientContextManager hiddenContextManager = injector
+				.getInstnace(ClientContextManager.class);
 
 		hiddenContextManager.end();
 		super.requestDestroyed(sre);
@@ -75,8 +75,8 @@ public class Listener extends ForwardingServletListener {
 		logger.log(LogInject.BEGIN_REQUEST);
 		super.requestInitialized(sre);
 		Injector injector = new Injector(manager);
-		HiddenContextManager hiddenContextManager = injector
-				.getInstnace(HiddenContextManager.class);
+		ClientContextManager hiddenContextManager = injector
+				.getInstnace(ClientContextManager.class);
 		hiddenContextManager
 				.begin((HttpServletRequest) sre.getServletRequest());
 	}
@@ -135,7 +135,7 @@ public class Listener extends ForwardingServletListener {
 
 	private void addContext() {
 		Injector injector = new Injector(manager);
-		HiddenContext hiddenContext = injector.getInstnace(HiddenContext.class);
+		ClientContext hiddenContext = injector.getInstnace(ClientContext.class);
 		((BeanManagerImpl) manager).addContext(hiddenContext);
 	}
 
