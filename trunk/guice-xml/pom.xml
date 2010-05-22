@@ -14,11 +14,11 @@
 	</properties>
 
 	<scm>
-		<connection>scm:svn:https://lushlife.googlecode.com/svn/tags/guicexml-0.0-SNAPSHOT
+		<connection>scm:svn:https://lushlife.googlecode.com/svn/tags/guice-xml-0.1-SNAPSHOT
 		</connection>
-		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/tags/guicexml-0.0-SNAPSHOT
+		<developerConnection>scm:svn:https://lushlife.googlecode.com/svn/tags/guice-xml-0.1-SNAPSHOT
 		</developerConnection>
-		<url>scm:svn:https://lushlife.googlecode.com/svn/tags/guicexml-0.0-SNAPSHOT</url>
+		<url>scm:svn:https://lushlife.googlecode.com/svn/tags/guice-xml-0.1-SNAPSHOT</url>
 	</scm>
 
 	<distributionManagement>
