@@ -1,0 +1,35 @@
+<components>
+	<component class="test.SampleComponent" scope="application"
+		value2="#{bb}">
+		<a>
+			1,2,3
+		</a>
+		<b>
+			<value>
+				aa
+			</value>
+			<value>
+				bb
+			</value>
+		</b>
+		<c>
+			<key>
+				aa
+			</key>
+			<value>
+				bb
+			</value>
+		</c>
+		<value>
+			#{com2}
+		</value>
+
+		<property name="value3" value="#{bb}" />
+
+	</component>
+
+	<component class="test.Com2" name="com2" />
+
+	<factory name="bb" value="#{com2}" />
+
+</components>
