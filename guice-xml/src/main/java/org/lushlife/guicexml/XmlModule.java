@@ -32,6 +32,9 @@ public class XmlModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		try {
+			if (stream == null) {
+				return;
+			}
 			Element rootElement = XML.getRootElement(stream);
 			for (Object obj : rootElement.elements()) {
 				Element element = (Element) obj;
