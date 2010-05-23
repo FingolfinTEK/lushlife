@@ -42,7 +42,7 @@
 	<component class="test.SysoutInterceptor" name="intercept1" />
 
 	<component class="test.SysoutInterceptor" name="intercept2"
-		message="hello" startup="true" />
+		message="invocations ${invocationContext.method}" startup="true" />
 
 	<interceptor-mapping interceptors="#{intercept1}"
 		target-class="test\..*" />

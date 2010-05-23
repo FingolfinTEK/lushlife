@@ -49,6 +49,7 @@ public class Conversions {
 		addConverter(new DateformatConverter());
 		addConverter(new PatternConverter());
 		addConverter(new ObjectNameConverter());
+		addConverter(new ValueExpressionConverter());
 
 		ServiceLoader<Converter> loader = ServiceLoader.load(Converter.class);
 		for (Converter<?> converter : loader) {
