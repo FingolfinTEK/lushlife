@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
 
@@ -22,32 +23,36 @@ import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
 import com.google.inject.Binder;
+import com.google.inject.Injector;
+import com.google.inject.JustInTimeProvider;
 import com.google.inject.Key;
 import com.google.inject.Provider;
-import com.google.inject.TypeLiteral;
 import com.google.inject.binder.ScopedBindingBuilder;
-import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
-import com.google.inject.spi.InjectionListener;
-import com.google.inject.spi.TypeEncounter;
-import com.google.inject.spi.TypeListener;
 
 public class Component<T> {
 	static private Log log = Logging.getLog(Component.class);
 
-	class ComponentInjectionListener implements
-			com.google.inject.spi.InjectionListener<T> {
+	static private AtomicInteger counter = new AtomicInteger();
+
+	class ComponentInjectionListener implements Provider<T> {
 
 		Provider<Expressions> expressions;
+		Component<T> ownerComponent;
+		Provider<Injector> injector;
 
-		public ComponentInjectionListener(Provider<Expressions> expressions) {
+		public ComponentInjectionListener(Provider<Expressions> expressions,
+				Provider<Injector> injector) {
 			this.expressions = expressions;
+			this.injector = injector;
 		}
 
 		@Override
-		public void afterInjection(T t) {
+		public T get() {
+			T t = injector.get().getInstance(internalKey);
 			injectValues(t, expressions.get());
 			postConstruct(t);
+			return t;
 		}
 
 	}
@@ -60,6 +65,8 @@ public class Component<T> {
 	final protected Map<String, PropertyValue> attribute;
 	final protected Map<String, Injectable> attribuiteInject = new HashMap<String, Injectable>();
 	protected Method postConstruct;
+
+	private Key<T> internalKey;
 
 	public Component(Type[] bindTypes, Class<T> clazz, String name,
 			Class<? extends Annotation> scopeType, boolean eagerSingleton,
@@ -114,6 +121,8 @@ public class Component<T> {
 	}
 
 	protected void initialize() {
+		this.internalKey = Key.get(clazz, Names.named("_internal_"
+				+ counter.getAndIncrement()));
 		initSetterInject();
 		initFieldInject();
 		this.postConstruct = findPostConstructMethod();
@@ -136,27 +145,18 @@ public class Component<T> {
 	@SuppressWarnings("unchecked")
 	public void bind(Binder binder) {
 		log.log(GuiceXmlLogMessage.INSTALL_COMPONENT, this);
-		binder.bindListener(Matchers.only(TypeLiteral.get(clazz)),
-				new TypeListener() {
-					@Override
-					public <I> void hear(TypeLiteral<I> type,
-							TypeEncounter<I> encounter) {
-						Provider<Expressions> provider = encounter
-								.getProvider(Expressions.class);
-						encounter
-								.register((InjectionListener<? super I>) new ComponentInjectionListener(
-										provider));
-					}
-				});
+
+		binder.bind(internalKey).toProvider(new JustInTimeProvider<T>(clazz));
+
+		Provider<Expressions> expressions = binder
+				.getProvider(Expressions.class);
+		Provider<Injector> injector = binder.getProvider(Injector.class);
 		for (Type type : types) {
 			Key<T> key = (Key<T>) ((name != null) ? Key.get(type, Names
 					.named(name)) : Key.get(type));
 			ScopedBindingBuilder scopedBindingBuilder;
-			if (type != clazz || name != null) {
-				scopedBindingBuilder = binder.bind(key).to(clazz);
-			} else {
-				scopedBindingBuilder = binder.bind(key);
-			}
+			scopedBindingBuilder = binder.bind(key).toProvider(
+					new ComponentInjectionListener(expressions, injector));
 			if (eagerSingleton) {
 				scopedBindingBuilder.asEagerSingleton();
 			} else if (scopeType != null) {

@@ -41,7 +41,16 @@
 
 	<component class="test.SysoutInterceptor" name="intercept1" />
 
+	<component class="test.SysoutInterceptor" name="intercept2"
+		message="hello" />
+
 	<interceptor-mapping interceptors="#{intercept1}"
 		target-class="test\..*" />
+
+	<interceptor-mapping target-class="test\..*">
+		<interceptors>
+			<value>#{intercept2}</value>
+		</interceptors>
+	</interceptor-mapping>
 
 </guiceXml>

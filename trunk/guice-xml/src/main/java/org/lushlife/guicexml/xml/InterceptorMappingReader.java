@@ -27,6 +27,13 @@ public class InterceptorMappingReader {
 				element.attributeValue("exclude-method")).resolveString(
 				Pattern.class, null);
 
+		Element interceptorsElement = element.element("interceptors");
+
+		if (interceptorsElement != null) {
+			interceptors = xmlManagement.toListPropertyValue(
+					interceptorsElement).getValues();
+		}
+
 		return new InterceptorMapping(interceptors, targetClass, excludeClass,
 				targetMethod, excludeMethod);
 
