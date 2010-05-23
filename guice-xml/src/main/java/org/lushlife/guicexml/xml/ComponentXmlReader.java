@@ -59,6 +59,9 @@ public class ComponentXmlReader {
 			if (attr.getName().equals("name")) {
 				continue;
 			}
+			if (attr.getName().equals("id")) {
+				continue;
+			}
 			if (attr.getName().equals("class")) {
 				continue;
 			}
