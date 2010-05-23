@@ -1,24 +1,20 @@
 package org.lushlife.guicexml.xml;
 
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.dom4j.Attribute;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Namespace;
 import org.lushlife.guicexml.Component;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.reflection.DependencyManagement;
 
-import com.google.inject.AbstractModule;
-
+@SuppressWarnings("unchecked")
 public class ComponentXmlReader {
 
-	@SuppressWarnings("unchecked")
 	public static Component<?> create(Element element,
 			DependencyManagement xmlManagement) {
 		assert element.getName().equals("component");

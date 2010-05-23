@@ -1,17 +1,12 @@
 package org.lushlife.guicexml.xml;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.UnknownHostException;
 
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 public class XML {
 	public static Element getRootElement(InputStream stream)

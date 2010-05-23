@@ -9,8 +9,6 @@ import org.lushlife.guicexml.Factory;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.reflection.DependencyManagement;
 
-import com.google.inject.ScopeAnnotation;
-
 public class FactoryXmlReader {
 
 	@SuppressWarnings("unchecked")
