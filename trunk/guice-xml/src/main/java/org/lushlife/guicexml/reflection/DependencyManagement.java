@@ -65,6 +65,7 @@ public class DependencyManagement {
 		scopeBinding.configure(scopes);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Class<? extends Annotation> getScope(String name) {
 		if (name == null) {
 			return null;
