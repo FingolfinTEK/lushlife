@@ -6,10 +6,10 @@ import java.net.URL;
 
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.lushlife.guicexml.reflection.DependencyManagement;
 import org.lushlife.guicexml.xml.ComponentXmlReader;
 import org.lushlife.guicexml.xml.FactoryXmlReader;
 import org.lushlife.guicexml.xml.XML;
-import org.lushlife.guicexml.xml.XmlManagement;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
@@ -18,20 +18,20 @@ import com.google.inject.AbstractModule;
 public class XmlModule extends AbstractModule {
 	static private Log log = Logging.getLog(XmlModule.class);
 	private URL url;
-	private XmlManagement xmlManagement;
+	private DependencyManagement xmlManagement;
 
-	XmlModule(URL url, XmlManagement xmlManagement) {
+	XmlModule(URL url, DependencyManagement xmlManagement) {
 		this.url = url;
 		this.xmlManagement = xmlManagement;
 	}
 
 	public XmlModule(URL url) {
-		this(url, new XmlManagement());
+		this(url, new DependencyManagement());
 	}
 
 	public XmlModule(String classPath) {
 		this(Thread.currentThread().getContextClassLoader().getResource(
-				classPath), new XmlManagement());
+				classPath), new DependencyManagement());
 	}
 
 	@Override
