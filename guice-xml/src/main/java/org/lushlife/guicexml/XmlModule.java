@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.lushlife.guicexml.reflection.DependencyManagement;
 import org.lushlife.guicexml.xml.ComponentXmlReader;
