@@ -18,35 +18,36 @@ import javax.annotation.PostConstruct;
 import org.lushlife.guicexml.el.Expressions;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.xml.Injectable;
+import org.lushlife.stla.Log;
+import org.lushlife.stla.Logging;
 
 import com.google.inject.Binder;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.JustInTimeProvider;
 import com.google.inject.Key;
 import com.google.inject.Provider;
+import com.google.inject.TypeLiteral;
 import com.google.inject.binder.ScopedBindingBuilder;
+import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
+import com.google.inject.spi.InjectionListener;
+import com.google.inject.spi.TypeEncounter;
+import com.google.inject.spi.TypeListener;
 
 public class Component<T> {
-	class ComponentProvier implements Provider<T> {
-		@Inject
-		Injector injector;
+	static private Log log = Logging.getLog(Component.class);
 
-		@Inject
-		Expressions expressions;
+	class ComponentInjectionListener implements
+			com.google.inject.spi.InjectionListener<T> {
+
+		Provider<Expressions> expressions;
+
+		public ComponentInjectionListener(Provider<Expressions> expressions) {
+			this.expressions = expressions;
+		}
 
 		@Override
-		public T get() {
-			T t;
-			try {
-				t = injector.getInstance(internalKey);
-				injectValues(t, expressions);
-				postConstruct(t);
-				return t;
-			} catch (Exception e) {
-				throw new IllegalArgumentException(e);
-			}
+		public void afterInjection(T t) {
+			injectValues(t, expressions.get());
+			postConstruct(t);
 		}
 
 	}
@@ -59,7 +60,6 @@ public class Component<T> {
 	final protected Map<String, PropertyValue> attribute;
 	final protected Map<String, Injectable> attribuiteInject = new HashMap<String, Injectable>();
 	protected Method postConstruct;
-	private Key<T> internalKey;
 
 	public Component(Type[] bindTypes, Class<T> clazz, String name,
 			Class<? extends Annotation> scopeType, boolean eagerSingleton,
@@ -114,7 +114,6 @@ public class Component<T> {
 	}
 
 	protected void initialize() {
-		internalKey = Key.get(clazz, Names.named("_internal_"));
 		initSetterInject();
 		initFieldInject();
 		this.postConstruct = findPostConstructMethod();
@@ -136,16 +135,32 @@ public class Component<T> {
 
 	@SuppressWarnings("unchecked")
 	public void bind(Binder binder) {
-		binder.bind(internalKey).toProvider(new JustInTimeProvider<T>(clazz));
+		log.log(GuiceXmlLogMessage.INSTALL_COMPONENT, this);
+		binder.bindListener(Matchers.only(TypeLiteral.get(clazz)),
+				new TypeListener() {
+					@Override
+					public <I> void hear(TypeLiteral<I> type,
+							TypeEncounter<I> encounter) {
+						Provider<Expressions> provider = encounter
+								.getProvider(Expressions.class);
+						encounter
+								.register((InjectionListener<? super I>) new ComponentInjectionListener(
+										provider));
+					}
+				});
 		for (Type type : types) {
 			Key<T> key = (Key<T>) ((name != null) ? Key.get(type, Names
 					.named(name)) : Key.get(type));
-			ScopedBindingBuilder provider = binder.bind(key).toProvider(
-					new ComponentProvier());
+			ScopedBindingBuilder scopedBindingBuilder;
+			if (type != clazz || name != null) {
+				scopedBindingBuilder = binder.bind(key).to(clazz);
+			} else {
+				scopedBindingBuilder = binder.bind(key);
+			}
 			if (eagerSingleton) {
-				provider.asEagerSingleton();
+				scopedBindingBuilder.asEagerSingleton();
 			} else if (scopeType != null) {
-				provider.in(scopeType);
+				scopedBindingBuilder.in(scopeType);
 			}
 		}
 	}
