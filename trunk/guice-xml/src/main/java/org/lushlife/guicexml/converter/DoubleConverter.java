@@ -8,6 +8,9 @@ class DoubleConverter implements Converter<Double> {
 
 	@Override
 	public Double convert(String str) {
+		if (str == null) {
+			return null;
+		}
 		return Double.valueOf(str);
 	}
 

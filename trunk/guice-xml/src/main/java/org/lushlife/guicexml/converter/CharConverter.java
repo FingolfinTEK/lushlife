@@ -8,6 +8,9 @@ class CharConverter implements Converter<Character> {
 
 	@Override
 	public Character convert(String str) {
+		if (str == null) {
+			return null;
+		}
 		if (str.length() != 0) {
 			// TODO message
 			throw new IllegalArgumentException("char length " + str.length());

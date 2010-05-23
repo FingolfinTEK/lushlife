@@ -13,6 +13,10 @@ import org.lushlife.guicexml.reflection.Generics;
 public class ListPropertyValue implements PropertyValue {
 	private PropertyValue[] values;
 
+	public PropertyValue[] getValues() {
+		return values;
+	}
+
 	public ListPropertyValue(PropertyValue[] values) {
 		this.values = values;
 	}

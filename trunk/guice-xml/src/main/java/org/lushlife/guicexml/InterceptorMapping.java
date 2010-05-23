@@ -1,0 +1,128 @@
+package org.lushlife.guicexml;
+
+import java.lang.reflect.Method;
+import java.util.regex.Pattern;
+
+import javax.interceptor.AroundInvoke;
+
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.lushlife.guicexml.aop.AOP;
+import org.lushlife.guicexml.aop.AopAlianceEjb3Inverceptor;
+import org.lushlife.guicexml.el.Expressions;
+import org.lushlife.guicexml.property.PropertyValue;
+
+import com.google.inject.Binder;
+import com.google.inject.Provider;
+import com.google.inject.matcher.AbstractMatcher;
+
+public class InterceptorMapping {
+	class ReferenceInterceptor implements MethodInterceptor {
+		int pos;
+
+		public ReferenceInterceptor(int pos) {
+			this.pos = pos;
+		}
+
+		@Override
+		public Object invoke(MethodInvocation invocation) throws Throwable {
+			Object obj = interceptors[pos].resolveString(Object.class,
+					expressions.get());
+			if (obj instanceof MethodInterceptor) {
+				return ((MethodInterceptor) obj).invoke(invocation);
+			} else {
+				return new AopAlianceEjb3Inverceptor(AOP.toInterceptor(obj))
+						.invoke(invocation);
+			}
+		}
+	}
+
+	class ClassMatcher extends AbstractMatcher<Class<?>> {
+
+		@Override
+		public boolean matches(Class<?> clazz) {
+			if (MethodInvocation.class.isAssignableFrom(clazz)) {
+				return false;
+			}
+			for (Method method : clazz.getMethods()) {
+				if (method.isAnnotationPresent(AroundInvoke.class)) {
+					return false;
+				}
+			}
+			String name = clazz.getName();
+			if (targetClass != null) {
+				if (targetClass.matcher(name).matches()) {
+					if (excludeClass != null) {
+						if (excludeClass.matcher(name).matches()) {
+							return false;
+						}
+					}
+					return true;
+				} else {
+					return false;
+				}
+			}
+			if (excludeClass != null) {
+				if (excludeClass.matcher(name).matches()) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+
+	class MethodMatcher extends AbstractMatcher<Method> {
+
+		@Override
+		public boolean matches(Method method) {
+			if (method.isAnnotationPresent(AroundInvoke.class)) {
+				return false;
+			}
+			String name = method.getName();
+			if (targetMethod != null) {
+				if (targetMethod.matcher(name).matches()) {
+					if (excludeMethod != null) {
+						if (excludeMethod.matcher(name).matches()) {
+							return false;
+						}
+					}
+					return true;
+				} else {
+					return false;
+				}
+			}
+			if (excludeMethod != null) {
+				if (excludeMethod.matcher(name).matches()) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+
+	PropertyValue[] interceptors;
+	Pattern targetClass;
+	Pattern excludeClass;
+	Pattern targetMethod;
+	Pattern excludeMethod;
+
+	private Provider<Expressions> expressions;
+
+	public InterceptorMapping(PropertyValue[] interceptors,
+			Pattern targetClass, Pattern excludeClass, Pattern targetMethod,
+			Pattern excludeMethod) {
+		this.interceptors = interceptors;
+		this.targetClass = targetClass;
+		this.excludeClass = excludeClass;
+		this.targetMethod = targetMethod;
+		this.excludeMethod = excludeMethod;
+	}
+
+	public void bind(Binder binder) {
+		this.expressions = binder.getProvider(Expressions.class);
+		for (int i = 0; i < interceptors.length; i++) {
+			binder.bindInterceptor(new ClassMatcher(), new MethodMatcher(),
+					new ReferenceInterceptor(i));
+		}
+	}
+}

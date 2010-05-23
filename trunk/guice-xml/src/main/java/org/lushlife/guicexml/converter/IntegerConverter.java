@@ -8,6 +8,9 @@ class IntegerConverter implements Converter<Integer> {
 
 	@Override
 	public Integer convert(String str) {
+		if (str == null) {
+			return null;
+		}
 		return Integer.valueOf(str);
 	}
 

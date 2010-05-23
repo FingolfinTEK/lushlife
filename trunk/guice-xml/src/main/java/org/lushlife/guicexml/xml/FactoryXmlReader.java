@@ -14,6 +14,8 @@ public class FactoryXmlReader {
 	@SuppressWarnings("unchecked")
 	public static Factory create(Element element,
 			DependencyManagement xmlManagement) {
+		assert element.getName().equals("factory");
+
 		Type type = xmlManagement.toType(element.attributeValue("type"));
 		String name = element.attributeValue("name");
 		Class<? extends Annotation> scope = xmlManagement.getScope(element

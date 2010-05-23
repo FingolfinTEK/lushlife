@@ -20,17 +20,6 @@ public class TestModule {
 			@Override
 			protected void configure() {
 				install(new XmlModule("components.xml"));
-				bindInterceptor(Matchers.any(), Matchers.any(),
-						new org.aopalliance.intercept.MethodInterceptor() {
-
-							@Override
-							public Object invoke(MethodInvocation invocation)
-									throws Throwable {
-								System.out.println("call "
-										+ invocation.getMethod());
-								return invocation.proceed();
-							}
-						});
 			}
 		});
 		SampleComponent test = injector.getInstance(Key

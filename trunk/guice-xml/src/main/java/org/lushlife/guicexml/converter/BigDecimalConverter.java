@@ -10,6 +10,9 @@ class BigDecimalConverter implements Converter<DateFormat> {
 
 	@Override
 	public DateFormat convert(String pattern) {
+		if (pattern == null) {
+			return DateFormat.getDateInstance();
+		}
 		return new SimpleDateFormat(pattern);
 	}
 

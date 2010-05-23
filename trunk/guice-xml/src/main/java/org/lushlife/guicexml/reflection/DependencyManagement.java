@@ -17,6 +17,7 @@ import org.lushlife.guicexml.el.Expressions;
 import org.lushlife.guicexml.property.ExpressionPropertyValue;
 import org.lushlife.guicexml.property.ListPropertyValue;
 import org.lushlife.guicexml.property.MapPropertyValue;
+import org.lushlife.guicexml.property.NullPropertyValue;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.property.SimplePropertyValue;
 import org.lushlife.guicexml.spi.NameSpaceBinding;
@@ -154,6 +155,9 @@ public class DependencyManagement {
 	}
 
 	public PropertyValue toPropertyValue(String value) {
+		if (value == null) {
+			return new NullPropertyValue(this);
+		}
 		if (value.startsWith("#{")) {
 			ValueExpression valueExpression = Expressions
 					.createValueExpression(value);
@@ -189,7 +193,7 @@ public class DependencyManagement {
 	}
 
 	@SuppressWarnings("unchecked")
-	private PropertyValue toMapPropertyValue(Element value) {
+	public MapPropertyValue toMapPropertyValue(Element value) {
 		List list = value.elements();
 		Map<PropertyValue, PropertyValue> map = Maps.newLinkedHashMap();
 		for (int i = 0; i < list.size(); i += 2) {
@@ -210,7 +214,16 @@ public class DependencyManagement {
 		return new MapPropertyValue(map);
 	}
 
-	private PropertyValue toListPropertyValue(Element value) {
+	public ListPropertyValue toListPropertyValue(String value) {
+		String[] values = value.split(",");
+		PropertyValue[] propertyValues = new PropertyValue[values.length];
+		for (int i = 0; i < values.length; i++) {
+			propertyValues[i] = toPropertyValue(values[i]);
+		}
+		return new ListPropertyValue(propertyValues);
+	}
+
+	public ListPropertyValue toListPropertyValue(Element value) {
 		List<PropertyValue> list = new ArrayList<PropertyValue>();
 		for (Object element : value.elements()) {
 			Element el = (Element) element;
