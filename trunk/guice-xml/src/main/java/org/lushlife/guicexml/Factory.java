@@ -9,7 +9,6 @@ import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 
 import com.google.inject.Binder;
-import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.binder.ScopedBindingBuilder;
@@ -19,13 +18,16 @@ public class Factory<T> {
 	static private Log log = Logging.getLog(Factory.class);
 
 	class FactoryProvider implements Provider<T> {
-		@Inject
-		Expressions expressions;
+		Provider<Expressions> expressions;
+
+		public FactoryProvider(Provider<Expressions> expressions) {
+			this.expressions = expressions;
+		}
 
 		@SuppressWarnings("unchecked")
 		@Override
 		public T get() {
-			return (T) value.resolveString(type, expressions);
+			return (T) value.resolveString(type, expressions.get());
 		}
 	}
 
@@ -56,10 +58,12 @@ public class Factory<T> {
 	@SuppressWarnings("unchecked")
 	public void bind(Binder binder) {
 		log.log(GuiceXmlLogMessage.INSTALL_FACTORY, this);
+		Provider<Expressions> expression = binder
+				.getProvider(Expressions.class);
 		Key key = (name != null) ? Key.get(type, Names.named(name)) : Key
 				.get(type);
 		ScopedBindingBuilder scopedBindingBuilder = binder.bind(key)
-				.toProvider(new FactoryProvider());
+				.toProvider(new FactoryProvider(expression));
 		if (startup) {
 			scopedBindingBuilder.asEagerSingleton();
 		} else if (scope != null) {
