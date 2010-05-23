@@ -1,4 +1,4 @@
-package org.lushlife.guicexml.converter;
+package org.lushlife.guicexml.spi;
 
 import java.lang.reflect.Type;
 

@@ -2,9 +2,9 @@ package org.lushlife.guicexml.converter;
 
 import java.lang.reflect.Type;
 
+import org.lushlife.guicexml.spi.Converter;
 
-
-public class LongConverter implements Converter<Long> {
+class LongConverter implements Converter<Long> {
 
 	@Override
 	public Long convert(String str) {

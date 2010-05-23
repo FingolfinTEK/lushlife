@@ -2,9 +2,9 @@ package org.lushlife.guicexml.converter;
 
 import java.lang.reflect.Type;
 
+import org.lushlife.guicexml.spi.Converter;
 
-
-public class ByteConverter implements Converter<Byte> {
+class ByteConverter implements Converter<Byte> {
 
 	@Override
 	public Byte convert(String str) {

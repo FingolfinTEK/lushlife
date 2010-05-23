@@ -19,6 +19,7 @@ import org.lushlife.guicexml.property.MapPropertyValue;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.property.SimplePropertyValue;
 import org.lushlife.guicexml.reflection.ParameterizedTypeImpl;
+import org.lushlife.guicexml.spi.ScopeBinding;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
