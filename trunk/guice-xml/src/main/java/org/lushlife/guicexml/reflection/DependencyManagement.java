@@ -44,7 +44,6 @@ import org.lushlife.guicexml.spi.NameSpaceBinding;
 import org.lushlife.guicexml.spi.ScopeBinding;
 
 import com.google.common.collect.Maps;
-import com.google.inject.Singleton;
 
 /**
  * @author Takeshi Kondo
