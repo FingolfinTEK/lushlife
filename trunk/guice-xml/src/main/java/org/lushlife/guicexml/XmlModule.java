@@ -93,6 +93,10 @@ public class XmlModule extends AbstractModule {
 			ComponentXmlReader.create(element, xmlManagement).bind(
 					this.binder());
 		}
+		if (element.getName().equals("bean")) {
+			ComponentXmlReader.create(element, xmlManagement).bind(
+					this.binder());
+		}
 		if (element.getName().equals("factory")) {
 			FactoryXmlReader.create(element, xmlManagement).bind(this.binder());
 		}

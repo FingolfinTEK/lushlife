@@ -25,6 +25,9 @@ public class ComponentXmlReader {
 	private static Component<?> create(Element element,
 			DependencyManagement xmlManagement, Class<?> clazz) {
 		String name = element.attributeValue("name");
+		if (name == null) {
+			name = element.attributeValue("id");
+		}
 		boolean startup = Boolean.valueOf(element.attributeValue("startup"));
 
 		Class<? extends Annotation> scope = xmlManagement.getScope(element
