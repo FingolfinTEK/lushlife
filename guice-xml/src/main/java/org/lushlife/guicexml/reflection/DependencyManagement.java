@@ -17,6 +17,7 @@ import org.lushlife.guicexml.el.Expressions;
 import org.lushlife.guicexml.property.ExpressionPropertyValue;
 import org.lushlife.guicexml.property.ListPropertyValue;
 import org.lushlife.guicexml.property.MapPropertyValue;
+import org.lushlife.guicexml.property.NullListPropertyValue;
 import org.lushlife.guicexml.property.NullPropertyValue;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.property.SimplePropertyValue;
@@ -36,6 +37,20 @@ public class DependencyManagement {
 	}
 
 	protected void initialize() {
+		initializeScope();
+		initializeNamepase();
+
+	}
+
+	private void initializeNamepase() {
+		ServiceLoader<NameSpaceBinding> ns = ServiceLoader
+				.load(NameSpaceBinding.class);
+		for (NameSpaceBinding binding : ns) {
+			bindNamespace(binding);
+		}
+	}
+
+	private void initializeScope() {
 		bindScope(new ScopeBinding() {
 
 			@Override
@@ -50,12 +65,6 @@ public class DependencyManagement {
 		for (ScopeBinding binding : loadScopes) {
 			bindScope(binding);
 		}
-		ServiceLoader<NameSpaceBinding> ns = ServiceLoader
-				.load(NameSpaceBinding.class);
-		for (NameSpaceBinding binding : ns) {
-			bindNamespace(binding);
-		}
-
 	}
 
 	private void bindNamespace(NameSpaceBinding binding) {
@@ -215,6 +224,9 @@ public class DependencyManagement {
 	}
 
 	public ListPropertyValue toListPropertyValue(String value) {
+		if (value == null) {
+			return new NullListPropertyValue(this);
+		}
 		String[] values = value.split(",");
 		PropertyValue[] propertyValues = new PropertyValue[values.length];
 		for (int i = 0; i < values.length; i++) {
