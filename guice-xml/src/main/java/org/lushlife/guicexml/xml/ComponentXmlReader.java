@@ -9,9 +9,12 @@ import java.util.Map;
 import org.dom4j.Attribute;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.Namespace;
 import org.lushlife.guicexml.Component;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.reflection.DependencyManagement;
+
+import com.google.inject.AbstractModule;
 
 public class ComponentXmlReader {
 
@@ -19,9 +22,13 @@ public class ComponentXmlReader {
 	public static Component<?> create(Element element,
 			DependencyManagement xmlManagement) {
 		assert element.getName().equals("component");
-
-		String name = element.attributeValue("name");
 		Class<?> clazz = xmlManagement.toClass(element.attributeValue("class"));
+		return create(element, xmlManagement, clazz);
+	}
+
+	private static Component<?> create(Element element,
+			DependencyManagement xmlManagement, Class<?> clazz) {
+		String name = element.attributeValue("name");
 		boolean startup = Boolean.valueOf(element.attributeValue("startup"));
 
 		Class<? extends Annotation> scope = xmlManagement.getScope(element
@@ -69,6 +76,18 @@ public class ComponentXmlReader {
 			types = new Type[] { clazz };
 		}
 		return new Component(types, clazz, name, scope, startup, attribute);
+	}
+
+	public static Component create(String packageName, String className,
+			Element element, DependencyManagement xmlManagement) {
+		Class<?> clazz = xmlManagement.toClass(packageName, className);
+		return create(element, xmlManagement, clazz);
+	}
+
+	public static Component create(Namespace namespace, String className,
+			Element element, DependencyManagement xmlManagement) {
+		Class<?> clazz = xmlManagement.toClass(namespace, className);
+		return create(element, xmlManagement, clazz);
 	}
 
 }

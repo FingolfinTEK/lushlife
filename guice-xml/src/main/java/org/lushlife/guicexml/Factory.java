@@ -1,5 +1,6 @@
 package org.lushlife.guicexml;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 import org.lushlife.guicexml.el.Expressions;
@@ -11,6 +12,7 @@ import com.google.inject.Binder;
 import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.google.inject.Provider;
+import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Names;
 
 public class Factory<T> {
@@ -30,13 +32,18 @@ public class Factory<T> {
 	private Type type;
 	private String name;
 	private PropertyValue value;
+	Class<? extends Annotation> scope;
+	private boolean startup;
 
-	public Factory(Type type, String name, PropertyValue value) {
+	public Factory(Type type, String name, PropertyValue value,
+			Class<? extends Annotation> scope, boolean startup) {
 		assert value != null;
 
 		this.type = (type != null) ? type : Object.class;
 		this.value = value;
 		this.name = name;
+		this.scope = scope;
+		this.startup = startup;
 	}
 
 	@Override
@@ -51,6 +58,12 @@ public class Factory<T> {
 		log.log(GuiceXmlLogMessage.INSTALL_FACTORY, this);
 		Key key = (name != null) ? Key.get(type, Names.named(name)) : Key
 				.get(type);
-		binder.bind(key).toProvider(new FactoryProvider());
+		ScopedBindingBuilder scopedBindingBuilder = binder.bind(key)
+				.toProvider(new FactoryProvider());
+		if (startup) {
+			scopedBindingBuilder.asEagerSingleton();
+		} else if (scope != null) {
+			scopedBindingBuilder.in(scope);
+		}
 	}
 }

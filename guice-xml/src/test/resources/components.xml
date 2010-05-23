@@ -1,6 +1,7 @@
-<components>
-	<component class="test.SampleComponent" scope="application"
-		value2="#{bb}">
+<components xmlns:t="urn:import:test"
+	xmlns:g="http://code.google.com/p/lushlife/guice-xml/test">
+
+	<t:sample-component scope="application" value2="#{bb}">
 		<a>
 			1,2,3
 		</a>
@@ -19,6 +20,12 @@
 			<value>
 				bb
 			</value>
+			<key>
+				cc
+			</key>
+			<value>
+				bb
+			</value>
 		</c>
 		<value>
 			#{com2}
@@ -26,10 +33,10 @@
 
 		<property name="value3" value="#{bb}" />
 
-	</component>
+	</t:sample-component>
 
-	<component class="test.Com2" name="com2" />
+	<g:com2 name="com2" scope="@com.google.inject.Singleton" />
 
-	<factory name="bb" value="#{com2}" />
+	<factory name="bb" value="#{com2}" scope="singleton" />
 
 </components>

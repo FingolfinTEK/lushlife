@@ -4,6 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class Generics {
 	public static <K, V> Map<K, V> createMap(Class<?> rawType) {
 		try {
 			if (Map.class.equals(rawType)) {
-				return new HashMap<K, V>();
+				return new LinkedHashMap<K, V>();
 			}
 			return (Map<K, V>) rawType.newInstance();
 		} catch (Exception e) {

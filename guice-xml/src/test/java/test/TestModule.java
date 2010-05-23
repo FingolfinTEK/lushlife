@@ -41,7 +41,7 @@ public class TestModule {
 		System.out.println(test.a);
 		Assert.assertEquals(test.a.size(), 3);
 		Assert.assertEquals(test.b.size(), 2);
-		Assert.assertEquals(test.c.size(), 1);
+		Assert.assertEquals(test.c.size(), 2);
 		System.out.println(test.b);
 		System.out.println(test.c);
 		Assert.assertNotNull(test.value);
