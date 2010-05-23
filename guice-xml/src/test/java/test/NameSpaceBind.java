@@ -1,7 +1,5 @@
 package test;
 
-import java.util.Map;
-
 import org.lushlife.guicexml.spi.NameSpaceBinding;
 
 public class NameSpaceBind extends NameSpaceBinding {
