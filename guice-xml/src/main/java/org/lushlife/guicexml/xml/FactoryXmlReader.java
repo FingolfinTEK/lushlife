@@ -6,11 +6,12 @@ import java.util.List;
 import org.dom4j.Element;
 import org.lushlife.guicexml.Factory;
 import org.lushlife.guicexml.property.PropertyValue;
+import org.lushlife.guicexml.reflection.DependencyManagement;
 
 public class FactoryXmlReader {
 
 	@SuppressWarnings("unchecked")
-	public static Factory create(Element element, XmlManagement xmlManagement) {
+	public static Factory create(Element element, DependencyManagement xmlManagement) {
 		Type type = xmlManagement.toType(element.attributeValue("type"));
 		String name = element.attributeValue("name");
 		PropertyValue value;

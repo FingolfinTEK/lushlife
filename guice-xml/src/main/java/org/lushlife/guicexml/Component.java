@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 
 import org.lushlife.guicexml.el.Expressions;
 import org.lushlife.guicexml.property.PropertyValue;
-import org.lushlife.guicexml.xml.Injectable;
+import org.lushlife.guicexml.reflection.Injectable;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
 

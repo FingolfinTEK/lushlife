@@ -1,4 +1,4 @@
-package org.lushlife.guicexml.xml;
+package org.lushlife.guicexml.reflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

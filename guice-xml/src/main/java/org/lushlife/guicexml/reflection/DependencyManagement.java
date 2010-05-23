@@ -1,4 +1,4 @@
-package org.lushlife.guicexml.xml;
+package org.lushlife.guicexml.reflection;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
@@ -18,17 +18,16 @@ import org.lushlife.guicexml.property.ListPropertyValue;
 import org.lushlife.guicexml.property.MapPropertyValue;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.property.SimplePropertyValue;
-import org.lushlife.guicexml.reflection.ParameterizedTypeImpl;
 import org.lushlife.guicexml.spi.ScopeBinding;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
 
-public class XmlManagement {
+public class DependencyManagement {
 
 	private Map<String, Class<? extends Annotation>> scopes = new HashMap<String, Class<? extends Annotation>>();
 
-	public XmlManagement() {
+	public DependencyManagement() {
 		initialize();
 	}
 
