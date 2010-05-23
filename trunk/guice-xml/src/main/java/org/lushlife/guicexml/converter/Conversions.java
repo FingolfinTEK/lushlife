@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.lushlife.guicexml.spi.Converter;
 
 public class Conversions {
 
@@ -25,6 +26,12 @@ public class Conversions {
 		addConverter(new IntegerConverter());
 		addConverter(new LongConverter());
 		addConverter(new StringConverter());
+
+		addConverter(new BigDecimalConverter());
+		addConverter(new DateformatConverter());
+		addConverter(new PatternConverter());
+		addConverter(new ObjectNameConverter());
+
 		ServiceLoader<Converter> loader = ServiceLoader.load(Converter.class);
 		for (Converter<?> converter : loader) {
 			addConverter(converter);

@@ -2,9 +2,9 @@ package org.lushlife.guicexml.converter;
 
 import java.lang.reflect.Type;
 
+import org.lushlife.guicexml.spi.Converter;
 
-
-public class IntegerConverter implements Converter<Integer> {
+class IntegerConverter implements Converter<Integer> {
 
 	@Override
 	public Integer convert(String str) {

@@ -2,14 +2,14 @@ package org.lushlife.guicexml.converter;
 
 import java.lang.reflect.Type;
 
+import org.lushlife.guicexml.spi.Converter;
 
-
-public class CharConverter implements Converter<Character> {
+class CharConverter implements Converter<Character> {
 
 	@Override
 	public Character convert(String str) {
 		if (str.length() != 0) {
-			// TODO
+			// TODO message
 			throw new IllegalArgumentException("char length " + str.length());
 		}
 		return str.charAt(0);

@@ -1,4 +1,4 @@
-package org.lushlife.guicexml.xml;
+package org.lushlife.guicexml.spi;
 
 import java.lang.annotation.Annotation;
 

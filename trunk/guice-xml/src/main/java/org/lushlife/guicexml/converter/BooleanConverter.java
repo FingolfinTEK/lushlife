@@ -2,9 +2,9 @@ package org.lushlife.guicexml.converter;
 
 import java.lang.reflect.Type;
 
+import org.lushlife.guicexml.spi.Converter;
 
-
-public class BooleanConverter implements Converter<Boolean> {
+class BooleanConverter implements Converter<Boolean> {
 
 	@Override
 	public Boolean convert(String str) {

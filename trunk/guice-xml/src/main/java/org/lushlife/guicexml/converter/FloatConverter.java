@@ -2,9 +2,9 @@ package org.lushlife.guicexml.converter;
 
 import java.lang.reflect.Type;
 
+import org.lushlife.guicexml.spi.Converter;
 
-
-public class FloatConverter implements Converter<Float> {
+class FloatConverter implements Converter<Float> {
 
 	@Override
 	public Float convert(String str) {
