@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -42,8 +43,6 @@ import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.property.SimplePropertyValue;
 import org.lushlife.guicexml.spi.NameSpaceBinding;
 import org.lushlife.guicexml.spi.ScopeBinding;
-
-import com.google.common.collect.Maps;
 
 /**
  * @author Takeshi Kondo
@@ -256,7 +255,7 @@ public class DependencyManagement {
 	@SuppressWarnings("unchecked")
 	public MapPropertyValue toMapPropertyValue(Element value) {
 		List list = value.elements();
-		Map<PropertyValue, PropertyValue> map = Maps.newLinkedHashMap();
+		Map<PropertyValue, PropertyValue> map = new LinkedHashMap<PropertyValue, PropertyValue>();
 		for (int i = 0; i < list.size(); i += 2) {
 			Element k = (Element) list.get(i);
 			Element v = (Element) list.get(i + 1);

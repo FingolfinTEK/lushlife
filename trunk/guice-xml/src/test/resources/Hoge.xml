@@ -8,7 +8,7 @@
 	<h:Foo id="foo" message="hi" />
 
 	<!--  
-		inject Foo instance to examle.hoge.Hoge's foo attribute.
+		inject Foo instance to examle.hoge.Hoge's foo property.
 	-->
 	<h:Hoge foo="#{foo}" />
 
