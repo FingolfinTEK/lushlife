@@ -12,12 +12,14 @@ import java.util.ServiceLoader;
 import javax.el.ValueExpression;
 
 import org.dom4j.Element;
+import org.dom4j.Namespace;
 import org.lushlife.guicexml.el.Expressions;
 import org.lushlife.guicexml.property.ExpressionPropertyValue;
 import org.lushlife.guicexml.property.ListPropertyValue;
 import org.lushlife.guicexml.property.MapPropertyValue;
 import org.lushlife.guicexml.property.PropertyValue;
 import org.lushlife.guicexml.property.SimplePropertyValue;
+import org.lushlife.guicexml.spi.NameSpaceBinding;
 import org.lushlife.guicexml.spi.ScopeBinding;
 
 import com.google.common.collect.Maps;
@@ -26,39 +28,50 @@ import com.google.inject.Singleton;
 public class DependencyManagement {
 
 	private Map<String, Class<? extends Annotation>> scopes = new HashMap<String, Class<? extends Annotation>>();
+	private Map<String, String> namespace = new HashMap<String, String>();
 
 	public DependencyManagement() {
 		initialize();
 	}
 
-	private void initialize() {
+	protected void initialize() {
 		bindScope(new ScopeBinding() {
 
 			@Override
-			public Class<? extends Annotation> getScopeAnnotation() {
-				return Singleton.class;
-			}
+			protected void configuire() {
+				bindScope(Singleton.class).toName("singleton");
+				bindScope(Singleton.class).toName("application");
 
-			@Override
-			public String[] getNames() {
-				return new String[] { "singleton", "application" };
 			}
-
 		});
 		ServiceLoader<ScopeBinding> loadScopes = ServiceLoader
 				.load(ScopeBinding.class);
 		for (ScopeBinding binding : loadScopes) {
 			bindScope(binding);
 		}
+		ServiceLoader<NameSpaceBinding> ns = ServiceLoader
+				.load(NameSpaceBinding.class);
+		for (NameSpaceBinding binding : ns) {
+			bindNamespace(binding);
+		}
+
+	}
+
+	private void bindNamespace(NameSpaceBinding binding) {
+		binding.configure(namespace);
 	}
 
 	private void bindScope(ScopeBinding scopeBinding) {
-		for (String name : scopeBinding.getNames()) {
-			scopes.put(name, scopeBinding.getScopeAnnotation());
-		}
+		scopeBinding.configure(scopes);
 	}
 
 	public Class<? extends Annotation> getScope(String name) {
+		if (name == null) {
+			return null;
+		}
+		if (name.startsWith("@")) {
+			return (Class<? extends Annotation>) toClass(name.substring(1));
+		}
 		return scopes.get(name);
 	}
 
@@ -207,6 +220,38 @@ public class DependencyManagement {
 			list.add(toPropertyValue(el));
 		}
 		return new ListPropertyValue(list.toArray(new PropertyValue[0]));
+	}
+
+	public Class<?> toClass(String packageName, String className) {
+		return toClass(packageName + "." + toChamelCase(className));
+	}
+
+	public Class<?> toClass(Namespace namespace, String className) {
+		String packageName = this.namespace.get(namespace.getText());
+		if (packageName == null) {
+			throw new IllegalArgumentException("don't bind namespace "
+					+ namespace);
+		}
+		return toClass(packageName, className);
+	}
+
+	public String toChamelCase(String clazzName) {
+		char[] value = clazzName.toCharArray();
+		StringBuilder sb = new StringBuilder();
+		sb.append(Character.toUpperCase(value[0]));
+		for (int i = 1; i < value.length; i++) {
+			if (value[i] == '-') {
+				if (i + 1 >= value.length) {
+					throw new IllegalArgumentException("illegal name "
+							+ clazzName);
+				}
+				sb.append(Character.toUpperCase(value[i + 1]));
+				i++;
+				continue;
+			}
+			sb.append(value[i]);
+		}
+		return sb.toString();
 	}
 
 }
