@@ -25,12 +25,6 @@
 == ドキュメント ==
  * [NegroniTutorial チュートリアル]
  * [NegroniUserGuide ユーザガイド]
-== メーリングリスト == 
- Negroniに関する質問、バグレポート、リクエストなどありましたら以下のメーリングリストにお気軽に。
- * メーリングリスト 
-  * <a href="mailto:lushlife4j@googlegroups.com"><b>lushlife4j</b>@googlegroups.com</a>
- * グループ
-  * http://groups.google.com/group/lushlife4j
 
 == ソースコード == 
  ソースコードはmavenレポジトリにアップロードしています。
