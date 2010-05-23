@@ -4,13 +4,14 @@
   <artifactId>guice-xml</artifactId>
   <version>0.0</version>
   <versioning>
-    <release>0.3</release>
+    <release>0.5</release>
     <versions>
       <version>0.0</version>
       <version>0.1</version>
       <version>0.2</version>
       <version>0.3</version>
+      <version>0.5</version>
     </versions>
-    <lastUpdated>20100523104745</lastUpdated>
+    <lastUpdated>20100523113340</lastUpdated>
   </versioning>
 </metadata>
