@@ -15,13 +15,17 @@
  */
 package org.lushlife.guicexml.reflection;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.ServiceLoader;
 
 import javax.el.ValueExpression;
@@ -61,6 +65,18 @@ public class DependencyManagement {
 	}
 
 	private void initializeNamepase() {
+		bindNamespace(new NameSpaceBinding() {
+
+			@Override
+			protected void configure() {
+				Properties properties = loadProperties("META-INF/namespace.properties");
+				for (Object key : properties.keySet()) {
+					namespace((String) key).toPackage(
+							(String) properties.getProperty((String) key));
+				}
+			}
+		});
+
 		ServiceLoader<NameSpaceBinding> ns = ServiceLoader
 				.load(NameSpaceBinding.class);
 		for (NameSpaceBinding binding : ns) {
@@ -73,16 +89,35 @@ public class DependencyManagement {
 
 			@Override
 			protected void configuire() {
-				bindScope(Singleton.class).toName("singleton");
-				bindScope(Singleton.class).toName("application");
-
+				Properties properties = loadProperties("META-INF/scopes.properties");
+				for (Object key : properties.keySet()) {
+					bindScope(
+							(Class<? extends Annotation>) toClass((String) properties
+									.get(key))).toName((String) key);
+				}
 			}
+
 		});
 		ServiceLoader<ScopeBinding> loadScopes = ServiceLoader
 				.load(ScopeBinding.class);
 		for (ScopeBinding binding : loadScopes) {
 			bindScope(binding);
 		}
+	}
+
+	private Properties loadProperties(String classPath) {
+		Properties properties = new Properties();
+		try {
+			Enumeration<URL> resources = Thread.currentThread()
+					.getContextClassLoader().getResources(classPath);
+			while (resources.hasMoreElements()) {
+				URL url = resources.nextElement();
+				properties.load(url.openStream());
+			}
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+		return properties;
 	}
 
 	private void bindNamespace(NameSpaceBinding binding) {
