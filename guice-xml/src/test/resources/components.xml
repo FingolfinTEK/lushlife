@@ -1,4 +1,4 @@
-<guice xmlns:t="urn:import:test"
+<guiceXml xmlns:t="urn:import:test"
 	xmlns:g="http://code.google.com/p/lushlife/guice-xml/test">
 
 	<t:sample-component scope="application" value2="#{bb}">
@@ -39,4 +39,4 @@
 
 	<factory name="bb" value="#{com2}" scope="singleton" />
 
-</guice>
+</guiceXml>
