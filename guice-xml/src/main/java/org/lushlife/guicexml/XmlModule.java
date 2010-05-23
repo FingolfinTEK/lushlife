@@ -17,10 +17,10 @@ import com.google.inject.AbstractModule;
 
 public class XmlModule extends AbstractModule {
 	static private Log log = Logging.getLog(XmlModule.class);
-	private URL url;
-	private DependencyManagement xmlManagement;
+	protected URL url;
+	protected DependencyManagement xmlManagement;
 
-	XmlModule(URL url, DependencyManagement xmlManagement) {
+	protected XmlModule(URL url, DependencyManagement xmlManagement) {
 		this.url = url;
 		this.xmlManagement = xmlManagement;
 	}
