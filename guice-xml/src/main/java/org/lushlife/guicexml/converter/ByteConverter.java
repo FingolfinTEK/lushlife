@@ -8,6 +8,9 @@ class ByteConverter implements Converter<Byte> {
 
 	@Override
 	public Byte convert(String str) {
+		if (str == null) {
+			return null;
+		}
 		return Byte.valueOf(str);
 	}
 

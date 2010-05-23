@@ -9,6 +9,9 @@ class DateformatConverter implements Converter<BigDecimal> {
 
 	@Override
 	public BigDecimal convert(String str) {
+		if (str == null) {
+			return null;
+		}
 		return new BigDecimal(str);
 	}
 

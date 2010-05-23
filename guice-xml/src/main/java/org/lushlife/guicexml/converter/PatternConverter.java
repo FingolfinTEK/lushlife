@@ -9,6 +9,9 @@ class PatternConverter implements Converter<Pattern> {
 
 	@Override
 	public Pattern convert(String pattern) {
+		if (pattern == null) {
+			return null;
+		}
 		return Pattern.compile(pattern);
 	}
 

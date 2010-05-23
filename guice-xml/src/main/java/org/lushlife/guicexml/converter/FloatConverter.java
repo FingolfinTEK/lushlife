@@ -8,6 +8,9 @@ class FloatConverter implements Converter<Float> {
 
 	@Override
 	public Float convert(String str) {
+		if (str == null) {
+			return null;
+		}
 		return Float.valueOf(str);
 	}
 

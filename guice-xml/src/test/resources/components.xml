@@ -39,4 +39,9 @@
 
 	<factory name="bb" value="#{com2}" scope="singleton" />
 
+	<component class="test.SysoutInterceptor" name="intercept1" />
+
+	<interceptor-mapping interceptors="#{intercept1}"
+		target-class="test\..*" />
+
 </guiceXml>

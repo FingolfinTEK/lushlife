@@ -10,6 +10,9 @@ class ObjectNameConverter implements Converter<ObjectName> {
 
 	@Override
 	public ObjectName convert(String name) {
+		if (name == null) {
+			return null;
+		}
 		try {
 			return new ObjectName(name);
 		} catch (Exception e) {

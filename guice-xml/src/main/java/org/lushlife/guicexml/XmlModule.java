@@ -9,6 +9,7 @@ import org.dom4j.Namespace;
 import org.lushlife.guicexml.reflection.DependencyManagement;
 import org.lushlife.guicexml.xml.ComponentXmlReader;
 import org.lushlife.guicexml.xml.FactoryXmlReader;
+import org.lushlife.guicexml.xml.InterceptorMappingReader;
 import org.lushlife.guicexml.xml.XML;
 import org.lushlife.stla.Log;
 import org.lushlife.stla.Logging;
@@ -94,6 +95,10 @@ public class XmlModule extends AbstractModule {
 		}
 		if (element.getName().equals("factory")) {
 			FactoryXmlReader.create(element, xmlManagement).bind(this.binder());
+		}
+		if (element.getName().equals("interceptor-mapping")) {
+			InterceptorMappingReader.create(element, xmlManagement).bind(
+					this.binder());
 		}
 	}
 }
