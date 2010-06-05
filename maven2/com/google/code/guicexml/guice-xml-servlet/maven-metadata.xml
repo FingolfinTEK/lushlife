@@ -4,10 +4,11 @@
   <artifactId>guice-xml-servlet</artifactId>
   <version>0.8</version>
   <versioning>
-    <release>0.8</release>
+    <release>0.9</release>
     <versions>
       <version>0.8</version>
+      <version>0.9</version>
     </versions>
-    <lastUpdated>20100605053741</lastUpdated>
+    <lastUpdated>20100605133522</lastUpdated>
   </versioning>
 </metadata>
