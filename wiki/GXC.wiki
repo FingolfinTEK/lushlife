@@ -57,7 +57,7 @@
  * <a href="http://guice-xml-configuration.googlecode.com/svn/tags/gxc-parent-0.2/">SVNレポジトリ</a>
  
 == Maven2統合 ==
- * dependency
+ * 下記の３つもモジュールから構成されています。
 {{{
 <dependency>
 	<groupId>com.google.code.gxc</groupId>
@@ -77,7 +77,7 @@
 
 }}}
 
- * repositories
+ * 下記のレポジトリを追加してください。
 {{{
 <repository>
 	<id>java net</id>
