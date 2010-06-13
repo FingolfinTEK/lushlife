@@ -17,14 +17,16 @@
 <!-- XML名前空間 t　と testパッケージを紐づける -->
 <beans
 	xmlns:t="urn:import:test">
+
 	<!-- 
 	 フィルターの設定(test.SampleFilterクラス)
 	 -->	
 	<t:SampleFilter name="sampleFilter" />
-
 	<filter-mapping>
+
 		<!-- サーブレットとの紐づけ -->
 		<filter>#{sampleFilter}</filter>
+
 		<!-- 環境変数からパラメータを取得する -->
 		<url-pattern>#{gxc.pattern}</url-pattern>
 	</filter-mapping>
@@ -35,8 +37,10 @@
 	<t:SampleServlet name="sampleServlet"/>
 
 	<servlet-mapping>
+
 		<!-- サーブレットとの紐づけ -->
 		<servlet>#{sampleServlet}</servlet>
+		
 		<!-- 環境変数からパラメータを取得する -->
 		<url-pattern>#{gxc.pattern}</url-pattern>
 	</servlet-mapping>
