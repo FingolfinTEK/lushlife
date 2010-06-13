@@ -4,10 +4,11 @@
   <artifactId>gxc-aop</artifactId>
   <version>0.1</version>
   <versioning>
-    <release>0.1</release>
+    <release>0.2</release>
     <versions>
       <version>0.1</version>
+      <version>0.2</version>
     </versions>
-    <lastUpdated>20100613025243</lastUpdated>
+    <lastUpdated>20100613135833</lastUpdated>
   </versioning>
 </metadata>
