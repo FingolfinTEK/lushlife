@@ -19,7 +19,7 @@
 	xmlns:t="urn:import:test">
 
 	<!-- 
-	 フィルターの設定(test.SampleFilterクラス)
+		フィルターの設定(test.SampleFilterクラス)
 	 -->	
 	<t:SampleFilter name="sampleFilter" />
 	<filter-mapping>
@@ -32,7 +32,7 @@
 	</filter-mapping>
 	
 	<!-- 
-	 サーブレットの設定(test.SampleServletクラス)
+		サーブレットの設定(test.SampleServletクラス)
 	 -->
 	<t:SampleServlet name="sampleServlet"/>
 
