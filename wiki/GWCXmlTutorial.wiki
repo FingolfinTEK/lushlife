@@ -131,4 +131,4 @@ public class MatlsModule extends AbstractModule {
 
 }}}
   
- Java CodeでBeerとMaltsを紐づけるので、Eclipseのコード補間が使え、ミスなく設定することができます。頻繁に変更するものでなければ、Java Codeでハードコーディングしておくほうが、効率的に開発を進めることができるので、こちらの設定のほうがお勧めです。
+ Java CodeでBeerとMaltsを紐づけるので、Eclipseのコード補間が使え、ミスなく設定することができます。頻繁に変更するものでなければ、Java Codeでハードコーディングしておくほうが、効率的に開発を進めることができるので、こちらがお勧めです。
