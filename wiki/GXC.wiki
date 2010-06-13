@@ -7,7 +7,7 @@
   * 設定値の参照機能に拘っています（EL式を使うことができます)。
 
 == はじめに ==
- Goolge App Engine上でアプリを開発するならGoogleのプロダクトで固めて開発を進めようと思い,最近はDIコンテナにGoogle Guiceを使っています(Google App Engine for Businessのサポートに含まれないかな。。。)。Google GuiceはJava CodeでDIの設定を行うため、煩わしいXMLを記述く、また、Eclipseと組み合わせて使えばタイプセーフに設定を記述することができるので高い生産性を得られています。しかし、Java Codeで書いた設定はリコンパイルが必要であり、また、Eclipseのない環境での設定変更は難儀なものです。
+ Goolge App Engine上でアプリを開発するならGoogleのプロダクトで固めて開発を進めようと思い,最近はDIコンテナにGoogle Guiceを使っています(Google App Engine for Businessでサポートされないかな。。。)。Google GuiceはJava CodeでDIの設定を行うため、煩わしいXMLを記述く、また、Eclipseと組み合わせて使えばタイプセーフに設定を記述することができるので高い生産性を得られています。しかし、Java Codeで書いた設定はリコンパイルが必要であり、また、Eclipseのない環境での設定変更は難儀なものです。
 
  XMLで設定を記述したいことは、ServletやFilter,Interceptorや環境変数、ログレベルなど、テスト時や運用時に少しだけ変更したい項目です。Google CodeにGoogle GuiceのXML設定のライブラリがありましたが、Java CodeでできることをそのままXMLで記述できるようにしていたものでした。それでは意味がありません。
 
