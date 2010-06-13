@@ -12,7 +12,7 @@
 
 ということで、Google GuiceのXML設定のライブラリを作りました。設定の管理を容易にするために、設定値の参照機能にとくに拘って作っています。また,ServletやFilter,Interceptorの設定も、このXMLファイルから行えます。
 
-== サンプル ==
+== Sample ==
 {{{
 <!-- XML名前空間 t　と testパッケージを紐づける -->
 <beans
