@@ -1,0 +1,21 @@
+#summary Gucid Xml Configuration API
+==  Gucid Xml Configuration(GXC)とは ==
+
+== はじめに ==
+
+== ダウンロード ==
+
+== インストール ==
+
+== ドキュメント ==
+
+== ソースコード == 
+== Maven2統合 ==
+ * dependency
+{{{
+}}}
+
+ * repository
+{{{
+
+}}}
