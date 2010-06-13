@@ -19,7 +19,7 @@
  * gxc-all-0.2.jarにクラスパスを通してください(※Google Guiceもこのjarの中に含まれています)。
 
 == ドキュメント ==
- * <a href="GXCTutorial">チュートリアル</a>
+ * [GXCTutorial チュートリアル]
 
 == ソースコード == 
  * <a href="http://guice-xml-configuration.googlecode.com/svn/tags/gxc-parent-0.2/">SVNレポジトリ</a>
