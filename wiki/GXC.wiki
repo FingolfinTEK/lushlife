@@ -12,17 +12,49 @@
 
 ということで、Google GuiceのXML設定のライブラリを作りました。設定の管理を容易にするために、設定値の参照機能にとくに拘って作っています。また,ServletやFilter,Interceptorの設定も、このXMLファイルから行えます。
 
+== サンプル ==
+{{{
+<!-- XML名前空間 t　と testパッケージを紐づける -->
+<beans
+	xmlns:t="urn:import:test">
+	<!-- 
+	 フィルターの設定(test.SampleFilterクラス)
+	 -->	
+	<t:SampleFilter name="sampleFilter" />
+
+	<filter-mapping>
+		<!-- サーブレットとの紐づけ -->
+		<filter>#{sampleFilter}</filter>
+		<!-- 環境変数からパラメータを取得する -->
+		<url-pattern>#{gxc.pattern}</url-pattern>
+	</filter-mapping>
+	
+	<!-- 
+	 サーブレットの設定(test.SampleServletクラス)
+	 -->
+	<t:SampleServlet name="sampleServlet"/>
+
+	<servlet-mapping>
+		<!-- サーブレットとの紐づけ -->
+		<servlet>#{sampleServlet}</servlet>
+		<!-- 環境変数からパラメータを取得する -->
+		<url-pattern>#{gxc.pattern}</url-pattern>
+	</servlet-mapping>
+
+</beans>
+
+}}}
+
 == ダウンロード ==
  * モジュール(依存ライブラリも含む) : <a href="http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-all/0.2/gxc-all-0.2.jar">gxl-all-0.2.jar</a>
 
 == インストール ==
- * gxc-all-0.2.jarにクラスパスを通してください。
-   ※ Google Guiceもこのjarの中に含まれています。
+ * gxc-all-0.2.jarにクラスパスを通してください(※Google Guiceもこのjarの中に含まれています)。
 
 == ドキュメント ==
 
 == ソースコード == 
- * <a href="http://guice-xml-configuration.googlecode.com/svn">SVNレポジトリ</a>
+ * <a href="http://guice-xml-configuration.googlecode.com/svn/tags/gxc-parent-0.2/">SVNレポジトリ</a>
  
 == Maven2統合 ==
  * dependency
