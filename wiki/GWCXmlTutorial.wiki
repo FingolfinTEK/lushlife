@@ -1,0 +1,113 @@
+#summary GXC XML Configuration
+
+== XML Configuration ==
+ XMLで設定したいものは、テスト中や運用中に設定を切り替えたいパラメータです。よくあるのが、タイムアウト時間やデータベースの接続先など、環境依存のパラメータが対象となります。JBossからWebShsereのようにアプリケーションサーバを切り替えたい場合には、アプリケーションサーバ依存のロジックを切り替えを行います。
+ 
+ DIコンテナを使うとこのような仕組みを簡単に作成することができます。GXCを使って、XMLによる設定の切り替えのサンプルの説明をしていきます。
+
+== Beer Hallサンプル ( [http://guice-xml-configuration.googlecode.com/svn/tags/gxc-parent-0.3/gxc-sample/javase-sample/ ダウンロード]) == 
+
+ あるBeer Hallでは、毎週ビールの銘柄を変更して出しているとします。その場合、このBeer Hallは特定のビールの銘柄に依存しないようにモデルをする必要があります。
+
+ モデル化していきましょう。始めにビールクラスを作成します。
+
+{{{
+package sample;
+
+public abstract class Beer {
+
+}
+}}}
+
+ ビールは抽象クラスですね。次にビアホールクラスを作成します。
+
+{{{
+package sample;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import sample.aop.Counted;
+
+public class BeerHall {
+
+	@Inject
+	Provider<Beer> beerProvider;
+
+	public Beer serveBeer() {
+		return beerProvider.get();
+	}
+
+}
+}}}
+ Beer Hallにはビールのオーダを受け付けるserveBeerメソッドを追加します。ビールの調達は、`@Inject Provider<Beer>`として、外部から調達するようにします。Beer Hallは,Beerにしか見てませんね。
+----
+ ** 補足 - `@Inject Provider<Beer>` - について
+  `@Inject`はDIコンテナによって値が挿入されるということを示すラベルです。`Provider<Beer>`は、BeerクラスをDIコンテナから取得するためのインタフェースです。Provider#getメソッドを呼び出したタイミングで取得できます。どちらのクラスもJavaEE6から導入されたDIコンテナの標準のインタフェースであり、JSR-330と呼ばれています。JSR-330は、Google Guice 2.1の他に、Spring 3.0やJBoss Weld 1.0が対応しています。
+----
+
+ では、このビアホールでモルツを飲めるようにします。まずは、モルツクラスを作成します。
+
+{{{
+package sample.impl;
+
+import sample.Beer;
+
+public class Malts extends Beer {
+
+}
+}}}
+ 
+ 次にBeerクラスにMaltsクラスを結びつけます。これをXMLで設定します。
+
+{{{
+
+<beans>
+	<!-- 
+		BeerをMaltsにする。
+	 -->
+	<bean type="sample.Beer" class="sample.impl.Malts" />
+
+</beans>
+
+
+}}}
+ type(sample.Beer)をclass("sample.impl.Malts")に紐づけるという設定です。
+ 
+ では、このXMLファイルを読み込ませてBeer HallでMaltsが出てくるかを確認しましょう。先ほどのXMLは"sample/Malts.xml"に保存します。
+
+ XmlModule#create("sample/Malts.xml")と呼び出して、それをGoogle Guiceに渡し、XMLを読み込ませます。そして、BeerHall#serveBeerから取得できるBeerがMaltsであることを確認します。
+
+{{{
+package sample;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import sample.impl.Malts;
+
+import com.google.code.gxc.XmlModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+public class BeerTest {
+
+	@Test
+	public void maltsTest() {
+		XmlModule xmlModule = XmlModule.create("sample/Malts.xml");
+		Injector injector = Guice.createInjector(xmlModule);
+
+		BeerHall beerHall = injector.getInstance(BeerHall.class);
+		Beer beer = beerHall.serveBeer();
+
+		Assert.assertTrue(beer instanceof Malts);
+	}
+
+}
+
+}}}
+
+ これで、このBeer Hallが出すビールがモルツになっていることを確認できました。
+-----
+ 
