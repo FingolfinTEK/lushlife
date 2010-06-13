@@ -10,7 +10,7 @@
 
  XMLで設定を記述したいことは、ServletやFilter,Interceptorや環境変数、ログレベルなど、テスト時や運用時に少しだけ変更したい項目です。Google CodeにGoogle GuiceのXML設定のライブラリがありましたが、Java CodeでできることをそのままXMLで記述できるようにしていたものでした。それでは意味がありません。
 
-ということで、Google GuiceのXML設定のライブラリを作りました。設定の管理を容易にするために、設定値の参照機能にとくに拘って作っています。また,ServletやFilter,Interceptorの設定も、このXMLファイルから行えます。
+ ということで、Google GuiceのXML設定のライブラリを作りました。設定の管理を容易にするために、設定値の参照機能にとくに拘って作っています。また,ServletやFilter,Interceptorの設定も、このXMLファイルから行えます。
 
 == Sample ==
 {{{
