@@ -122,6 +122,7 @@ public class PremiumMalts extends Malts {
 }
 }}}
  次にBeerと`PremiumMalts`を紐づけるXMLを作成します。
+
 {{{
 <beans>
 	<!-- 
