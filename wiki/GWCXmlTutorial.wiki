@@ -45,7 +45,7 @@ public class BeerHall {
  ** 補足 - `@Inject Provider<Beer>` - について
   `@Inject`はDIコンテナによって値が挿入されるということを示すラベルです。`Provider<Beer>`は、BeerクラスをDIコンテナから取得するためのインタフェースです。Provider#getメソッドを呼び出したタイミングで取得できます。どちらのクラスもJavaEE6から導入されたDIコンテナの標準のインタフェースであり、JSR-330と呼ばれています。JSR-330は、Google Guice 2.1の他に、Spring 3.0やJBoss Weld 1.0が対応しています。
 ----
-
+ === モルツを飲めるように ===
  では、このビアホールでモルツを飲めるようにします。まずは、モルツクラスを作成します。
 
 {{{
@@ -109,6 +109,74 @@ public class BeerTest {
 }}}
 
  これで、このBeer Hallが出すビールがモルツになっていることを確認できました。
+
+-----
+ === プレミアムモルツを飲めるように ===
+ Beer Hallでプレミアムモルツを飲めるようにします。始めにプレミアムモルツのクラスを作成します。
+
+{{{
+package sample.impl;
+
+public class PremiumMalts extends Malts {
+
+}
+}}}
+ 次にBeerとPremiumMaltsを紐づけるXMLを作成します。
+{{{
+<beans>
+	<!-- 
+		BeerをPremiumMaltsにする。
+	 -->
+	<bean type="sample.Beer" class="sample.impl.PremiumMalts"
+		precedence="20" />
+
+</beans>
+}}}
+ Maltsとの設定の違いは、precedence(優先順位）を設定していることです。precedenceを設定すると、優先度が高いほうが読み込まれます（precedenceのデフォルト値は10なので、PremiumMaltsが優先されます）。
+
+ では、MaltsとPremiumMaltsの設定を読み込ませて、PremiumMaltsが優先されることを確認しましょう。
+
+{{{
+package sample.precedence;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import sample.Beer;
+import sample.BeerHall;
+import sample.impl.PremiumMalts;
+
+import com.google.code.gxc.AbstractXmlModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+public class PrecedenceTest {
+
+	@Test
+	public void premiumMaltsTest() {
+		class PremiumMaltsModule extends AbstractXmlModule {
+			@Override
+			protected void configure() {
+				installXml("sample/Malts.xml");
+				installXml("sample/PremiumMalts.xml");
+			}
+		}
+
+		Injector injector = Guice.createInjector(new PremiumMaltsModule());
+
+		BeerHall beerHall = injector.getInstance(BeerHall.class);
+		Beer beer = beerHall.serveBeer();
+
+		Assert.assertTrue(beer instanceof PremiumMalts);
+	}
+}
+
+}}}
+ ２つ以上のXMLファイルを読み込ませる場合には、AbstractXmlModuleを継承したクラスを作成して、configureメソッドの中でXMLファイルを指定します。
+ `Assert.assertTrue(beer instanceof PremiumMalts);`でBeerがPremiumMaltsであることを確認できます。
+ 
+
 -----
  ** おまけ
   XMLの設定でビールをモルツに紐づけました。本来,Google Guiceでは下記のようなコードを作成して、ビールをモルツに紐づけます。
