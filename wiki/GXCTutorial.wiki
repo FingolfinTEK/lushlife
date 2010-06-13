@@ -1,6 +1,6 @@
 #summary Guice Xml Configuration(GXC) Tutorial
 
-チュートリアルでは、始めにGXCの基本的なXMLの書き方を解説し、AOPの使い方とServletの使い方について解説します。
+チュートリアルでは、始めにGXCの基本的なXMLの書き方を解説し、続いてAOPの使い方とServletの使い方について解説します。
 
 == メニュー ==
  * [GWCXmlTutorial XMLファイルの書き方]
