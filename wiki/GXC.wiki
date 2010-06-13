@@ -1,21 +1,67 @@
-#summary Gucid Xml Configuration API
-==  Gucid Xml Configuration(GXC)とは ==
+#summary Gucie Xml Configuration API
+==  Gucie Xml Configuration(GXC) ==
+ * 特徴
+  * Google Gucieの設定をXMLで行うライブラリです。
+  * Servlet,FilterやInterceptorの設定も可能です。
+  * 設定値の参照機能に拘っています（EL式を使うことができます)。
 
 == はじめに ==
+ Goolge App Engine上でアプリを開発するならGoogleのプロダクトで固めて開発を進めようと思い,DIコンテナにGoogle Guiceを選びました。Google GuiceはJava CodeでDIの設定を行うため、煩わしいXMLを記述する必要はありません。また、Eclipseと組み合わせて使えばタイプセーフに設定を記述することができるので高い生産性を得られます。しかし、Java Codeで書いた設定はリコンパイルが必要であり、また、Eclipseのない環境での設定変更は難儀なものです。
+
+ XMLで設定を記述したいことは、ServletやFilter,Interceptorや環境変数、ログレベルなど、テスト時や運用時に少しだけ変更したい項目です。Google CodeにGoogle GuiceのXML設定のライブラリがありましたが、Java CodeでできることをそのままXMLで記述できるようにしていたものでした。それでは意味がありません。
+
+ということで、Google GuiceのXML設定のライブラリを作りました。設定の管理を容易にするために、設定値の参照機能にとくに拘って作っています。また,ServletやFilter,Interceptorの設定も、このXMLファイルから行えます。
 
 == ダウンロード ==
+ * モジュール(依存ライブラリも含む) : <a href="http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-all/0.2/gxc-all-0.2.jar">gxl-all-0.2.jar</a>
 
 == インストール ==
+ * gxc-all-0.2.jarにクラスパスを通してください。
+   ※ Google Guiceもこのjarの中に含まれています。
 
 == ドキュメント ==
 
 == ソースコード == 
+ * <a href="http://guice-xml-configuration.googlecode.com/svn">SVNレポジトリ</a>
+ 
 == Maven2統合 ==
  * dependency
 {{{
+<dependency>
+	<groupId>com.google.code.gxc</groupId>
+	<artifactId>gxc-core</artifactId>
+	<version>0.2</version>
+</dependency>
+<dependency>
+	<groupId>com.google.code.gxc</groupId>
+	<artifactId>gxc-servlet</artifactId>
+	<version>0.2</version>
+</dependency>
+<dependency>
+	<groupId>com.google.code.gxc</groupId>
+	<artifactId>gxc-aop</artifactId>
+	<version>0.2</version>
+</dependency>
+
 }}}
 
- * repository
+ * repositories
 {{{
+<repository>
+	<id>java net</id>
+	<url>http://download.java.net/maven/2/</url>
+</repository>
+<repository>
+	<id>jboss</id>
+	<url>http://repository.jboss.org/maven2/</url>
+</repository>
+<repository>
+	<id>google</id>
+	<url>http://google-maven-repository.googlecode.com/svn/repository/</url>
+</repository>
+<repository>
+	<id>lushlife</id>
+	<url>http://lushlife.googlecode.com/svn/maven2/</url>
+</repository>
 
 }}}
