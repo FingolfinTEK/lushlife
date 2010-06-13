@@ -1,7 +1,7 @@
 #summary GXC XML Configuration
 
 == XML Configuration ==
- XMLで設定したいものは、テスト中や運用中に設定を切り替えたいパラメータです。よくあるのが、タイムアウト時間やデータベースの接続先など、環境依存のパラメータが対象となります。JBossからWebShsereのようにアプリケーションサーバを切り替えたい場合には、アプリケーションサーバ依存のロジックを切り替えを行います。
+ XMLで設定したいものは、テスト中や運用中に設定を切り替えたいパラメータです。よくあるのが、タイムアウト時間やデータベースの接続先など、環境依存のパラメータが対象となります。JBossから`WebShsere`のようにアプリケーションサーバを切り替えたい場合には、アプリケーションサーバ依存のロジックを切り替えたりもします。
  
  DIコンテナを使うとこのような仕組みを簡単に作成することができます。GXCを使って、XMLによる設定の切り替えのサンプルの説明をしていきます。
 
@@ -76,7 +76,7 @@ public class Malts extends Beer {
  
  では、このXMLファイルを読み込ませてBeer HallでMaltsが出てくるかを確認しましょう。先ほどのXMLは"sample/Malts.xml"に保存します。
 
- XmlModule#create("sample/Malts.xml")と呼び出して、それをGoogle Guiceに渡し、XMLを読み込ませます。そして、BeerHall#serveBeerから取得できるBeerがMaltsであることを確認します。
+ `XmlModule#create("sample/Malts.xml")`と呼び出して、それをGoogle Guiceに渡し、XMLを読み込ませます。そして、`BeerHall#serveBeer`から取得できるBeerがMaltsであることを確認します。
 
 {{{
 package sample;
@@ -121,7 +121,7 @@ public class PremiumMalts extends Malts {
 
 }
 }}}
- 次にBeerとPremiumMaltsを紐づけるXMLを作成します。
+ 次にBeerと`PremiumMalts`を紐づけるXMLを作成します。
 {{{
 <beans>
 	<!-- 
@@ -134,7 +134,7 @@ public class PremiumMalts extends Malts {
 }}}
  Maltsとの設定の違いは、precedence(優先順位）を設定していることです。precedenceを設定すると、優先度が高いほうが読み込まれます（precedenceのデフォルト値は10なので、PremiumMaltsが優先されます）。
 
- では、MaltsとPremiumMaltsの設定を読み込ませて、PremiumMaltsが優先されることを確認しましょう。
+ では、Maltsと`PremiumMalts`の設定を読み込ませて、`PremiumMalts`が優先されることを確認しましょう。
 
 {{{
 package sample.precedence;
@@ -173,8 +173,8 @@ public class PrecedenceTest {
 }
 
 }}}
- ２つ以上のXMLファイルを読み込ませる場合には、AbstractXmlModuleを継承したクラスを作成して、configureメソッドの中でXMLファイルを指定します。
- `Assert.assertTrue(beer instanceof PremiumMalts);`でBeerがPremiumMaltsであることを確認できます。
+ ２つ以上のXMLファイルを読み込ませる場合には、`AbstractXmlModule`を継承したクラスを作成して、configureメソッドの中でXMLファイルを指定します。
+ `Assert.assertTrue(beer instanceof PremiumMalts);`でBeerが`PremiumMalts`であることを確認できます。
  
 
 -----
