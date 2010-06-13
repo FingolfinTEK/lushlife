@@ -1,4 +1,5 @@
 #summary Gucie Xml Configuration API
+#labels Featured
 ==  Gucie Xml Configuration(GXC) ==
  * 特徴
   * Google Gucieの設定をXMLで行うライブラリです。
