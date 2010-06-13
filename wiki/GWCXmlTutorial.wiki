@@ -43,7 +43,7 @@ public class BeerHall {
  Beer Hallにはビールのオーダを受け付けるserveBeerメソッドを追加します。ビールの調達は、`@Inject Provider<Beer>`として、外部から調達するようにします。Beer Hallは,Beerにしか見てませんね。
 ----
  ** 補足 - `@Inject Provider<Beer>` - について
-  `@Inject`はDIコンテナによって値が挿入されるということを示すラベルです。`Provider<Beer>`は、BeerクラスをDIコンテナから取得するためのインタフェースです。Provider#getメソッドを呼び出したタイミングで取得できます。どちらのクラスもJavaEE6から導入されたDIコンテナの標準のインタフェースであり、JSR-330と呼ばれます。JSR-330は、Google Guice 2.1の他に、Spring 3.0やJBoss Weld 1.0が対応しています。
+  `@Inject`はDIコンテナによって値が挿入されるということを示すラベルです。`Provider<Beer>`は、BeerクラスをDIコンテナから取得するためのインタフェースです。Provider#getメソッドを呼び出したタイミングで取得できます。どちらのクラスもJavaEE6から導入されたDIコンテナの標準のインタフェースであり、JSR-330と呼ばれています。JSR-330は、Google Guice 2.1の他に、Spring 3.0やJBoss Weld 1.0が対応しています。
 ----
  === モルツを飲めるように ===
  では、このビアホールでモルツを飲めるようにします。まずは、モルツクラスを作成します。
