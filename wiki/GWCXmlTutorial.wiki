@@ -110,4 +110,25 @@ public class BeerTest {
 
  これで、このBeer Hallが出すビールがモルツになっていることを確認できました。
 -----
- 
+ ** おまけ
+  XMLの設定でビールをモルツに紐づけました。本来,Google Guiceでは下記のようなコードを作成して、ビールをモルツに紐づけます。
+
+{{{
+package sample;
+
+import sample.impl.Malts;
+
+import com.google.inject.AbstractModule;
+
+public class MatlsModule extends AbstractModule {
+
+	@Override
+	protected void configure() {
+		bind(Beer.class).to(Malts.class);
+	}
+
+}
+
+}}}
+  
+ Java CodeでBeerとMaltsを紐づけるので、Eclipseのコード補間が使え、ミスなく設定することができます。頻繁に変更するものでなければ、Java Codeでハードコーディングしておくほうが、効率的に開発を進めることができるので、こちらの設定のほうがお勧めです。
