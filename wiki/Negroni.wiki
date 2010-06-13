@@ -1,5 +1,5 @@
 #summary A java library type-safe mix-in and method-missing
-#labels Featured,Phase-Design
+#labels Phase-Design
 == Negroniとは ==
  * Javaでmix-inとmethod-missingのライブラリです
  * 型付き言語の良さを活かしたmix-inとmethod-missingをコンセプトに設計しています
