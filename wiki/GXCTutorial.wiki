@@ -2,7 +2,7 @@
 
 チュートリアルでは、始めにGXCのXMLファイルの書き方を説明し、AOPの使い方とServletの使い方について解説します。
 
-= メニュー =
+== メニュー ==
  * [GWCXmlTutorial XMLファイルの書き方]
  * [GWCAopTutorial AOPの使い方]
  * [GWCServletTutorial Servletの使い方]
