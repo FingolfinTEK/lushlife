@@ -179,7 +179,7 @@ public class PrecedenceTest {
  
 
 -----
- == おまけ(Java Codeによる設定) ==
+ == おまけ(Google Guice本来の使い方) ==
   XMLの設定でビールをモルツに紐づけました。本来,Google Guiceでは下記のようなコードを作成して、ビールをモルツに紐づけます。
 
 {{{
