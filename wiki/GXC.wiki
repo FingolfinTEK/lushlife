@@ -27,7 +27,7 @@
 
 == Sample ==
 {{{
-<!-- XML名前空間 t　と testパッケージを紐づける -->
+<!-- XML名前空間 t　と Javaパッケージ testを紐づける -->
 <beans
 	xmlns:t="urn:import:test">
 
