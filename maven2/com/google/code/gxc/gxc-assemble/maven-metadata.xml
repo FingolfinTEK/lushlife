@@ -4,11 +4,12 @@
   <artifactId>gxc-assemble</artifactId>
   <version>0.1</version>
   <versioning>
-    <release>0.2</release>
+    <release>0.3</release>
     <versions>
       <version>0.1</version>
       <version>0.2</version>
+      <version>0.3</version>
     </versions>
-    <lastUpdated>20100613140613</lastUpdated>
+    <lastUpdated>20100615064347</lastUpdated>
   </versioning>
 </metadata>
