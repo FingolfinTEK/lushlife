@@ -1,6 +1,6 @@
 #summary Guice Xml Configuration API
 #labels Featured
-==  Guice Xml Configuration(GXC) ==
+==  Guice Xml Configuration (GXC) ==
  * 特徴
   * Google Guiceの設定をXMLで行うライブラリです。
   * Servlet,FilterやInterceptorの設定も可能です。
