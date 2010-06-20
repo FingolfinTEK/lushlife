@@ -23,7 +23,7 @@
  * [GXCTutorial チュートリアル]
 
 == ソースコード == 
- * <a href="http://guice-xml-configuration.googlecode.com/svn/tags/gxc-parent-0.2/">SVNレポジトリ</a>
+ * <a href="http://guice-xml-configuration.googlecode.com/svn/tags/gxc-parent-0.5/">SVNレポジトリ</a>
 
 == Sample ==
 {{{
