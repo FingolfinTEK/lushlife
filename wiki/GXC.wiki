@@ -14,7 +14,7 @@
  ということで、Google GuiceのXML設定のライブラリを作りました。設定の管理を容易にするために、設定値の参照機能にとくに拘って作っています。また,ServletやFilter,Interceptorの設定も、このXMLファイルから行えます。
 
 == ダウンロード ==
- * モジュール(依存ライブラリも含む) : <a href="http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-all/0.4/gxc-all-0.4.jar">gxl-all-0.4.jar</a>
+ * モジュール : <a href="http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-all/0.4/gxc-all-0.4.jar">gxl-all-0.4.jar</a>
 
 == インストール ==
  * gxc-all-0.4.jarにクラスパスを通してください(※Google Guiceもこのjarの中に含まれています)。
