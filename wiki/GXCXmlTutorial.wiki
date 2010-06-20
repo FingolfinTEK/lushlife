@@ -135,7 +135,7 @@ public class PremiumMalts extends Malts {
 
 </beans>
 }}}
- Maltsとの設定の違いは、precedence(優先順位）を設定していることです。precedenceを設定すると、優先度が高いほうが読み込まれます（precedenceのデフォルト値は10なので、`Malts`より`PremiumMalts`が優先されます）。
+ Maltsとの設定の違いは、precedence(優先順位）を設定していることです。precedenceを設定すると、優先度が高いほうが読み込まれます。
 
  では、Maltsと`PremiumMalts`の設定を読み込ませて、`PremiumMalts`が優先されることを確認しましょう。
 
@@ -202,4 +202,4 @@ public class MatlsModule extends AbstractModule {
 
 }}}
   
- Java CodeでBeerとMaltsを紐づけるので、Eclipseのコード補間が使え、ミスなく設定することができます。変更が少ないパラメータであれば、Java Codeでハードコーディングの方が、効率的に開発を進めることができるので、こちらがお勧めです。
+ Java CodeでBeerとMaltsを紐づけるので、コンパイル時にチェックされ、ミスなく設定することができます。変更が少ないパラメータであれば、Java Codeでハードコーディングの方が、効率的に開発を進めることができるので、こちらがお勧めです。
