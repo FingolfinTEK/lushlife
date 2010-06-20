@@ -37,7 +37,7 @@
 	<t:SampleFilter name="sampleFilter" />
 	<filter-mapping>
 
-		<!-- サーブレットとの紐づけ -->
+		<!-- フィルターとの紐づけ -->
 		<filter>#{sampleFilter}</filter>
 
 		<!-- 環境変数からパラメータを取得する -->
