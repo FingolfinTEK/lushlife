@@ -6,3 +6,6 @@
  * [GWCXmlTutorial XMLファイルの書き方]
  * [GWCAopTutorial AOPの使い方]
  * [GWCServletTutorial Servletの使い方]
+
+== サンプル ==
+  * XML and AOP [http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-javase-sample/0.5/gxc-javase-sample-0.5-sources.jar ダウンロード]
