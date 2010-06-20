@@ -179,8 +179,8 @@ public class PrecedenceTest {
  
 
 -----
- == おまけ(Google Guice本来の使い方) ==
-  本来,Google Guiceでは下記のようなコードを作成して、ビールをモルツに紐づけます。
+== おまけ(Google Guice本来の使い方) ==
+ 本来,Google Guiceでは下記のようなコードを作成して、ビールをモルツに紐づけます。
 
 {{{
 package sample;
