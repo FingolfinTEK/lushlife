@@ -5,7 +5,7 @@
  
  DIコンテナを使うとこのような仕組みを簡単に作成することができます。GXCを使って、XMLによる設定の切り替えのサンプルの説明をしていきます。
 
-== Beer Hallサンプル ( [http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-javase-sample/0.5/gxc-javase-sample-0.5-sources.jar/ ソースコード]) == 
+== Beer Hallサンプル ( [http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-javase-sample/0.5/gxc-javase-sample-0.5-sources.jar ソースコード]) == 
 
  あるBeer Hallでは、毎週ビールの銘柄を変更して出しているとします。その場合、このBeer Hallは特定のビールの銘柄に依存しないようにモデルをする必要があります。
 
