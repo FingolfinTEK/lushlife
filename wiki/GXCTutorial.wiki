@@ -1,11 +1,11 @@
 #summary Guice Xml Configuration Tutorial
 
-チュートリアルでは、始めにGXCの基本的な使い方を解説し、続いてAOPの使い方とServletの使い方について解説します。
+チュートリアルでは、始めにGXCの基本的な使い方を解説し、続いてインターセプタの使い方とServlet・Filterの使い方について解説します。
 
 == メニュー ==
  * [GXCXmlTutorial 基本的な使い方]
- * [GXCAopTutorial AOPの使い方]
- * [GXCServletTutorial Servletの使い方]
+ * [GXCAopTutorial インターセプタの使い方]
+ * [GXCServletTutorial Servlet・Filterの使い方]
 
 == サンプルコード ==
-  * [http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-javase-sample/0.5/gxc-javase-sample-0.5-sources.jar 基本とAOPのサンプル]
+  * [http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-javase-sample/0.5/gxc-javase-sample-0.5-sources.jar 基本とインターセプタのサンプル]
