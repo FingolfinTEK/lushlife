@@ -177,7 +177,7 @@ public class CounterTest {
 
  `BeerHall#serveBeer`メソッドを３回呼び出し、`Assert.assertEquals(3, counter.getOurderCounter());`で、カウンターが３になっていることを確認しています。
 
- これで`BeerHallの稼働状況`を監視できるよになりました。
+ これで`BeerHallの稼働状況`を監視できるようになりました。
 
 ------
  * 補足 - インターセプタの織り込み方法 -
