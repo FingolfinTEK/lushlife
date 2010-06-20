@@ -1,4 +1,5 @@
 #summary Guice XML Configuration Interceptor Tutorial
+== インターセプタの使いどころ ==
  Production Readyという言葉をご存知でしょうか。[http://dl.google.com/googleio/2010/gwt-architecting-apps-production.pdf Google IO 2010のGWTのセッション]にProduction Readyという言葉がでてきます。あまり馴染みのない言葉ですが、Production Readyとは,「工業的に使える」という意味のようです([http://www.hyuki.com/yukiwiki/wiki.cgi?%C3%B1%B8%EC%C4%A2 単語帳]より）。
 
 
