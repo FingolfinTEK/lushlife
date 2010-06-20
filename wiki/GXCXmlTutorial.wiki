@@ -41,7 +41,8 @@ public class BeerHall {
 
 }
 }}}
- Beer Hallにはビールのオーダを受け付けるserveBeerメソッドを追加します。ビールの調達は、`@Inject Provider<Beer>`として、外部から調達するようにします。Beer Hallは,Beerにしか見てませんね。
+ Beer Hallにはビールのオーダを受け付けるserveBeerメソッドを追加します。ビールの調達は、`@Inject Provider<Beer>`として、外部から調達するようにします。Beer Hallクラスは,Beerクラスにしか見ていないので、特定のビールの銘柄には依存していません。
+
 ----
  ** 補足 - `@Inject Provider<Beer>` - について
   `@Inject`はDIコンテナによって値が挿入されるということを示すラベルです。`Provider<Beer>`は、BeerクラスをDIコンテナから取得するためのインタフェースで,Provider#getメソッドを呼び出したタイミングで取得できます。どちらのクラスもJavaEE6に導入されたインタフェースであり、JSR-330と呼ばれています。JSR-330は、Google Guice 2.1の他に、Spring 3.0やJBoss Weld 1.0が対応しています。
