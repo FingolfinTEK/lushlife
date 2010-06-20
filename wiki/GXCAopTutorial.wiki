@@ -63,7 +63,7 @@ public class OrderCounterInterceptor implements MethodInterceptor {
 }
 }}}
  `OrderCounter`は@Injectにより、DIコンテナから取得します。
- ここの処理では、メソッドの呼び出し(MethodInvocation#proceed)の前に、カウンターをインクリメントして、メソッドの呼び出し数を数え上げるようにしています。
+ ここの処理では、メソッドの呼び出し(`MethodInvocation#proceed`)の前に、カウンターをインクリメントして、メソッドの呼び出し数を数え上げるようにしています。
 
 -----
  === 補足 インターセプタの種類===
@@ -110,7 +110,7 @@ public class BeerHall {
 }
 }}}
 
- @CountedアノテーションとOrderCounterInterceptorインターセプタを紐づけて、インターセプタを織り込むためには、下記のようなXMLファイルを書きます。
+ @Countedアノテーションと`OrderCounterInterceptor`インターセプタを紐づけて、インターセプタを織り込むためには、下記のようなXMLファイルを書きます。
 {{{
 <beans xmlns:sample-aop="urn:import:sample.aop">
 
