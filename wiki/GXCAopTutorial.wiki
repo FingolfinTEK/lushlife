@@ -66,7 +66,7 @@ public class OrderCounterInterceptor implements MethodInterceptor {
  ここの処理では、メソッドの呼び出し(`MethodInvocation#proceed`)の前に、カウンターをインクリメントして、メソッドの呼び出し数を数え上げるようにしています。
 
 -----
- === 補足 インターセプタの種類===
+ * 補足 - インターセプタの種類 -
  インターセプタのインタフェースは、２種類あります。このサンプルではAOP Allianceを利用しています。AOP AllianceはSpringとGuiceで使われているインタフェースです。一方、EJB3もインターセプタのインタフェースを持っています。EJB3やJBoss Seamで使われています。
  GXCではどちらのインタフェースも使えるようにしていますので、EJB3のインターセプタを使いたい人は試してみてください。
 
