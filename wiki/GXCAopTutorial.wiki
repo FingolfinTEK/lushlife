@@ -62,7 +62,7 @@ public class OrderCounterInterceptor implements MethodInterceptor {
 
 }
 }}}
- 'OrderCounter'は@Injectにより、DIコンテナから取得します。
+ `OrderCounter`は@Injectにより、DIコンテナから取得します。
  ここの処理では、メソッドの呼び出し(MethodInvocation#proceed)の前に、カウンターをインクリメントして、メソッドの呼び出し数を数え上げるようにしています。
 
 -----
