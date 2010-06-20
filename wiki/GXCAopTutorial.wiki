@@ -4,7 +4,7 @@
 
  インターセプタはProduction Readyの要素の一つ'Monitored(監視されている)'を実現する場合に便利な機能です。
  
- ここでは[GXCXmlTutorial Beer Hallサンプル] をインターセプタを使って、監視可能なサンプルとします。
+ ここでは[GXCXmlTutorial Beer Hallサンプル] をインターセプタを使って、監視できるようにします。
 
 == Beer Hallの稼働状況を監視する ==
  Beer Hallの稼働状態を監視するために、ビールの注文数(`BeerHall#serveBeer`メソッドの呼び出し回数）が分かるようにします。
