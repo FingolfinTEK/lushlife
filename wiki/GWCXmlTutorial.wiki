@@ -1,4 +1,4 @@
-#summary GXC XML Configuration
+#summary Guice XML Configuration
 
 == XML Configuration ==
  XMLで設定したいものは、テスト中や運用中に設定を切り替えたいパラメータです。よくあるのが、タイムアウト時間やデータベースの接続先など、環境依存のパラメータが対象となります。JBossから`WebShsere`のようにアプリケーションサーバを切り替えたい場合には、アプリケーションサーバ依存のロジックを切り替えたりもします。
