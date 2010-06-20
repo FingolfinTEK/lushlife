@@ -130,7 +130,6 @@ public class BeerHall {
  では、上記のXMLを`sample/aop/OrderCounter.xml`に保存し動かしてみましょう。
 
  `BeerHall`サンプルを動かすためには、[GXCXmlTutorial Beer Hallサンプル] の設定も読み込ませる必要があるので、下記のような２つの設定を読み込ませるXMLを作成します。
-
 {{{ 
 <beans>
 	<install class-path="sample/Malts.xml" />
@@ -141,7 +140,6 @@ public class BeerHall {
  この設定を`sample/aop/CounterTest.xml`に保存します。
 
  次にテストケースを作成し、上記のXMLファイルを読み込ませます。
- 
 {{{
 package sample.aop;
 
