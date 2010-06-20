@@ -127,7 +127,7 @@ public class BeerHall {
 
  annotation-with属性でアノテーションを,interceptorsタグでインターセプタを紐づけして、インターセプタを織り込みます。
 
- では、上記のXMLを'sample/aop/OrderCounter.xml'に保存し動かしてみましょう。
+ では、上記のXMLを`sample/aop/OrderCounter.xml`に保存し動かしてみましょう。
 
  `BeerHall`サンプルを動かすためには、[GXCXmlTutorial Beer Hallサンプル] の設定も読み込ませる必要があるので、下記のような２つの設定を読み込ませるXMLを作成します。
 
