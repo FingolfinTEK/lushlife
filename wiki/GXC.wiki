@@ -1,8 +1,8 @@
-#summary Gucie Xml Configuration API
+#summary Guice Xml Configuration API
 #labels Featured
-==  Gucie Xml Configuration(GXC) ==
+==  Guice Xml Configuration(GXC) ==
  * 特徴
-  * Google Gucieの設定をXMLで行うライブラリです。
+  * Google Guiceの設定をXMLで行うライブラリです。
   * Servlet,FilterやInterceptorの設定も可能です。
   * 設定値の参照機能に拘っています（EL式を使うことができます)。
 
