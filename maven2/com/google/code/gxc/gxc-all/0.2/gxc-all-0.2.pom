@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <artifactId>gxc-parent</artifactId>
+    <artifactId>gxc2-parent</artifactId>
     <groupId>com.google.code.gxc</groupId>
     <version>0.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>gxc-all</artifactId>
-  <name>Guice Xml All</name>
-  <version>0.2</version>
+  <name>GXC All</name>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>
@@ -25,7 +24,6 @@
               <artifactSet>
                 <excludes>
                   <exclude>*:xml-apis</exclude>
-                  <exclude>*:ejb-api</exclude>
                   <exclude>*:servlet-api</exclude>
                 </excludes>
               </artifactSet>
