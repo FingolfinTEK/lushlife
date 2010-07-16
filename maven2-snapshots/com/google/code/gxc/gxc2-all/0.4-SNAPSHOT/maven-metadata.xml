@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.google.code.gxc</groupId>
+  <artifactId>gxc2-all</artifactId>
+  <version>0.4-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20100716.113433</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20100716113714</lastUpdated>
+  </versioning>
+</metadata>
