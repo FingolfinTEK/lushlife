@@ -26,7 +26,7 @@
 == Sample ==
 {{{
 <!-- XML名前空間 t　と Javaパッケージ testを紐づける -->
-<beans
+<gxc
 	xmlns:t="urn:import:test">
 
 	<!-- 
@@ -56,7 +56,7 @@
 		<url-pattern>#{gxc['pattern']}</url-pattern>
 	</servlet-mapping>
 
-</beans>
+</gxc>
 
 }}}
  
