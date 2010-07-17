@@ -8,4 +8,4 @@
  * [GXCServletTutorial Servlet・Filterの使い方]
 
 == サンプルコード ==
-  * [http://lushlife.googlecode.com/svn/maven2/com/google/code/gxc/gxc-javase-sample/0.5/gxc-javase-sample-0.5-sources.jar 基本とインターセプタのサンプル]
+  * [http://guice-xml-configuration.googlecode.com/svn/trunk/gxc2/gxc2-sample/gxc2-sample/  基本とインターセプタのサンプル]
