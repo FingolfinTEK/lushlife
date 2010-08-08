@@ -21,7 +21,7 @@
  * [GXCTutorial チュートリアル]
 
 == ソースコード == 
- * <a href="http://guice-xml-configuration.googlecode.com/svn/tags/gxc2-parent-0.6/">SVNレポジトリ</a>
+ * <a href="http://code.google.com/p/lushlife/downloads/detail?name=gxc2-core-0.6-sources.jar&can=2&q=#makechanges">gxc2-core-0.6-sources.jar</a>
 
 == Maven2統合 ==
  * 下記のモジュールから構成されています。
