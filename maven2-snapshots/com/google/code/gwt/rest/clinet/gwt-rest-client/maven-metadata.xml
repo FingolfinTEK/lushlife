@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.google.code.gwt.rest.clinet</groupId>
+  <artifactId>gwt-rest-client</artifactId>
+  <version>0.2-SNAPSHOT</version>
+  <versioning>
+    <versions>
+      <version>0.2-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20110219120152</lastUpdated>
+  </versioning>
+</metadata>
