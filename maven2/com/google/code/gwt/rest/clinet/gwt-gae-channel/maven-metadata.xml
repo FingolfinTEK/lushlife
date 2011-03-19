@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.google.code.gwt.rest.clinet</groupId>
+  <artifactId>gwt-gae-channel</artifactId>
+  <version>0.10</version>
+  <versioning>
+    <release>0.10</release>
+    <versions>
+      <version>0.10</version>
+    </versions>
+    <lastUpdated>20110319180524</lastUpdated>
+  </versioning>
+</metadata>
