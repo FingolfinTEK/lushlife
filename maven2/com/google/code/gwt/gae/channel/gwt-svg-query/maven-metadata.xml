@@ -3,10 +3,11 @@
   <groupId>com.google.code.gwt.gae.channel</groupId>
   <artifactId>gwt-svg-query</artifactId>
   <versioning>
-    <release>0.10</release>
+    <release>0.11</release>
     <versions>
       <version>0.10</version>
+      <version>0.11</version>
     </versions>
-    <lastUpdated>20110508053506</lastUpdated>
+    <lastUpdated>20110508091429</lastUpdated>
   </versioning>
 </metadata>
