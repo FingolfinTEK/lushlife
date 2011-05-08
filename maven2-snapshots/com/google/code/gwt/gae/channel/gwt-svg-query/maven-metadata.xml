@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.google.code.gwt.gae.channel</groupId>
+  <artifactId>gwt-svg-query</artifactId>
+  <versioning>
+    <versions>
+      <version>0.12-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20110508053047</lastUpdated>
+  </versioning>
+</metadata>
