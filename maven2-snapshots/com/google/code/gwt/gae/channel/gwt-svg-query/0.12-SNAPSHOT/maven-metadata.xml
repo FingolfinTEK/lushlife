@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.google.code.gwt.gae.channel</groupId>
+  <artifactId>gwt-svg-query</artifactId>
+  <version>0.12-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20110508.053019</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20110508053019</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.12-20110508.053019-1</value>
+        <updated>20110508053019</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.12-20110508.053019-1</value>
+        <updated>20110508053019</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
