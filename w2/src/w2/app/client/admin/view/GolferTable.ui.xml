@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+
+	<ui:style>
+		.cellTable {
+		border-bottom: 1px solid #ccc;
+		text-align: left;
+		margin-bottom: 4px;
+		}
+	</ui:style>
+
+	<g:HTMLPanel>
+		<h2>Golfer List</h2>
+		<table cellspacing='0' cellpadding='0' style='width:100%;'>
+			<tr>
+				<td valign='center'>
+					<c:CellTable addStyleNames='{style.cellTable}'
+						pageSize='15' ui:field='cellTable' />
+				</td>
+			</tr>
+			<tr>
+				<td align='center'>
+					<c:SimplePager location="LEFT" addStyleNames="right-aligned"
+						ui:field='pager' />
+				</td>
+			</tr>
+			<tr>
+				<td align='left'>
+					<g:Button text="delete" ui:field="delete" />
+				</td>
+			</tr>
+		</table>
+	</g:HTMLPanel>
+</ui:UiBinder>
