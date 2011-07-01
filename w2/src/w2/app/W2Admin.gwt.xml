@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='w2admin'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<inherits name='com.google.gwt.user.theme.clean.Clean' />
+	<inherits name='com.google.gwt.place.Place' />
+	<inherits name='com.google.gwt.activity.Activity' />
+	
+
+	<inherits name='w2.extensions.gmaps.GMap' />
+	<inherits name="com.googlecode.objectify.Objectify" />
+
+	<!-- Specify the paths for translatable code -->
+	<source path='client' />
+	<source path='model' />
+
+	<entry-point class="w2.app.client.W2Admin"></entry-point>
+</module>

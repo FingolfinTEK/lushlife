@@ -1,0 +1,136 @@
+.w2-Button {
+	-webkit-appearance: push-button;
+}
+button{
+	-webkit-appearance: push-button;
+}
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+	width: 400px;
+}
+
+.dialogVPanel {
+	margin: 5px;
+}
+
+.serverResponseLabelError {
+	color: red;
+}
+
+#closeButton {
+	margin: 15px 6px 6px;
+}
+
+a {
+	color: #36c !important;
+	text-decoration: none;
+}
+
+header {
+	float: left;
+	width: 100%;
+	font-family: fantasy;
+	font-size: 13px;
+	font-style: normal;
+	color: #36c !important;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menu {
+	margin: 0;
+	padding: 0;
+	width: 50%;
+	display: inline;
+}
+
+.menu li {
+	display: inline;
+	margin: 10px;
+}
+
+.user_menu {
+	float: right;
+	margin: 0;
+	padding: 0;
+	right: 0px;
+	top: 0px;
+	z-index: inherit;
+	display: inline;
+}
+
+.user_menu li {
+	display: inline;
+}
+
+aside {
+	margin: 0;
+	padding: 0;
+	font-family: fantasy;
+	width: 100%;
+	/* 	border-bottom-color: #c9d7f1;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+ */
+}
+
+aside h1 {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-size: 30px;
+	display: inline;
+}
+
+aside .message {
+	display: inline;
+	margin: 10px;
+}
+
+aside .message .gwt-Label {
+	display: inline;
+}
+
+nav {
+	font-family: fantasy;
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 15%;
+	height: 85%;
+	border-right-color: #c9d7f1;
+	border-right-width: 1px;
+	border-right-style: solid;
+	color: #36c !important;
+}
+
+nav h2 {
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+nav ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+article {
+	margin-left: 15%;
+	margin-right: 15%;
+	padding: 10px;
+	width: 84%;
+	height: 85%;
+}
+
+footer {
+	font-size: 13px;
+	font-family: fantasy;
+	clear: both;
+	width: 100%;
+	text-align: right;
+}
