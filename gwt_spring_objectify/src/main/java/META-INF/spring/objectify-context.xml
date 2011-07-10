@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.0.xsd
 		">
-	<!--ObjectifyのEntityを読み込む -->
+	<!--ObjectifyのEntityをgso.modelパッケージ以下から読み込む -->
 	<bean id="objectifyManager" class="ex.objectify.spring.ObjectifyManager">
 		<property name="basePackage" value="gso.model" />
 	</bean>

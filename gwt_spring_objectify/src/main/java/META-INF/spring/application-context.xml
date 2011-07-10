@@ -11,11 +11,12 @@
 		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.0.xsd
 		">
 
-	<!-- Springのコンポーネントを読み込む -->
+	<!-- Springのコンポーネントをgsoパッケージ以下から読み込む。 ただし、@Controllerは読み込まない。 -->
 	<context:component-scan base-package="gso">
 		<context:exclude-filter expression="org.springframework.stereotype.Controller"
 			type="annotation" />
 	</context:component-scan>
 
+	<!-- Objectifyの設定を読み込む -->
 	<import resource="objectify-context.xml" />
 </beans>
