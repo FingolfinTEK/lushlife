@@ -72,8 +72,10 @@
 			<url>http://gwtquery-plugins.googlecode.com/svn/mavenrepo</url>
 		</repository>
 	</repositories>
+	
 	<pluginRepositories>
 	</pluginRepositories>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.google.appengine</groupId>
