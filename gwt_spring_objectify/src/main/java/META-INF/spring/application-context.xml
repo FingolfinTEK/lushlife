@@ -11,6 +11,8 @@
 		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.0.xsd
 		">
 
+	<context:property-placeholder location="classpath*:META-INF/spring/*.properties" />
+
 	<!-- Springのコンポーネントをgsoパッケージ以下から読み込む。 ただし、@Controllerは読み込まない。 -->
 	<context:component-scan base-package="gso">
 		<context:exclude-filter expression="org.springframework.stereotype.Controller"
