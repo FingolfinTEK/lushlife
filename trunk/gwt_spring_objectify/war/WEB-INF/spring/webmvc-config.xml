@@ -7,25 +7,30 @@
 	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 	    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
+	<!-- @Controllerを読み込む -->
 	<context:component-scan base-package="gso"
 		use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller"
 			type="annotation" />
 	</context:component-scan>
 
+	<!-- Spring MVCのアノテーションを有効にする -->
 	<mvc:annotation-driven />
 	<mvc:resources location="/, classpath:/META-INF/web-resources/"
 		mapping="/resources/**" />
 
 	<mvc:default-servlet-handler />
 
+	<!-- URLのハンドリング -->
 	<mvc:view-controller path="/" view-name="index" />
 
+	<!-- 例外画面遷移を書く -->
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"
 		p:defaultErrorView="uncaughtException">
 	</bean>
 
+	<!-- マルチパートリクエストのハンドリングには、Apatche Commons を利用する -->
 	<bean
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 		id="multipartResolver" />
