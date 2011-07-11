@@ -1,4 +1,4 @@
-package gso.model;
+package app.model;
 
 import javax.persistence.Id;
 

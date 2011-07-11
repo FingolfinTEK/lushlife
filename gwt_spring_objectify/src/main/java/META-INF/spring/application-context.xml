@@ -14,7 +14,7 @@
 	<context:property-placeholder location="classpath*:META-INF/spring/*.properties" />
 
 	<!-- Springのコンポーネントをgsoパッケージ以下から読み込む。 ただし、@Controllerは読み込まない。 -->
-	<context:component-scan base-package="gso">
+	<context:component-scan base-package="app">
 		<context:exclude-filter expression="org.springframework.stereotype.Controller"
 			type="annotation" />
 	</context:component-scan>

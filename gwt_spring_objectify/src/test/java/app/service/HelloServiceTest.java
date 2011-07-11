@@ -1,4 +1,4 @@
-package gso.service;
+package app.service;
 
 import javax.inject.Inject;
 
@@ -7,6 +7,8 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
+
+import app.service.HelloService;
 
 import ex.spring.GaeSpringRunner;
 

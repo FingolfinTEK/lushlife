@@ -1,4 +1,4 @@
-package gso.client;
+package app.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

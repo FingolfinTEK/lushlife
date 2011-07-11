@@ -12,7 +12,7 @@
 		">
 	<!--ObjectifyのEntityをgso.modelパッケージ以下から読み込む -->
 	<bean id="objectifyManager" class="ex.objectify.spring.ObjectifyManager">
-		<property name="basePackage" value="gso.model" />
+		<property name="basePackage" value="app.model" />
 	</bean>
 
 	<!-- Objectifyインスタンスを管理する -->
