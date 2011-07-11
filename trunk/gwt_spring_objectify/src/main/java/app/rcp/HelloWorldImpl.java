@@ -1,13 +1,14 @@
-package gso.rcp;
+package app.rcp;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import app.client.HelloWorld;
+import app.service.HelloService;
+
 import ex.gwt.spring.SpringRemoteServiceServlet;
-import gso.client.HelloWorld;
-import gso.service.HelloService;
 
 @RequestMapping("*/helloworld.rcp")
 @Controller

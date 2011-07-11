@@ -1,5 +1,6 @@
-#Sun Jul 10 22:55:50 JST 2011
+#Mon Jul 11 18:29:02 JST 2011
 //com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/gso/src/main/java/META-INF/spring/application-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<graph/>
 //com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/gso/src/main/resources/META-INF/spring/application-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<graph/>
 //com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/gwt_spring_objectify/src/main/java/META-INF/spring/application-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<graph/>
+//com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/gwt_spring_objectify/src/main/java/META-INF/spring/objectify-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<graph/>
 eclipse.preferences.version=1

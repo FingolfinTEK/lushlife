@@ -8,7 +8,7 @@
 	    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<!-- @Controllerを読み込む -->
-	<context:component-scan base-package="gso"
+	<context:component-scan base-package="app"
 		use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller"
 			type="annotation" />

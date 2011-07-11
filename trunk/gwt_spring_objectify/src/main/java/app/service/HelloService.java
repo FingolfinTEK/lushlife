@@ -1,10 +1,11 @@
-package gso.service;
+package app.service;
 
-import gso.model.HelloModel;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+
+import app.model.HelloModel;
 
 import com.googlecode.objectify.Objectify;
 
