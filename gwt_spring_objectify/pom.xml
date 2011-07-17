@@ -16,6 +16,17 @@
 		<objectify.version>3.0</objectify.version>
 	</properties>
 	<repositories>
+		<repository>
+			<id>twitter4j.org</id>
+			<name>twitter4j.org Repository</name>
+			<url>http://twitter4j.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 
 		<repository>
 			<id>maven.seasar.org</id>
@@ -72,11 +83,17 @@
 			<url>http://gwtquery-plugins.googlecode.com/svn/mavenrepo</url>
 		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 	</pluginRepositories>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-core</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
@@ -367,10 +384,7 @@
 					<excludes>
 						<exclude>com.google.appengine:appengine-api-1.0-sdk</exclude>
 						<exclude>com.google.appengine:appengine-api-labs</exclude>
-						<!--  
-						<exclude>com.google.appengine:appengine-api-stubs</exclude>
-						<exclude>com.google.appengine:appengine-local-runtime</exclude>
-						-->
+						<!-- <exclude>com.google.appengine:appengine-api-stubs</exclude> <exclude>com.google.appengine:appengine-local-runtime</exclude> -->
 					</excludes>
 					<additionalProjectnatures>
 						<projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>
