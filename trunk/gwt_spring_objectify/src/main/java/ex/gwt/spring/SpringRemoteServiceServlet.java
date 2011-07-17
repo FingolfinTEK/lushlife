@@ -31,7 +31,8 @@ public class SpringRemoteServiceServlet extends RemoteServiceServlet implements
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
-		service(req, res);
+		// RemoteServiceServletにディスパッチする
+		super.service(req, res);
 		return null;
 	}
 

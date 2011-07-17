@@ -1,3 +1,4 @@
+<%@page import="ex.gtwitter.share.TwitterLexer"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!doctype>
 <html>
@@ -11,5 +12,12 @@
 </head>
 
 <body>
+
+	<ol>
+		<li class="twitter-status">ssss #sample @jiro http://google.com</li>
+		<li><%=TwitterLexer
+					.twitterLink("ssss #sample @jiro http://google.com")%></li>
+	</ol>
+
 </body>
 </html>

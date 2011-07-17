@@ -10,11 +10,12 @@
 	<inherits name="com.googlecode.objectify.Objectify" />
 
 	<inherits name='com.google.gwt.query.Query' />
+	<inherits name='ex.gtwitter.GTwitter' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
-	<source path='model' />
+	<source path='share' />
 
-	<entry-point class="gso.client.HelloWorldEntry"></entry-point>
-	
+	<entry-point class="app.client.HelloWorldEntry"></entry-point>
+
 </module>

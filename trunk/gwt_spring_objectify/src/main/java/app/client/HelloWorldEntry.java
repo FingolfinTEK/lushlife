@@ -1,40 +1,19 @@
 package app.client;
 
+import static com.google.gwt.query.client.GQuery.$;
+import static ex.gtwitter.client.GTwitter.GTwitter;
+
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.query.client.GQuery;
+
+import ex.gtwitter.client.GTwitter;
+import ex.gtwitter.client.TwitterPlugin;
 
 public class HelloWorldEntry implements EntryPoint {
 
-	HelloWorldAsync helloworld = GWT.create(HelloWorld.class);
-
 	public void onModuleLoad() {
-		helloworld.persist("Hello World", new AsyncCallback<Long>() {
-
-			@Override
-			public void onSuccess(Long id) {
-				find(id);
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				GWT.log("onFailure", caught);
-			}
-		});
-	}
-
-	private void find(long id) {
-		helloworld.find(id, new AsyncCallback<String>() {
-			@Override
-			public void onSuccess(String result) {
-				Window.alert(result);
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				GWT.log("onFailure", caught);
-			}
-		});
+		GQuery.registerPlugin(GTwitter.class, new TwitterPlugin());
+		
+		$(".twitter-status").as(GTwitter).twitterLink();
 	}
 }

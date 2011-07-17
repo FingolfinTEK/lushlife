@@ -19,6 +19,10 @@
 	<mvc:resources location="/, classpath:/META-INF/web-resources/"
 		mapping="/resources/**" />
 
+	<mvc:interceptors>
+		<bean class="app.controller.interceptor.AuthenticationInterceptor" />
+	</mvc:interceptors>
+
 	<mvc:default-servlet-handler />
 
 	<!-- URLのハンドリング -->
