@@ -27,7 +27,7 @@ public class GTwitter extends GQuery {
 	 */
 	public GTwitter twitterLink() {
 		AbstractTwitterLexer lexer = new TwitterLexer();
-		String values = lexer.addAnchor(this.html());
+		String values = lexer.addTwitterLink(this.html());
 		this.html(values);
 		return this;
 	}

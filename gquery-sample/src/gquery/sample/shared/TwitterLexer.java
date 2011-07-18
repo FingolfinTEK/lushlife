@@ -7,7 +7,7 @@ public class TwitterLexer extends AbstractTwitterLexer {
 
 	public static String twitterLink(String html) {
 		TwitterLexer lexer = new TwitterLexer();
-		return lexer.addAnchor(html);
+		return lexer.addTwitterLink(html);
 	}
 
 	protected String appendAnchorToUrl(String url) {
