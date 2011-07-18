@@ -6,7 +6,7 @@ abstract public class AbstractTwitterLexer {
 		BASE, USER, URL, HASHTAG, HTML_TAG
 	}
 
-	public String addAnchor(String tweet) {
+	public String addTwitterLink(String tweet) {
 		// 最後を強制的にスペースにして、
 		// 終了処理を単純化する
 		tweet += " ";
