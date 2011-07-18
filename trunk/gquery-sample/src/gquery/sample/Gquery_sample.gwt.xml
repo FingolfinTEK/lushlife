@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='gquery_sample'>
+	<inherits name='com.google.gwt.user.User' />
+
+	<inherits name='com.google.gwt.user.theme.clean.Clean' />
+
+	<inherits name='com.google.gwt.query.Query' />
+
+	<entry-point class='gquery.sample.client.GquerySample' />
+
+	<source path='client' />
+	<source path='shared' />
+
+</module>
