@@ -8,12 +8,37 @@ import java.util.List;
 
 import pz.PanelCommands.CommandInvoker;
 
-public class Board {
+public class Board implements Comparable<Board> {
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(b);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Board other = (Board) obj;
+		if (!Arrays.equals(b, other.b))
+			return false;
+		return true;
+	}
+
 	private static final boolean DEBUG = false;
+	int score;
 	String s;
 	byte W, H;
 	int L, U, R, D;
 	byte[] b;
+	byte[] a;
 	byte[] g;
 	boolean[] fixed;
 	int p;
@@ -39,6 +64,12 @@ public class Board {
 		board.p = p;
 		board.W = W;
 		board.H = H;
+
+		board.L = L;
+		board.U = U;
+		board.R = R;
+		board.D = D;
+
 		board.b = new byte[b.length];
 		board.g = this.g;
 		board.counter = this.counter;
@@ -85,6 +116,10 @@ public class Board {
 				panelCount++;
 			}
 		}
+		this.a = new byte[g.length];
+		for (int i = 0; i < g.length; i++) {
+			a[i] = g[find(g[i])];
+		}
 		this.commands = new PanelCommands[this.b.length];
 		for (int i = 0; i < this.b.length; i++) {
 			this.commands[i] = new PanelCommands(i, this);
@@ -110,10 +145,16 @@ public class Board {
 			for (int j = 0; j < W; j++) {
 				ps.print((char) g[W * i + j]);
 			}
+			/*
+			 * if (a != null) { ps.print(" ");
+			 * 
+			 * for (int j = 0; j < W; j++) { ps.print((char) a[W * i + j]); } }
+			 */
 			ps.print(" ");
 			for (int j = 0; j < W; j++) {
 				ps.print((char) b[W * i + j]);
 			}
+
 			ps.print(" ");
 			for (int j = 0; j < W; j++) {
 				if (g[W * i + j] == b[W * i + j] && b[W * i + j] != '=') {
@@ -568,6 +609,34 @@ public class Board {
 		}
 	}
 
+	public String g() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < g.length; i++) {
+			sb.append((char) g[i]);
+		}
+		return sb.toString();
+	}
+
+	public String b() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < b.length; i++) {
+			sb.append((char) b[i]);
+		}
+		return sb.toString();
+	}
+
+	public String a() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] == g[i]) {
+				sb.append("-");
+			} else {
+				sb.append((char) a[i]);
+			}
+		}
+		return sb.toString();
+	}
+
 	public void historyClear() {
 		operationHistory.clear();
 		counter = 0;
@@ -576,5 +645,19 @@ public class Board {
 		U = 0;
 		D = 0;
 
+	}
+
+	public boolean goaled() {
+		for (int i = 0; i < g.length; i++) {
+			if (g[i] != b[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public int compareTo(Board o) {
+		return score - o.score;
 	}
 }

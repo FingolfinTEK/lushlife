@@ -21,13 +21,14 @@ public class Main {
 			// Board b = pz.boards.get(0);
 			{
 				counter++;
-				if (counter < 214) {
-					continue;
-				}
-				String command = Resolver.resolve(b);
+				// if (counter < 200) {
+				// continue;
+				// }
+				String command = R2.resolve(b);
 				answer.println(command);
 				pz.count(command);
-				System.out.println(counter + " " + command.length() + " ");
+				System.out.println("problem " + counter + "  score"
+						+ command.length() + " ");
 				System.out.println(command);
 				System.out.println(pz);
 			}

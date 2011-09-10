@@ -3,6 +3,7 @@ package pz;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -10,6 +11,7 @@ import java.util.TreeSet;
 
 abstract public class Roop implements Comparable<Roop> {
 	boolean DEBUG = false;
+	byte entry;
 
 	@Override
 	public int hashCode() {
@@ -22,6 +24,9 @@ abstract public class Roop implements Comparable<Roop> {
 
 	@Override
 	public int compareTo(Roop arg0) {
+		if (entry != arg0.entry) {
+			return entry - arg0.entry;
+		}
 		if (rank() != arg0.rank()) {
 			return rank() - arg0.rank();
 		}
@@ -45,7 +50,9 @@ abstract public class Roop implements Comparable<Roop> {
 		if (getClass() != obj.getClass())
 			return false;
 		Roop other = (Roop) obj;
-
+		if (entry != other.entry) {
+			return false;
+		}
 		if (rank() != other.rank()) {
 			return false;
 		}
@@ -126,6 +133,11 @@ abstract public class Roop implements Comparable<Roop> {
 				return false;
 			}
 
+			@Override
+			public List<Operation> operations() {
+				return Roop.this.operations();
+			}
+
 		};
 	}
 
@@ -161,6 +173,14 @@ abstract public class Roop implements Comparable<Roop> {
 					return toString().equals(f.toString());
 				}
 				return false;
+			}
+
+			@Override
+			public List<Operation> operations() {
+				ArrayList<Operation> operations = new ArrayList<Operation>();
+				operations.addAll(Roop.this.operations());
+				Collections.reverse(operations);
+				return operations;
 			}
 		};
 	}
@@ -260,7 +280,8 @@ abstract public class Roop implements Comparable<Roop> {
 		for (int i = list.size() - 1; i >= 0; i--) {
 			output.add(list.get(i).f_1());
 		}
-		return new CompositRoop(points, output.toArray(new Function[0]));
+		return new CompositRoop(points, output.toArray(new Function[0]),
+				roop.entry);
 	}
 
 	public CompositRoop baseChange(Roop target, byte to) {
@@ -300,7 +321,7 @@ abstract public class Roop implements Comparable<Roop> {
 				newPoints[i] = target.points[i];
 			}
 		}
-		return new CompositRoop(newPoints, functions);
+		return new CompositRoop(newPoints, functions, target.entry);
 	}
 
 	public boolean constains(byte value) {
@@ -351,4 +372,64 @@ abstract public class Roop implements Comparable<Roop> {
 		return sb.toString();
 	}
 
+	public String transformString(Board b) {
+		byte[] tmp = new byte[b.g.length];
+		System.arraycopy(b.g, 0, tmp, 0, tmp.length);
+		StringBuilder sb = new StringBuilder();
+		f(tmp);
+
+		for (int i = 0; i < tmp.length; i++) {
+			if (entry == i) {
+				sb.append("*");
+			} else if (b.g[i] == tmp[i]) {
+				sb.append("-");
+			} else {
+				sb.append((char) tmp[i]);
+			}
+		}
+		return sb.toString();
+	}
+
+	public byte first() {
+		return points[0];
+	}
+
+	public byte last() {
+		return points[points.length - 1];
+	}
+
+	public byte[] join(Roop b) {
+		if (last() != b.first()) {
+			throw new IllegalStateException();
+		}
+		byte[] join = new byte[points.length + b.points.length - 1];
+		System.arraycopy(points, 0, join, 0, points.length);
+		System.arraycopy(b.points, 1, join, points.length, b.points.length - 1);
+		return join;
+	}
+
+	public boolean isCross(Board b) {
+		for (int i = 0; i < points.length - 1; i++) {
+			int f1 = b.find(b.g[points[i]]);
+			int i2 = (i + 1) % points.length;
+			int f2 = b.find(b.g[points[i2]]);
+
+			for (int j = 2; j < points.length; j++) {
+				int i3 = (i + j) % points.length;
+				int k = b.find(b.g[points[i3]]);
+
+				int p = f1;
+				while (p != f2) {
+					p++;
+					p %= b.g.length;
+					if (p == k) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	abstract public List<Operation> operations();
 }

@@ -35,10 +35,11 @@ public class Roops {
 						continue;
 
 					}
-					if (hasMove0Way(roop, board)) {
-						if (!roops.contains(roop)) {
-							roops.add(roop);
-						}
+					if (!hasMove0Way(roop, board)) {
+						continue;
+					}
+					if (!roops.contains(roop)) {
+						roops.add(roop);
 					}
 				}
 			}
@@ -46,11 +47,11 @@ public class Roops {
 		return roops;
 	}
 
-	private static byte[] way(Board board, int point, Operation[] operations) {
+	public static byte[] way(Board board, int entry, Operation[] operations) {
 		byte[] way = new byte[operations.length - 1];
 		for (int i = 0; i < way.length; i++) {
-			point = operations[i].move(point, board);
-			way[i] = (byte) point;
+			entry = operations[i].move(entry, board);
+			way[i] = (byte) entry;
 		}
 		return way;
 	}
@@ -68,7 +69,7 @@ public class Roops {
 		return list;
 	}
 
-	private static boolean hasMove0Way(BaseRoop roop, Board board) {
+	public static boolean hasMove0Way(Roop roop, Board board) {
 		for (int r : roop.points) {
 			board.fixed[r] = true;
 		}
@@ -361,7 +362,7 @@ public class Roops {
 			return null;
 		}
 		MAIN: while (p != entry) {
-			for (Operation o : operation.search()) {
+			for (Operation o : operation.forwardRotation()) {
 				int p0 = o.move(p, board);
 				if (p0 != -1 && board.fixed[p0] == false
 						&& !checkd.contains(p0)) {
@@ -376,5 +377,115 @@ public class Roops {
 		}
 
 		return operations.toArray(new Operation[0]);
+	}
+
+	static public BaseRoop add(Roop a, Roop b, Board board) {
+		List<Operation> operations = a.operations();
+		List<Operation> op = new ArrayList<Operation>();
+		int p = a.entry;
+		for (int i = 0; i < operations.size() - 2; i++) {
+			p = operations.get(i).move(p, board);
+			op.add(operations.get(i));
+			if (p == b.entry) {
+				int next = operations.get(i + 1).move(p, board);
+				if (b.last() == next) {
+					op.addAll(b.operations());
+					op.remove(op.size() - 1);
+					for (int j = i + 2; j < operations.size(); j++) {
+						op.add(operations.get(j));
+					}
+					Operation[] array = op.toArray(new Operation[0]);
+					byte[] way = way(board, a.entry, array);
+					return new BaseRoop(a.entry, way, array);
+				}
+				break;
+			}
+		}
+		// throw new IllegalArgumentException();
+		return null;
+	}
+
+	static public CompositRoop join(Roop a, Roop b, Board board) {
+		if (!roopCheck(a, b)) {
+			return null;
+		}
+		Roop x = null, y = null;
+		if (a.last() == b.first()) {
+			x = a;
+			y = b;
+		}
+		if (a.first() == b.last()) {
+			y = a;
+			x = b;
+		}
+		if (x == null) {
+			return null;
+		}
+		Function[] f = new Function[2];
+		f[0] = x.f();
+		f[1] = y.f();
+		return new CompositRoop(x.join(y), f, x.entry);
+
+	}
+
+	private static boolean roopCheck(Roop a, Roop b) {
+		if (a.entry != b.entry) {
+			return false;
+		}
+		if (a.and(b).size() != 1) {
+			return false;
+		}
+		return true;
+	}
+
+	private static void swap(byte[] points, int i, int j) {
+		byte tmp = points[i];
+		points[i] = points[j];
+		points[j] = tmp;
+	}
+
+	public static String toString(List<Operation> operations) {
+		StringBuilder sb = new StringBuilder();
+		for (Operation operation : operations) {
+			sb.append(operation.name());
+		}
+		return sb.toString();
+	}
+
+	public static TreeSet<Roop> makeRoop(List<BaseRoop> baseRoops, Board board) {
+		TreeSet<Roop> roops = new TreeSet<Roop>();
+		TreeSet<Roop> newRoop = new TreeSet<Roop>();
+		roops.addAll(baseRoops);
+		newRoop.addAll(baseRoops);
+		while (!newRoop.isEmpty()) {
+			if (roops.size() >= 1000) {
+				break;
+			}
+			List<Roop> target = new ArrayList<Roop>();
+			target.addAll(newRoop);
+			roops.addAll(newRoop);
+			newRoop.clear();
+			for (Roop roop : roops) {
+				for (Roop roop2 : target) {
+					if (roop.equals(roop2)) {
+						continue;
+					}
+					Roop r = add(roop, roop2, board);
+					if (r != null && !roops.contains(r)) {
+						newRoop.add(r);
+					}
+					r = add(roop2, roop, board);
+					if (r != null && !roops.contains(r)) {
+						newRoop.add(r);
+					}
+					r = join(roop2, roop, board);
+					if (r != null && !roops.contains(r)) {
+						newRoop.add(r);
+					}
+				}
+			}
+		}
+
+		return roops;
 	}
 }

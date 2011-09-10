@@ -7,19 +7,20 @@ import pz.PanelCommands.CommandInvoker;
 
 public class BaseRoop extends Roop {
 
-	byte entry;
 	Operation[] operations;
+	boolean back = false;
 
 	public BaseRoop(byte entry, byte[] points, Operation[] operations) {
 		super();
 		this.points = points;
 		this.entry = entry;
 		this.operations = operations;
-		initPoint(points);
+		// initPoint(points);
 	}
 
 	public String toString() {
-		return rank() + ":" + entry + ":" + Arrays.toString(points);
+		return rank() + ":[" + entry + "]:" + Arrays.toString(points) + ":"
+				+ Arrays.toString(operations);
 	}
 
 	public void f(Board board) {
@@ -127,4 +128,23 @@ public class BaseRoop extends Roop {
 		return Arrays.asList(this);
 	}
 
+	public BaseRoop reverse() {
+		byte[] points = new byte[this.points.length];
+		for (int i = 0; i < points.length; i++) {
+			points[i] = this.points[points.length - 1 - i];
+		}
+		Operation[] operations = new Operation[this.operations.length];
+		for (int i = 0; i < operations.length; i++) {
+			operations[i] = this.operations[operations.length - 1 - i];
+		}
+
+		BaseRoop roop = new BaseRoop(this.entry, points, operations);
+		roop.back = !this.back;
+		return roop;
+	}
+
+	@Override
+	public List<Operation> operations() {
+		return Arrays.asList(operations);
+	}
 }

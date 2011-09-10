@@ -45,8 +45,12 @@ public enum Operation {
 		return null;
 	}
 
-	public Operation[] search() {
+	public Operation[] forwardRotation() {
 		return new Operation[] { right(), forward(), left() };
+	}
+
+	public Operation[] backwardRotation() {
+		return new Operation[] { left(), forward(), right() };
 	}
 
 	private Operation left() {

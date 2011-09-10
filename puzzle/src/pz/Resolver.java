@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import pz.PanelCommands.CommandInvoker;
 
 public class Resolver {
-	static boolean DEBUG = false;
+	static boolean DEBUG = true;
 
 	static public String resolve(Board b) {
 		for (CommandInvoker command : b.move0(b.p, b.p(b.H - 1, b.W - 1))) {
@@ -37,6 +37,9 @@ public class Resolver {
 			TreeSet<Integer> target = Roops.block(b).get(0);
 			String answer = null;
 			for (byte i = 0; i < b.b.length - 1; i++) {
+				if (b.b[i] == b.g[i]) {
+					continue;
+				}
 				if (b.fixed[i]) {
 					continue;
 				}
@@ -57,6 +60,15 @@ public class Resolver {
 				}
 			}
 			if (answer == null) {
+				if (DEBUG) {
+					System.out.println("***************");
+					System.out.println("Base Roop");
+					System.out.println("***************");
+					for (BaseRoop base : baseRoops) {
+						System.out.println(base);
+					}
+					System.out.println("***************");
+				}
 				throw new IllegalStateException();
 			}
 			return answer;

@@ -8,14 +8,16 @@ public class CompositRoop extends Roop {
 	Function[] functions;
 	int rank = -1;
 
-	public CompositRoop(byte[] points, Function[] functions) {
+	public CompositRoop(byte[] points, Function[] functions, byte entry) {
+		this.entry = entry;
 		this.functions = functions;
 		this.points = points;
-		initPoint(points);
+		// initPoint(points);
 	}
 
 	@Override
 	public void f(Board board) {
+
 		byte[] cp = null;
 		if (DEBUG) {
 			cp = new byte[board.b.length];
@@ -56,18 +58,15 @@ public class CompositRoop extends Roop {
 	}
 
 	public String toString() {
-		return rank() + ":" + Arrays.toString(points) + ":"
-				+ Arrays.toString(functions);
+		return rank() + "[" + entry + "]:" + Arrays.toString(points) + ":"
+				+ (Roops.toString(operations()))
+		/* + Arrays.toString(functions) */;
 	}
 
 	@Override
 	public int rank() {
 		if (rank == -1) {
-			int rank = 0;
-			for (Function f : functions) {
-				rank += f.rank();
-			}
-			this.rank = rank;
+			this.rank = operations().size();
 		}
 		return rank;
 	}
@@ -77,6 +76,22 @@ public class CompositRoop extends Roop {
 		List<BaseRoop> list = new ArrayList<BaseRoop>();
 		for (Function f : functions) {
 			list.addAll(f.base());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Operation> operations() {
+		List<Operation> list = new ArrayList<Operation>();
+		Operation last = null;
+		for (Function f : functions) {
+			for (Operation o : f.operations()) {
+				if (last != null && last.f_1().equals(o)) {
+					last = list.remove(list.size() - 1);
+				} else {
+					list.add(o);
+				}
+			}
 		}
 		return list;
 	}
