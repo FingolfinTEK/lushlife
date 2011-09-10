@@ -28,10 +28,6 @@ public class Resolver {
 			}
 			System.out.println("***************");
 		}
-		byte base = 0;
-		byte base2 = 0;
-		Roop[] list = null;
-		Roop[] list2 = null;
 		List<Integer> findBridgePoint = Roops.findBridgePoint(b);
 		if (findBridgePoint.size() >= 2) {
 			throw new IllegalStateException(findBridgePoint.toString());
@@ -74,50 +70,46 @@ public class Resolver {
 			List<TreeSet<Integer>> set = Roops.block(b2);
 			TreeSet<Integer> first = set.get(0);
 			TreeSet<Integer> second = set.get(0);
+			String answer = null;
 			for (int f : first) {
 				int localScore = 0;
 				for (int s : second) {
-					Roop[] tmp = selectMinBase(b, threeRoops, (byte) f, first);
-					if (tmp == null) {
+					Roop[] list = selectMinBase(b, threeRoops, (byte) f, first);
+					if (list == null) {
 						continue;
 					}
-					for (Roop g2 : tmp) {
-						localScore += g2.rank();
-					}
-					Roop[] tmp2 = selectMinBase(b, threeRoops, (byte) s, second);
-					if (tmp2 == null) {
+					Roop[] list2 = selectMinBase(b, threeRoops, (byte) s,
+							second);
+					if (list2 == null) {
 						continue;
 					}
-					for (Roop g2 : tmp2) {
-						localScore += g2.rank();
+
+					List<Integer> notContains = notContainsPoint(b, list, first);
+					if (notContains.size() >= 1) {
+						moveGaol(b, notContains);
 					}
-					if (localScore < score) {
-						base = (byte) f;
-						base2 = (byte) s;
-						list = tmp;
-						list2 = tmp2;
+					notContains = notContainsPoint(b, list2, second);
+					if (notContains.size() >= 1) {
+						moveGaol(b, notContains);
+					}
+					boolean resolve = resolve(b, threeRoops, (byte) f, list);
+					if (resolve == false) {
+						continue;
+					}
+					resolve = resolve(b, threeRoops, (byte) s, list2);
+					if (resolve == false) {
+						continue;
+					}
+
+					if (b.counter < score) {
 						score = localScore;
+						answer = b.history();
 					}
 				}
 			}
-
-			if (list == null || list2 == null) {
-				b.print();
-				throw new IllegalStateException();
-			}
-			List<Integer> notContains = notContainsPoint(b, list, first);
-			if (notContains.size() >= 1) {
-				moveGaol(b, notContains);
-			}
-			notContains = notContainsPoint(b, list2, second);
-			if (notContains.size() >= 1) {
-				moveGaol(b, notContains);
-			}
-			resolve(b, threeRoops, base, list);
-			resolve(b, threeRoops, base2, list2);
+			return answer;
 		}
-
-		return b.history();
+		throw new IllegalStateException();
 	}
 
 	private static void moveGaol(Board b, List<Integer> notContains) {
@@ -173,7 +165,7 @@ public class Resolver {
 		return tmp;
 	}
 
-	private static void resolve(Board b, List<Roop> threeRoops, byte base,
+	private static boolean resolve(Board b, List<Roop> threeRoops, byte base,
 			Roop[] baseGroup) {
 		List<RoopPair> pairList = new ArrayList<RoopPair>();
 		for (Roop group3 : baseGroup) {
@@ -321,11 +313,15 @@ public class Resolver {
 					for (RoopPair r : pairList) {
 						System.out.println(r.group);
 					}
-					throw new IllegalStateException(base + " " + pair.group
-							+ "");
+					System.out.println(pairList.size());
+					b.print();
+					return false;
+					// throw new IllegalStateException(base + " " + pair.group
+					// + "");
 				}
 			}
 		}
+		return true;
 	}
 
 	private static List<Integer> notContainsPoint(Board b, Roop[] list,

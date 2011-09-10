@@ -21,9 +21,9 @@ public class Main {
 			// Board b = pz.boards.get(0);
 			{
 				counter++;
-				// if (counter < 184) {
-				// continue;
-				// }
+				if (counter < 214) {
+					continue;
+				}
 				String command = Resolver.resolve(b);
 				answer.println(command);
 				pz.count(command);
@@ -31,7 +31,10 @@ public class Main {
 				System.out.println(command);
 				System.out.println(pz);
 			}
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
 		} finally {
+			pz.boards.get(counter - 1).print();
 			System.out.println(counter);
 			System.out.println(pz);
 		}
