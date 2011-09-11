@@ -61,4 +61,20 @@ public class Puzzle {
 			}
 		}
 	}
+
+	public boolean out() {
+		if (L > LX) {
+			return true;
+		}
+		if (R > RX) {
+			return true;
+		}
+		if (U > UX) {
+			return true;
+		}
+		if (D > DX) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -658,6 +658,10 @@ public class Board implements Comparable<Board> {
 
 	@Override
 	public int compareTo(Board o) {
-		return score - o.score;
+		return score() - o.score();
+	}
+
+	private int score() {
+		return score;
 	}
 }

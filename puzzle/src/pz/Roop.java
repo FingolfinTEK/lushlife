@@ -17,7 +17,7 @@ abstract public class Roop implements Comparable<Roop> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + rank();
+		result = prime * result + entry;
 		result = prime * result + Arrays.hashCode(points);
 		return result;
 	}
@@ -27,9 +27,9 @@ abstract public class Roop implements Comparable<Roop> {
 		if (entry != arg0.entry) {
 			return entry - arg0.entry;
 		}
-		if (rank() != arg0.rank()) {
-			return rank() - arg0.rank();
-		}
+		// if (rank() != arg0.rank()) {
+		// return rank() - arg0.rank();
+		// }
 		if (points.length != arg0.points.length) {
 			return points.length - arg0.points.length;
 		}
@@ -53,9 +53,9 @@ abstract public class Roop implements Comparable<Roop> {
 		if (entry != other.entry) {
 			return false;
 		}
-		if (rank() != other.rank()) {
-			return false;
-		}
+		// if (rank() != other.rank()) {
+		// return false;
+		// }
 		if (!Arrays.equals(points, other.points))
 			return false;
 		return true;

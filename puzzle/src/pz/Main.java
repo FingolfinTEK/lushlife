@@ -20,8 +20,9 @@ public class Main {
 			for (Board b : pz.boards)
 			// Board b = pz.boards.get(0);
 			{
+				long time = System.currentTimeMillis();
 				counter++;
-				// if (counter < 200) {
+				// if (counter < 1025) {
 				// continue;
 				// }
 				String command = R2.resolve(b);
@@ -29,6 +30,11 @@ public class Main {
 				pz.count(command);
 				System.out.println("problem " + counter + "  score"
 						+ command.length() + " ");
+				System.out.println("time "
+						+ (System.currentTimeMillis() - time));
+				if (pz.out()) {
+					break;
+				}
 				System.out.println(command);
 				System.out.println(pz);
 			}

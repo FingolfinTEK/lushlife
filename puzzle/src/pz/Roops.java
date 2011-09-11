@@ -1,5 +1,6 @@
 package pz;
 
+import java.beans.FeatureDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -7,6 +8,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import pz.PanelCommands.CommandInvoker;
 
@@ -452,36 +456,76 @@ public class Roops {
 		return sb.toString();
 	}
 
-	public static TreeSet<Roop> makeRoop(List<BaseRoop> baseRoops, Board board) {
+	public static TreeSet<Roop> makeRoop(List<BaseRoop> baseRoops,
+			final Board board) throws InterruptedException, ExecutionException {
 		TreeSet<Roop> roops = new TreeSet<Roop>();
 		TreeSet<Roop> newRoop = new TreeSet<Roop>();
 		roops.addAll(baseRoops);
 		newRoop.addAll(baseRoops);
 		while (!newRoop.isEmpty()) {
-			if (roops.size() >= 1000) {
-				break;
-			}
+
 			List<Roop> target = new ArrayList<Roop>();
 			target.addAll(newRoop);
 			roops.addAll(newRoop);
 			newRoop.clear();
-			for (Roop roop : roops) {
-				for (Roop roop2 : target) {
+			if (roops.size() >= 888) {
+				break;
+			}
+			List<Future<Roop>> futures = new ArrayList<Future<Roop>>();
+			MAIN: for (final Roop roop2 : target) {
+				for (final Roop roop : roops) {
+
+					if (futures.size() > 888) {
+						break MAIN;
+					}
 					if (roop.equals(roop2)) {
 						continue;
 					}
-					Roop r = add(roop, roop2, board);
+
+					if (roop.and(roop2).size() == 0) {
+						continue;
+					}
+
+					Future<Roop> f1 = R2.service.submit(new Callable<Roop>() {
+
+						@Override
+						public Roop call() throws Exception {
+							return add(roop, roop2, board);
+						}
+					});
+					Future<Roop> f2 = R2.service.submit(new Callable<Roop>() {
+
+						@Override
+						public Roop call() throws Exception {
+							return add(roop, roop2, board);
+						}
+					});
+					Future<Roop> f3 = R2.service.submit(new Callable<Roop>() {
+
+						@Override
+						public Roop call() throws Exception {
+							return join(roop2, roop, board);
+						}
+					});
+					futures.add(f1);
+					futures.add(f2);
+					futures.add(f3);
+
+				}
+				int counter = 0;
+				for (Future<Roop> feature : futures) {
+					if (++counter % 1000000 == 0) {
+						System.out.println(counter);
+					}
+					if (newRoop.size() > 999) {
+						feature.cancel(false);
+						continue;
+					}
+					Roop r = feature.get();
 					if (r != null && !roops.contains(r)) {
 						newRoop.add(r);
 					}
-					r = add(roop2, roop, board);
-					if (r != null && !roops.contains(r)) {
-						newRoop.add(r);
-					}
-					r = join(roop2, roop, board);
-					if (r != null && !roops.contains(r)) {
-						newRoop.add(r);
-					}
+
 				}
 			}
 		}
