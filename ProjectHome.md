@@ -1,0 +1,1 @@
+<a href='http://lushlife.googlecode.com/svn/maven2/com/google/code/gwt/rest/clinet/gwt-rest-client/0.20/'>gwt-rest-client</a>
